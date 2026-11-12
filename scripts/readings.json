@@ -407,7 +407,7 @@
     "AI robot infers author gender (male/female) from author data",
     "Adds OpenAlex topics (e.g. Ecology, Cell Biology) and other metadata",
     "Impact metrics: popularity, influence, impulse, citation count",
-    "Plans to compare ELIXIR with general literature, plus a focus group with women"
+    "Plans to compare ELIXIR with general literature, plus a focus group on women's experiences in publishing"
    ],
    "notes": [
     {
@@ -541,7 +541,7 @@
    "project_number": 28,
    "number_evidence": "\"#28\" written on the orange sticky note at the top of the poster; the headline \"Weather X Biodiversity\" also matches official title 28 (WeatherXBiodiversity).",
    "title_on_poster": "Weather X Biodiversity",
-   "one_liner": "Rebuilt a bumblebee-and-weather study as reproducible, tracked workflows, with open publishing planned next.",
+   "one_liner": "Rebuilt a bumblebee-and-weather study as reproducible workflows, with automatic tracking and open publishing planned next.",
    "highlights": [
     "Workflow joins GBIF bumblebee occurrence data with ERA5 weather data",
     "Retrieval, preprocessing and analysis steps each record provenance metadata",
@@ -1100,10 +1100,10 @@
    "project_number": 25,
    "number_evidence": "Written on the poster: '#BioHackEU26 Project No. 25' in the boxed top-right corner; the DBTL theme also matches title 25 (DBTLHUB).",
    "title_on_poster": "DBTL RELOADED",
-   "one_liner": "Designed AI agents that pass work between the design, build, test and learn steps of engineering biology, packaged as RO-Crates.",
+   "one_liner": "Plans standard handoffs between the design, build, test and learn steps of engineering biology: agents pass the work on in RO-Crates.",
    "highlights": [
     "DBTL cycle (Design, Build, Test, Learn) laid out as sticky notes around a central Architect",
-    "Central 'Live Knowledge Graph' linked to every phase of the cycle",
+    "'Live Knowledge Graph' note at the central hub, which arrows link to every phase",
     "Four transition notes between phases: L→D, D→B, B→T, T→L",
     "Printed diagram: Interface agents and RO-Crates for a generic DBTL biomanufacturing workflow",
     "Printed class diagram titled 'sentinel-oo: the classes'"
@@ -1281,7 +1281,7 @@
     "Six threat models on sticky notes, e.g. leak instructions, forged history leak",
     "Automatic evaluation loop: create/modify scenario, then evaluate scenario",
     "Secure environment sketch: Agent, Tool Sandbox, GA4GH APIs, Sensitive Data",
-    "Human step proposes mitigations and verifies them against the threat models",
+    "A person proposes mitigations for the environment and verifies the threat models",
     "Evaluation results feed a create/update threat model step"
    ],
    "notes": [
@@ -1821,7 +1821,7 @@
    "project_number": 21,
    "number_evidence": "Written on the poster: \"#21\" at top left, and the headline \"Data Stewardship Handbook\" matches official title 21.",
    "title_on_poster": "DATA STEWARDSHIP HANDBOOK",
-   "one_liner": "Improved an online handbook for research data managers: new page templates, checked pages online, a survey draft, 200 pull requests.",
+   "one_liner": "Improved the online Data Stewardship Handbook: reshaped page templates, checked pages online, a survey draft, 200 pull requests.",
    "highlights": [
     "200 pull requests!",
     "Reshaped the handbook page templates",
@@ -2194,7 +2194,7 @@
    "project_number": 19,
    "number_evidence": "Written on the poster: \"19\" on the orange round sticker at top right. Content (exposome, ontology cross-mapping) also matches official title 19.",
    "title_on_poster": "Ontologies",
-   "one_liner": "Built ExpoPortal and cross-mapped exposome ontologies so environmental exposure data becomes FAIR and AI-ready.",
+   "one_liner": "Working towards ExpoPortal, a catalogue for cross-mapping exposome ontologies, so exposure data can become FAIR and AI-ready.",
    "highlights": [
     "ExpoPortal: a portal for exposome ontologies, linked from a star sticky note",
     "Ontology cross-mapping feeding into FAIRification of exposome data",
@@ -3121,7 +3121,7 @@
    "project_number": 14,
    "number_evidence": "\"#14\" written in green marker next to the headline; headline matches official title 14",
    "title_on_poster": "Unlocking animal data for reproducible research",
-   "one_liner": "Building MIMSA, a checklist for describing animal research data, and plugging it into ISA Wizard, ARC and FAIRDOM SEEK",
+   "one_liner": "Finishing version 2 of MIMSA, a checklist for describing animal research data, and working it into ISA Wizard, ARC and FAIRDOM SEEK",
    "highlights": [
     "Finalising version 2 of the MIMSA checklist for animal metadata",
     "Finalising the mapping",
@@ -3616,12 +3616,12 @@
    "project_number": 11,
    "number_evidence": "Written on the poster as \"#11\" in the top-left corner; the VERDANT banner also matches official title 11.",
    "title_on_poster": "KNOWLEDGE GRAPHS TO DEFINE YOUR SAMPLE DATA",
-   "one_liner": "Built VERDANT, a tool that uses AI embeddings to match free-text environmental sample descriptions to standard vocabularies like ENVO.",
+   "one_liner": "Built VERDANT, a tool that uses AI embeddings to match environmental sample data to standard vocabularies like ENVO.",
    "highlights": [
     "VERDANT flow: import your data -> generate embeddings -> confidence score vs other vocabs",
     "Each match is typed as exact match, related match or no match, then validated",
     "Test cases: Aerobiome, PANGAEA and Soil, linked to ENVO, GOLD, EMPO, ChEBI, EUNIS",
-    "Aerobiome case: ~500 air metagenome samples from the upper troposphere biome",
+    "Aerobiome case: ~500 air metagenome samples; upper troposphere biome",
     "Roots list Natura 2000, EMPO, EUNIS, GOLD, NCBI Taxon, ChEBI, Wikidata and ENVO"
    ],
    "notes": [
@@ -3804,7 +3804,7 @@
    "project_number": 10,
    "number_evidence": "\"#10\" written in red marker inside a red circle, top right of the poster; content (ETT, bio.tools, EDAM annotations) matches official title 10",
    "title_on_poster": "ELIXIR TOOLKIT THEME",
-   "one_liner": "Works on letting community websites built on the ELIXIR Toolkit Theme show software tools in a form machines can read",
+   "one_liner": "Works on letting community websites built on the ELIXIR Toolkit Theme show tools and workflows in a form machines can read",
    "highlights": [
     "ELIXIR Toolkit Theme (ETT): developed by ELIXIR-BE, deploys websites via GitHub",
     "8 teal logo stickers show ETT implementations, incl. RDMkit, RSQkit and 1+MG",
@@ -3994,7 +3994,7 @@
    "project_number": 9,
    "number_evidence": "Written on the poster: \"PROJECT 9\" in large letters top right; headline \"MSA to insight\" also matches title 9.",
    "title_on_poster": "MSA to insight",
-   "one_liner": "Linked protein sequence alignments to 3D structures, running analyses and building prototypes in the iCn3D and Jalview viewers.",
+   "one_liner": "Linking protein sequence alignments with 3D structure views: analyses so far, plus prototypes in the iCn3D and Jalview viewers.",
    "highlights": [
     "Done: analysis and prototypes, using iCn3D and Jalview",
     "Analyses drawn: contacts, MD simulation, structure comparison, sequence alignment",
@@ -4364,7 +4364,7 @@
     "PhyloAI-RP: a reconstructability predictor that removes unreliable quartets",
     "Filtered quartets are amalgamated (ASTRAQ) into an N-taxon tree",
     "Pipeline: 1. all quartet topologies, 2. amalgamation, 3. N-taxon tree",
-    "BIOCONDA written large on the poster as the packaging target"
+    "BIOCONDA written large and diagonally in green on the poster"
    ],
    "notes": [
     {
@@ -4678,13 +4678,13 @@
    "project_number": 5,
    "number_evidence": "Written on the poster: '#5' before the headline 'COMMUNITY PRACTICES'; consistent with official title 5 (submission and visualisation interface for community interoperability practices).",
    "title_on_poster": "#5 COMMUNITY PRACTICES",
-   "one_liner": "A web tool where communities submit their data practices, an LLM helps tag them, and they are shown on a data lifecycle wheel.",
+   "one_liner": "A web tool where communities submit their data practices, an LLM helps fill in the form, and they are shown on a data lifecycle wheel.",
    "highlights": [
     "Three-step pipeline: capture, display, integrate community practices",
     "Output site live at BH.BILGEHAN.NL",
     "Free-text form input goes to an LLM that returns JSON to fill form fields",
     "Practices placed on a lifecycle: plan, collect, process, analyse, share",
-    "Links tasks to FAIRsharing, RDM kit and bio.tools; asks for UX feedback and use cases"
+    "Integrates with FAIRsharing, RDM kit and bio.tools; asks for UX feedback and use cases"
    ],
    "notes": [
     {
@@ -4854,11 +4854,11 @@
    "title_on_poster": "CLINICAL RECOMMEDATION ENGINE",
    "one_liner": "Built tools that cut the human genome into haplotype blocks and hashes, working toward an engine that recommends drug types to patients.",
    "highlights": [
-    "Done: Haplograph, a network of haplotype blocks",
-    "Done: Haploblocks, live at https://haploblocks.org",
-    "Done: genomic hashes, genome blocks turned into binary vectors [0 1 ... 1...]",
+    "Done: Haplograph, drawn as a network of linked dots",
+    "Done: Haploblocks; the poster says check https://haploblocks.org",
+    "Done: human genome drawn as blocks, and genomic hashes as a row of 0s and 1s",
     "In progress: validator (ticked), embeddings (Evo2, XGboost), proteomics data",
-    "Working towards: clinical recommendation engine sorting into drug types 1 to 4"
+    "Working towards: clinical recommendation engine with drug types 1 to 3 and a type 4"
    ],
    "notes": [
     {
@@ -5026,7 +5026,7 @@
    "highlights": [
     "Pipeline drawn: multi-omics use cases to ontology terms, SHACL (RDF), .ttl, Modelling",
     "Ontology built with ODK and LinkML; dashboard of ontology terms fed by the OLS API",
-    "7-step visualization plan, from selecting terms to SHACL QC and .ttl export",
+    "7-step visualization list, including selecting terms, SHACL QC and .ttl export",
     "Prioritization via a minimal information standard and SPARQL evidence-tier queries",
     "Federated queries over Rhea, OrthoDB and Bgee feed optional fields and a score"
    ],

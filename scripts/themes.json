@@ -1,0 +1,484 @@
+{
+ "themes": [
+  {
+   "id": "knowledge-graphs",
+   "label": "Knowledge graphs",
+   "meaning": "Builds, designs or queries a knowledge graph (linked data, RDF, SPARQL) that connects entities across sources."
+  },
+  {
+   "id": "ontologies",
+   "label": "Ontologies",
+   "meaning": "Creates, extends or maps ontology terms or controlled vocabularies (e.g. EDAM, ENVO, contributor roles) so things are annotated consistently."
+  },
+  {
+   "id": "data-management",
+   "label": "Data management",
+   "meaning": "Defines how research data is described, packaged, integrated or submitted (metadata standards, checklists, ISA/ARC packages, schemas) or guides how data is managed."
+  },
+  {
+   "id": "tools-workflows",
+   "label": "Tools & workflows",
+   "meaning": "Registers, catalogues, assesses or ports software tools and computational workflows (bio.tools, WorkflowHub, Galaxy, Nextflow, CWL, Conda)."
+  },
+  {
+   "id": "compute",
+   "label": "Cloud & HPC",
+   "meaning": "Provides or connects the infrastructure analyses run on: cloud, HPC, federated job execution, containers or secure processing environments."
+  },
+  {
+   "id": "privacy-security",
+   "label": "Privacy & security",
+   "meaning": "Keeps sensitive data and the systems around it safe: privacy, secure processing environments, threat models, authentication."
+  },
+  {
+   "id": "genai",
+   "label": "Generative AI",
+   "meaning": "Uses large language models or AI agents to do the work: generating or translating code and workflows, extracting information, filling forms or answering questions."
+  },
+  {
+   "id": "machine-learning",
+   "label": "Machine learning",
+   "meaning": "Trains or applies predictive models (neural networks, embeddings, classifiers, regression) to research data, or makes such models findable and runnable."
+  },
+  {
+   "id": "good-practice",
+   "label": "Good practice",
+   "meaning": "Defines what good looks like and helps people get there: quality indicators, maturity scores, benchmarks, best-practice guidelines or handbooks."
+  },
+  {
+   "id": "visualisation",
+   "label": "Visualisation",
+   "meaning": "Builds interactive visual views for exploring data: maps, network graphs, pathway diagrams, 3D structures, lifecycle wheels."
+  },
+  {
+   "id": "environment",
+   "label": "Environment",
+   "meaning": "Works with environmental or ecological data: biodiversity, ecosystems, environmental and microbiome samples, exposures or climate."
+  },
+  {
+   "id": "credit",
+   "label": "Credit & citations",
+   "meaning": "Tracks research outputs and the people behind them: publications, citations, author metrics, contributor roles, attribution, who does what."
+  },
+  {
+   "id": "molecular",
+   "label": "Genes & molecules",
+   "meaning": "Analyses molecular biology data directly: genomes, sequence alignments, protein structures, single-cell expression or metabolic pathways."
+  }
+ ],
+ "projects": [
+  {
+   "id": 1,
+   "short_name": "BYOC in Galaxy & TREs",
+   "primary": "compute",
+   "themes": [
+    "compute",
+    "privacy-security"
+   ]
+  },
+  {
+   "id": 2,
+   "short_name": "MARS",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "good-practice"
+   ]
+  },
+  {
+   "id": 3,
+   "short_name": "PlantMetWiki",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "knowledge-graphs",
+    "data-management",
+    "molecular"
+   ]
+  },
+  {
+   "id": 4,
+   "short_name": "Clinical Rec. Engine",
+   "primary": "molecular",
+   "themes": [
+    "molecular",
+    "machine-learning",
+    "privacy-security",
+    "knowledge-graphs"
+   ]
+  },
+  {
+   "id": 5,
+   "short_name": "Community Practices",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "data-management",
+    "visualisation",
+    "genai"
+   ]
+  },
+  {
+   "id": 6,
+   "short_name": "Where Is the Credit?",
+   "primary": "credit",
+   "themes": [
+    "credit",
+    "ontologies",
+    "good-practice"
+   ]
+  },
+  {
+   "id": 7,
+   "short_name": "PhyloAI",
+   "primary": "machine-learning",
+   "themes": [
+    "machine-learning",
+    "molecular",
+    "tools-workflows"
+   ]
+  },
+  {
+   "id": 8,
+   "short_name": "La Petite Métrique",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "tools-workflows",
+    "privacy-security"
+   ]
+  },
+  {
+   "id": 9,
+   "short_name": "MSA to Insight",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "molecular",
+    "genai"
+   ]
+  },
+  {
+   "id": 10,
+   "short_name": "ELIXIR Toolkit Theme",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "ontologies",
+    "credit"
+   ]
+  },
+  {
+   "id": 11,
+   "short_name": "VERDANT",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "environment",
+    "machine-learning",
+    "knowledge-graphs"
+   ]
+  },
+  {
+   "id": 12,
+   "short_name": "SampleSift",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "environment"
+   ]
+  },
+  {
+   "id": 13,
+   "short_name": "ELIXIR AI Ecosystem",
+   "primary": "machine-learning",
+   "themes": [
+    "machine-learning",
+    "tools-workflows",
+    "compute"
+   ]
+  },
+  {
+   "id": 14,
+   "short_name": "Unlocking Animal Data",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "ontologies"
+   ]
+  },
+  {
+   "id": 15,
+   "short_name": "ELIXIR Trainer",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "genai",
+    "credit"
+   ]
+  },
+  {
+   "id": 16,
+   "short_name": "MiCoKnowGraph",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "ontologies",
+    "environment"
+   ]
+  },
+  {
+   "id": 17,
+   "short_name": "Tool Co-citations",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "credit",
+    "visualisation"
+   ]
+  },
+  {
+   "id": 18,
+   "short_name": "Condeessi",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "compute"
+   ]
+  },
+  {
+   "id": 19,
+   "short_name": "Exposome Ontologies",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "environment"
+   ]
+  },
+  {
+   "id": 20,
+   "short_name": "Maturity Meter",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "tools-workflows",
+    "credit"
+   ]
+  },
+  {
+   "id": 21,
+   "short_name": "Stewardship Handbook",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "data-management"
+   ]
+  },
+  {
+   "id": 22,
+   "short_name": "Open Pathway Maps",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "molecular",
+    "good-practice"
+   ]
+  },
+  {
+   "id": 23,
+   "short_name": "Single-cell Integration",
+   "primary": "molecular",
+   "themes": [
+    "molecular",
+    "ontologies",
+    "data-management",
+    "machine-learning"
+   ]
+  },
+  {
+   "id": 24,
+   "short_name": "AI Agents in SPEs",
+   "primary": "privacy-security",
+   "themes": [
+    "privacy-security",
+    "genai",
+    "compute",
+    "good-practice"
+   ]
+  },
+  {
+   "id": 25,
+   "short_name": "DBTL Reloaded",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "knowledge-graphs"
+   ]
+  },
+  {
+   "id": 26,
+   "short_name": "ELIXIR Atlas",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "genai",
+    "credit"
+   ]
+  },
+  {
+   "id": 27,
+   "short_name": "Federated Compute",
+   "primary": "compute",
+   "themes": [
+    "compute",
+    "privacy-security"
+   ]
+  },
+  {
+   "id": 28,
+   "short_name": "Weather X Biodiversity",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "environment",
+    "tools-workflows"
+   ]
+  },
+  {
+   "id": 29,
+   "short_name": "Gender in Publications",
+   "primary": "credit",
+   "themes": [
+    "credit",
+    "machine-learning"
+   ]
+  },
+  {
+   "id": 30,
+   "short_name": "BiCoReCa",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "environment",
+    "ontologies"
+   ]
+  },
+  {
+   "id": 31,
+   "short_name": "Building Bridges",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "genai",
+    "good-practice"
+   ]
+  }
+ ],
+ "links": [
+  {
+   "a": 6,
+   "b": 15,
+   "reason": "Trainer poster names #6 for training credit"
+  },
+  {
+   "a": 15,
+   "b": 26,
+   "reason": "Trainer poster names #26 (Biotope experiment)"
+  },
+  {
+   "a": 11,
+   "b": 16,
+   "reason": "Microbiome KG built together with VERDANT"
+  },
+  {
+   "a": 14,
+   "b": 28,
+   "reason": "Both build on ARC; shared team members"
+  },
+  {
+   "a": 6,
+   "b": 10,
+   "reason": "ETT aligns credit vocabulary with APICURON"
+  },
+  {
+   "a": 6,
+   "b": 29,
+   "reason": "Both use BIP! scholarly services"
+  },
+  {
+   "a": 24,
+   "b": 27,
+   "reason": "Both run workflows via WESkit and GA4GH APIs"
+  },
+  {
+   "a": 15,
+   "b": 30,
+   "reason": "Both build on TeSS training data"
+  },
+  {
+   "a": 2,
+   "b": 14,
+   "reason": "Both build on the ISA metadata model"
+  },
+  {
+   "a": 5,
+   "b": 21,
+   "reason": "Both link RDMkit, FAIR Cookbook and DSW"
+  },
+  {
+   "a": 10,
+   "b": 17,
+   "reason": "Both pull workflows from WorkflowHub"
+  },
+  {
+   "a": 10,
+   "b": 30,
+   "reason": "Both use WorkflowHub and EDAM annotations"
+  },
+  {
+   "a": 17,
+   "b": 30,
+   "reason": "Both combine WorkflowHub and OpenEBench"
+  },
+  {
+   "a": 17,
+   "b": 20,
+   "reason": "Both mine OpenEBench and Europe PMC"
+  },
+  {
+   "a": 8,
+   "b": 20,
+   "reason": "Both score software quality using OpenEBench"
+  },
+  {
+   "a": 20,
+   "b": 30,
+   "reason": "Both build on the Research Software Ecosystem"
+  },
+  {
+   "a": 20,
+   "b": 29,
+   "reason": "Both pull publication data from OpenAlex"
+  },
+  {
+   "a": 17,
+   "b": 31,
+   "reason": "Both work with nf-core and Galaxy workflows"
+  },
+  {
+   "a": 7,
+   "b": 18,
+   "reason": "Both centre on Bioconda packages"
+  },
+  {
+   "a": 3,
+   "b": 23,
+   "reason": "Both draw on the Bgee database"
+  },
+  {
+   "a": 11,
+   "b": 19,
+   "reason": "Both map terms to ENVO and ChEBI"
+  }
+ ]
+}

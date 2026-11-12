@@ -14,45 +14,7 @@
   ],
   "motif": "Suspension bridge linking cloud providers to a spiral Galaxy",
   "links": [],
-  "aspect": 0.6939,
-  "questions": [
-   {
-    "question": "What does the stick figure on the poster say it needs?",
-    "options": [
-     "More storage for Galaxy",
-     "More compute for using Galaxy",
-     "A faster internet connection",
-     "More training data"
-    ],
-    "answer": 1,
-    "hint": "Left middle: red stick figure with the black handwritten text \"Help! I need more compute for using Galaxy!\"",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which country codes are written on the green \"Collaboration\" sticky note?",
-    "options": [
-     "ES, FR, IT, PT",
-     "NO, SE, FI, DK",
-     "BE, CH, DE, NL",
-     "UK, IE, AT, CZ"
-    ],
-    "answer": 2,
-    "hint": "Top centre: green note headed \"Collaboration\" with the letters BE / CH / DE / NL stacked down it",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the network diagram at the bottom under \"SANE NETWORK\", which three parts are linked together?",
-    "options": [
-     "Gateway, User Portal, Data Lake",
-     "Tinker, Compute Portal, Storage Node",
-     "Hub, Provider Portal, Archive Server",
-     "Tinker, Provider Portal, Data Server"
-    ],
-    "answer": 3,
-    "hint": "Bottom left: light blue words TINKER = PROVIDER PORTAL = DATA SERVER below \"SANE NETWORK\"",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6939
  },
  {
   "id": 2,
@@ -71,45 +33,7 @@
   "links": [
    "#BioHackEU26"
   ],
-  "aspect": 1.4554,
-  "questions": [
-   {
-    "question": "Which word sits in the middle of the yellow and red sunburst rays at the bottom left of the poster?",
-    "options": [
-     "RELEASE",
-     "PRE-PRINT",
-     "LAUNCH",
-     "PUBLISHED"
-    ],
-    "answer": 1,
-    "hint": "Bottom-left corner, large black lettering surrounded by yellow and red rays",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Next to the 'MARS LOGO!' item, one orange sticky note shows a rover. What is drawn on the other one?",
-    "options": [
-     "A telescope",
-     "A satellite dish",
-     "A planet with rings",
-     "A rocket ship"
-    ],
-    "answer": 3,
-    "hint": "Bottom-right orange sticky notes below 'MARS LOGO!'",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many green dots are drawn on the poster?",
-    "options": [
-     "3",
-     "4",
-     "5",
-     "6"
-    ],
-    "answer": 2,
-    "hint": "Coloured marker dots beside the list items below the pipeline diagram",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 1.4554
  },
  {
   "id": 3,
@@ -120,7 +44,7 @@
   "highlights": [
    "Pipeline drawn: multi-omics use cases to ontology terms, SHACL (RDF), .ttl, Modelling",
    "Ontology built with ODK and LinkML; dashboard of ontology terms fed by the OLS API",
-   "7-step visualization plan, from selecting terms to SHACL QC and .ttl export",
+   "7-step visualization list, including selecting terms, SHACL QC and .ttl export",
    "Prioritization via a minimal information standard and SPARQL evidence-tier queries",
    "Federated queries over Rhea, OrthoDB and Bgee feed optional fields and a score"
   ],
@@ -128,45 +52,7 @@
   "links": [
    "https://github.com/pathway-lod/lod-pathways-community"
   ],
-  "aspect": 0.75,
-  "questions": [
-   {
-    "question": "What symbol is drawn next to the words 'success metric' in the Submission System section?",
-    "options": [
-     "A star",
-     "A trophy",
-     "A dollar sign",
-     "A light bulb"
-    ],
-    "answer": 2,
-    "hint": "Bottom-left, under '4. SUBMISSION SYSTEM'",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which three databases are listed under the 'Federated Queries' circle?",
-    "options": [
-     "Rhea, OrthoDB, Bgee",
-     "KEGG, ChEBI, Reactome",
-     "MetaCyc, PubChem, Ensembl",
-     "Wikidata, PDB, LOTUS"
-    ],
-    "answer": 0,
-    "hint": "Lower right, in red below the 'Federated Queries' circle",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many numbered steps are listed under the 'VISUALIZATION' heading?",
-    "options": [
-     "5",
-     "6",
-     "9",
-     "7"
-    ],
-    "answer": 3,
-    "hint": "Left side, red list under 'VISUALIZATION' below '2. Multi-OMICS MODELLING'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.75
  },
  {
   "id": 4,
@@ -175,112 +61,36 @@
   "posterTitle": "CLINICAL RECOMMEDATION ENGINE",
   "oneLiner": "Built tools that cut the human genome into haplotype blocks and hashes, working toward an engine that recommends drug types to patients.",
   "highlights": [
-   "Done: Haplograph, a network of haplotype blocks",
-   "Done: Haploblocks, live at https://haploblocks.org",
-   "Done: genomic hashes, genome blocks turned into binary vectors [0 1 ... 1...]",
+   "Done: Haplograph, drawn as a network of linked dots",
+   "Done: Haploblocks; the poster says check https://haploblocks.org",
+   "Done: human genome drawn as blocks, and genomic hashes as a row of 0s and 1s",
    "In progress: validator (ticked), embeddings (Evo2, XGboost), proteomics data",
-   "Working towards: clinical recommendation engine sorting into drug types 1 to 4"
+   "Working towards: clinical recommendation engine with drug types 1 to 3 and a type 4"
   ],
   "motif": "Four chromosomes (chr1 to chr4) linked by red arrows, beside a node network",
   "links": [
    "https://haploblocks.org"
   ],
-  "aspect": 0.7088,
-  "questions": [
-   {
-    "question": "What does the green square sticky note for 'Type 4' say?",
-    "options": [
-     "Rare disease only",
-     "No known drugs",
-     "Needs more data",
-     "Too toxic"
-    ],
-    "answer": 1,
-    "hint": "Green square sticky note below the three star stickers, top left inside the red box",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many chromosomes are drawn down the right edge of the poster, linked by red arrows?",
-    "options": [
-     "2",
-     "3",
-     "6",
-     "4"
-    ],
-    "answer": 3,
-    "hint": "Right edge, bottom half: chromosomes labelled chr1, chr2, chr3, chr4",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which model name is written in brackets next to 'EMBEDDINGS' in the In Progress box?",
-    "options": [
-     "ESM2",
-     "AlphaFold",
-     "Evo2",
-     "BERT"
-    ],
-    "answer": 2,
-    "hint": "Green 'IN PROGRESS!' box, middle right: 'EMBEDDINGS (Evo2, XGboost...)'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7088
  },
  {
   "id": 5,
   "title": "A submission and visualisation interface for sharing community interoperability practices",
   "leads": "Tooba Abbassi-Daloii, Nick Juty, Bilgehan Nevruz",
   "posterTitle": "#5 COMMUNITY PRACTICES",
-  "oneLiner": "A web tool where communities submit their data practices, an LLM helps tag them, and they are shown on a data lifecycle wheel.",
+  "oneLiner": "A web tool where communities submit their data practices, an LLM helps fill in the form, and they are shown on a data lifecycle wheel.",
   "highlights": [
    "Three-step pipeline: capture, display, integrate community practices",
    "Output site live at BH.BILGEHAN.NL",
    "Free-text form input goes to an LLM that returns JSON to fill form fields",
    "Practices placed on a lifecycle: plan, collect, process, analyse, share",
-   "Links tasks to FAIRsharing, RDM kit and bio.tools; asks for UX feedback and use cases"
+   "Integrates with FAIRsharing, RDM kit and bio.tools; asks for UX feedback and use cases"
   ],
   "motif": "Two hand-drawn lifecycle wheels with coloured domain circles and red task lines",
   "links": [
    "BH.BILGEHAN.NL"
   ],
-  "aspect": 0.709,
-  "questions": [
-   {
-    "question": "What does the cloud-shaped bubble at the bottom right of the poster say?",
-    "options": [
-     "WE NEED DATA",
-     "COMING SOON",
-     "HELP NEEDED",
-     "ASK US HOW"
-    ],
-    "answer": 2,
-    "hint": "Bottom right, red text inside a green and blue cloud outline",
-    "difficulty": "easy"
-   },
-   {
-    "question": "In the left-hand drawing, a green line leaves a box labelled LLM and loops back to the form. Which word is written in red under that loop?",
-    "options": [
-     "JSON",
-     "XML",
-     "YAML",
-     "CSV"
-    ],
-    "answer": 0,
-    "hint": "Left middle, red word under the green loop below the LLM box",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the right-hand wheel drawing at the bottom, how many red lines meet at the single green circle in the middle?",
-    "options": [
-     "2",
-     "3",
-     "4",
-     "5"
-    ],
-    "answer": 1,
-    "hint": "Bottom centre, second (right) grey wheel labelled PLAN and COLLECT",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.709
  },
  {
   "id": 6,
@@ -297,45 +107,7 @@
   ],
   "motif": "Three cheering stick figures: one with a laptop, one with a stack, one at a bar-chart easel",
   "links": [],
-  "aspect": 0.6811,
-  "questions": [
-   {
-    "question": "Step 3 'SHOW IT!' says the team will prototype with which tools?",
-    "options": [
-     "ORCID & Wikidata",
-     "bio.tools & FAIRsharing",
-     "APICURON & BIP",
-     "Galaxy & WorkflowHub"
-    ],
-    "answer": 2,
-    "hint": "Green box numbered 3 with a laptop drawing, upper right",
-    "difficulty": "easy"
-   },
-   {
-    "question": "In the 'From person to output' flow, which name is given as the example contributor?",
-    "options": [
-     "Maria",
-     "Elena",
-     "Sofia",
-     "Laura"
-    ],
-    "answer": 0,
-    "hint": "Blue blob with a stick person, left side of the 'From person to output' row",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the 'Mind the gap!' table, how many activities are marked with a red X and '(gap)' under CRediT?",
-    "options": [
-     "Three",
-     "Two",
-     "One",
-     "None"
-    ],
-    "answer": 1,
-    "hint": "CRediT column of the Activity/CRediT/CRO table, middle right",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6811
  },
  {
   "id": 7,
@@ -348,49 +120,11 @@
    "PhyloAI-RP: a reconstructability predictor that removes unreliable quartets",
    "Filtered quartets are amalgamated (ASTRAQ) into an N-taxon tree",
    "Pipeline: 1. all quartet topologies, 2. amalgamation, 3. N-taxon tree",
-   "BIOCONDA written large on the poster as the packaging target"
+   "BIOCONDA written large and diagonally in green on the poster"
   ],
   "motif": "Colour-coded 5-species DNA alignment feeding quartet trees; animal stickers on a tree",
   "links": [],
-  "aspect": 0.7163,
-  "questions": [
-   {
-    "question": "Which word is written diagonally in big green letters on the poster?",
-    "options": [
-     "GALAXY",
-     "BIOCONDA",
-     "NEXTFLOW",
-     "DOCKER"
-    ],
-    "answer": 1,
-    "hint": "Right of the colour-coded DNA alignment, upper right of the sheet",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which of these animals appears as a sticker on the N-taxon tree drawing?",
-    "options": [
-     "Panda",
-     "Octopus",
-     "Fox",
-     "Penguin"
-    ],
-    "answer": 3,
-    "hint": "Bottom left, stickers at the tips of the tree under '3. N-taxon tree'",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the PhyloAI-RP section, how many quartet drawings are crossed out in red?",
-    "options": [
-     "Two",
-     "One",
-     "Three",
-     "Four"
-    ],
-    "answer": 0,
-    "hint": "Right column under 'PhyloAI-RP', above 'Removal of unreliable quartets'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7163
  },
  {
   "id": 8,
@@ -407,40 +141,14 @@
   ],
   "motif": "Little Prince on asteroid EVERSE, dreaming of FAIR software in a box",
   "links": [],
-  "aspect": 0.7088,
-  "questions": [
-   {
-    "question": "What word is written on the big round planet in the middle of the poster?",
-    "options": [
-     "ELIXIR",
-     "EVERSE",
-     "GALAXY",
-     "ORCID"
-    ],
-    "answer": 1,
-    "hint": "Large brown circle in the centre, under the little prince figure",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which of these is named under MEASURING TOOLS?",
-    "options": [
-     "SonarQube",
-     "Pylint",
-     "Codecov",
-     "GitLeaks"
-    ],
-    "answer": 3,
-    "hint": "Lower right, red words around the drawn wrench",
-    "difficulty": "medium"
-   }
-  ]
+  "aspect": 0.7088
  },
  {
   "id": 9,
   "title": "From alignment to insight: synchronized MSA and 3D structure visualization",
   "leads": "Adam Midlik, Philippe Youkharibache, David Sehnal",
   "posterTitle": "MSA to insight",
-  "oneLiner": "Linked protein sequence alignments to 3D structures, running analyses and building prototypes in the iCn3D and Jalview viewers.",
+  "oneLiner": "Linking protein sequence alignments with 3D structure views: analyses so far, plus prototypes in the iCn3D and Jalview viewers.",
   "highlights": [
    "Done: analysis and prototypes, using iCn3D and Jalview",
    "Analyses drawn: contacts, MD simulation, structure comparison, sequence alignment",
@@ -450,52 +158,14 @@
   ],
   "motif": "Phylogenetic tree and coloured protein helices, with a red Claude starburst",
   "links": [],
-  "aspect": 0.5886,
-  "questions": [
-   {
-    "question": "Which of these is listed under 'Which families' on the top sheet?",
-    "options": [
-     "Kinase",
-     "Nanobody",
-     "Hemoglobin",
-     "Ion channel"
-    ],
-    "answer": 1,
-    "hint": "Top sheet, second column under 'Which families', third entry in blue marker",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many bullet points are listed under 'Which visualizations'?",
-    "options": [
-     "2",
-     "4",
-     "3",
-     "5"
-    ],
-    "answer": 2,
-    "hint": "Top sheet, rightmost column: Interoperability, Consensus, Automation",
-    "difficulty": "medium"
-   },
-   {
-    "question": "What version is written under the big red 'Mol*' at the bottom of the poster?",
-    "options": [
-     "v.2",
-     "v.3",
-     "v.4",
-     "v.6"
-    ],
-    "answer": 3,
-    "hint": "Bottom sheet, lower right, red marker under 'Mol*'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.5886
  },
  {
   "id": 10,
   "title": "Enabling workflows and EDAM annotations to display in community website deployments",
   "leads": "Federico Bianchini, Joshua Baskaran, Johan Gustafsson",
   "posterTitle": "ELIXIR TOOLKIT THEME",
-  "oneLiner": "Works on letting community websites built on the ELIXIR Toolkit Theme show software tools in a form machines can read",
+  "oneLiner": "Works on letting community websites built on the ELIXIR Toolkit Theme show tools and workflows in a form machines can read",
   "highlights": [
    "ELIXIR Toolkit Theme (ETT): developed by ELIXIR-BE, deploys websites via GitHub",
    "8 teal logo stickers show ETT implementations, incl. RDMkit, RSQkit and 1+MG",
@@ -509,100 +179,24 @@
    "schema.org",
    "bio.tools"
   ],
-  "aspect": 0.6581,
-  "questions": [
-   {
-    "question": "What animal is on the HUMAN MADE sticker in the top left corner?",
-    "options": [
-     "Penguin",
-     "Fox",
-     "Polar bear",
-     "Owl"
-    ],
-    "answer": 2,
-    "hint": "Top left corner, small sticker above the contributor names",
-    "difficulty": "easy"
-   },
-   {
-    "question": "According to the browser-window box, which ELIXIR node developed the ELIXIR Toolkit Theme?",
-    "options": [
-     "ELIXIR-NL",
-     "ELIXIR-UK",
-     "ELIXIR-ES",
-     "ELIXIR-BE"
-    ],
-    "answer": 3,
-    "hint": "First bullet in the 'ELIXIR TOOLKIT THEME' browser-window box, upper left",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which of these is written on one of the teal round stickers under 'Implementations'?",
-    "options": [
-     "1+MG",
-     "Galaxy",
-     "Bioconductor",
-     "OpenAIRE"
-    ],
-    "answer": 0,
-    "hint": "Cluster of teal round stickers to the right of the arrow labelled 'Implementations', upper right",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6581
  },
  {
   "id": 11,
   "title": "VERDANT: Vocabulary Enrichment & Resolution of Diversity Annotations via Neural Technology",
   "leads": "Jovana Dobreva, Miguel Rodriguez Rojas, James McLaughlin",
   "posterTitle": "KNOWLEDGE GRAPHS TO DEFINE YOUR SAMPLE DATA",
-  "oneLiner": "Built VERDANT, a tool that uses AI embeddings to match free-text environmental sample descriptions to standard vocabularies like ENVO.",
+  "oneLiner": "Built VERDANT, a tool that uses AI embeddings to match environmental sample data to standard vocabularies like ENVO.",
   "highlights": [
    "VERDANT flow: import your data -> generate embeddings -> confidence score vs other vocabs",
    "Each match is typed as exact match, related match or no match, then validated",
    "Test cases: Aerobiome, PANGAEA and Soil, linked to ENVO, GOLD, EMPO, ChEBI, EUNIS",
-   "Aerobiome case: ~500 air metagenome samples from the upper troposphere biome",
+   "Aerobiome case: ~500 air metagenome samples; upper troposphere biome",
    "Roots list Natura 2000, EMPO, EUNIS, GOLD, NCBI Taxon, ChEBI, Wikidata and ENVO"
   ],
   "motif": "Big tree with a yellow VERDANT banner, ontology names as roots, pond below",
   "links": [],
-  "aspect": 0.6888,
-  "questions": [
-   {
-    "question": "What animal is drawn swimming next to the fish in the pond under the tree?",
-    "options": [
-     "Duck",
-     "Turtle",
-     "Frog",
-     "Crab"
-    ],
-    "answer": 1,
-    "hint": "Pond drawing in the lower middle, just right of the blue fish",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What is written on the yellow star sticker among the pink speech bubbles?",
-    "options": [
-     "Try it!",
-     "Ask us!",
-     "Help us!",
-     "Join us!"
-    ],
-    "answer": 2,
-    "hint": "Yellow star in the lower right, surrounded by pink speech-bubble notes",
-    "difficulty": "medium"
-   },
-   {
-    "question": "One yellow round sticker says its starting point is 'free text descriptions'. Which name heads that sticker?",
-    "options": [
-     "Soil",
-     "Aerobiome",
-     "NMDC",
-     "PANGAEA"
-    ],
-    "answer": 3,
-    "hint": "Yellow round sticker on the left edge, at grass level",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6888
  },
  {
   "id": 12,
@@ -619,45 +213,7 @@
   ],
   "motif": "Sketched world map with a dashed '89' cluster and an elephant balancing a globe",
   "links": [],
-  "aspect": 0.708,
-  "questions": [
-   {
-    "question": "What animal is drawn balancing a globe inside the \"SampleSift DB\" box?",
-    "options": [
-     "Giraffe",
-     "Seal",
-     "Elephant",
-     "Octopus"
-    ],
-    "answer": 2,
-    "hint": "Lower-left, the \"SampleSift DB\" panel next to the database cylinder",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which number sits inside the dashed polygon selection on the hand-drawn map?",
-    "options": [
-     "89",
-     "64",
-     "31",
-     "150"
-    ],
-    "answer": 0,
-    "hint": "Top centre, the world-map mockup (same number on the stacked diamond sticker)",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which word is crossed out and replaced by \"Opportunities\" next to the green circles?",
-    "options": [
-     "Risks",
-     "Blockers",
-     "Issues",
-     "Problems"
-    ],
-    "answer": 3,
-    "hint": "Bottom right, red crossed-out word above \"Opportunities\" and the winking smiley",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.708
  },
  {
   "id": 13,
@@ -676,52 +232,14 @@
   "links": [
    "#BioHackEU26"
   ],
-  "aspect": 1.5612,
-  "questions": [
-   {
-    "question": "What is drawn on the green square overlapping the corner of the Galaxy card?",
-    "options": [
-     "A rocket",
-     "A magnifying glass",
-     "A crossed hammer and screwdriver",
-     "A gear"
-    ],
-    "answer": 2,
-    "hint": "Bottom left, green square at the lower right corner of the Galaxy card",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which word labels the green arrow on the poster?",
-    "options": [
-     "Recommend",
-     "Deploy",
-     "Publish",
-     "Validate"
-    ],
-    "answer": 0,
-    "hint": "Right middle, orange label above the green arrow running from BioAIRepo to Container Registry",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which item is written on the tall orange list note at the far left edge (the one starting with 'Workflows')?",
-    "options": [
-     "Storage",
-     "Benchmarking",
-     "Training data",
-     "Reproducible analyses"
-    ],
-    "answer": 3,
-    "hint": "Left edge, tall orange note partly covered by a dark red square, last line",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 1.5612
  },
  {
   "id": 14,
   "title": "Unlocking Animal Data for Reproducible Research with ARC RO–Crate",
   "leads": "Rica Rehfeld, Manuel Feser, Emily Clark",
   "posterTitle": "Unlocking animal data for reproducible research",
-  "oneLiner": "Building MIMSA, a checklist for describing animal research data, and plugging it into ISA Wizard, ARC and FAIRDOM SEEK",
+  "oneLiner": "Finishing version 2 of MIMSA, a checklist for describing animal research data, and working it into ISA Wizard, ARC and FAIRDOM SEEK",
   "highlights": [
    "Finalising version 2 of the MIMSA checklist for animal metadata",
    "Finalising the mapping",
@@ -731,45 +249,7 @@
   ],
   "motif": "Doodled mouse, pig and cow heads beside arrow-shaped sticky notes",
   "links": [],
-  "aspect": 0.6665,
-  "questions": [
-   {
-    "question": "Which of these animals is drawn on the poster?",
-    "options": [
-     "Cat",
-     "Horse",
-     "Pig",
-     "Chicken"
-    ],
-    "answer": 2,
-    "hint": "Right side, middle drawing in the column of animal heads",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What is written on the green arrow-shaped sticky notes?",
-    "options": [
-     "Testing with real data",
-     "Ready for release",
-     "Needs more volunteers",
-     "Bug fixing in progress"
-    ],
-    "answer": 0,
-    "hint": "Green arrows next to ISA WIZARD and ARC FRAMEWORK",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many names in the contributor list are marked with a green asterisk (online)?",
-    "options": [
-     "2",
-     "3",
-     "4",
-     "5"
-    ],
-    "answer": 1,
-    "hint": "Contributor names under the headline; legend '*online' at bottom left",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6665
  },
  {
   "id": 15,
@@ -789,45 +269,7 @@
    "elixir-europe-training/ELIXIR-TrP-KG-training-metadata",
    "https://biosoda.unil.ch/elixir-trainer/sparql"
   ],
-  "aspect": 0.6731,
-  "questions": [
-   {
-    "question": "Which triplestore did the team pick, according to a ticked green sticky note?",
-    "options": [
-     "Blazegraph",
-     "QLever",
-     "Virtuoso",
-     "GraphDB"
-    ],
-    "answer": 1,
-    "hint": "Deploying + Maintaining row, first green note: 'Pick triplestore qlever'",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many pink sticky notes are on the poster?",
-    "options": [
-     "2",
-     "4",
-     "3",
-     "5"
-    ],
-    "answer": 2,
-    "hint": "Lower part of the sheet, near the 'Interactions with other projects' label",
-    "difficulty": "medium"
-   },
-   {
-    "question": "One note plans ahead for the harvesting script breaking. In how many months?",
-    "options": [
-     "3 months",
-     "6 months",
-     "12 months",
-     "5 months"
-    ],
-    "answer": 3,
-    "hint": "Far right note of the Deploying + Maintaining row: 'Prepare for how to fix when harvesting script breaks in 5 months'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6731
  },
  {
   "id": 16,
@@ -844,45 +286,7 @@
   ],
   "motif": "Cloud of overlapping red translucent circles with a big question mark",
   "links": [],
-  "aspect": 0.7388,
-  "questions": [
-   {
-    "question": "What sits in the middle of the poster, made of overlapping red circles?",
-    "options": [
-     "A DNA double helix",
-     "A bacterium with flagella",
-     "A cloud with a question mark",
-     "A globe"
-    ],
-    "answer": 2,
-    "hint": "Centre of the poster, below the 'Relevant Concepts' and 'Relevant Properties' boxes",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which word is written on the green note in the 'SECRET WEAPONS' corner?",
-    "options": [
-     "SPREADSHEETS",
-     "COFFEE",
-     "PYTHON",
-     "GITHUB"
-    ],
-    "answer": 0,
-    "hint": "Right edge, middle: green note beside the red heart under the 'SECRET WEAPONS' label",
-    "difficulty": "medium"
-   },
-   {
-    "question": "What number is on the yellow dot attached to the 'Ontologies' box?",
-    "options": [
-     "24",
-     "48",
-     "92",
-     "67"
-    ],
-    "answer": 3,
-    "hint": "'State of the Art' section, upper right: yellow dot on the left corner of the 'Ontologies' box",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7388
  },
  {
   "id": 17,
@@ -899,45 +303,7 @@
   ],
   "motif": "Network of red and green sticky-note tools linked by hand-drawn arrows",
   "links": [],
-  "aspect": 0.7273,
-  "questions": [
-   {
-    "question": "According to the DATA box, how many publications did the team use?",
-    "options": [
-     "1.5M",
-     "7.2M",
-     "3.4M",
-     "720K"
-    ],
-    "answer": 1,
-    "hint": "Big number at the top of the DATA box, upper left",
-    "difficulty": "easy"
-   },
-   {
-    "question": "In the EDAM topics legend, what does the orange colour stand for?",
-    "options": [
-     "Genomics",
-     "Lipidomics",
-     "Transcriptomics",
-     "Both metabolomics and proteomics"
-    ],
-    "answer": 3,
-    "hint": "EDAM TOPICS LEGEND under the green sticky-note cluster, left side",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many red square sticky notes make up the tool network drawing?",
-    "options": [
-     "11",
-     "8",
-     "14",
-     "6"
-    ],
-    "answer": 0,
-    "hint": "Large arrow network in the right half of the poster",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7273
  },
  {
   "id": 18,
@@ -954,52 +320,14 @@
   ],
   "motif": "Sticky-note pipeline in a blue box, red \"THE HARD PART\" arrow, Europe dot map",
   "links": [],
-  "aspect": 0.6857,
-  "questions": [
-   {
-    "question": "What is drawn in the top-right corner, under the words \"EESSI HERE\"?",
-    "options": [
-     "A world map with blue pins",
-     "A bar chart of package downloads",
-     "A map of Europe with red dots",
-     "A drawing of a snake"
-    ],
-    "answer": 2,
-    "hint": "Top-right box, pink sheet under the red \"EESSI HERE\" arrow",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many packages does the yellow speech bubble next to BIOCONDA say there are?",
-    "options": [
-     "2,890",
-     "25,000",
-     "1,057",
-     "10,572"
-    ],
-    "answer": 3,
-    "hint": "Yellow speech-bubble sticky note at the top left, beside the blue BIOCONDA note",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which CI configuration is named under \"Fully Automated Pipeline\"?",
-    "options": [
-     ".gitlab-ci",
-     "Jenkinsfile",
-     "CircleCI",
-     "Travis CI"
-    ],
-    "answer": 0,
-    "hint": "Blue handwriting to the right of the sticky-note pipeline, in brackets below \"Pipeline\"",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6857
  },
  {
   "id": 19,
   "title": "Towards a semantic artefact catalogue for exposome ontology cross-mapping",
   "leads": "Sara Morsy, Egon Willighagen, Bashir MAYAHI",
   "posterTitle": "Ontologies",
-  "oneLiner": "Built ExpoPortal and cross-mapped exposome ontologies so environmental exposure data becomes FAIR and AI-ready.",
+  "oneLiner": "Working towards ExpoPortal, a catalogue for cross-mapping exposome ontologies, so exposure data can become FAIR and AI-ready.",
   "highlights": [
    "ExpoPortal: a portal for exposome ontologies, linked from a star sticky note",
    "Ontology cross-mapping feeding into FAIRification of exposome data",
@@ -1011,45 +339,7 @@
   "links": [
    "https://edu.nl/ngaku"
   ],
-  "aspect": 0.7051,
-  "questions": [
-   {
-    "question": "What animal is cut out of blue paper near the bottom of the poster?",
-    "options": [
-     "A bird",
-     "A turtle",
-     "A fish",
-     "A whale"
-    ],
-    "answer": 2,
-    "hint": "Lower middle, next to the \"6 PPD-Q & Coho Salmon\" use case",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What is drawn in pen next to the three orange circles linked by green arrows?",
-    "options": [
-     "A robot",
-     "A rocket",
-     "A laptop",
-     "An owl"
-    ],
-    "answer": 0,
-    "hint": "Right side, just above the big \"AI Ready FAIR\" letters",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which body organ is drawn on the small green square sticky note?",
-    "options": [
-     "Heart",
-     "Brain",
-     "Kidneys",
-     "Lungs"
-    ],
-    "answer": 3,
-    "hint": "Bottom left area, beside the hand-drawn pink molecule",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7051
  },
  {
   "id": 20,
@@ -1070,52 +360,14 @@
    "edu.nl/3y4ek",
    "#BioHackEU26"
   ],
-  "aspect": 1.4655,
-  "questions": [
-   {
-    "question": "What is written inside the big green circle on the left side of the poster?",
-    "options": [
-     "Your Data",
-     "Your Tool",
-     "Your Lab",
-     "Your Code"
-    ],
-    "answer": 1,
-    "hint": "Large green circle at the left edge, middle height",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which sound effect is written just below the pink gear in the middle?",
-    "options": [
-     "zap zap",
-     "beep boop",
-     "whirr whirr",
-     "pew pew"
-    ],
-    "answer": 3,
-    "hint": "Centre of the poster, green text under the pink gear ('magic' is above it)",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many blue ovals connect the left green circle to the central gear?",
-    "options": [
-     "9",
-     "6",
-     "7",
-     "12"
-    ],
-    "answer": 0,
-    "hint": "Column of blue ovals between the left circle and the gear (repo down to others)",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 1.4655
  },
  {
   "id": 21,
   "title": "Supporting ELIXIR Nodes in maturing RDM services through the Data Stewardship Handbook",
   "leads": "Mijke Jetten, Hana Marcetic, Jeanne Wilbrandt",
   "posterTitle": "DATA STEWARDSHIP HANDBOOK",
-  "oneLiner": "Improved an online handbook for research data managers: new page templates, checked pages online, a survey draft, 200 pull requests.",
+  "oneLiner": "Improved the online Data Stewardship Handbook: reshaped page templates, checked pages online, a survey draft, 200 pull requests.",
   "highlights": [
    "200 pull requests!",
    "Reshaped the handbook page templates",
@@ -1127,45 +379,7 @@
   "links": [
    "elixir-europe.github.io/ds-handbook/"
   ],
-  "aspect": 0.7062,
-  "questions": [
-   {
-    "question": "How many pull requests does the yellow sun in the top right corner announce?",
-    "options": [
-     "50",
-     "120",
-     "200",
-     "500"
-    ],
-    "answer": 2,
-    "hint": "Top right, inside the yellow sun next to the bird",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What is written on the wooden signpost on the left side of the trail?",
-    "options": [
-     "This way to FAIR",
-     "Finding GUIDANCE",
-     "Next stop: Galaxy",
-     "Mind the gap"
-    ],
-    "answer": 1,
-    "hint": "Left side, the signboard under the word SIGNPOSTs",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many wooden benches are drawn around the small campfire in the middle of the trail?",
-    "options": [
-     "2",
-     "4",
-     "5",
-     "3"
-    ],
-    "answer": 3,
-    "hint": "Centre right, the small fire ring beside \"Sharing CASE STUDIES\"",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7062
  },
  {
   "id": 22,
@@ -1182,45 +396,7 @@
   ],
   "motif": "Star stickers feeding a sticky-note flowchart, plus a good vs bad graph sketch",
   "links": [],
-  "aspect": 0.7172,
-  "questions": [
-   {
-    "question": "What shape are the coloured stickers that name map sources like Reactome and BRENDA?",
-    "options": [
-     "Hearts",
-     "Stars",
-     "Clouds",
-     "Hexagons"
-    ],
-    "answer": 1,
-    "hint": "Top left, the cluster of purple and green stickers above the yellow 'Data' note",
-    "difficulty": "easy"
-   },
-   {
-    "question": "In the 'Tools' list, how many algorithms are noted next to Cytoscape?",
-    "options": [
-     "5",
-     "9",
-     "15",
-     "12"
-    ],
-    "answer": 3,
-    "hint": "Bottom left, the 'Tools' list under the blue 'Trying it out' note",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the right-hand graph of the 'Good or bad?' sketch, which lettered node is drawn inside a triangle?",
-    "options": [
-     "A",
-     "C",
-     "B",
-     "E"
-    ],
-    "answer": 2,
-    "hint": "Top right, the messier of the two graphs under 'Good or bad?'",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7172
  },
  {
   "id": 23,
@@ -1237,45 +413,7 @@
   ],
   "motif": "Doodled mouse and fish linked by arrows, plus a 3x3 sticky-note heatmap",
   "links": [],
-  "aspect": 0.7051,
-  "questions": [
-   {
-    "question": "Which two animals are drawn on this poster?",
-    "options": [
-     "A cat and a dog",
-     "A fly and a worm",
-     "A mouse and a fish",
-     "A frog and a bird"
-    ],
-    "answer": 2,
-    "hint": "Left middle (above the gene-mapping dots) and again bottom right with arrows between them",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many coloured sticky notes make up the grid in the bottom-left corner?",
-    "options": [
-     "6",
-     "9",
-     "12",
-     "16"
-    ],
-    "answer": 1,
-    "hint": "Bottom left: red, orange and green sticky notes arranged in a square grid",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the small table at the bottom, what R² value is listed for cell type A?",
-    "options": [
-     "0.65",
-     "0.35",
-     "0.82",
-     "0.95"
-    ],
-    "answer": 0,
-    "hint": "Bottom centre box, table under 'ElasticNet Regression' with columns Cell type / R² / Top genes",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7051
  },
  {
   "id": 24,
@@ -1287,105 +425,29 @@
    "Six threat models on sticky notes, e.g. leak instructions, forged history leak",
    "Automatic evaluation loop: create/modify scenario, then evaluate scenario",
    "Secure environment sketch: Agent, Tool Sandbox, GA4GH APIs, Sensitive Data",
-   "Human step proposes mitigations and verifies them against the threat models",
+   "A person proposes mitigations for the environment and verifies the threat models",
    "Evaluation results feed a create/update threat model step"
   ],
   "motif": "Scientist in black sunglasses holding a test tube, yellow robot head up top",
   "links": [],
-  "aspect": 0.7217,
-  "questions": [
-   {
-    "question": "What does the yellow sticky note in the top-right 'Automatic Evaluation' box say?",
-    "options": [
-     "Done!",
-     "Work in Progress",
-     "Coming soon",
-     "Help wanted"
-    ],
-    "answer": 1,
-    "hint": "Top-right corner, yellow sticky note covering the end of the 'Automatic Evaluation' heading",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many orange-red sticky notes sit inside the 'Threat Models' box?",
-    "options": [
-     "5",
-     "8",
-     "4",
-     "6"
-    ],
-    "answer": 3,
-    "hint": "Left half of the poster, the 'Threat Models' box with the orange warning/bomb drawing",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the 'Security Processing Environment' diagram, which sticky note does the arrow from 'Sensitive Data' connect to?",
-    "options": [
-     "GA4GH APIs",
-     "Agent",
-     "Tool Sandbox",
-     "Encryption Key"
-    ],
-    "answer": 0,
-    "hint": "Bottom-right box: the L-shaped yellow arrow from 'Sensitive Data' goes up to the note above it",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7217
  },
  {
   "id": 25,
   "title": "DBTLHUB Interoperability Contracts: Standardised Phase Transitions for Engineering Biology",
   "leads": "Oscar Dias, Vitor Martins dos Santos, Anil Wipat",
   "posterTitle": "DBTL RELOADED",
-  "oneLiner": "Designed AI agents that pass work between the design, build, test and learn steps of engineering biology, packaged as RO-Crates.",
+  "oneLiner": "Plans standard handoffs between the design, build, test and learn steps of engineering biology: agents pass the work on in RO-Crates.",
   "highlights": [
    "DBTL cycle (Design, Build, Test, Learn) laid out as sticky notes around a central Architect",
-   "Central 'Live Knowledge Graph' linked to every phase of the cycle",
+   "'Live Knowledge Graph' note at the central hub, which arrows link to every phase",
    "Four transition notes between phases: L→D, D→B, B→T, T→L",
    "Printed diagram: Interface agents and RO-Crates for a generic DBTL biomanufacturing workflow",
    "Printed class diagram titled 'sentinel-oo: the classes'"
   ],
   "motif": "Sticky-note DBTL cycle around a blue 'Architect' face, plus a cookie RO-Crate",
   "links": [],
-  "aspect": 0.6931,
-  "questions": [
-   {
-    "question": "What word is written under the drawn face on the blue note at the centre of the cycle?",
-    "options": [
-     "Captain",
-     "Curator",
-     "Architect",
-     "Orchestrator"
-    ],
-    "answer": 2,
-    "hint": "Blue sticky notes in the centre of the poster",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What is drawn on the orange RO-CRATE sticky note?",
-    "options": [
-     "A cookie",
-     "A wooden crate",
-     "A rocket",
-     "A coffee cup"
-    ],
-    "answer": 0,
-    "hint": "Orange RO-CRATE note near the top centre",
-    "difficulty": "medium"
-   },
-   {
-    "question": "Which big letter is written on the red sticky notes that sit between the cycle phases?",
-    "options": [
-     "M",
-     "R",
-     "X",
-     "S"
-    ],
-    "answer": 3,
-    "hint": "Red sticky notes around the cycle (marked L→D, B→T, T→L)",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6931
  },
  {
   "id": 26,
@@ -1402,45 +464,7 @@
   ],
   "motif": "Rainbow Dante inferno layers under a train, beside a smiling Earth globe",
   "links": [],
-  "aspect": 1.5598,
-  "questions": [
-   {
-    "question": "What vehicle is drawn running across the top of the poster?",
-    "options": [
-     "A rocket",
-     "A cargo ship",
-     "A train",
-     "A hot-air balloon"
-    ],
-    "answer": 2,
-    "hint": "Top left, the \"ATLAS EXPRESS\" drawing above the coloured layers",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which animal is drawn in the yellow GREED layer, saying \"It's all up here!\"?",
-    "options": [
-     "A dinosaur",
-     "A dragon",
-     "An elephant",
-     "An owl"
-    ],
-    "answer": 0,
-    "hint": "Left side, yellow GREED band, left of the locked vault",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many views does the little sign in the blue LIMBO layer show?",
-    "options": [
-     "50",
-     "12",
-     "2",
-     "5"
-    ],
-    "answer": 3,
-    "hint": "Left side, top blue LIMBO band, the eye sign next to the \"DOI!\" document",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 1.5598
  },
  {
   "id": 27,
@@ -1457,52 +481,14 @@
   ],
   "motif": "Stick-figure pipeline ending at a Europe map with flags, plus a TES surfer",
   "links": [],
-  "aspect": 0.6903,
-  "questions": [
-   {
-    "question": "In the APPS section, what is drawn on the three green sticky notes joined by blue arrows?",
-    "options": [
-     "Laptops with a cloud",
-     "DNA double helices",
-     "Hospital buildings with a red cross",
-     "Test tubes in a rack"
-    ],
-    "answer": 2,
-    "hint": "Three green sticky notes at the bottom of the APPS column, right side, just above AUTH FLOW",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many small national flags are stuck onto the Europe map in the top-right corner?",
-    "options": [
-     "4",
-     "5",
-     "3",
-     "7"
-    ],
-    "answer": 1,
-    "hint": "Top-right corner, on the hand-drawn Europe map next to the {TES} labels",
-    "difficulty": "medium"
-   },
-   {
-    "question": "The orange 'CODE GREW 3x' sticky note with the thinking-face emoji says the code reached about how many lines?",
-    "options": [
-     "~5k+ lines",
-     "~12k+ lines",
-     "~50k+ lines",
-     "~21k+ lines"
-    ],
-    "answer": 3,
-    "hint": "Lower left, small orange note under the NEW&REVIEW list in the GA4GH SDK column",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6903
  },
  {
   "id": 28,
   "title": "WeatherXBiodiversity: Exploring Harmonization of Cross-Domain Data into FAIR Digital Objects",
   "leads": "Anne Fouilloux, Paul Slavin, Heinrich Lukas Weil",
   "posterTitle": "Weather X Biodiversity",
-  "oneLiner": "Rebuilt a bumblebee-and-weather study as reproducible, tracked workflows, with open publishing planned next.",
+  "oneLiner": "Rebuilt a bumblebee-and-weather study as reproducible workflows, with automatic tracking and open publishing planned next.",
   "highlights": [
    "Workflow joins GBIF bumblebee occurrence data with ERA5 weather data",
    "Retrieval, preprocessing and analysis steps each record provenance metadata",
@@ -1511,45 +497,7 @@
   ],
   "motif": "Smiling paper bumblebee beside a thermometer, over a sticky-note flowchart",
   "links": [],
-  "aspect": 0.6702,
-  "questions": [
-   {
-    "question": "What animal is drawn in the top-right corner of the poster?",
-    "options": [
-     "Butterfly",
-     "Bee",
-     "Ladybird",
-     "Hummingbird"
-    ],
-    "answer": 1,
-    "hint": "Top-right corner: large cut-paper striped insect with wings and a smile",
-    "difficulty": "easy"
-   },
-   {
-    "question": "Which weather dataset is labelled next to the drawn globe at the top of the poster?",
-    "options": [
-     "MODIS",
-     "WorldClim",
-     "CHELSA",
-     "ERA5"
-    ],
-    "answer": 3,
-    "hint": "Top centre: globe drawing labelled 'ERA5 weather data'",
-    "difficulty": "medium"
-   },
-   {
-    "question": "How many pink star-shaped 'Provenance Metadata' sticky notes are on the poster?",
-    "options": [
-     "2",
-     "4",
-     "3",
-     "5"
-    ],
-    "answer": 2,
-    "hint": "Centre column of the flowchart: pink star sticky notes between the GBIF and ERA5 branches and beside Analysis Results",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6702
  },
  {
   "id": 29,
@@ -1562,49 +510,11 @@
    "AI robot infers author gender (male/female) from author data",
    "Adds OpenAlex topics (e.g. Ecology, Cell Biology) and other metadata",
    "Impact metrics: popularity, influence, impulse, citation count",
-   "Plans to compare ELIXIR with general literature, plus a focus group with women"
+   "Plans to compare ELIXIR with general literature, plus a focus group on women's experiences in publishing"
   ],
   "motif": "AI robot saying ♂ ♀ above a column of green-vs-purple gender bar charts",
   "links": [],
-  "aspect": 0.7027,
-  "questions": [
-   {
-    "question": "About how many ELIXIR-supported papers does the poster say were analysed?",
-    "options": [
-     "~500",
-     "~1,300",
-     "~5,000",
-     "~13,000"
-    ],
-    "answer": 1,
-    "hint": "Next to the drawn stack of discs near the top: '~1.300 ELIXIR supported papers'",
-    "difficulty": "easy"
-   },
-   {
-    "question": "What drawing is shown saying the male and female symbols in a speech bubble?",
-    "options": [
-     "A cat",
-     "A microscope",
-     "A DNA helix",
-     "A robot labelled 'AI'"
-    ],
-    "answer": 3,
-    "hint": "Under 'AUTHORS' on the left, upper half",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the numbered bar charts (papers 1 to 5) under red dot 1, which number has male and female bars of about equal height?",
-    "options": [
-     "3",
-     "1",
-     "5",
-     "2"
-    ],
-    "answer": 0,
-    "hint": "Left column of document icons and bar charts, bottom-left quarter",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.7027
  },
  {
   "id": 30,
@@ -1621,45 +531,7 @@
   ],
   "motif": "Rainbow BiCoReCa letters, registry boxes funnelling down, star stickies",
   "links": [],
-  "aspect": 0.6601,
-  "questions": [
-   {
-    "question": "What shape are most of the sticky notes on this poster?",
-    "options": [
-     "Hearts",
-     "Stars",
-     "Circles",
-     "Squares"
-    ],
-    "answer": 1,
-    "hint": "Sticky notes scattered across the poster, especially the cluster along the bottom",
-    "difficulty": "easy"
-   },
-   {
-    "question": "According to the EDAM box, about how many additional concepts are needed for biodiversity?",
-    "options": [
-     "~15",
-     "~40",
-     "~70",
-     "~150"
-    ],
-    "answer": 2,
-    "hint": "EDAM box on the left side, middle of the poster",
-    "difficulty": "medium"
-   },
-   {
-    "question": "In the 2025 microbiome catalogue flow, how many records were displayed in the RSEc Atlas after human filtering by the community?",
-    "options": [
-     "50",
-     "750",
-     "1,200",
-     "300"
-    ],
-    "answer": 3,
-    "hint": "Bottom-left section, under the 2025 Microbiome Community Resource Catalogue heading",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.6601
  },
  {
   "id": 31,
@@ -1676,44 +548,6 @@
   ],
   "motif": "Orange brick bridge of pipeline sticky notes spanning a river from Nextflow to Galaxy",
   "links": [],
-  "aspect": 0.639,
-  "questions": [
-   {
-    "question": "The red star sticker reports how many contributions by first-timers?",
-    "options": [
-     "12",
-     "22",
-     "8",
-     "40"
-    ],
-    "answer": 1,
-    "hint": "Red star sticker, top right of the sheet",
-    "difficulty": "easy"
-   },
-   {
-    "question": "How many hand-drawn flags are on the Galaxy side, around the words \"ran here\"?",
-    "options": [
-     "2",
-     "3",
-     "4",
-     "6"
-    ],
-    "answer": 2,
-    "hint": "Right bank under the orange GALAXY label",
-    "difficulty": "medium"
-   },
-   {
-    "question": "The blue sticky note in the bottom-right corner reports how many new tools?",
-    "options": [
-     "15",
-     "9",
-     "20",
-     "6"
-    ],
-    "answer": 0,
-    "hint": "Blue sticky note, bottom right, second line (\"15 New Tools\")",
-    "difficulty": "hard"
-   }
-  ]
+  "aspect": 0.639
  }
 ]

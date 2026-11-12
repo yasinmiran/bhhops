@@ -1,107 +1,130 @@
 import { AnimatePresence, motion } from "motion/react";
-import { POSTERS, rank, scorePoster, totals, type useProgress } from "./game";
-import { Star } from "./Star";
+import { PAR, PROJECTS, isComplete, project, theme, type Direction, type Run } from "./game";
 
-type Game = ReturnType<typeof useProgress>;
+const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
+const DPAD_ORDER: Direction[] = ["up", "left", "right", "down"];
 
 interface HudProps {
-  game: Game;
-  centered: number;
-  showHint: boolean;
+  run: Run;
+  best: number | null;
+  reason: string | null;
+  overview: boolean;
   hidden: boolean;
-  onStep: (delta: number) => void;
+  onMove: (direction: Direction) => void;
   onOpen: () => void;
-  onJump: (index: number) => void;
-  onList: () => void;
+  onOverview: () => void;
+  onRestart: () => void;
 }
 
-/** The ring seen from above: one dot per window, filled once it is clear. */
-function Compass({ game, centered, onJump }: Pick<HudProps, "game" | "centered" | "onJump">) {
-  return (
-    <svg className="compass" viewBox="-50 -50 100 100" role="group" aria-label="All windows, seen from above">
-      {POSTERS.map((poster, index) => {
-        const angle = (index / POSTERS.length) * Math.PI * 2 - Math.PI / 2;
-        const cleared = scorePoster(poster, game.progress).cleared;
-        return (
-          <circle
-            key={poster.id}
-            className={`compass-dot${cleared ? " compass-clear" : ""}${index === centered ? " compass-here" : ""}`}
-            cx={Math.cos(angle) * 40}
-            cy={Math.sin(angle) * 40}
-            r={index === centered ? 5.5 : 3.6}
-            onClick={() => onJump(index)}
-          >
-            <title>
-              Project {poster.id}
-              {cleared ? ", clear" : ""}
-            </title>
-          </circle>
-        );
-      })}
-    </svg>
-  );
+function shareText(run: Run): string {
+  return `I toured all ${PROJECTS.length} BioHackathon projects in ${run.hops} hops (par ${PAR}).`;
 }
 
-export function Hud({ game, centered, showHint, hidden, onStep, onOpen, onJump, onList }: HudProps) {
-  const { cleared, gold, paper } = totals(game.progress);
-  const poster = POSTERS[centered];
-  const isClear = scorePoster(poster, game.progress).cleared;
+async function share(run: Run): Promise<void> {
+  const payload = { text: shareText(run), url: location.href.split("#")[0] };
+  try {
+    if (navigator.share) await navigator.share(payload);
+    else await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);
+  } catch {
+    // Dismissing the share sheet is not an error worth showing.
+  }
+}
+
+export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOverview, onRestart }: HudProps) {
+  const here = project(run.current);
+  const done = isComplete(run);
 
   return (
-    <div className="hud" inert={hidden}>
+    <div
+      className="hud"
+      inert={hidden}
+      // A mouse or touch press should not leave a button focused, or the next Enter would press it again instead of opening the poster.
+      onClick={(event) => event.detail > 0 && (document.activeElement as HTMLElement | null)?.blur()}
+    >
       <header className="hud-top">
         <div>
-          <h1>Poster Hunt</h1>
+          <h1>31 Hops</h1>
           <p className="hud-score">
-            <span className="mini-sticker">
-              <Star kind="gold" />
-              <motion.strong key={gold + paper} initial={{ scale: 1.8 }} animate={{ scale: 1 }}>
-                {gold + paper}
-              </motion.strong>
-            </span>
-            {cleared} of {POSTERS.length} windows clear
+            <motion.strong key={run.visited.length} initial={{ scale: 1.5 }} animate={{ scale: 1 }}>
+              {run.visited.length}
+            </motion.strong>{" "}
+            of {PROJECTS.length} projects, {run.hops} {run.hops === 1 ? "hop" : "hops"}
           </p>
-          <p className="hud-rank">{rank(cleared)}</p>
+          <p className="hud-par">
+            Par {PAR}
+            {best !== null && `, your best ${best}`}
+          </p>
         </div>
         <div className="hud-side">
-          <Compass game={game} centered={centered} onJump={onJump} />
-          <button className="quiet-button" onClick={onList}>
-            Show as a list
+          <button className="marker-button small" onClick={onOverview}>
+            {overview ? "Back to the star" : "Whole graph"}
+          </button>
+          <button className="quiet-button" onClick={onRestart}>
+            Start over
           </button>
         </div>
       </header>
 
+      <AnimatePresence>
+        {done && (
+          <motion.div className="finale" initial={{ scale: 0.6, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: -2 }} exit={{ opacity: 0 }}>
+            <h2>All {PROJECTS.length} projects in {run.hops} hops</h2>
+            <p>{run.hops <= PAR ? `Par is ${PAR}. You matched or beat it.` : `Par is ${PAR}. ${run.hops - PAR} over.`}</p>
+            <div className="finale-actions">
+              <button className="marker-button" onClick={() => share(run)}>
+                Share my score
+              </button>
+              <button className="marker-button" onClick={onRestart}>
+                Play again
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <footer className="hud-bottom">
         <AnimatePresence>
-          {showHint && (
-            <motion.p className="hud-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              Drag sideways to walk along the windows
+          {reason && (
+            <motion.p key={reason + run.hops} className="hud-reason" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              {reason}
             </motion.p>
           )}
         </AnimatePresence>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={poster.id}
-            className="hud-caption"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.14 }}
-          >
-            <p className="poster-number">Project {poster.id}</p>
-            <p className="hud-title">{poster.title}</p>
-          </motion.div>
-        </AnimatePresence>
-        <div className="hud-controls">
-          <button className="marker-button round" onClick={() => onStep(-1)} aria-label="Previous window">
-            ‹
-          </button>
-          <motion.button className="marker-button" onClick={onOpen} whileTap={{ scale: 0.96 }}>
-            {isClear ? "Look again" : "Clear this window"}
-          </motion.button>
-          <button className="marker-button round" onClick={() => onStep(1)} aria-label="Next window">
-            ›
-          </button>
+
+        <div className="hud-row">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.button
+              key={here.id}
+              className="hud-card"
+              style={{ borderColor: theme(here.primary).color }}
+              onClick={onOpen}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.14 }}
+            >
+              <span className="card-number">Project {here.id}</span>
+              <span className="card-title">{here.title}</span>
+              <span className="card-open">See the poster</span>
+            </motion.button>
+          </AnimatePresence>
+
+          <div className="dpad" role="group" aria-label="Move the star">
+            {DPAD_ORDER.map((direction) => {
+              const to = here.arrows[direction];
+              return (
+                <button
+                  key={direction}
+                  className={`dpad-key dpad-${direction}`}
+                  disabled={to === null}
+                  onClick={() => onMove(direction)}
+                  aria-label={to === null ? `Nothing ${direction}` : `Go ${direction} to project ${to}, ${project(to).name}`}
+                >
+                  {GLYPH[direction]}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </footer>
     </div>

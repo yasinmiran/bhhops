@@ -1,0 +1,979 @@
+{
+ "par": 33,
+ "themes": [
+  {
+   "id": "knowledge-graphs",
+   "label": "Knowledge graphs",
+   "color": "#b9d531",
+   "x": -3.603,
+   "y": 3.863
+  },
+  {
+   "id": "ontologies",
+   "label": "Ontologies",
+   "color": "#f6d94a",
+   "x": 3.396,
+   "y": 8.801
+  },
+  {
+   "id": "data-management",
+   "label": "Data management",
+   "color": "#f39130",
+   "x": 1.428,
+   "y": 15.389
+  },
+  {
+   "id": "tools-workflows",
+   "label": "Tools & workflows",
+   "color": "#ee3f6c",
+   "x": 7.23,
+   "y": -4.091
+  },
+  {
+   "id": "compute",
+   "label": "Cloud & HPC",
+   "color": "#2f8fce",
+   "x": -15.176,
+   "y": -3.368
+  },
+  {
+   "id": "privacy-security",
+   "label": "Privacy & security",
+   "color": "#9a78c9",
+   "x": -11.528,
+   "y": -5.918
+  },
+  {
+   "id": "genai",
+   "label": "Generative AI",
+   "color": "#3bb7a4",
+   "x": null,
+   "y": null
+  },
+  {
+   "id": "machine-learning",
+   "label": "Machine learning",
+   "color": "#e2674f",
+   "x": 14.684,
+   "y": 1.352
+  },
+  {
+   "id": "good-practice",
+   "label": "Good practice",
+   "color": "#86c9ea",
+   "x": -5.069,
+   "y": -8.398
+  },
+  {
+   "id": "visualisation",
+   "label": "Visualisation",
+   "color": "#6fb565",
+   "x": -8.981,
+   "y": -15.303
+  },
+  {
+   "id": "environment",
+   "label": "Environment",
+   "color": "#f7b189",
+   "x": null,
+   "y": null
+  },
+  {
+   "id": "credit",
+   "label": "Credit & citations",
+   "color": "#cdb0ea",
+   "x": -0.549,
+   "y": -1.06
+  },
+  {
+   "id": "molecular",
+   "label": "Genes & molecules",
+   "color": "#d9c24a",
+   "x": 9.797,
+   "y": 6.238
+  }
+ ],
+ "nodes": [
+  {
+   "id": 1,
+   "name": "BYOC in Galaxy & TREs",
+   "primary": "compute",
+   "themes": [
+    "compute",
+    "privacy-security"
+   ],
+   "x": -16.613,
+   "y": -4.981,
+   "z": -0.627,
+   "arrows": {
+    "up": 27,
+    "right": 24,
+    "down": null,
+    "left": null
+   }
+  },
+  {
+   "id": 2,
+   "name": "MARS",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "good-practice"
+   ],
+   "x": 3.66,
+   "y": 17.068,
+   "z": 0.992,
+   "arrows": {
+    "up": 14,
+    "right": null,
+    "down": 25,
+    "left": 28
+   }
+  },
+  {
+   "id": 3,
+   "name": "PlantMetWiki",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "knowledge-graphs",
+    "data-management",
+    "molecular"
+   ],
+   "x": 7.57,
+   "y": 9.975,
+   "z": 0.27,
+   "arrows": {
+    "up": 25,
+    "right": 4,
+    "down": 23,
+    "left": 11
+   }
+  },
+  {
+   "id": 4,
+   "name": "Clinical Rec. Engine",
+   "primary": "molecular",
+   "themes": [
+    "molecular",
+    "machine-learning",
+    "privacy-security",
+    "knowledge-graphs"
+   ],
+   "x": 11.085,
+   "y": 7.517,
+   "z": 1.025,
+   "arrows": {
+    "up": 3,
+    "right": 7,
+    "down": 23,
+    "left": 11
+   }
+  },
+  {
+   "id": 5,
+   "name": "Community Practices",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "data-management",
+    "visualisation",
+    "genai"
+   ],
+   "x": -9.603,
+   "y": -10.366,
+   "z": -1.082,
+   "arrows": {
+    "up": 24,
+    "right": 21,
+    "down": 22,
+    "left": 9
+   }
+  },
+  {
+   "id": 6,
+   "name": "Where Is the Credit?",
+   "primary": "credit",
+   "themes": [
+    "credit",
+    "ontologies",
+    "good-practice"
+   ],
+   "x": 1.95,
+   "y": 0.298,
+   "z": 0.854,
+   "arrows": {
+    "up": null,
+    "right": 10,
+    "down": 29,
+    "left": 15
+   }
+  },
+  {
+   "id": 7,
+   "name": "PhyloAI",
+   "primary": "machine-learning",
+   "themes": [
+    "machine-learning",
+    "molecular",
+    "tools-workflows"
+   ],
+   "x": 12.913,
+   "y": 2.874,
+   "z": -0.334,
+   "arrows": {
+    "up": 4,
+    "right": 13,
+    "down": 18,
+    "left": 23
+   }
+  },
+  {
+   "id": 8,
+   "name": "La Petite Métrique",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "tools-workflows",
+    "privacy-security"
+   ],
+   "x": -6.058,
+   "y": -6.419,
+   "z": -1.073,
+   "arrows": {
+    "up": null,
+    "right": 20,
+    "down": 21,
+    "left": 24
+   }
+  },
+  {
+   "id": 9,
+   "name": "MSA to Insight",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "molecular",
+    "genai"
+   ],
+   "x": -11.714,
+   "y": -14.141,
+   "z": -1.035,
+   "arrows": {
+    "up": 5,
+    "right": 22,
+    "down": 12,
+    "left": null
+   }
+  },
+  {
+   "id": 10,
+   "name": "ELIXIR Toolkit Theme",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "ontologies",
+    "credit"
+   ],
+   "x": 6.582,
+   "y": -2.324,
+   "z": 1.161,
+   "arrows": {
+    "up": 6,
+    "right": 18,
+    "down": 17,
+    "left": 30
+   }
+  },
+  {
+   "id": 11,
+   "name": "VERDANT",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "environment",
+    "machine-learning",
+    "knowledge-graphs"
+   ],
+   "x": 3.911,
+   "y": 7.338,
+   "z": 1.135,
+   "arrows": {
+    "up": 3,
+    "right": 4,
+    "down": 16,
+    "left": 19
+   }
+  },
+  {
+   "id": 12,
+   "name": "SampleSift",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "environment"
+   ],
+   "x": -8.625,
+   "y": -17.614,
+   "z": 0.075,
+   "arrows": {
+    "up": 22,
+    "right": null,
+    "down": null,
+    "left": 9
+   }
+  },
+  {
+   "id": 13,
+   "name": "ELIXIR AI Ecosystem",
+   "primary": "machine-learning",
+   "themes": [
+    "machine-learning",
+    "tools-workflows",
+    "compute"
+   ],
+   "x": 16.454,
+   "y": -0.171,
+   "z": -0.116,
+   "arrows": {
+    "up": 7,
+    "right": null,
+    "down": null,
+    "left": 18
+   }
+  },
+  {
+   "id": 14,
+   "name": "Unlocking Animal Data",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "ontologies"
+   ],
+   "x": -0.801,
+   "y": 17.193,
+   "z": 0.115,
+   "arrows": {
+    "up": 2,
+    "right": 25,
+    "down": 28,
+    "left": null
+   }
+  },
+  {
+   "id": 15,
+   "name": "ELIXIR Trainer",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "genai",
+    "credit"
+   ],
+   "x": -2.526,
+   "y": 1.538,
+   "z": 0.252,
+   "arrows": {
+    "up": 16,
+    "right": 6,
+    "down": 30,
+    "left": 26
+   }
+  },
+  {
+   "id": 16,
+   "name": "MiCoKnowGraph",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "ontologies",
+    "environment"
+   ],
+   "x": -1.569,
+   "y": 5.495,
+   "z": 0.666,
+   "arrows": {
+    "up": 19,
+    "right": 11,
+    "down": 15,
+    "left": 26
+   }
+  },
+  {
+   "id": 17,
+   "name": "Tool Co-citations",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "credit",
+    "visualisation"
+   ],
+   "x": 5.192,
+   "y": -6.605,
+   "z": 0.672,
+   "arrows": {
+    "up": 10,
+    "right": 31,
+    "down": 20,
+    "left": 30
+   }
+  },
+  {
+   "id": 18,
+   "name": "Condeessi",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "compute"
+   ],
+   "x": 11.911,
+   "y": -1.93,
+   "z": -0.197,
+   "arrows": {
+    "up": 7,
+    "right": 13,
+    "down": 31,
+    "left": 10
+   }
+  },
+  {
+   "id": 19,
+   "name": "Exposome Ontologies",
+   "primary": "ontologies",
+   "themes": [
+    "ontologies",
+    "environment"
+   ],
+   "x": -1.294,
+   "y": 9.09,
+   "z": -0.062,
+   "arrows": {
+    "up": null,
+    "right": 11,
+    "down": 16,
+    "left": null
+   }
+  },
+  {
+   "id": 20,
+   "name": "Maturity Meter",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "tools-workflows",
+    "credit"
+   ],
+   "x": -0.46,
+   "y": -6.486,
+   "z": 0.845,
+   "arrows": {
+    "up": 29,
+    "right": 30,
+    "down": 17,
+    "left": 8
+   }
+  },
+  {
+   "id": 21,
+   "name": "Stewardship Handbook",
+   "primary": "good-practice",
+   "themes": [
+    "good-practice",
+    "data-management"
+   ],
+   "x": -4.153,
+   "y": -10.321,
+   "z": -0.33,
+   "arrows": {
+    "up": 8,
+    "right": null,
+    "down": null,
+    "left": 5
+   }
+  },
+  {
+   "id": 22,
+   "name": "Open Pathway Maps",
+   "primary": "visualisation",
+   "themes": [
+    "visualisation",
+    "molecular",
+    "good-practice"
+   ],
+   "x": -6.604,
+   "y": -14.155,
+   "z": -0.044,
+   "arrows": {
+    "up": 5,
+    "right": null,
+    "down": 12,
+    "left": 9
+   }
+  },
+  {
+   "id": 23,
+   "name": "Single-cell Integration",
+   "primary": "molecular",
+   "themes": [
+    "molecular",
+    "ontologies",
+    "data-management",
+    "machine-learning"
+   ],
+   "x": 8.508,
+   "y": 4.96,
+   "z": -0.979,
+   "arrows": {
+    "up": 3,
+    "right": 4,
+    "down": 7,
+    "left": null
+   }
+  },
+  {
+   "id": 24,
+   "name": "AI Agents in SPEs",
+   "primary": "privacy-security",
+   "themes": [
+    "privacy-security",
+    "genai",
+    "compute",
+    "good-practice"
+   ],
+   "x": -11.528,
+   "y": -5.918,
+   "z": 0.598,
+   "arrows": {
+    "up": 27,
+    "right": 8,
+    "down": 5,
+    "left": 1
+   }
+  },
+  {
+   "id": 25,
+   "name": "DBTL Reloaded",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "knowledge-graphs"
+   ],
+   "x": 3.869,
+   "y": 13.482,
+   "z": 0.802,
+   "arrows": {
+    "up": 2,
+    "right": 3,
+    "down": 28,
+    "left": 14
+   }
+  },
+  {
+   "id": 26,
+   "name": "ELIXIR Atlas",
+   "primary": "knowledge-graphs",
+   "themes": [
+    "knowledge-graphs",
+    "genai",
+    "credit"
+   ],
+   "x": -6.716,
+   "y": 4.557,
+   "z": -0.341,
+   "arrows": {
+    "up": null,
+    "right": 16,
+    "down": 15,
+    "left": null
+   }
+  },
+  {
+   "id": 27,
+   "name": "Federated Compute",
+   "primary": "compute",
+   "themes": [
+    "compute",
+    "privacy-security"
+   ],
+   "x": -13.74,
+   "y": -1.755,
+   "z": -0.771,
+   "arrows": {
+    "up": null,
+    "right": null,
+    "down": 24,
+    "left": 1
+   }
+  },
+  {
+   "id": 28,
+   "name": "Weather X Biodiversity",
+   "primary": "data-management",
+   "themes": [
+    "data-management",
+    "environment",
+    "tools-workflows"
+   ],
+   "x": -1.018,
+   "y": 13.815,
+   "z": 1.156,
+   "arrows": {
+    "up": 14,
+    "right": 2,
+    "down": 25,
+    "left": null
+   }
+  },
+  {
+   "id": 29,
+   "name": "Gender in Publications",
+   "primary": "credit",
+   "themes": [
+    "credit",
+    "machine-learning"
+   ],
+   "x": -3.049,
+   "y": -2.418,
+   "z": -0.907,
+   "arrows": {
+    "up": null,
+    "right": 6,
+    "down": 20,
+    "left": null
+   }
+  },
+  {
+   "id": 30,
+   "name": "BiCoReCa",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "environment",
+    "ontologies"
+   ],
+   "x": 1.775,
+   "y": -3.104,
+   "z": -0.109,
+   "arrows": {
+    "up": 15,
+    "right": 10,
+    "down": 17,
+    "left": 20
+   }
+  },
+  {
+   "id": 31,
+   "name": "Building Bridges",
+   "primary": "tools-workflows",
+   "themes": [
+    "tools-workflows",
+    "genai",
+    "good-practice"
+   ],
+   "x": 10.69,
+   "y": -6.494,
+   "z": -0.105,
+   "arrows": {
+    "up": 18,
+    "right": null,
+    "down": null,
+    "left": 17
+   }
+  }
+ ],
+ "edges": [
+  {
+   "a": 1,
+   "b": 24,
+   "reason": "Both: Cloud & HPC, Privacy & security",
+   "theme": "compute"
+  },
+  {
+   "a": 1,
+   "b": 27,
+   "reason": "Both: Cloud & HPC, Privacy & security",
+   "theme": "compute"
+  },
+  {
+   "a": 2,
+   "b": 14,
+   "reason": "Both build on the ISA metadata model",
+   "theme": "data-management"
+  },
+  {
+   "a": 2,
+   "b": 25,
+   "reason": "Both: Data management",
+   "theme": "data-management"
+  },
+  {
+   "a": 2,
+   "b": 28,
+   "reason": "Both: Data management",
+   "theme": "data-management"
+  },
+  {
+   "a": 3,
+   "b": 4,
+   "reason": "Both: Genes & molecules, Knowledge graphs",
+   "theme": "molecular"
+  },
+  {
+   "a": 3,
+   "b": 11,
+   "reason": "Both: Knowledge graphs, Ontologies",
+   "theme": "knowledge-graphs"
+  },
+  {
+   "a": 3,
+   "b": 23,
+   "reason": "Both draw on the Bgee database",
+   "theme": "molecular"
+  },
+  {
+   "a": 3,
+   "b": 25,
+   "reason": "Both: Knowledge graphs, Data management",
+   "theme": "knowledge-graphs"
+  },
+  {
+   "a": 4,
+   "b": 7,
+   "reason": "Both: Genes & molecules, Machine learning",
+   "theme": "molecular"
+  },
+  {
+   "a": 4,
+   "b": 11,
+   "reason": "Both: Machine learning, Knowledge graphs",
+   "theme": "machine-learning"
+  },
+  {
+   "a": 4,
+   "b": 23,
+   "reason": "Both: Genes & molecules, Machine learning",
+   "theme": "molecular"
+  },
+  {
+   "a": 5,
+   "b": 9,
+   "reason": "Both: Visualisation, Generative AI",
+   "theme": "visualisation"
+  },
+  {
+   "a": 5,
+   "b": 21,
+   "reason": "Both link RDMkit, FAIR Cookbook and DSW",
+   "theme": "data-management"
+  },
+  {
+   "a": 5,
+   "b": 22,
+   "reason": "Both: Visualisation, Good practice",
+   "theme": "visualisation"
+  },
+  {
+   "a": 5,
+   "b": 24,
+   "reason": "Both: Generative AI, Good practice",
+   "theme": "genai"
+  },
+  {
+   "a": 6,
+   "b": 10,
+   "reason": "ETT aligns credit vocabulary with APICURON",
+   "theme": "credit"
+  },
+  {
+   "a": 6,
+   "b": 15,
+   "reason": "Trainer poster names #6 for training credit",
+   "theme": "credit"
+  },
+  {
+   "a": 6,
+   "b": 29,
+   "reason": "Both use BIP! scholarly services",
+   "theme": "credit"
+  },
+  {
+   "a": 7,
+   "b": 13,
+   "reason": "Both: Machine learning, Tools & workflows",
+   "theme": "machine-learning"
+  },
+  {
+   "a": 7,
+   "b": 18,
+   "reason": "Both centre on Bioconda packages",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 7,
+   "b": 23,
+   "reason": "Both: Machine learning, Genes & molecules",
+   "theme": "machine-learning"
+  },
+  {
+   "a": 8,
+   "b": 20,
+   "reason": "Both score software quality using OpenEBench",
+   "theme": "good-practice"
+  },
+  {
+   "a": 8,
+   "b": 21,
+   "reason": "Both: Good practice",
+   "theme": "good-practice"
+  },
+  {
+   "a": 8,
+   "b": 24,
+   "reason": "Both: Privacy & security, Good practice",
+   "theme": "privacy-security"
+  },
+  {
+   "a": 9,
+   "b": 12,
+   "reason": "Both: Visualisation",
+   "theme": "visualisation"
+  },
+  {
+   "a": 9,
+   "b": 22,
+   "reason": "Both: Visualisation, Genes & molecules",
+   "theme": "visualisation"
+  },
+  {
+   "a": 10,
+   "b": 17,
+   "reason": "Both pull workflows from WorkflowHub",
+   "theme": "credit"
+  },
+  {
+   "a": 10,
+   "b": 18,
+   "reason": "Both: Tools & workflows",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 10,
+   "b": 30,
+   "reason": "Both use WorkflowHub and EDAM annotations",
+   "theme": "ontologies"
+  },
+  {
+   "a": 11,
+   "b": 16,
+   "reason": "Microbiome KG built together with VERDANT",
+   "theme": "environment"
+  },
+  {
+   "a": 11,
+   "b": 19,
+   "reason": "Both map terms to ENVO and ChEBI",
+   "theme": "environment"
+  },
+  {
+   "a": 12,
+   "b": 22,
+   "reason": "Both: Visualisation",
+   "theme": "visualisation"
+  },
+  {
+   "a": 13,
+   "b": 18,
+   "reason": "Both: Cloud & HPC, Tools & workflows",
+   "theme": "compute"
+  },
+  {
+   "a": 14,
+   "b": 25,
+   "reason": "Both: Data management",
+   "theme": "data-management"
+  },
+  {
+   "a": 14,
+   "b": 28,
+   "reason": "Both build on ARC; shared team members",
+   "theme": "data-management"
+  },
+  {
+   "a": 15,
+   "b": 16,
+   "reason": "Both: Knowledge graphs",
+   "theme": "knowledge-graphs"
+  },
+  {
+   "a": 15,
+   "b": 26,
+   "reason": "Trainer poster names #26 (Biotope experiment)",
+   "theme": "genai"
+  },
+  {
+   "a": 15,
+   "b": 30,
+   "reason": "Both build on TeSS training data",
+   "theme": null
+  },
+  {
+   "a": 16,
+   "b": 19,
+   "reason": "Both: Environment, Ontologies",
+   "theme": "environment"
+  },
+  {
+   "a": 16,
+   "b": 26,
+   "reason": "Both: Knowledge graphs",
+   "theme": "knowledge-graphs"
+  },
+  {
+   "a": 17,
+   "b": 20,
+   "reason": "Both mine OpenEBench and Europe PMC",
+   "theme": "credit"
+  },
+  {
+   "a": 17,
+   "b": 30,
+   "reason": "Both combine WorkflowHub and OpenEBench",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 17,
+   "b": 31,
+   "reason": "Both work with nf-core and Galaxy workflows",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 18,
+   "b": 31,
+   "reason": "Both: Tools & workflows",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 20,
+   "b": 29,
+   "reason": "Both pull publication data from OpenAlex",
+   "theme": "credit"
+  },
+  {
+   "a": 20,
+   "b": 30,
+   "reason": "Both build on the Research Software Ecosystem",
+   "theme": "tools-workflows"
+  },
+  {
+   "a": 24,
+   "b": 27,
+   "reason": "Both run workflows via WESkit and GA4GH APIs",
+   "theme": "privacy-security"
+  },
+  {
+   "a": 25,
+   "b": 28,
+   "reason": "Both: Data management",
+   "theme": "data-management"
+  }
+ ]
+}

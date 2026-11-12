@@ -1,19 +1,14 @@
-/* Everything here is borrowed from the posters themselves: flipchart paper taped to a
-   window, marker headlines, neon sticky notes, masking tape in two colours. */
+/* Everything here is borrowed from the posters themselves: squared flipchart paper,
+   marker headlines, neon sticky notes and the star stickers one team used. */
 :root {
-  --glass: #cfdcd6;
-  --paper: #fbfaf6;
+  --paper: #f4f3ee;
+  --sheet: #fbfaf6;
   --ink: #1d2433;
   --ink-soft: #556070;
   --marker-blue: #24459c;
   --marker-red: #d8412f;
-  --note-green: #b9d531;
   --note-yellow: #f6d94a;
-  --note-orange: #f39130;
   --note-pink: #ee3f6c;
-  --tape-green: #86c440;
-  --tape-yellow: #e7c94b;
-  --gold: #f5b921;
 
   --hand: "Shantell Sans Variable", "Comic Sans MS", cursive;
   --text: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
@@ -32,16 +27,19 @@ html {
 
 body {
   margin: 0;
+  background: var(--paper);
   color: var(--ink);
   font: 400 1rem/1.5 var(--text);
-  /* The garden behind the glass, out of focus. */
-  background:
-    radial-gradient(55% 35% at 12% 8%, #b4cba6 0, transparent 70%),
-    radial-gradient(45% 30% at 88% 30%, #a7bdb4 0, transparent 70%),
-    radial-gradient(60% 40% at 30% 85%, #b9cdb0 0, transparent 70%),
-    linear-gradient(#dbe5e1, #c2d1ca);
-  background-attachment: fixed;
   min-height: 100dvh;
+}
+
+body.playing {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.sheet-open {
+  overflow: hidden;
 }
 
 h1,
@@ -74,46 +72,6 @@ a {
   outline-offset: 3px;
 }
 
-/* Stars */
-
-.star {
-  width: 1.5em;
-  height: 1.5em;
-  flex: none;
-  overflow: visible;
-}
-
-.star polygon {
-  stroke: var(--ink);
-  stroke-width: 1.4;
-  stroke-linejoin: round;
-}
-
-.star-gold polygon {
-  fill: var(--gold);
-}
-
-.star-paper polygon {
-  fill: #fff;
-  stroke-dasharray: 2.2 1.6;
-}
-
-.star-none polygon {
-  fill: none;
-  stroke-opacity: 0.3;
-}
-
-.star-slap {
-  animation: slap 0.38s cubic-bezier(0.2, 1.4, 0.4, 1);
-}
-
-@keyframes slap {
-  from {
-    transform: scale(2.6) rotate(-25deg);
-    opacity: 0;
-  }
-}
-
 /* Buttons */
 
 .marker-button {
@@ -121,7 +79,7 @@ a {
   padding: 11px 20px;
   border: 2.5px solid var(--ink);
   border-radius: 6px 14px 8px 12px;
-  background: var(--paper);
+  background: var(--sheet);
   color: var(--ink);
   font: 600 1.05rem var(--hand);
   text-decoration: none;
@@ -134,254 +92,308 @@ a {
   box-shadow: 1px 1px 0 var(--ink);
 }
 
+.marker-button.small {
+  padding: 7px 12px;
+  font-size: 0.92rem;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
 .quiet-button {
   border: none;
   background: none;
   padding: 8px 0;
-  color: var(--ink-soft);
+  color: var(--ink);
   font: inherit;
+  font-size: 0.9rem;
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
 }
 
-/* The wall */
-
-.wall-page {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: calc(env(safe-area-inset-top) + 28px) var(--gutter) 48px;
-}
-
-.wall-head {
-  max-width: 640px;
-  display: grid;
-  gap: 16px;
-  justify-items: start;
-  margin-bottom: 36px;
-}
-
-.wall-head h1 {
-  font-size: clamp(3rem, 14vw, 5.2rem);
-  font-weight: 800;
-  font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
-  color: var(--marker-blue);
-  letter-spacing: -0.02em;
-  rotate: -1.5deg;
-}
-
-.lede {
-  font-size: 1.1rem;
-  max-width: 34em;
-}
-
-.scoreboard {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* The pink star sticker one team used for its headline number. */
-.score-sticker {
-  position: relative;
+.loading {
+  position: fixed;
+  inset: 0;
   display: grid;
   place-items: center;
-  font-size: 3.3rem;
-  rotate: 8deg;
+  font: 700 1.3rem var(--hand);
 }
 
-.score-sticker .star polygon {
-  fill: var(--note-pink);
-  stroke: none;
+/* The graph fills the screen; the game's controls are laid over it. */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
 }
 
-.score-sticker strong {
-  position: absolute;
-  padding-top: 0.12em;
-  color: #fff;
-  font: 800 0.36em var(--hand);
-}
-
-.score-main {
-  font: 700 1.35rem var(--hand);
-}
-
-.score-rank {
-  color: var(--ink-soft);
-}
-
-.finale {
-  padding: 12px 16px;
-  background: var(--note-yellow);
-  font: 700 1.2rem var(--hand);
-  rotate: -1deg;
-  box-shadow: 0 6px 8px -6px rgb(29 36 51 / 0.5);
-}
-
-.wall {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 30px 18px;
-  align-items: start;
-}
-
-@media (min-width: 620px) {
-  .wall {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 36px 24px;
-  }
-}
-
-@media (min-width: 900px) {
-  .wall {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1250px) {
-  .wall {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-}
-
-.sheet {
-  position: relative;
-  background: var(--paper);
-  box-shadow: 0 10px 18px -10px rgb(29 36 51 / 0.45);
-}
-
-.tilt-0 {
-  rotate: -1.1deg;
-}
-.tilt-1 {
-  rotate: 0.7deg;
-}
-.tilt-2 {
-  rotate: -0.4deg;
-}
-.tilt-3 {
-  rotate: 1.2deg;
-}
-.tilt-4 {
-  rotate: -0.8deg;
-}
-
-/* Two strips of masking tape across the top corners. */
-.sheet::before,
-.sheet::after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: -7px;
-  width: 34px;
-  height: 15px;
-  opacity: 0.85;
+.hud {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) calc(env(safe-area-inset-bottom) + 14px);
   pointer-events: none;
 }
 
-.sheet::before {
-  left: -9px;
-  rotate: -38deg;
-  background: var(--tape-green);
+.hud button {
+  pointer-events: auto;
 }
 
-.sheet::after {
-  right: -9px;
-  rotate: 38deg;
-  background: var(--tape-green);
-}
-
-.sheet:nth-child(odd)::before,
-.sheet:nth-child(odd)::after {
-  background: var(--tape-yellow);
-}
-
-.sheet a {
-  position: relative;
-  display: block;
-  height: 100%;
-  overflow: hidden;
-  text-decoration: none;
-}
-
-.sheet-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.frosted {
-  filter: blur(7px) saturate(0.55);
-  scale: 1.06;
-}
-
-.sheet a:has(.frosted)::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgb(255 255 255 / 0.38);
-}
-
-.sheet-number {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-  font: 800 clamp(2.6rem, 11vw, 4rem) var(--hand);
-  font-variation-settings: "BNCE" 30, "INFM" 70, "SPAC" 0;
-}
-
-.sheet-stars {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+.hud-top {
   display: flex;
-  padding: 4px 6px;
-  background: var(--paper);
-  font-size: 0.8rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.wall-foot {
-  max-width: 640px;
-  margin-top: 48px;
-  display: grid;
-  gap: 8px;
-  justify-items: start;
+/* Keeps marker text readable where a note or a thread passes behind it. */
+.hud-top h1,
+.hud-score,
+.hud-par,
+.hud-side .quiet-button {
+  text-shadow: 0 0 10px var(--paper), 0 0 4px var(--paper), 0 0 2px var(--paper);
+}
+
+.hud-top h1 {
+  font-size: clamp(2.1rem, 9vw, 3.2rem);
+  font-weight: 800;
+  font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
+  color: var(--marker-blue);
+  rotate: -1.5deg;
+}
+
+.hud-score {
+  margin-top: 4px;
+  font: 700 1.08rem var(--hand);
+}
+
+.hud-score strong {
+  display: inline-block;
+  color: var(--marker-red);
+  font-size: 1.35em;
+}
+
+.hud-par {
   color: var(--ink-soft);
   font-size: 0.92rem;
 }
 
-/* One poster */
+.hud-side {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.hud-bottom {
+  display: grid;
+  gap: 10px;
+}
+
+.hud-reason {
+  justify-self: center;
+  padding: 7px 14px;
+  background: var(--note-yellow);
+  font: 600 1rem var(--hand);
+  rotate: -1deg;
+  box-shadow: 0 8px 8px -8px rgb(29 36 51 / 0.6);
+}
+
+.hud-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hud-card {
+  flex: 1;
+  min-width: 0;
+  max-width: 480px;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px 12px;
+  border: none;
+  border-left: 10px solid;
+  background: rgb(251 250 246 / 0.96);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 10px 14px -10px rgb(29 36 51 / 0.55);
+}
+
+.card-number {
+  color: var(--marker-red);
+  font: 800 1.15rem var(--hand);
+}
+
+.card-title {
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-open {
+  color: var(--marker-blue);
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Four keys in a cross, the same shape as the arrow keys on a keyboard. */
+.dpad {
+  flex: none;
+  display: grid;
+  grid-template: repeat(3, 44px) / repeat(3, 44px);
+  gap: 3px;
+}
+
+.dpad-key {
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  background: var(--sheet);
+  color: var(--ink);
+  font: 800 1.35rem/1 system-ui, sans-serif;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.dpad-key:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.dpad-key:disabled {
+  opacity: 0.28;
+  box-shadow: none;
+  cursor: default;
+}
+
+.dpad-up {
+  grid-area: 1 / 2;
+}
+
+.dpad-left {
+  grid-area: 2 / 1;
+}
+
+.dpad-right {
+  grid-area: 2 / 3;
+}
+
+.dpad-down {
+  grid-area: 3 / 2;
+}
+
+.finale {
+  align-self: center;
+  max-width: 420px;
+  padding: 20px 22px;
+  display: grid;
+  gap: 10px;
+  background: var(--note-yellow);
+  box-shadow: 0 16px 16px -12px rgb(29 36 51 / 0.6);
+  pointer-events: auto;
+}
+
+.finale h2 {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.finale-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* Start */
+
+.start {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  /* The squared paper of a flipchart pad. */
+  background-image:
+    linear-gradient(rgb(47 143 206 / 0.14) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgb(47 143 206 / 0.14) 1.5px, transparent 1.5px);
+  background-size: 34px 34px;
+}
+
+.start-note {
+  width: min(100%, 440px);
+  padding: 30px 24px 26px;
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  background: var(--note-yellow);
+  box-shadow: 0 22px 20px -16px rgb(29 36 51 / 0.6);
+}
+
+.start-note h1 {
+  font-size: clamp(3rem, 15vw, 4.4rem);
+  font-weight: 800;
+  font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
+  color: var(--marker-blue);
+}
+
+.start-note p {
+  font-size: 1.08rem;
+}
+
+.start-note label {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  font: 700 1rem var(--hand);
+}
+
+.start-note select {
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 10px;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--sheet);
+  color: var(--ink);
+  font: 400 1rem var(--text);
+}
+
+/* The poster sheet slides over the graph. */
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--sheet);
+}
 
 .poster-page {
   max-width: 760px;
   margin: 0 auto;
-  min-height: 100dvh;
   padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) 56px;
-  background: var(--paper);
   display: grid;
   gap: 26px;
   align-content: start;
 }
 
 .poster-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   font-family: var(--hand);
   font-weight: 600;
 }
 
-.poster-nav a {
-  padding: 8px 0;
-}
-
-.poster-stars {
-  display: flex;
-  gap: 2px;
+.poster-nav .quiet-button {
+  color: var(--marker-blue);
+  font: inherit;
 }
 
 .poster-number {
@@ -402,21 +414,40 @@ a {
   font-size: 0.95rem;
 }
 
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chips li {
+  padding: 3px 10px;
+  font: 600 0.92rem var(--hand);
+}
+
 .poster-figure {
   margin: 0 calc(var(--gutter) * -1);
 }
 
 .poster-frame {
-  width: 100%;
-  max-height: 86dvh;
+  margin-inline: auto;
   overflow: hidden;
   background: #e9ece8;
+}
+
+.poster-zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
 }
 
 .poster-frame img {
   display: block;
   width: 100%;
-  cursor: zoom-in;
 }
 
 .poster-frame.zoomed {
@@ -425,9 +456,8 @@ a {
   overscroll-behavior: contain;
 }
 
-.poster-frame.zoomed img {
+.poster-frame.zoomed .poster-zoom {
   width: 280%;
-  max-width: none;
   cursor: zoom-out;
 }
 
@@ -440,115 +470,7 @@ a {
 .poster-page h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.notes {
-  display: grid;
-  gap: 22px;
-}
-
-.note {
-  padding: 18px 16px 16px;
-  display: grid;
-  gap: 14px;
-  /* The lifted bottom edge of a sticky note. */
-  box-shadow: 0 14px 12px -12px rgb(29 36 51 / 0.55);
-}
-
-.note:nth-child(odd) {
-  rotate: -0.6deg;
-}
-
-.note:nth-child(even) {
-  rotate: 0.5deg;
-}
-
-.note-easy {
-  background: var(--note-green);
-}
-
-.note-medium {
-  background: var(--note-yellow);
-}
-
-.note-hard {
-  background: var(--note-orange);
-}
-
-.note-shake {
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  25% {
-    translate: -6px 0;
-  }
-  75% {
-    translate: 6px 0;
-  }
-}
-
-.note-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.note-head h3 {
-  font-size: 1.22rem;
-  font-weight: 650;
-}
-
-.note-head .star {
-  font-size: 1.25rem;
-}
-
-.options {
-  display: grid;
-  gap: 8px;
-}
-
-.option {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 2px solid rgb(29 36 51 / 0.35);
-  border-radius: 4px;
-  background: rgb(255 255 255 / 0.6);
-  color: var(--ink);
-  font: 500 1.02rem var(--text);
-  text-align: left;
-  cursor: pointer;
-}
-
-.option:disabled {
-  cursor: default;
-}
-
-.option-open:disabled {
-  opacity: 0.6;
-}
-
-.option-wrong {
-  text-decoration: line-through;
-  opacity: 0.55;
-}
-
-.option-right {
-  border-color: var(--ink);
-  background: #fff;
-  font-weight: 700;
-}
-
-.note-status {
-  min-height: 1.5em;
-  font-size: 0.95rem;
-}
-
-.reveal {
-  padding-top: 4px;
+  margin-bottom: 14px;
 }
 
 .one-liner {
@@ -586,211 +508,116 @@ a {
   overflow-wrap: anywhere;
 }
 
-.next-poster {
-  justify-self: start;
+.hops {
+  display: grid;
+  gap: 10px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .star-slap,
-  .note-shake {
-    animation: none;
-  }
-}
-
-/* The poster sheet slides over whichever wall is underneath. */
-
-.sheet-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  background: var(--paper);
-}
-
-body.sheet-open {
-  overflow: hidden;
-}
-
-.wall-actions {
+.hop {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
+  padding: 8px 12px 8px 8px;
+  border: 2px solid rgb(29 36 51 / 0.2);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
-.loading {
-  position: fixed;
-  inset: 0;
+.hop:disabled {
+  cursor: default;
+}
+
+.hop-number {
+  flex: none;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
-  font: 700 1.3rem var(--hand);
+  font: 800 1.25rem var(--hand);
+  rotate: -3deg;
 }
 
-/* The pavilion: a canvas filling the screen with the game's controls laid over it. */
-
-body.pavilion {
-  overflow: hidden;
-  overscroll-behavior: none;
+.hop-reason {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
-.scene {
-  position: fixed;
-  inset: 0;
-  touch-action: none;
-  cursor: grab;
+/* The list, for devices without WebGL. */
+
+.wall-page {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 28px) var(--gutter) 48px;
 }
 
-.scene:active {
-  cursor: grabbing;
+.wall-head {
+  max-width: 640px;
+  display: grid;
+  gap: 14px;
+  margin-bottom: 32px;
 }
 
-.hud {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) calc(env(safe-area-inset-bottom) + 16px);
-  pointer-events: none;
-}
-
-.hud button,
-.hud .compass-dot {
-  pointer-events: auto;
-}
-
-.hud-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.hud-top h1 {
-  font-size: clamp(1.9rem, 8vw, 2.8rem);
+.wall-head h1 {
+  font-size: clamp(3rem, 14vw, 5rem);
   font-weight: 800;
   font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
   color: var(--marker-blue);
   rotate: -1.5deg;
-  /* Keeps the marker title readable over trees and posters alike. */
-  text-shadow: 0 0 12px #fff, 0 0 4px #fff;
+  justify-self: start;
 }
 
-.hud-score {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  font: 700 1.05rem var(--hand);
-  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
+.lede {
+  font-size: 1.1rem;
 }
 
-.hud-rank {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
-}
-
-.mini-sticker {
-  position: relative;
+.wall {
   display: grid;
-  place-items: center;
-  font-size: 1.75rem;
-  rotate: 8deg;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 28px 18px;
+  align-items: start;
 }
 
-.mini-sticker .star polygon {
-  fill: var(--note-pink);
-  stroke: none;
+.sheet {
+  background: var(--sheet);
+  box-shadow: 0 10px 18px -10px rgb(29 36 51 / 0.45);
 }
 
-.mini-sticker strong {
-  position: absolute;
-  padding-top: 0.1em;
-  color: #fff;
-  font: 800 0.38em var(--hand);
+.tilt-0 {
+  rotate: -1.1deg;
+}
+.tilt-1 {
+  rotate: 0.7deg;
+}
+.tilt-2 {
+  rotate: -0.4deg;
+}
+.tilt-3 {
+  rotate: 1.2deg;
+}
+.tilt-4 {
+  rotate: -0.8deg;
 }
 
-.hud-side {
-  display: grid;
-  justify-items: end;
-  gap: 2px;
-}
-
-.hud-side .quiet-button {
+.sheet a {
+  display: block;
   color: var(--ink);
-  font-size: 0.88rem;
-  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
+  text-decoration: none;
 }
 
-.compass {
-  width: 76px;
-  height: 76px;
+.sheet img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 
-.compass-dot {
-  fill: rgb(255 255 255 / 0.85);
-  stroke: var(--ink);
-  stroke-width: 1.4;
-  cursor: pointer;
-}
-
-.compass-clear {
-  fill: var(--gold);
-}
-
-.compass-here {
-  stroke: var(--marker-red);
-  stroke-width: 3;
-}
-
-.hud-hint {
-  align-self: center;
-  padding: 8px 14px;
-  background: var(--note-yellow);
-  font: 600 1rem var(--hand);
-  rotate: -1deg;
-  box-shadow: 0 8px 8px -8px rgb(29 36 51 / 0.6);
-}
-
-.hud-bottom {
-  display: grid;
-  gap: 12px;
-  justify-items: center;
-}
-
-.hud-caption {
-  width: min(100%, 520px);
-  padding: 10px 14px;
-  background: rgb(251 250 246 / 0.94);
-  box-shadow: 0 10px 14px -10px rgb(29 36 51 / 0.5);
-}
-
-.hud-caption .poster-number {
-  font-size: 1.15rem;
-}
-
-.hud-title {
-  font-weight: 600;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.hud-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.marker-button.round {
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  border-radius: 50%;
-  font-size: 1.6rem;
-  line-height: 1;
+.sheet-label {
+  display: block;
+  padding: 6px 8px;
+  font: 600 0.92rem var(--hand);
 }
