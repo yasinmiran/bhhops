@@ -8,6 +8,7 @@ if (!photosDir) throw new Error("usage: build-data.mjs <photos dir> [readings.js
 
 const projects = JSON.parse(readFileSync(new URL("./projects.json", import.meta.url), "utf8"));
 const readings = JSON.parse(readFileSync(readingsPath, "utf8"));
+const explainers = new Map(JSON.parse(readFileSync(new URL("./explainers.json", import.meta.url), "utf8")).map((e) => [e.id, e]));
 const outDir = new URL("../public/posters/", import.meta.url).pathname;
 mkdirSync(outDir, { recursive: true });
 
@@ -25,8 +26,18 @@ function region(box, width, height, margin = MARGIN) {
   return { left, top, width: Math.max(1, Math.round(x1 * width) - left), height: Math.max(1, Math.round(y1 * height) - top) };
 }
 
-const posters = [];
+/** The plain-language account of a project, or nothing if none was written for it. */
+function explainerFor(id) {
+  const e = explainers.get(id);
+  if (!e) {
+    report.push(`P${id} HAS NO EXPLAINER`);
+    return undefined;
+  }
+  return { problem: e.problem, thisWeek: e.this_week, whyItMatters: e.why_it_matters, glossary: e.glossary, done: e.done, next: e.next };
+}
+
 const report = [];
+const posters = [];
 
 for (const { file, poster, check } of readings) {
   const project = projects.find((p) => p.id === poster.project_number);
@@ -55,6 +66,7 @@ for (const { file, poster, check } of readings) {
     motif: poster.visual_motif,
     links: poster.links,
     aspect: Number((sheet.width / sheet.height).toFixed(4)),
+    explainer: explainerFor(project.id),
   });
 }
 

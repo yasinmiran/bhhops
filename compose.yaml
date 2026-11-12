@@ -1,0 +1,48 @@
+name: hops
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: 10m
+    max-file: "3"
+
+services:
+  web:
+    build:
+      context: .
+      target: web
+    restart: unless-stopped
+    # IPv4 only. Docker would relay IPv6 connections through its proxy, hiding the real client address.
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+      - "0.0.0.0:443:443/udp"
+    environment:
+      SITE: ${SITE:?set SITE to the public hostname}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+    logging: *logging
+
+  api:
+    build:
+      context: .
+      target: api
+    restart: unless-stopped
+    environment:
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?set ADMIN_TOKEN, for example with openssl rand -hex 32}
+    volumes:
+      - hops_data:/data
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging: *logging
+
+volumes:
+  caddy_data:
+  caddy_config:
+  hops_data:

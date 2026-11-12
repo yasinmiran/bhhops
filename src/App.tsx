@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { PROJECTS, edgeBetween, project, useRun, type Direction } from "./game";
+import { PROJECTS, edgeBetween, project, useGame, type Direction, type Player } from "./game";
+import { Leaderboard } from "./Leaderboard";
 import { Hud } from "./Hud";
 import { PosterView } from "./PosterView";
 import { Wall } from "./Wall";
@@ -44,17 +45,55 @@ const idFromHash = () => {
   return PROJECTS.some((p) => p.id === id) ? id : null;
 };
 
-function StartPicker({ onStart }: { onStart: (id: number) => void }) {
+interface StartProps {
+  player: Player | null;
+  onJoin: (name: string) => Promise<Player>;
+  onStart: (id: number, as: Player) => Promise<void>;
+  onBoard: () => void;
+  onForget: () => void;
+}
+
+function StartNote({ player, onJoin, onStart, onBoard, onForget }: StartProps) {
+  const [name, setName] = useState("");
   const [choice, setChoice] = useState("");
-  const begin = () => onStart(choice ? Number(choice) : PROJECTS[Math.floor(Math.random() * PROJECTS.length)].id);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const begin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      const as = player ?? (await onJoin(name));
+      await onStart(choice ? Number(choice) : PROJECTS[Math.floor(Math.random() * PROJECTS.length)].id, as);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <div className="start">
-      <motion.div className="start-note" initial={{ scale: 0.7, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: -1.5, opacity: 1 }}>
+      <motion.form className="start-note" onSubmit={begin} initial={{ scale: 0.7, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: -1.5, opacity: 1 }}>
         <h1>31 Hops</h1>
         <p>
           Every BioHackathon project is a sticky note, and a thread joins the ones working on the same thing. Travel the
-          threads with the arrow keys and visit all 31 in as few hops as you can.
+          threads with the arrow keys and visit all 31 in as few hops as you can. The clock breaks ties.
         </p>
+        {player ? (
+          <p className="start-player">
+            Playing as <strong>{player.name}</strong>.{" "}
+            <button type="button" className="quiet-button" onClick={onForget}>
+              Not you?
+            </button>
+          </p>
+        ) : (
+          <label>
+            Your name on the leaderboard
+            <input value={name} onChange={(e) => setName(e.target.value)} minLength={2} maxLength={20} autoComplete="nickname" required autoFocus />
+          </label>
+        )}
         <label>
           Start at
           <select value={choice} onChange={(e) => setChoice(e.target.value)}>
@@ -66,16 +105,23 @@ function StartPicker({ onStart }: { onStart: (id: number) => void }) {
             ))}
           </select>
         </label>
-        <button className="marker-button" onClick={begin} autoFocus>
-          Start
-        </button>
-      </motion.div>
+        {error && <p className="error">{error}</p>}
+        <div className="start-actions">
+          <button className="marker-button" disabled={busy}>
+            {busy ? "Starting…" : "Start the clock"}
+          </button>
+          <button type="button" className="quiet-button" onClick={onBoard}>
+            See the leaderboard
+          </button>
+        </div>
+      </motion.form>
     </div>
   );
 }
 
 export function App() {
-  const { run, best, start, hop, abandon } = useRun();
+  const { player, run, saving, join, start, hop, abandon, forget } = useGame();
+  const [boardOpen, setBoardOpen] = useState(false);
   const [openId, setOpenId] = useState(idFromHash);
   const [overview, setOverview] = useState(false);
   const [reason, setReason] = useState<string | null>(null);
@@ -145,12 +191,14 @@ export function App() {
   useEffect(() => {
     if (!run) return;
     const onKey = (event: KeyboardEvent) => {
+      if (boardOpen) return;
       if (event.key === "Escape" && openId !== null) return closeSheet();
       if (openId !== null || event.metaKey || event.ctrlKey || event.altKey) return;
       const direction = KEY_DIRECTIONS[event.key];
       if (direction) {
         event.preventDefault();
-        move(direction);
+        // One hop per press: a held key would otherwise run the star across the graph.
+        if (!event.repeat) move(direction);
       } else if ((event.key === "Enter" || event.key === " ") && !(event.target instanceof HTMLButtonElement || event.target instanceof HTMLSelectElement)) {
         event.preventDefault();
         openSheet(run.current);
@@ -158,7 +206,7 @@ export function App() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [run, openId, move]);
+  }, [run, openId, boardOpen, move]);
 
   const tapNote = (id: number) => {
     if (!run) return;
@@ -194,7 +242,8 @@ export function App() {
     </AnimatePresence>
   );
 
-  const hidden = openId !== null;
+  const hidden = openId !== null || boardOpen;
+  const board = <AnimatePresence>{boardOpen && <Leaderboard player={player} onClose={() => setBoardOpen(false)} />}</AnimatePresence>;
   if (!playing) {
     const note = graphFailed
       ? "The 3D graph did not load, so here they are as a list. Reload to try again."
@@ -209,7 +258,7 @@ export function App() {
 
   return (
     <>
-      {run ? (
+      {run && player ? (
         <>
           <GraphBoundary onFail={() => setGraphFailed(true)}>
             <Suspense fallback={<p className="loading">Pinning up the notes…</p>}>
@@ -218,13 +267,15 @@ export function App() {
           </GraphBoundary>
           <Hud
             run={run}
-            best={best}
+            player={player}
+            saving={saving}
             reason={reason}
             overview={overview}
             hidden={hidden}
             onMove={move}
             onOpen={() => openSheet(run.current)}
             onOverview={() => setOverview((was) => !was)}
+            onBoard={() => setBoardOpen(true)}
             onRestart={() => {
               setOverview(false);
               abandon();
@@ -232,9 +283,10 @@ export function App() {
           />
         </>
       ) : (
-        <StartPicker onStart={start} />
+        <StartNote player={player} onJoin={join} onStart={start} onBoard={() => setBoardOpen(true)} onForget={forget} />
       )}
       {sheet}
+      {board}
     </>
   );
 }

@@ -621,3 +621,201 @@ a {
   padding: 6px 8px;
   font: 600 0.92rem var(--hand);
 }
+
+/* Name, start and errors */
+
+.start-note input {
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 10px;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--sheet);
+  color: var(--ink);
+  font: 400 1.05rem var(--text);
+}
+
+.start-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.start-player .quiet-button {
+  padding: 0;
+  font-size: inherit;
+}
+
+.error {
+  color: #a31f12;
+  font-weight: 700;
+}
+
+.hud-time {
+  color: var(--ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-warning {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  background: var(--note-pink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.hud-side .marker-button {
+  white-space: nowrap;
+}
+
+/* Leaderboard */
+
+.board-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgb(29 36 51 / 0.45);
+}
+
+.board {
+  width: min(100%, 520px);
+  max-height: min(86dvh, 720px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 18px 16px;
+  background: var(--sheet);
+  box-shadow: 0 24px 30px -18px rgb(29 36 51 / 0.7);
+}
+
+.board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.board-head h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--marker-blue);
+}
+
+.board-rule,
+.board-empty {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.board-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.board table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.board th {
+  position: sticky;
+  top: 0;
+  background: var(--sheet);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.board th,
+.board td {
+  padding: 8px 6px;
+  border-bottom: 1.5px solid rgb(29 36 51 / 0.12);
+}
+
+.board th:nth-child(n + 3),
+.board td:nth-child(n + 3) {
+  text-align: right;
+}
+
+.board-rank {
+  width: 3.2em;
+  font: 800 1.05rem var(--hand);
+}
+
+.board-name {
+  overflow-wrap: anywhere;
+}
+
+.board-me td {
+  background: var(--note-yellow);
+  font-weight: 700;
+}
+
+/* What a project is, for someone who will not read the poster */
+
+.story {
+  margin: 16px 0 0;
+  display: grid;
+  gap: 4px;
+  max-width: 38em;
+}
+
+.story dt {
+  margin-top: 10px;
+  color: var(--marker-red);
+  font: 700 1.05rem var(--hand);
+}
+
+.story dd,
+.glossary dd {
+  margin: 0;
+}
+
+.status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.status-note {
+  padding: 14px 14px 16px;
+  box-shadow: 0 12px 10px -10px rgb(29 36 51 / 0.5);
+}
+
+.status-done {
+  background: #b9d531;
+  rotate: -0.6deg;
+}
+
+.status-next {
+  background: var(--note-yellow);
+  rotate: 0.5deg;
+}
+
+.status-note h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.status-note li {
+  padding: 3px 0;
+}
+
+.glossary {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+  max-width: 38em;
+}
+
+.glossary dt {
+  font-weight: 700;
+}

@@ -64,17 +64,70 @@ export function PosterView({ p, onClose, onHop }: PosterViewProps) {
         </ul>
       </header>
 
+      <section className="explainer">
+        <h2>In short</h2>
+        <p className="one-liner">{p.oneLiner}</p>
+        {p.explainer && (
+          <dl className="story">
+            <dt>The problem</dt>
+            <dd>{p.explainer.problem}</dd>
+            <dt>This week</dt>
+            <dd>{p.explainer.thisWeek}</dd>
+            <dt>Why it matters</dt>
+            <dd>{p.explainer.whyItMatters}</dd>
+          </dl>
+        )}
+      </section>
+
+      {p.explainer && (p.explainer.done.length > 0 || p.explainer.next.length > 0) && (
+        <section className="status">
+          {p.explainer.done.length > 0 && (
+            <div className="status-note status-done">
+              <h3>Done</h3>
+              <ul>
+                {p.explainer.done.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {p.explainer.next.length > 0 && (
+            <div className="status-note status-next">
+              <h3>Still to do</h3>
+              <ul>
+                {p.explainer.next.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+
+      {p.explainer && p.explainer.glossary.length > 0 && (
+        <section>
+          <h2>Words you may not know</h2>
+          <dl className="glossary">
+            {p.explainer.glossary.map((entry) => (
+              <div key={entry.term}>
+                <dt>{entry.term}</dt>
+                <dd>{entry.meaning}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
       <PosterFrame p={p} />
 
       <section>
-        <h2>What the team did</h2>
-        <p className="one-liner">{p.oneLiner}</p>
+        <h2>On the poster</h2>
         <ul className="highlights">
           {p.highlights.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>
-        {p.links.length > 0 && <p className="links">On the poster: {p.links.join(", ")}</p>}
+        {p.links.length > 0 && <p className="links">Links: {p.links.join(", ")}</p>}
       </section>
 
       <section>

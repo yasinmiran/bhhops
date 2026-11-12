@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { api, ApiError } from "./api";
 import graphData from "./graph.json";
 import posterData from "./posters.json";
 
@@ -15,6 +16,14 @@ interface PosterEntry {
   motif: string;
   links: string[];
   aspect: number;
+  explainer?: {
+    problem: string;
+    thisWeek: string;
+    whyItMatters: string;
+    glossary: { term: string; meaning: string }[];
+    done: string[];
+    next: string[];
+  };
 }
 
 interface GraphNode {
@@ -75,83 +84,218 @@ const pad = (id: number) => String(id).padStart(2, "0");
 export const posterImage = (id: number) => `./posters/${pad(id)}.webp`;
 export const posterThumb = (id: number) => `./posters/${pad(id)}-thumb.webp`;
 
-/** One tour of the graph: where the player is, what they have seen, and how many hops it took. */
+export interface Player {
+  token: string;
+  name: string;
+}
+
+/** The server's verdict on a finished tour. */
+export interface Result {
+  hops: number;
+  durationMs: number;
+  rank: number;
+  finishers: number;
+}
+
+/** What is stored and sent: the walk itself. Everything else is worked out from it. */
+interface Tour {
+  id: number;
+  path: number[];
+  /** When the tour began, on this device's clock. */
+  startedAt: number;
+  result: Result | null;
+}
+
+/** One tour as the game shows it. */
 export interface Run {
   current: number;
   visited: number[];
   walked: string[];
+  /** Hops that count: the walk up to the moment every project had been seen. */
   hops: number;
+  complete: boolean;
+  startedAt: number;
+  result: Result | null;
 }
 
-const RUN_KEY = "31hops.run.v1";
-const BEST_KEY = "31hops.best.v1";
+/** The part of a walk that counts for the score: it ends when the last project is first reached. */
+function counted(path: number[]): number[] {
+  const seen = new Set<number>();
+  for (let i = 0; i < path.length; i++) {
+    seen.add(path[i]);
+    if (seen.size === PROJECTS.length) return path.slice(0, i + 1);
+  }
+  return path;
+}
 
-function loadRun(): Run | null {
+function view(tour: Tour): Run {
+  const scored = counted(tour.path);
+  const visited = [...new Set(tour.path)];
+  return {
+    current: tour.path.at(-1)!,
+    visited,
+    walked: [...new Set(tour.path.slice(1).map((id, i) => edgeKey(tour.path[i], id)))],
+    hops: scored.length - 1,
+    complete: visited.length === PROJECTS.length,
+    startedAt: tour.startedAt,
+    result: tour.result,
+  };
+}
+
+const PLAYER_KEY = "31hops.player.v1";
+const TOUR_KEY = "31hops.tour.v1";
+const RETRY_MS = 4000;
+
+function load<T>(key: string, valid: (value: any) => boolean): T | null {
   try {
-    const run = JSON.parse(localStorage.getItem(RUN_KEY) ?? "null") as Run | null;
-    const valid =
-      run !== null &&
-      projectsById.has(run.current) &&
-      Array.isArray(run.visited) &&
-      run.visited.every((id) => projectsById.has(id)) &&
-      Array.isArray(run.walked) &&
-      Number.isInteger(run.hops);
-    return valid ? run : null;
+    const value: unknown = JSON.parse(localStorage.getItem(key) ?? "null");
+    return value !== null && valid(value) ? (value as T) : null;
   } catch {
     return null;
   }
 }
 
-function loadBest(): number | null {
+function store(key: string, value: unknown): void {
   try {
-    const best = Number(localStorage.getItem(BEST_KEY));
-    return Number.isInteger(best) && best > 0 ? best : null;
-  } catch {
-    return null;
-  }
-}
-
-function store(key: string, value: string): void {
-  try {
-    localStorage.setItem(key, value);
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, JSON.stringify(value));
   } catch {
     // Private browsing: the game still works for this visit.
   }
 }
 
-export const isComplete = (run: Run) => run.visited.length === PROJECTS.length;
+const validPlayer = (p: any) => typeof p.token === "string" && typeof p.name === "string";
+const validTour = (t: any) =>
+  Number.isInteger(t.id) &&
+  Array.isArray(t.path) &&
+  t.path.length > 0 &&
+  t.path.every((id: unknown, i: number) => typeof id === "number" && projectsById.has(id) && (i === 0 || edgeBetween(t.path[i - 1], id))) &&
+  typeof t.startedAt === "number";
 
-export function useRun() {
-  const [run, setRun] = useState<Run | null>(loadRun);
-  const [best, setBest] = useState<number | null>(loadBest);
+interface ServerRun {
+  id: number;
+  path: number[];
+  startedAt: number;
+}
 
+export type Saving = "saved" | "saving" | "retrying";
+
+export function useGame() {
+  const [player, setPlayer] = useState<Player | null>(() => load<Player>(PLAYER_KEY, validPlayer));
+  const [tour, setTour] = useState<Tour | null>(() => load<Tour>(TOUR_KEY, validTour));
+  const [saving, setSaving] = useState<Saving>("saved");
+  const busy = useRef(false);
+
+  useEffect(() => store(PLAYER_KEY, player), [player]);
+  useEffect(() => store(TOUR_KEY, tour), [tour]);
+
+  const forget = useCallback(() => {
+    setPlayer(null);
+    setTour(null);
+  }, []);
+
+  // On load, the server's copy settles what the tour is: it may have moved on from another device.
   useEffect(() => {
-    if (run) store(RUN_KEY, JSON.stringify(run));
-  }, [run]);
+    if (!player) return;
+    let alive = true;
+    api<{ now: number; run: ServerRun | null }>("GET", "/me", undefined, player.token).then(
+      ({ now, run }) => {
+        if (!alive) return;
+        setTour((local) => {
+          if (!run) return local?.result ? local : null;
+          const ahead = local?.id === run.id && local.path.length > run.path.length && run.path.every((id, i) => local.path[i] === id);
+          return ahead ? local : { id: run.id, path: run.path, startedAt: Date.now() - (now - run.startedAt), result: null };
+        });
+      },
+      (error: ApiError) => {
+        // The server no longer knows this player (removed, or the database was reset).
+        if (alive && error.status === 401) forget();
+      },
+    );
+    return () => {
+      alive = false;
+    };
+    // Runs once per player; later changes are pushed, not pulled.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [player?.token]);
 
+  // Push the walk after every hop: one request at a time, always the newest path,
+  // and nothing at all when the server already has every hop.
+  const latest = useRef({ player, tour });
+  latest.current = { player, tour };
+  const saved = useRef({ id: -1, length: 0 });
+  const retryTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const push = useCallback(async () => {
+    const { player: as, tour: now } = latest.current;
+    if (busy.current || !as || !now || now.result) return;
+    const path = counted(now.path);
+    const alreadySaved = saved.current.id === now.id ? saved.current.length : 1;
+    if (path.length <= alreadySaved) return;
+
+    busy.current = true;
+    clearTimeout(retryTimer.current);
+    setSaving((was) => (was === "retrying" ? was : "saving"));
+    let delivered = false;
+    try {
+      const answer = await api<{ finished: boolean } & Partial<Result>>("PUT", `/runs/${now.id}`, { path }, as.token);
+      saved.current = { id: now.id, length: path.length };
+      delivered = true;
+      setSaving("saved");
+      if (answer.finished) {
+        const result = { hops: answer.hops!, durationMs: answer.durationMs!, rank: answer.rank!, finishers: answer.finishers! };
+        setTour((current) => (current && current.id === now.id ? { ...current, result } : current));
+      }
+    } catch (error) {
+      const status = error instanceof ApiError ? error.status : 0;
+      if (status === 401) forget();
+      // The server refused this tour for good (restarted elsewhere, or not a valid walk): drop it.
+      else if (status === 404 || status === 409 || status === 422) setTour(null);
+      else {
+        setSaving("retrying");
+        retryTimer.current = setTimeout(() => void push(), RETRY_MS);
+      }
+    } finally {
+      busy.current = false;
+    }
+    // Hops made while that request was in flight still need sending. After a failure the timer does it instead.
+    if (delivered) void push();
+  }, [forget]);
+
+  const scoredLength = tour ? counted(tour.path).length : 0;
   useEffect(() => {
-    if (!run || !isComplete(run) || (best !== null && best <= run.hops)) return;
-    setBest(run.hops);
-    store(BEST_KEY, String(run.hops));
-  }, [run, best]);
+    void push();
+  }, [push, player?.token, tour?.id, scoredLength]);
+  useEffect(() => () => clearTimeout(retryTimer.current), []);
 
-  const start = useCallback((from: number) => setRun({ current: from, visited: [from], walked: [], hops: 0 }), []);
+  /** Claims a name. Rejects with a message to show if it is taken or the server is unreachable. */
+  const join = useCallback(async (name: string): Promise<Player> => {
+    const joined = await api<Player>("POST", "/players", { name });
+    setPlayer(joined);
+    return joined;
+  }, []);
+
+  /** Starts the clock on a new tour. `as` is for the moment right after joining, before the new player has rendered. */
+  const start = useCallback(
+    async (from: number, as: Player | null = player) => {
+      if (!as) throw new ApiError(401, "Pick a name first");
+      try {
+        const run = await api<ServerRun & { now: number }>("POST", "/runs", { start: from }, as.token);
+        setTour({ id: run.id, path: run.path, startedAt: Date.now(), result: null });
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 401) forget();
+        throw error;
+      }
+    },
+    [player, forget],
+  );
 
   /** Moves along a link; a hop to a project that is not joined to the current one is ignored. */
   const hop = useCallback((to: number) => {
-    setRun((now) => {
-      if (!now || !edgeBetween(now.current, to)) return now;
-      const key = edgeKey(now.current, to);
-      return {
-        current: to,
-        visited: now.visited.includes(to) ? now.visited : [...now.visited, to],
-        walked: now.walked.includes(key) ? now.walked : [...now.walked, key],
-        hops: now.hops + 1,
-      };
-    });
+    setTour((now) => (now && edgeBetween(now.path.at(-1)!, to) ? { ...now, path: [...now.path, to] } : now));
   }, []);
 
-  const abandon = useCallback(() => setRun(null), []);
+  const abandon = useCallback(() => setTour(null), []);
 
-  return { run, best, start, hop, abandon };
+  return { player, run: tour ? view(tour) : null, saving, join, start, hop, abandon, forget };
 }

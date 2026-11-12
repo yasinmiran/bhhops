@@ -1,27 +1,42 @@
 import { AnimatePresence, motion } from "motion/react";
-import { PAR, PROJECTS, isComplete, project, theme, type Direction, type Run } from "./game";
+import { useEffect, useState } from "react";
+import { clock } from "./api";
+import { PAR, PROJECTS, project, theme, type Direction, type Player, type Run, type Saving } from "./game";
 
 const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
 const DPAD_ORDER: Direction[] = ["up", "left", "right", "down"];
 
 interface HudProps {
   run: Run;
-  best: number | null;
+  player: Player;
+  saving: Saving;
   reason: string | null;
   overview: boolean;
   hidden: boolean;
   onMove: (direction: Direction) => void;
   onOpen: () => void;
   onOverview: () => void;
+  onBoard: () => void;
   onRestart: () => void;
 }
 
-function shareText(run: Run): string {
-  return `I toured all ${PROJECTS.length} BioHackathon projects in ${run.hops} hops (par ${PAR}).`;
+/** Elapsed time, ticking once a second until the server has given the official time. */
+function Timer({ run }: { run: Run }) {
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    if (run.result) return;
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, [run.result, run.startedAt]);
+  return <>{clock(run.result ? run.result.durationMs : now - run.startedAt)}</>;
 }
 
 async function share(run: Run): Promise<void> {
-  const payload = { text: shareText(run), url: location.href.split("#")[0] };
+  const result = run.result!;
+  const payload = {
+    text: `I toured all ${PROJECTS.length} BioHackathon projects in ${result.hops} hops and ${clock(result.durationMs)} (par ${PAR}). Place ${result.rank} of ${result.finishers}.`,
+    url: location.href.split("#")[0],
+  };
   try {
     if (navigator.share) await navigator.share(payload);
     else await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);
@@ -30,9 +45,12 @@ async function share(run: Run): Promise<void> {
   }
 }
 
-export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOverview, onRestart }: HudProps) {
+export function Hud({ run, player, saving, reason, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart }: HudProps) {
   const here = project(run.current);
-  const done = isComplete(run);
+  const [finaleSeen, setFinaleSeen] = useState(false);
+  useEffect(() => {
+    if (!run.complete) setFinaleSeen(false);
+  }, [run.complete]);
 
   return (
     <div
@@ -51,11 +69,17 @@ export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOve
             of {PROJECTS.length} projects, {run.hops} {run.hops === 1 ? "hop" : "hops"}
           </p>
           <p className="hud-par">
-            Par {PAR}
-            {best !== null && `, your best ${best}`}
+            <span className="hud-time">
+              <Timer run={run} />
+            </span>{" "}
+            on the clock, par {PAR}
           </p>
+          {saving === "retrying" && <p className="hud-warning">Not saved yet. Trying again…</p>}
         </div>
         <div className="hud-side">
+          <button className="marker-button small" onClick={onBoard}>
+            Leaderboard
+          </button>
           <button className="marker-button small" onClick={onOverview}>
             {overview ? "Back to the star" : "Whole graph"}
           </button>
@@ -66,16 +90,33 @@ export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOve
       </header>
 
       <AnimatePresence>
-        {done && (
+        {run.complete && !finaleSeen && (
           <motion.div className="finale" initial={{ scale: 0.6, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: -2 }} exit={{ opacity: 0 }}>
-            <h2>All {PROJECTS.length} projects in {run.hops} hops</h2>
-            <p>{run.hops <= PAR ? `Par is ${PAR}. You matched or beat it.` : `Par is ${PAR}. ${run.hops - PAR} over.`}</p>
+            <h2>
+              All {PROJECTS.length} projects in {run.hops} hops
+            </h2>
+            {run.result ? (
+              <p>
+                {clock(run.result.durationMs)} on the clock. {player.name}, you are in place {run.result.rank} of {run.result.finishers}.{" "}
+                {run.hops <= PAR ? `Par is ${PAR}: matched or beaten.` : `Par is ${PAR}, so ${run.hops - PAR} over.`}
+              </p>
+            ) : (
+              <p>{saving === "retrying" ? "Can't reach the server to record it. Still trying…" : "Recording your score…"}</p>
+            )}
             <div className="finale-actions">
-              <button className="marker-button" onClick={() => share(run)}>
-                Share my score
+              <button className="marker-button" onClick={onBoard}>
+                Leaderboard
               </button>
+              {run.result && (
+                <button className="marker-button" onClick={() => share(run)}>
+                  Share
+                </button>
+              )}
               <button className="marker-button" onClick={onRestart}>
                 Play again
+              </button>
+              <button className="quiet-button" onClick={() => setFinaleSeen(true)}>
+                Keep looking around
               </button>
             </div>
           </motion.div>
@@ -85,7 +126,7 @@ export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOve
       <footer className="hud-bottom">
         <AnimatePresence>
           {reason && (
-            <motion.p key={reason + run.hops} className="hud-reason" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+            <motion.p key={reason + run.current} className="hud-reason" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
               {reason}
             </motion.p>
           )}
@@ -105,7 +146,7 @@ export function Hud({ run, best, reason, overview, hidden, onMove, onOpen, onOve
             >
               <span className="card-number">Project {here.id}</span>
               <span className="card-title">{here.title}</span>
-              <span className="card-open">See the poster</span>
+              <span className="card-open">What is this project?</span>
             </motion.button>
           </AnimatePresence>
 

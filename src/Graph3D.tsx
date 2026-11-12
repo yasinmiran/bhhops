@@ -58,8 +58,11 @@ function noteTexture(p: Project): THREE.CanvasTexture {
     ctx.textBaseline = "alphabetic";
     ctx.font = `800 104px ${HAND}`;
     ctx.fillText(String(p.id), 22, 132);
-    ctx.font = `700 40px ${HAND}`;
-    wrap(ctx, p.name, 280).forEach((line, i) => ctx.fillText(line, 22, 196 + i * 46));
+    // A long single word ("MiCoKnowGraph") shrinks to fit instead of running off the edge.
+    let size = 40;
+    const widest = () => Math.max(...p.name.split(/\s+/).map((word) => ctx.measureText(word).width));
+    for (ctx.font = `700 ${size}px ${HAND}`; size > 26 && widest() > 280; ctx.font = `700 ${size}px ${HAND}`) size -= 2;
+    wrap(ctx, p.name, 280).forEach((line, i) => ctx.fillText(line, 22, 196 + i * (size + 6)));
   });
 }
 
