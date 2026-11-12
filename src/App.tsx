@@ -46,6 +46,8 @@ const idFromHash = () => {
 };
 
 interface StartProps {
+  /** Covered by a poster or the leaderboard: keys and focus must not reach the form underneath. */
+  hidden: boolean;
   player: Player | null;
   onJoin: (name: string) => Promise<Player>;
   onStart: (id: number, as: Player) => Promise<void>;
@@ -53,7 +55,7 @@ interface StartProps {
   onForget: () => void;
 }
 
-function StartNote({ player, onJoin, onStart, onBoard, onForget }: StartProps) {
+function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: StartProps) {
   const [name, setName] = useState("");
   const [choice, setChoice] = useState("");
   const [busy, setBusy] = useState(false);
@@ -74,12 +76,13 @@ function StartNote({ player, onJoin, onStart, onBoard, onForget }: StartProps) {
   };
 
   return (
-    <div className="start">
+    <div className="start" inert={hidden}>
       <motion.form className="start-note" onSubmit={begin} initial={{ scale: 0.7, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: -1.5, opacity: 1 }}>
         <h1>31 Hops</h1>
         <p>
           Every BioHackathon project is a sticky note, and a thread joins the ones working on the same thing. Travel the
-          threads with the arrow keys and visit all 31 in as few hops as you can. The clock breaks ties.
+          threads with the arrow keys and visit all 31 in as few hops as you can. The clock breaks ties, and where you
+          start matters.
         </p>
         {player ? (
           <p className="start-player">
@@ -130,6 +133,7 @@ export function App() {
   // Whether the open sheet was reached from inside the app, in which case "back" closes it.
   const openedHere = useRef(false);
   const playing = canDraw && !graphFailed;
+  const onGraph = playing && run !== null && player !== null;
 
   useEffect(() => {
     const onHash = () => {
@@ -144,8 +148,9 @@ export function App() {
 
   useEffect(() => {
     document.body.classList.toggle("sheet-open", openId !== null);
-    document.body.classList.toggle("playing", playing);
-  }, [openId, playing]);
+    // Only the graph locks scrolling; the start note has to scroll on a short landscape phone.
+    document.body.classList.toggle("playing", onGraph);
+  }, [openId, onGraph]);
 
   useEffect(() => {
     if (!reason) return;
@@ -189,11 +194,10 @@ export function App() {
   };
 
   useEffect(() => {
-    if (!run) return;
     const onKey = (event: KeyboardEvent) => {
       if (boardOpen) return;
       if (event.key === "Escape" && openId !== null) return closeSheet();
-      if (openId !== null || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (!onGraph || openId !== null || event.metaKey || event.ctrlKey || event.altKey) return;
       const direction = KEY_DIRECTIONS[event.key];
       if (direction) {
         event.preventDefault();
@@ -201,12 +205,12 @@ export function App() {
         if (!event.repeat) move(direction);
       } else if ((event.key === "Enter" || event.key === " ") && !(event.target instanceof HTMLButtonElement || event.target instanceof HTMLSelectElement)) {
         event.preventDefault();
-        openSheet(run.current);
+        if (run) openSheet(run.current);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [run, openId, boardOpen, move]);
+  }, [run, openId, boardOpen, onGraph, move]);
 
   const tapNote = (id: number) => {
     if (!run) return;
@@ -214,11 +218,16 @@ export function App() {
     else travel(id);
   };
 
+  // The page behind is locked, so the sheet has to hold focus for arrow keys and Space to scroll it.
+  const focusSheet = useCallback((node: HTMLDivElement | null) => node?.focus({ preventScroll: true }), []);
+
   const sheet = (
     <AnimatePresence>
       {openId !== null && (
         <motion.div
           key={openId}
+          ref={focusSheet}
+          tabIndex={-1}
           className="sheet-overlay"
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -229,7 +238,7 @@ export function App() {
             p={project(openId)}
             onClose={closeSheet}
             onHop={
-              run && openId === run.current
+              onGraph && run && openId === run.current
                 ? (to) => {
                     closeSheet();
                     travel(to);
@@ -283,7 +292,7 @@ export function App() {
           />
         </>
       ) : (
-        <StartNote player={player} onJoin={join} onStart={start} onBoard={() => setBoardOpen(true)} onForget={forget} />
+        <StartNote hidden={hidden} player={player} onJoin={join} onStart={start} onBoard={() => setBoardOpen(true)} onForget={forget} />
       )}
       {sheet}
       {board}

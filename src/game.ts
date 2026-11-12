@@ -35,6 +35,8 @@ interface GraphNode {
   y: number;
   z: number;
   arrows: Record<Direction, number | null>;
+  /** Fewest hops in which a tour starting here can visit every project. */
+  par: number;
 }
 
 export interface Theme {
@@ -108,6 +110,7 @@ interface Tour {
 
 /** One tour as the game shows it. */
 export interface Run {
+  start: number;
   current: number;
   visited: number[];
   walked: string[];
@@ -132,6 +135,7 @@ function view(tour: Tour): Run {
   const scored = counted(tour.path);
   const visited = [...new Set(tour.path)];
   return {
+    start: tour.path[0],
     current: tour.path.at(-1)!,
     visited,
     walked: [...new Set(tour.path.slice(1).map((id, i) => edgeKey(tour.path[i], id)))],

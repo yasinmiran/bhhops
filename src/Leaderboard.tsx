@@ -66,7 +66,8 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
           </button>
         </header>
         <p className="board-rule">
-          Fewest hops wins. Equal hops: the faster tour wins. Par is {PAR}.
+          Fewest hops wins. Equal hops: the faster tour wins. The shortest tour possible is {PAR} hops, and only from some
+          starts.
           {board && ` ${board.finishers} of ${board.players} players have finished.`}
         </p>
         {error && <p className="error">{error}</p>}

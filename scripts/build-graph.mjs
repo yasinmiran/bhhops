@@ -167,46 +167,40 @@ function arrowsFor(id) {
   return Object.fromEntries(names.map((dir) => [dir, best.arrows[dir] ?? null]));
 }
 
-// Par: a good (not proven shortest) walk that visits every project, counted in hops.
-const hops = new Map(ids.map((from) => {
-  const distance = new Map([[from, 0]]);
-  const queue = [from];
-  while (queue.length) {
-    const at = queue.shift();
-    for (const next of neighbours.get(at)) {
-      if (!distance.has(next)) {
-        distance.set(next, distance.get(at) + 1);
-        queue.push(next);
+// Par: the fewest hops in which every project can be visited, found exactly for each start.
+// A tour needs one hop per new project plus one for every step onto a project already seen,
+// so the search asks: starting here, can everything be reached with at most this many repeats?
+const index = new Map(ids.map((id, i) => [id, i]));
+const around = ids.map((id) => neighbours.get(id).map((n) => index.get(n)));
+const ALL = 2 ** ids.length - 1;
+// Plain arithmetic on the visited set: 31 projects do not fit in 32-bit bitwise operations.
+const has = (mask, i) => Math.floor(mask / 2 ** i) % 2 === 1;
+
+function fewestRepeats(start) {
+  for (let budget = 0; ; budget++) {
+    // For each (place, visited set): the largest budget already known not to be enough.
+    const failed = new Map();
+    const reach = (at, mask, left) => {
+      if (mask === ALL) return true;
+      const key = at + mask * 32;
+      if ((failed.get(key) ?? -1) >= left) return false;
+      for (const next of around[at]) {
+        if (!has(mask, next) && reach(next, mask + 2 ** next, left)) return true;
       }
-    }
-  }
-  return [from, distance];
-}));
-const walkLength = (order) => order.slice(1).reduce((sum, id, i) => sum + hops.get(order[i]).get(id), 0);
-let par = Infinity;
-for (const start of ids) {
-  const order = [start];
-  const left = new Set(ids.filter((id) => id !== start));
-  while (left.size) {
-    const at = order.at(-1);
-    const next = [...left].sort((x, y) => hops.get(at).get(x) - hops.get(at).get(y) || x - y)[0];
-    order.push(next);
-    left.delete(next);
-  }
-  for (let improved = true; improved; ) {
-    improved = false;
-    for (let i = 1; i < order.length - 1; i++) {
-      for (let j = i + 1; j < order.length; j++) {
-        const flipped = [...order.slice(0, i), ...order.slice(i, j + 1).reverse(), ...order.slice(j + 1)];
-        if (walkLength(flipped) < walkLength(order)) {
-          order.splice(0, order.length, ...flipped);
-          improved = true;
+      if (left > 0) {
+        for (const next of around[at]) {
+          if (has(mask, next) && reach(next, mask, left - 1)) return true;
         }
       }
-    }
+      failed.set(key, left);
+      return false;
+    };
+    if (reach(start, 2 ** start, budget)) return budget;
   }
-  par = Math.min(par, walkLength(order));
 }
+
+const parFrom = new Map(ids.map((id) => [id, ids.length - 1 + fewestRepeats(index.get(id))]));
+const par = Math.min(...parFrom.values());
 
 const depth = seeded(7);
 const round = (n) => Number(n.toFixed(3));
@@ -229,6 +223,7 @@ const graph = {
       y: round(pos.get(p.id).y - centre.y),
       z: round((depth() - 0.5) * 2.4),
       arrows: arrowsFor(p.id),
+      par: parFrom.get(p.id),
     }))
     .sort((a, b) => a.id - b.id),
   edges: edges.map((e) => ({ a: e.a, b: e.b, reason: e.reason, theme: e.theme })).sort((x, y) => x.a - y.a || x.b - y.b),
@@ -236,5 +231,5 @@ const graph = {
 
 writeFileSync(new URL("../src/graph.json", import.meta.url), JSON.stringify(graph, null, 1) + "\n");
 const degrees = ids.map((id) => neighbours.get(id).length);
-console.log(`${graph.nodes.length} projects, ${graph.edges.length} links, degree ${Math.min(...degrees)} to ${Math.max(...degrees)}, par ${par} hops`);
+console.log(`${graph.nodes.length} projects, ${graph.edges.length} links, degree ${Math.min(...degrees)} to ${Math.max(...degrees)}, par ${par} to ${Math.max(...parFrom.values())} hops depending on the start`);
 console.log(`links with no shared theme: ${edges.filter((e) => e.weight <= 0).length}`);

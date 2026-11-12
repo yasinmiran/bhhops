@@ -319,22 +319,24 @@ function StarAndCamera({ run, overview, extent }: RigProps) {
     const arc = Math.sin(eased * Math.PI) * 1.1;
 
     if (star.current) {
+      // The star sits on the note's corner, so it flies corner to corner and never snaps to the middle.
       const resting = t.progress >= 1;
       star.current.position.set(
-        at.current.x - (resting ? NOTE_SIZE * 0.52 : 0),
-        at.current.y + (resting ? NOTE_SIZE * 0.52 + Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
+        at.current.x - NOTE_SIZE * 0.52,
+        at.current.y + NOTE_SIZE * 0.52 + (resting ? Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
         at.current.z + 0.35 + arc,
       );
-      star.current.rotation.z = resting ? 0.25 : eased * Math.PI * 4;
+      star.current.rotation.z = 0.25 + eased * Math.PI * 4;
     }
 
     const portrait = size.width / size.height < 0.9;
     const perspective = camera as THREE.PerspectiveCamera;
     const closeUp = portrait ? 15 : 11;
     // Far enough back that the whole graph fits whichever way the screen is turned.
-    const whole = (extent / 2 / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2))) * (portrait ? 1 / perspective.aspect : 1) * 1.25;
+    const whole = (extent / 2 / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2))) * (portrait ? 1 / perspective.aspect : 1) * (portrait ? 1.25 : 1.4);
     const goalDistance = overview ? whole : closeUp;
-    const goalFocus = overview ? new THREE.Vector3(0, 0, 0) : at.current;
+    // In the whole-graph view the centre moves up a little, clear of the card and arrow pad.
+    const goalFocus = overview ? new THREE.Vector3(0, -extent * (portrait ? 0.06 : 0.13), 0) : at.current;
     const ease = 1 - Math.exp(-4.5 * dt);
     focus.current.lerp(goalFocus, ease);
     distance.current += (goalDistance - distance.current) * ease;
@@ -344,9 +346,12 @@ function StarAndCamera({ run, overview, extent }: RigProps) {
     perspective.position.lerp(new THREE.Vector3(focus.current.x, focus.current.y - lean, focus.current.z + distance.current), ease);
     perspective.lookAt(focus.current.x, focus.current.y, focus.current.z);
 
+    // Measured from where the camera is, not where it is heading: it lags, and fog set
+    // for the destination would hide the whole graph for the length of the flight.
     if (scene.fog instanceof THREE.Fog) {
-      scene.fog.near = distance.current + 4;
-      scene.fog.far = distance.current + 26;
+      const seen = perspective.position.distanceTo(focus.current);
+      scene.fog.near = seen + 4;
+      scene.fog.far = seen + 26;
     }
   });
 
@@ -425,6 +430,8 @@ interface GraphProps {
 }
 
 const SWIPE_PIXELS = 34;
+/** How far off a thread's direction a swipe may be and still count as meaning that thread. */
+const SWIPE_TOLERANCE = (70 * Math.PI) / 180;
 
 export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
   const [noteTextures, setNoteTextures] = useState<Map<number, THREE.CanvasTexture>>(new Map());
@@ -470,9 +477,18 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
     const dx = event.clientX - start.x;
     const dy = event.clientY - start.y;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < SWIPE_PIXELS) return;
-    // A swipe is an arrow key: the star goes the way the finger went.
-    if (Math.abs(dx) > Math.abs(dy)) onMove(dx > 0 ? "right" : "left");
-    else onMove(dy < 0 ? "up" : "down");
+    // A swipe goes to the neighbour it points at, which is not always the one its nearest arrow key leads to.
+    const swipe = Math.atan2(-dy, dx);
+    let best: { direction: Direction; off: number } | null = null;
+    for (const direction of Object.keys(here.arrows) as Direction[]) {
+      const to = here.arrows[direction];
+      if (to === null) continue;
+      const target = project(to);
+      const angle = Math.atan2(target.y - here.y, target.x - here.x);
+      const off = Math.abs(Math.atan2(Math.sin(angle - swipe), Math.cos(angle - swipe)));
+      if (!best || off < best.off) best = { direction, off };
+    }
+    if (best && best.off < SWIPE_TOLERANCE) onMove(best.direction);
   };
 
   return (

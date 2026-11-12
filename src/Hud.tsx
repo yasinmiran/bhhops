@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { clock } from "./api";
-import { PAR, PROJECTS, project, theme, type Direction, type Player, type Run, type Saving } from "./game";
+import { PROJECTS, project, theme, type Direction, type Player, type Run, type Saving } from "./game";
 
 const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
 const DPAD_ORDER: Direction[] = ["up", "left", "right", "down"];
@@ -34,7 +34,7 @@ function Timer({ run }: { run: Run }) {
 async function share(run: Run): Promise<void> {
   const result = run.result!;
   const payload = {
-    text: `I toured all ${PROJECTS.length} BioHackathon projects in ${result.hops} hops and ${clock(result.durationMs)} (par ${PAR}). Place ${result.rank} of ${result.finishers}.`,
+    text: `I toured all ${PROJECTS.length} BioHackathon projects in ${result.hops} hops and ${clock(result.durationMs)}. Place ${result.rank} of ${result.finishers}.`,
     url: location.href.split("#")[0],
   };
   try {
@@ -47,6 +47,8 @@ async function share(run: Run): Promise<void> {
 
 export function Hud({ run, player, saving, reason, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart }: HudProps) {
   const here = project(run.current);
+  // Par depends on where the tour began: some starts allow a shorter tour than others.
+  const par = project(run.start).par;
   const [finaleSeen, setFinaleSeen] = useState(false);
   useEffect(() => {
     if (!run.complete) setFinaleSeen(false);
@@ -72,7 +74,7 @@ export function Hud({ run, player, saving, reason, overview, hidden, onMove, onO
             <span className="hud-time">
               <Timer run={run} />
             </span>{" "}
-            on the clock, par {PAR}
+            on the clock, par {par} from this start
           </p>
           {saving === "retrying" && <p className="hud-warning">Not saved yet. Trying again…</p>}
         </div>
@@ -98,7 +100,7 @@ export function Hud({ run, player, saving, reason, overview, hidden, onMove, onO
             {run.result ? (
               <p>
                 {clock(run.result.durationMs)} on the clock. {player.name}, you are in place {run.result.rank} of {run.result.finishers}.{" "}
-                {run.hops <= PAR ? `Par is ${PAR}: matched or beaten.` : `Par is ${PAR}, so ${run.hops - PAR} over.`}
+                {run.hops <= par ? `That is par from project ${run.start}: no shorter tour exists.` : `Par from project ${run.start} is ${par}, so ${run.hops - par} over.`}
               </p>
             ) : (
               <p>{saving === "retrying" ? "Can't reach the server to record it. Still trying…" : "Recording your score…"}</p>

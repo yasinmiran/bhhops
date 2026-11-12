@@ -192,6 +192,7 @@ a {
 }
 
 .hud-reason {
+  pointer-events: auto;
   justify-self: center;
   padding: 7px 14px;
   background: var(--note-yellow);
@@ -367,6 +368,10 @@ a {
 }
 
 /* The poster sheet slides over the graph. */
+
+.sheet-overlay:focus {
+  outline: none;
+}
 
 .sheet-overlay {
   position: fixed;

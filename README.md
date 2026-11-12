@@ -112,8 +112,10 @@ its tags can change them in `themes.json` and rerun `build-graph.mjs`.
 How the graph is made: two projects are closer the more themes they share
 (rarer themes count for more) and closest when a poster or abstract names the
 other project or a tool few others use. Every project keeps at most four links,
-one per arrow key, and at least two, so there are no dead ends. Par is the
-length of a good tour found by search, not a proven minimum.
+one per arrow key, and at least two, so there are no dead ends. Par is exact:
+for every starting project the builder searches for the shortest tour that
+visits everything, which takes about half a minute. It comes out at 32 to 34
+hops depending on the start.
 
 To rebuild the images, convert the photos to upright JPEGs first (the originals
 are HEIC, which `sharp` cannot read):
