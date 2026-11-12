@@ -15,6 +15,7 @@ const PICTURES = {
       <path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4" />
     </>
   ),
+  close: <path d="M6 6l12 12M18 6L6 18" />,
   startOver: <path d="M4.5 4.5v5h5M5.2 9.2A8 8 0 1 1 4 12.6" />,
   soundOn: (
     <>
@@ -36,11 +37,12 @@ interface IconButtonProps {
   label: string;
   onClick: () => void;
   pressed?: boolean;
+  autoFocus?: boolean;
 }
 
-export function IconButton({ picture, label, onClick, pressed }: IconButtonProps) {
+export function IconButton({ picture, label, onClick, pressed, autoFocus }: IconButtonProps) {
   return (
-    <button type="button" className="icon-button" aria-label={label} title={label} aria-pressed={pressed} onClick={onClick}>
+    <button type="button" className="icon-button" aria-label={label} title={label} aria-pressed={pressed} autoFocus={autoFocus} onClick={onClick}>
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         {PICTURES[picture]}
       </svg>

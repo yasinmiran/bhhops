@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { api, clock, type ApiError, type Board, type BoardRow } from "./api";
 import { PAR, type Player } from "./game";
+import { IconButton } from "./icons";
 
 const REFRESH_MS = 10_000;
 
@@ -88,9 +89,7 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
       >
         <header className="board-head">
           <h2>Leaderboard</h2>
-          <button className="marker-button small" onClick={onClose} autoFocus>
-            Close
-          </button>
+          <IconButton picture="close" label="Close" onClick={onClose} autoFocus />
         </header>
         <p className="board-rule">
           Fewest hops wins, then the faster tour. The shortest tour possible is {PAR} hops, and only from some starts.
