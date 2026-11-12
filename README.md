@@ -125,7 +125,16 @@ The server makes its own admin token on first start. To read it, for the
 sudo podman exec hops_api_1 cat /data/admin-token
 ```
 
-There are no backups.
+To empty the leaderboard, for example right before the session it is meant
+for, run this from a laptop. It keeps a copy of the old database on the
+server's volume, then removes every player and every tour; anyone mid-game is
+sent back to pick a name.
+
+```sh
+ssh almalinux@<server> bhhops/deploy/reset.sh
+```
+
+There are no other backups.
 
 ## Where the content comes from
 

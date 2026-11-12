@@ -229,6 +229,29 @@ test("an admin can remove a player and their scores; nobody else can", async () 
   assert.equal((await call("GET", "/api/me", undefined, token)).status, 401);
 });
 
+test("the operator can empty the leaderboard, and only the operator", async () => {
+  const { call, join, tick } = await setup();
+  const tour = fullTour(1);
+  const token = await join("Early Bird");
+  const run = (await call("POST", "/api/runs", { start: 1 }, token)).body;
+  tick(60_000);
+  await call("PUT", `/api/runs/${run.id}`, { path: tour }, token);
+  await join("Latecomer");
+  const admin = "a".repeat(32);
+
+  assert.equal((await call("POST", "/api/admin/reset", { confirm: "reset" }, token)).status, 401);
+  assert.equal((await call("POST", "/api/admin/reset", { confirm: "reset" })).status, 401);
+  assert.equal((await call("POST", "/api/admin/reset", {}, admin)).status, 400);
+  assert.equal((await call("GET", "/api/leaderboard")).body.players, 2);
+
+  assert.deepEqual((await call("POST", "/api/admin/reset", { confirm: "reset" }, admin)).body, { players: 2, tours: 1 });
+  assert.deepEqual((await call("GET", "/api/leaderboard")).body.rows, []);
+  assert.equal((await call("GET", "/api/leaderboard")).body.players, 0);
+  // The old player is gone, and the name is free again.
+  assert.equal((await call("GET", "/api/me", undefined, token)).status, 401);
+  assert.equal((await call("POST", "/api/players", { name: "Early Bird" })).status, 201);
+});
+
 test("bad JSON and unknown routes get JSON errors", async () => {
   const { call } = await setup();
   assert.equal((await call("GET", "/api/nope")).status, 404);

@@ -237,16 +237,37 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     });
   });
 
-  app.post("/api/admin/remove-player", (req, res) => {
+  /** Lets the operator through and nobody else. */
+  function operator(req: Request): void {
     const token = req.get("authorization")?.replace(/^Bearer /, "") ?? "";
-    if (!adminToken || !timingSafeEqual(sha256(token), sha256(adminToken))) {
-      spend(`admin:${req.ip}`, LIMITS.adminFailuresPerMinute);
-      throw new HttpError(401, "not allowed");
-    }
+    if (adminToken && timingSafeEqual(sha256(token), sha256(adminToken))) return;
+    spend(`admin:${req.ip}`, LIMITS.adminFailuresPerMinute);
+    throw new HttpError(401, "not allowed");
+  }
+
+  app.post("/api/admin/remove-player", (req, res) => {
+    operator(req);
     const name: unknown = req.body?.name;
     if (typeof name !== "string") throw new HttpError(400, "name is required");
     const removed = db.prepare("DELETE FROM players WHERE name_key = ?").run(name.normalize("NFKC").replace(/\s+/g, " ").trim().toLowerCase());
     res.json({ removed: Number(removed.changes) });
+  });
+
+  /** Empties the leaderboard. Every device still holding a player is sent back to pick a name. */
+  app.post("/api/admin/reset", (req, res) => {
+    operator(req);
+    // Said out loud in the request, so a stray call with the right token changes nothing.
+    if (req.body?.confirm !== "reset") throw new HttpError(400, 'send {"confirm":"reset"} to remove every player and tour');
+    db.exec("BEGIN IMMEDIATE");
+    try {
+      const tours = db.prepare("DELETE FROM runs").run().changes;
+      const players = db.prepare("DELETE FROM players").run().changes;
+      db.exec("COMMIT");
+      res.json({ players: Number(players), tours: Number(tours) });
+    } catch (error) {
+      db.exec("ROLLBACK");
+      throw error;
+    }
   });
 
   app.use("/api", (_req, _res, next) => next(new HttpError(404, "not found")));
