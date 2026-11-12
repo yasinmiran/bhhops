@@ -16,8 +16,8 @@ ENV NODE_ENV=production HOST=0.0.0.0 PORT=8787 DATABASE_PATH=/data/hops.db
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 COPY server server
-# The server checks every hop against the same graph the client plays on.
-COPY src/graph.json src/graph.json
+# The server checks every hop against the same graph and the same wormholes the client plays on.
+COPY src/graph.json src/tricks.ts src/
 RUN mkdir /data && chown node:node /data
 USER node
 VOLUME /data

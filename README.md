@@ -23,12 +23,20 @@ The map is not honest, and it is dishonest in the same way for everyone:
 
 - Seven real threads are not drawn until the helix stands at one end of them.
 - A few drawn threads join nothing. They drop when the helix reaches an end.
-- Four grey notes numbered past 31 are not projects and cannot be reached.
+- A couple of notes are not projects and cannot be reached. One of them asks
+  about the network socket in the toilets.
+- Two wormholes, each beside one project, throw the helix to another project.
+  Stepping in is a hop and being thrown is not, so a tour can come in under
+  par. Where a wormhole leads is fixed by the tour's number and the step, so
+  the game can show it at once and the server can check it.
+- One black hole ends the tour: the screen goes dark and the only way on is to
+  start again.
 - A turtle, a lemur, a croissant and some spiders take turns getting in the
   way (`src/Critters.tsx`). They cost time, never hops. They stay away for
   anyone whose system asks for reduced motion.
 
-None of this reaches the server, which scores the walk against the real graph.
+Of all this only the wormholes reach the server, which scores the walk against
+the real graph and reads `src/tricks.ts` to know where each wormhole leads.
 Sounds are synthesised in the browser (`src/sound.ts`) and can be muted.
 
 Built with three.js through react-three-fiber and Motion on the client, and a

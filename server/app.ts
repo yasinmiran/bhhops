@@ -149,7 +149,8 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
   app.post("/api/runs", (req, res) => {
     const me = player(req);
     const start: unknown = req.body?.start;
-    const check = checkPath([start]);
+    // No tour has a number yet, and none is needed: a path of one place has no wormhole behind it.
+    const check = checkPath([start], 0);
     if (!check.ok) throw new HttpError(400, "Pick a project to start from");
     // One tour at a time: starting again gives up the unfinished one.
     db.prepare("DELETE FROM runs WHERE player_id = ? AND finished_at IS NULL").run(me.id);
@@ -175,7 +176,7 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     }
 
     const path: unknown = req.body?.path;
-    const check = checkPath(path);
+    const check = checkPath(path, run.id);
     if (!check.ok) throw new HttpError(422, check.why);
     const next = path as number[];
     const stored = JSON.parse(run.path) as number[];
@@ -185,7 +186,7 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     }
 
     const at = now();
-    const hops = next.length - 1;
+    const hops = check.hops;
     if (!check.complete) {
       db.prepare("UPDATE runs SET path = ?, hops = ?, updated_at = ? WHERE id = ?").run(JSON.stringify(next), hops, at, run.id);
       return res.json({ finished: false, hops });

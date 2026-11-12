@@ -1,17 +1,21 @@
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { EDGES, PROJECTS, THEMES, edgeKey, posterThumb, project, theme, type Direction, type Project, type Run } from "./game";
+import { EDGES, PROJECTS, THEMES, edgeKey, place, posterThumb, project, theme, type Direction, type Project, type Run } from "./game";
 import { Helix } from "./Helix";
-import { HIDDEN_THREADS, LOOSE_ENDS, PHANTOMS, type Phantom, type Spot } from "./tricks";
+import { HIDDEN_THREADS, LOOSE_ENDS, PHANTOMS, SPECIALS, type Phantom, type Special, type Spot } from "./tricks";
 
 const PAPER = "#f4f3ee";
 const INK = "#1d2433";
+const PINK = "#ee3f6c";
 const UNWALKED = "#c3c6cb";
 const NOTE_SIZE = 1.55;
 const PHANTOM_PAPER = "#e4e1d6";
 const NOTE_COLORS = ["#b9d531", "#f6d94a", "#f39130", "#ee3f6c", "#2f8fce"];
 const HOP_SECONDS = 0.55;
+/** How long a wormhole takes to throw the helix across the graph. */
+const THROW_SECONDS = 1.1;
+const BLACK_HOLE = SPECIALS.find((special) => special.kind === "blackhole");
 export const HAND = '"Shantell Sans Variable", cursive';
 
 const position = (p: Spot) => new THREE.Vector3(p.x, p.y, p.z);
@@ -38,15 +42,29 @@ export function canvasTexture(width: number, height: number, draw: (ctx: CanvasR
   return texture;
 }
 
-/** Breaks a name into at most three lines that fit the note. */
-function wrap(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+/** Breaks a name into lines that fit the note, three at most unless told otherwise. */
+function wrap(ctx: CanvasRenderingContext2D, text: string, maxWidth: number, maxLines = 3): string[] {
   const lines: string[] = [];
   for (const word of text.split(/\s+/)) {
     const candidate = lines.length ? `${lines.at(-1)} ${word}` : word;
     if (lines.length && ctx.measureText(candidate).width <= maxWidth) lines[lines.length - 1] = candidate;
     else lines.push(word);
   }
-  return lines.slice(0, 3);
+  return lines.slice(0, maxLines);
+}
+
+/** A note somebody left on the board that has nothing to do with any project: all writing, no number. */
+function cardTexture(text: string): THREE.CanvasTexture {
+  return canvasTexture(320, 320, (ctx) => {
+    ctx.fillStyle = "#f6d94a";
+    ctx.fillRect(0, 0, 320, 320);
+    ctx.fillStyle = "rgba(29, 36, 51, 0.07)";
+    ctx.fillRect(0, 0, 320, 44);
+    ctx.fillStyle = INK;
+    ctx.textBaseline = "alphabetic";
+    ctx.font = `700 30px ${HAND}`;
+    wrap(ctx, text, 284, 8).forEach((line, i) => ctx.fillText(line, 18, 82 + i * 34));
+  });
 }
 
 function noteTexture(p: { id: number; name: string }, paper: string): THREE.CanvasTexture {
@@ -281,8 +299,111 @@ function PhantomNote({ p, map }: { p: Phantom; map: THREE.CanvasTexture | null }
       </mesh>
       <mesh>
         <planeGeometry args={[NOTE_SIZE, NOTE_SIZE]} />
-        <meshBasicMaterial key={map ? "drawn" : "blank"} map={map} color="#d9d9d9" toneMapped={false} />
+        <meshBasicMaterial key={map ? "drawn" : "blank"} map={map} color="#e6e6e6" toneMapped={false} />
       </mesh>
+    </group>
+  );
+}
+
+const SCRAPS = 46;
+const SUCTION_RIM = 2.7;
+
+/** The black hole: a dark disc with scraps of paper spiralling into it from all around. Stepping in ends the tour. */
+function BlackHole({ at, onTap }: { at: Special; onTap: (id: number) => void }) {
+  const scraps = useRef<THREE.InstancedMesh>(null);
+  const rim = useRef<THREE.Mesh>(null);
+  const pieces = useMemo(() => {
+    const random = seeded(31);
+    return Array.from({ length: SCRAPS }, () => ({
+      phase: random(),
+      arm: random() * Math.PI * 2,
+      color: new THREE.Color(NOTE_COLORS[Math.floor(random() * NOTE_COLORS.length)]),
+    }));
+  }, []);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+
+  useEffect(() => {
+    pieces.forEach((piece, i) => scraps.current?.setColorAt(i, piece.color));
+    if (scraps.current?.instanceColor) scraps.current.instanceColor.needsUpdate = true;
+  }, [pieces]);
+
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    if (rim.current) rim.current.rotation.z = -t * 1.6;
+    if (!scraps.current) return;
+    pieces.forEach((piece, i) => {
+      // Each scrap falls from the rim to the middle, turning faster the nearer it gets, then starts again at the rim.
+      const fall = (t * 0.24 + piece.phase) % 1;
+      const radius = 0.3 + SUCTION_RIM * (1 - fall) ** 1.7;
+      const angle = piece.arm - fall * fall * 10 - t * 0.35;
+      dummy.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0.06);
+      dummy.rotation.z = angle * 3;
+      dummy.scale.setScalar(2.2 * (1 - fall) + 0.2);
+      dummy.updateMatrix();
+      scraps.current!.setMatrixAt(i, dummy.matrix);
+    });
+    scraps.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <group position={[at.x, at.y, at.z]}>
+      <mesh
+        onClick={(event) => {
+          event.stopPropagation();
+          if (event.delta < 8) onTap(at.id);
+        }}
+      >
+        <circleGeometry args={[0.98, 44]} />
+        <meshBasicMaterial color="#07080d" />
+      </mesh>
+      <mesh ref={rim} position-z={0.02}>
+        <ringGeometry args={[0.98, 1.16, 44, 1, 0, Math.PI * 1.55]} />
+        <meshBasicMaterial color="#9a78c9" toneMapped={false} />
+      </mesh>
+      <instancedMesh ref={scraps} args={[confettiGeometry, undefined, SCRAPS]} frustumCulled={false}>
+        <meshBasicMaterial side={THREE.DoubleSide} toneMapped={false} />
+      </instancedMesh>
+    </group>
+  );
+}
+
+const WORMHOLE_RINGS = [
+  { inner: 0.82, outer: 0.98, color: PINK, speed: 1.9 },
+  { inner: 0.56, outer: 0.7, color: "#2f8fce", speed: -2.6 },
+  { inner: 0.3, outer: 0.44, color: "#f6d94a", speed: 3.4 },
+];
+
+/** A wormhole: three broken rings turning against each other. Stepping in throws the helix to another project. */
+function Wormhole({ at, onTap }: { at: Special; onTap: (id: number) => void }) {
+  const rings = useRef<(THREE.Mesh | null)[]>([]);
+  useFrame(({ clock }) => {
+    rings.current.forEach((ring, i) => {
+      if (ring) ring.rotation.z = clock.elapsedTime * WORMHOLE_RINGS[i].speed;
+    });
+  });
+  return (
+    <group position={[at.x, at.y, at.z]}>
+      <mesh
+        onClick={(event) => {
+          event.stopPropagation();
+          if (event.delta < 8) onTap(at.id);
+        }}
+      >
+        <circleGeometry args={[1.04, 44]} />
+        <meshBasicMaterial color={INK} />
+      </mesh>
+      {WORMHOLE_RINGS.map((ring, i) => (
+        <mesh
+          key={ring.color}
+          ref={(mesh) => {
+            rings.current[i] = mesh;
+          }}
+          position-z={0.02 + i * 0.01}
+        >
+          <ringGeometry args={[ring.inner, ring.outer, 40, 1, 0, Math.PI * 1.5]} />
+          <meshBasicMaterial color={ring.color} toneMapped={false} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -304,10 +425,12 @@ function Thread({ a, b, color, radius }: { a: Spot; b: Spot; color: string; radi
   );
 }
 
+/** The helix's way from where it was to where it is going: straight there, or by way of a wormhole. */
 interface Travel {
-  from: THREE.Vector3;
-  to: THREE.Vector3;
-  progress: number;
+  stops: THREE.Vector3[];
+  /** How long each leg between two stops takes. */
+  legs: number[];
+  elapsed: number;
 }
 
 interface RigProps {
@@ -320,34 +443,46 @@ interface RigProps {
 function HelixAndCamera({ run, overview, extent }: RigProps) {
   const helix = useRef<THREE.Group>(null);
   const twist = useRef<THREE.Group>(null);
-  const travel = useRef<Travel>({ from: position(project(run.current)), to: position(project(run.current)), progress: 1 });
+  const travel = useRef<Travel>({ stops: [position(project(run.current))], legs: [], elapsed: 0 });
   const focus = useRef(position(project(run.current)));
   const distance = useRef(12);
   const at = useRef(position(project(run.current)));
   const { camera, size, scene } = useThree();
 
   useEffect(() => {
-    travel.current = { from: at.current.clone(), to: position(project(run.current)), progress: 0 };
-  }, [run.current]);
+    const from = at.current.clone();
+    if (run.lost && BLACK_HOLE) travel.current = { stops: [from, position(BLACK_HOLE)], legs: [HOP_SECONDS * 2], elapsed: 0 };
+    else if (run.via !== null) travel.current = { stops: [from, position(place(run.via)), position(project(run.current))], legs: [HOP_SECONDS, THROW_SECONDS], elapsed: 0 };
+    else travel.current = { stops: [from, position(project(run.current))], legs: [HOP_SECONDS], elapsed: 0 };
+    // The count of steps, not the place: a wormhole can throw the helix back to where it stood.
+  }, [run.steps, run.lost]);
 
   useFrame(({ clock }, rawDt) => {
     const dt = Math.min(rawDt, 0.05);
     const t = travel.current;
-    t.progress = Math.min(1, t.progress + dt / HOP_SECONDS);
-    const eased = t.progress * t.progress * (3 - 2 * t.progress);
-    at.current.lerpVectors(t.from, t.to, eased);
-    const arc = Math.sin(eased * Math.PI) * 1.1;
+    t.elapsed += dt;
+    let leg = 0;
+    let into = t.elapsed;
+    while (leg < t.legs.length - 1 && into > t.legs[leg]) into -= t.legs[leg++];
+    const progress = t.legs.length ? Math.min(1, into / t.legs[leg]) : 1;
+    const eased = progress * progress * (3 - 2 * progress);
+    if (t.legs.length) at.current.lerpVectors(t.stops[leg], t.stops[leg + 1], eased);
+    const thrown = leg === 1;
+    const arc = Math.sin(eased * Math.PI) * (thrown ? 3.4 : 1.1);
+    // Falling into the black hole, it shrinks to nothing over its middle.
+    const sinking = run.lost ? eased : 0;
 
     if (helix.current && twist.current) {
       // The helix stands on the note's corner, so it flies corner to corner and never snaps to the middle.
-      const resting = t.progress >= 1;
+      const resting = progress >= 1 && leg === t.legs.length - 1;
       helix.current.position.set(
-        at.current.x - NOTE_SIZE * 0.52,
-        at.current.y + NOTE_SIZE * 0.68 + (resting ? Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
+        at.current.x - NOTE_SIZE * 0.52 * (1 - sinking),
+        at.current.y + NOTE_SIZE * 0.68 * (1 - sinking) + (resting ? Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
         at.current.z + 0.5 + arc,
       );
-      // It always turns about its own axis, and winds up two extra turns over a hop.
-      twist.current.rotation.y = clock.elapsedTime * 1.4 + eased * Math.PI * 4;
+      helix.current.scale.setScalar(0.8 * (1 - sinking));
+      // It always turns about its own axis, and winds up two extra turns over a hop, more when thrown or swallowed.
+      twist.current.rotation.y = clock.elapsedTime * 1.4 + eased * Math.PI * (thrown || run.lost ? 14 : 4);
     }
 
     const portrait = size.width / size.height < 0.9;
@@ -396,7 +531,7 @@ function ArrowHints({ run }: { run: Run }) {
       {(Object.keys(textures) as Direction[]).map((direction) => {
         const to = here.arrows[direction];
         if (to === null) return null;
-        const target = project(to);
+        const target = place(to);
         const towards = new THREE.Vector3(target.x - here.x, target.y - here.y, 0).normalize();
         return (
           // In front of the helix, which stands on the note's corner and would otherwise hide a hint on that side.
@@ -472,7 +607,7 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
       if (!alive) return;
       const next = new Map([
         ...PROJECTS.map((p) => [p.id, noteTexture(p, theme(p.primary).color)] as const),
-        ...PHANTOMS.map((p) => [p.id, noteTexture(p, PHANTOM_PAPER)] as const),
+        ...PHANTOMS.map((p) => [p.id, p.name.length > 30 ? cardTexture(p.name) : noteTexture(p, PHANTOM_PAPER)] as const),
       ]);
       made = [...next.values()];
       setNoteTextures(next);
@@ -503,7 +638,7 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
     for (const direction of Object.keys(here.arrows) as Direction[]) {
       const to = here.arrows[direction];
       if (to === null) continue;
-      const target = project(to);
+      const target = place(to);
       const angle = Math.atan2(target.y - here.y, target.x - here.x);
       const off = Math.abs(Math.atan2(Math.sin(angle - swipe), Math.cos(angle - swipe)));
       if (!best || off < best.off) best = { direction, off };
@@ -543,6 +678,15 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
         {PHANTOMS.map((p) => (
           <PhantomNote key={p.id} p={p} map={noteTextures.get(p.id) ?? null} />
         ))}
+        {SPECIALS.map((s) => {
+          const beside = s.anchor === run.current;
+          return (
+            <group key={s.id}>
+              <Thread a={project(s.anchor)} b={s} color={!beside ? UNWALKED : s.kind === "blackhole" ? INK : PINK} radius={beside ? 0.055 : 0.03} />
+              {s.kind === "blackhole" ? <BlackHole at={s} onTap={onTap} /> : <Wormhole at={s} onTap={onTap} />}
+            </group>
+          );
+        })}
         {PROJECTS.map((p) => (
           <ProjectNote
             key={p.id}

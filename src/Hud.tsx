@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type ReactNode } from "react";
 import { clock } from "./api";
 import { IconButton } from "./icons";
-import { PROJECTS, project, theme, type Direction, type Player, type Project, type Run, type Saving } from "./game";
+import { PROJECTS, place, project, special, theme, type Direction, type Player, type Project, type Run, type Saving } from "./game";
 
 const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
 
@@ -53,7 +53,7 @@ function ArrowKey({ direction, here, onMove }: { direction: Direction; here: Pro
       className={`dpad-key dpad-${direction}`}
       disabled={to === null}
       onClick={() => onMove(direction)}
-      aria-label={to === null ? `Nothing ${direction}` : `Go ${direction} to project ${to}, ${project(to).name}`}
+      aria-label={to === null ? `Nothing ${direction}` : special(to) ? `Go ${direction} into ${place(to).name}` : `Go ${direction} to project ${to}, ${place(to).name}`}
     >
       {GLYPH[direction]}
     </button>
@@ -110,7 +110,11 @@ export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onO
             {run.result ? (
               <p>
                 {clock(run.result.durationMs)} on the clock. {player.name}, you are in place {run.result.rank} of {run.result.finishers}.{" "}
-                {run.hops <= par ? `That is par from project ${run.start}: no shorter tour exists.` : `Par from project ${run.start} is ${par}, so ${run.hops - par} over.`}
+                {run.hops < par
+                  ? `Par from project ${run.start} is ${par}: ${par - run.hops} under, thanks to a wormhole.`
+                  : run.hops === par
+                    ? `That is par from project ${run.start}: no shorter walk exists.`
+                    : `Par from project ${run.start} is ${par}, so ${run.hops - par} over.`}
               </p>
             ) : (
               <p>{saving === "retrying" ? "Can't reach the server to record it. Still trying…" : "Recording your score…"}</p>

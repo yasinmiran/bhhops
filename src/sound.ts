@@ -105,6 +105,18 @@ export const sound = {
   },
   /** It has been scared off. */
   shoo: () => tone({ wave: "sawtooth", from: 300, to: 1500, length: 0.28, level: 0.07 }),
+  /** Into a wormhole and out somewhere else. */
+  warp: () => {
+    tone({ wave: "sine", from: 220, to: 1760, length: 0.5, level: 0.16 });
+    tone({ wave: "triangle", from: 1760, to: 330, after: 0.5, length: 0.55, level: 0.14 });
+    puff({ after: 0.1, length: 0.8, level: 0.08, pitch: 3200 });
+  },
+  /** Into the black hole. */
+  oblivion: () => {
+    tone({ wave: "sawtooth", from: 440, to: 28, length: 1.5, level: 0.16 });
+    tone({ wave: "sine", from: 110, to: 30, after: 0.2, length: 1.6, level: 0.2 });
+    puff({ after: 0.1, length: 1.4, level: 0.1, pitch: 300 });
+  },
   /** All 31: a party popper, then a fanfare with the paper still coming down. */
   finale: () => {
     puff({ length: 0.09, level: 0.9, pitch: 900 });

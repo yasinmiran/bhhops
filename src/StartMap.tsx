@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { EDGES, PROJECTS, edgeKey, project, theme } from "./game";
 import { HAND, canvasTexture, fontsReady } from "./Graph3D";
 import { Helix } from "./Helix";
-import { HIDDEN_THREADS, LOOSE_ENDS, PHANTOMS, type Spot } from "./tricks";
+import { HIDDEN_THREADS, LOOSE_ENDS, PHANTOMS, SPECIALS, type Spot } from "./tricks";
 
 const INK = "#1d2433";
 const THREAD = "#a2a8b0";
@@ -13,18 +13,22 @@ const PHANTOM_PAPER = "#e4e1d6";
 const DOT_SIZE = 2.3;
 /** A click this close to a dot, in graph units, counts as a click on it: the dots are small on a phone. */
 const PICK_RADIUS = 2.4;
-/** Graph units left clear along the bottom for the caption. */
-const CAPTION_ROOM = 5.4;
-/** The side of the square of graph the map shows. */
-const VIEW = Math.max(...PROJECTS.flatMap((p) => [Math.abs(p.x), Math.abs(p.y)])) * 2 + DOT_SIZE * 2 + CAPTION_ROOM;
-/** The graph sits this far above the middle of the map, which is what keeps the caption clear of it. */
-const LIFT = CAPTION_ROOM / 2;
+/** Everything the map shows. The frame is fitted round it, so the graph fills the box and sits in its middle. */
+const SHOWN: Spot[] = [...PROJECTS, ...PHANTOMS, ...SPECIALS];
+const LEFT = Math.min(...SHOWN.map((spot) => spot.x));
+const RIGHT = Math.max(...SHOWN.map((spot) => spot.x));
+const BOTTOM = Math.min(...SHOWN.map((spot) => spot.y));
+const TOP = Math.max(...SHOWN.map((spot) => spot.y));
+const MIDDLE = { x: (LEFT + RIGHT) / 2, y: (BOTTOM + TOP) / 2 };
+/** The side of the square of graph the map shows: the graph and most of a dot of margin all round. */
+const VIEW = Math.max(RIGHT - LEFT, TOP - BOTTOM) + DOT_SIZE * 1.8;
 const STILL = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** What the game draws before the first hop: the links that are not hidden, and the loose ends among them. */
 const DRAWN: { a: Spot; b: Spot; ends: number[] }[] = [
   ...EDGES.filter((edge) => !HIDDEN_THREADS.has(edgeKey(edge.a, edge.b))).map((edge) => ({ a: project(edge.a), b: project(edge.b), ends: [edge.a, edge.b] })),
   ...LOOSE_ENDS.map((loose) => ({ a: loose.from, b: loose.to, ends: loose.ends })),
+  ...SPECIALS.map((special) => ({ a: project(special.anchor), b: special, ends: [special.anchor] })),
 ];
 
 /** Flat strips for a set of threads, in one mesh. */
@@ -42,16 +46,16 @@ function ribbons(threads: { a: Spot; b: Spot }[], width: number): THREE.BufferGe
   return geometry;
 }
 
-function dotTexture(label: string, paper: string): THREE.CanvasTexture {
+function dotTexture(label: string, paper: string, line = INK, writing = INK): THREE.CanvasTexture {
   return canvasTexture(128, 128, (ctx) => {
     ctx.beginPath();
     ctx.arc(64, 64, 56, 0, Math.PI * 2);
     ctx.fillStyle = paper;
     ctx.fill();
     ctx.lineWidth = 7;
-    ctx.strokeStyle = INK;
+    ctx.strokeStyle = line;
     ctx.stroke();
-    ctx.fillStyle = INK;
+    ctx.fillStyle = writing;
     ctx.font = `800 62px ${HAND}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -113,7 +117,7 @@ function Scene({ value, hover, textures }: SceneProps) {
       <mesh geometry={chosen} position-z={0.2}>
         <meshBasicMaterial color={INK} side={THREE.DoubleSide} />
       </mesh>
-      {PHANTOMS.map((p) => (
+      {[...PHANTOMS, ...SPECIALS].map((p) => (
         <mesh key={p.id} geometry={dotGeometry} position={[p.x, p.y, 1]}>
           <meshBasicMaterial map={textures.get(p.id)} transparent toneMapped={false} />
         </mesh>
@@ -164,7 +168,8 @@ export function StartMap({ value, onChange }: StartMapProps) {
       if (!alive) return;
       const next = new Map([
         ...PROJECTS.map((p) => [p.id, dotTexture(String(p.id), theme(p.primary).color)] as const),
-        ...PHANTOMS.map((p) => [p.id, dotTexture(String(p.id), PHANTOM_PAPER)] as const),
+        ...PHANTOMS.map((p) => [p.id, dotTexture("?", PHANTOM_PAPER)] as const),
+        ...SPECIALS.map((s) => [s.id, s.kind === "blackhole" ? dotTexture("", "#07080d", "#9a78c9") : dotTexture("?", INK, "#ee3f6c", "#fbfaf6")] as const),
       ]);
       made = [...next.values()];
       setTextures(next);
@@ -180,8 +185,8 @@ export function StartMap({ value, onChange }: StartMapProps) {
     // the tilt itself moves a dot by far less than the reach of a click.
     const box = event.currentTarget.getBoundingClientRect();
     const scale = Math.min(event.currentTarget.clientWidth, event.currentTarget.clientHeight) / VIEW;
-    const x = (event.clientX - (box.left + box.width / 2)) / scale;
-    const y = -(event.clientY - (box.top + box.height / 2)) / scale - LIFT;
+    const x = (event.clientX - (box.left + box.width / 2)) / scale + MIDDLE.x;
+    const y = -(event.clientY - (box.top + box.height / 2)) / scale + MIDDLE.y;
     let best: { id: number; off: number } | null = null;
     for (const p of PROJECTS) {
       const off = Math.hypot(p.x - x, p.y - y);
@@ -204,7 +209,7 @@ export function StartMap({ value, onChange }: StartMapProps) {
       onPointerMove={(event) => event.pointerType === "mouse" && setHover(under(event))}
       onPointerLeave={() => setHover(null)}
     >
-      <Canvas orthographic dpr={[1, 2]} camera={{ position: [0, -LIFT, 50], near: 0.1, far: 200 }} gl={{ antialias: true }}>
+      <Canvas orthographic dpr={[1, 2]} camera={{ position: [MIDDLE.x, MIDDLE.y, 50], near: 0.1, far: 200 }} gl={{ antialias: true }}>
         {textures && <Scene value={value} hover={hover} textures={textures} />}
       </Canvas>
       <AnimatePresence mode="wait" initial={false}>

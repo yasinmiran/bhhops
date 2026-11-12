@@ -63,9 +63,11 @@ in progress may stop validating. During the event, fix text freely and leave
 themes and links alone unless the team insists; if they do, say so on the
 leaderboard or clear it.
 
-The hidden threads, loose ends and phantom notes in `src/tricks.ts` are
-derived from the graph, so they move with it. Nothing there needs editing by
-hand.
+The hidden threads, loose ends, phantom notes, wormholes and the black hole in
+`src/tricks.ts` are derived from the graph, so they move with it. Nothing
+there needs editing by hand. The server imports that file to check wormhole
+steps, so it must stay free of anything the server image does not carry: no
+imports beyond `graph.json`.
 
 ### What not to "fix"
 

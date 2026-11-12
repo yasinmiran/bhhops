@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { api, ApiError } from "./api";
 import graphData from "./graph.json";
 import posterData from "./posters.json";
+import { SPECIALS, landing, type Spot } from "./tricks";
 
 export type Direction = "up" | "right" | "down" | "left";
 export const DIRECTIONS: Direction[] = ["up", "right", "down", "left"];
@@ -62,7 +63,16 @@ const posters = new Map((posterData as PosterEntry[]).map((p) => [p.id, p]));
 export const PAR = graph.par;
 export const THEMES = graph.themes;
 export const EDGES = graph.edges;
-export const PROJECTS: Project[] = graph.nodes.map((node) => ({ ...posters.get(node.id)!, ...node }));
+const specialsById = new Map(SPECIALS.map((s) => [s.id, s]));
+/** The black hole or wormhole with this number, or null for a project. */
+export const special = (id: number) => specialsById.get(id) ?? null;
+
+// A project beside a black hole or a wormhole gives it the arrow key it had to spare.
+export const PROJECTS: Project[] = graph.nodes.map((node) => {
+  const arrows = { ...node.arrows };
+  for (const beside of SPECIALS) if (beside.anchor === node.id) arrows[beside.direction] = beside.id;
+  return { ...posters.get(node.id)!, ...node, arrows };
+});
 
 const projectsById = new Map(PROJECTS.map((p) => [p.id, p]));
 const themesById = new Map(THEMES.map((t) => [t.id, t]));
@@ -72,13 +82,17 @@ export const theme = (id: string) => themesById.get(id)!;
 export const edgeKey = (a: number, b: number) => (a < b ? `${a}-${b}` : `${b}-${a}`);
 const edgesByKey = new Map(EDGES.map((e) => [edgeKey(e.a, e.b), e]));
 export const edgeBetween = (a: number, b: number) => edgesByKey.get(edgeKey(a, b)) ?? null;
+/** Anything an arrow can lead to: a project, the black hole or a wormhole. */
+export const place = (id: number): Spot & { id: number; name: string } => projectsById.get(id) ?? specialsById.get(id)!;
+/** Whether one press of an arrow can take the helix from a project to there. */
+export const canHop = (from: number, to: number) => Boolean(edgeBetween(from, to)) || special(to)?.anchor === from;
 
 /** The projects one hop away, with the arrow that leads to each. */
 export function neighbours(id: number): { direction: Direction; project: Project; reason: string }[] {
   const from = project(id);
   return DIRECTIONS.flatMap((direction) => {
     const to = from.arrows[direction];
-    return to === null ? [] : [{ direction, project: project(to), reason: edgeBetween(id, to)?.reason ?? "" }];
+    return to === null || special(to) ? [] : [{ direction, project: project(to), reason: edgeBetween(id, to)?.reason ?? "" }];
   });
 }
 
@@ -106,6 +120,8 @@ interface Tour {
   /** When the tour began, on this device's clock. */
   startedAt: number;
   result: Result | null;
+  /** The helix went into the black hole. The walk stays as it was; the tour cannot go on. */
+  lost?: boolean;
 }
 
 /** One tour as the game shows it. */
@@ -119,13 +135,18 @@ export interface Run {
   complete: boolean;
   startedAt: number;
   result: Result | null;
+  lost: boolean;
+  /** The wormhole the last move went through, if it did. */
+  via: number | null;
+  /** How many places the walk holds: it grows on every move, including one that lands where it began. */
+  steps: number;
 }
 
 /** The part of a walk that counts for the score: it ends when the last project is first reached. */
 function counted(path: number[]): number[] {
   const seen = new Set<number>();
   for (let i = 0; i < path.length; i++) {
-    seen.add(path[i]);
+    if (!special(path[i])) seen.add(path[i]);
     if (seen.size === PROJECTS.length) return path.slice(0, i + 1);
   }
   return path;
@@ -133,16 +154,22 @@ function counted(path: number[]): number[] {
 
 function view(tour: Tour): Run {
   const scored = counted(tour.path);
-  const visited = [...new Set(tour.path)];
+  const visited = [...new Set(tour.path.filter((id) => !special(id)))];
+  const steps = tour.path.slice(1).map((id, i) => [tour.path[i], id]);
+  const before = tour.path.at(-2);
   return {
     start: tour.path[0],
     current: tour.path.at(-1)!,
     visited,
-    walked: [...new Set(tour.path.slice(1).map((id, i) => edgeKey(tour.path[i], id)))],
-    hops: scored.length - 1,
+    walked: [...new Set(steps.filter(([a, b]) => edgeBetween(a, b)).map(([a, b]) => edgeKey(a, b)))],
+    // Stepping into a wormhole is a hop; being thrown out of it is not.
+    hops: scored.length - 1 - scored.filter((id) => special(id)).length,
     complete: visited.length === PROJECTS.length,
     startedAt: tour.startedAt,
     result: tour.result,
+    lost: tour.lost ?? false,
+    via: before !== undefined && special(before) ? before : null,
+    steps: tour.path.length,
   };
 }
 
@@ -175,11 +202,23 @@ const validPlayer = (p: any) => typeof p.token === "string" && typeof p.name ===
 const nameKey = (name: string) => name.normalize("NFKC").replace(/\s+/g, " ").trim().toLowerCase();
 
 export const lastPlayer = () => load<Player>(LAST_PLAYER_KEY, validPlayer);
+/** Whether place i of a stored walk could have been reached from the one before it. */
+function validStep(t: { id: number; path: number[] }, i: number): boolean {
+  const id = t.path[i];
+  const before = t.path[i - 1];
+  const hole = special(id);
+  // A wormhole is always followed by where it threw the helix, so a walk never ends in one.
+  if (hole) return hole.kind === "wormhole" && before === hole.anchor && i < t.path.length - 1;
+  if (!projectsById.has(id)) return false;
+  if (i === 0) return true;
+  return special(before) ? id === landing(t.id, i - 1) : Boolean(edgeBetween(before, id));
+}
+
 const validTour = (t: any) =>
   Number.isInteger(t.id) &&
   Array.isArray(t.path) &&
   t.path.length > 0 &&
-  t.path.every((id: unknown, i: number) => typeof id === "number" && projectsById.has(id) && (i === 0 || edgeBetween(t.path[i - 1], id))) &&
+  t.path.every((id: unknown, i: number) => typeof id === "number" && validStep(t, i)) &&
   typeof t.startedAt === "number";
 
 interface ServerRun {
@@ -216,6 +255,8 @@ export function useGame() {
         if (!alive) return;
         setTour((local) => {
           if (!run) return local?.result ? local : null;
+          // Reloading the page is no way out of the black hole.
+          if (local?.id === run.id && local.lost) return local;
           const ahead = local?.id === run.id && local.path.length > run.path.length && run.path.every((id, i) => local.path[i] === id);
           return ahead ? local : { id: run.id, path: run.path, startedAt: Date.now() - (now - run.startedAt), result: null };
         });
@@ -314,9 +355,18 @@ export function useGame() {
     [player, forget],
   );
 
-  /** Moves along a link; a hop to a project that is not joined to the current one is ignored. */
+  /** Moves along a link; a hop to somewhere that is not joined to the current project is ignored. */
   const hop = useCallback((to: number) => {
-    setTour((now) => (now && edgeBetween(now.path.at(-1)!, to) ? { ...now, path: [...now.path, to] } : now));
+    setTour((now) => {
+      if (!now || now.lost) return now;
+      const at = now.path.at(-1)!;
+      const hole = special(to);
+      if (!hole) return edgeBetween(at, to) ? { ...now, path: [...now.path, to] } : now;
+      // With every project seen the tour is scored, and the holes have nothing left to give or take.
+      if (hole.anchor !== at || view(now).complete) return now;
+      if (hole.kind === "blackhole") return { ...now, lost: true };
+      return { ...now, path: [...now.path, to, landing(now.id, now.path.length)] };
+    });
   }, []);
 
   const abandon = useCallback(() => setTour(null), []);

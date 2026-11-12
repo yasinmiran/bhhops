@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { PROJECTS, edgeBetween, lastPlayer, project, useGame, type Direction, type Player } from "./game";
+import { PROJECTS, canHop, lastPlayer, project, special, useGame, type Direction, type Player } from "./game";
 import { Leaderboard } from "./Leaderboard";
 import { Critters } from "./Critters";
 import { Hud } from "./Hud";
@@ -114,7 +114,7 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget, onMapFa
         </p>
         <p>
           Do not trust the map. Some threads are loose ends, some only show once you reach them, and a few notes are
-          not projects at all.
+          not projects at all. A wormhole throws you somewhere else. The black hole ends your tour.
         </p>
         {player ? (
           <p className="start-player">
@@ -229,9 +229,12 @@ export function App() {
 
   const travel = useCallback(
     (to: number) => {
-      if (!run) return;
-      if (!edgeBetween(run.current, to)) return;
-      if (run.visited.includes(to)) sound.hop();
+      if (!run || run.lost || !canHop(run.current, to)) return;
+      const hole = special(to);
+      // Once the tour is scored the holes do nothing, so they make no sound either.
+      if (hole && run.complete) return;
+      if (hole) sound[hole.kind === "blackhole" ? "oblivion" : "warp"]();
+      else if (run.visited.includes(to)) sound.hop();
       else sound.discover(run.visited.length + 1);
       setOverview(false);
       hop(to);
@@ -241,7 +244,8 @@ export function App() {
 
   const move = useCallback(
     (direction: Direction) => {
-      const to = run ? project(run.current).arrows[direction] : null;
+      if (!run || run.lost) return;
+      const to = project(run.current).arrows[direction];
       if (to !== null) travel(to);
       else sound.bump();
     },
@@ -365,13 +369,13 @@ export function App() {
               <Graph3D run={run} overview={overview} onMove={move} onTap={tapNote} />
             </Suspense>
           </GraphBoundary>
-          <Critters active={!hidden && !run.complete} />
+          <Critters active={!hidden && !run.complete && !run.lost} />
           <Hud
             run={run}
             player={player}
             saving={saving}
             overview={overview}
-            hidden={hidden}
+            hidden={hidden || run.lost}
             onMove={move}
             onOpen={() => openSheet(run.current)}
             onOverview={() => setOverview((was) => !was)}
@@ -382,6 +386,36 @@ export function App() {
             }}
             soundSwitch={<SoundSwitch />}
           />
+          {run.lost && (
+            // The helix needs a moment to fall in before the lights go out.
+            <motion.div className="oblivion" role="alertdialog" aria-labelledby="oblivion-title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.9 }}>
+              <div className="oblivion-stage">
+                <div className="oblivion-plane">
+                  <div className="oblivion-crawl">
+                    <p className="oblivion-episode">Hop {run.hops + 1}</p>
+                    <h2 id="oblivion-title">Oblivion</h2>
+                    <p>You just went into the oblivion.</p>
+                    <p>
+                      The black hole has your helix, and {run.visited.length} of {PROJECTS.length} projects went in with it. No thread leads out. No
+                      arrow key works here.
+                    </p>
+                    <p>Far above, a turtle walks on, a croissant has places to be, and the leaderboard does not know your name.</p>
+                    <p>There is one way back. It is the button.</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="oblivion-retry"
+                autoFocus
+                onClick={() => {
+                  setOverview(false);
+                  abandon();
+                }}
+              >
+                Try again
+              </button>
+            </motion.div>
+          )}
         </>
       ) : (
         <StartNote

@@ -4,6 +4,7 @@ import type { AddressInfo } from "node:net";
 import { after, test } from "node:test";
 import { createApp } from "./app.ts";
 import { openDatabase } from "./db.ts";
+import { SPECIALS, landing } from "../src/tricks.ts";
 import { checkPath } from "./graph.ts";
 
 const graph = JSON.parse(readFileSync(new URL("../src/graph.json", import.meta.url), "utf8")) as {
@@ -51,14 +52,14 @@ async function setup() {
 
 test("a path must follow links and stop when the tour is complete", () => {
   const tour = fullTour(1);
-  assert.deepEqual(checkPath(tour), { ok: true, complete: true });
-  assert.deepEqual(checkPath(tour.slice(0, 5)), { ok: true, complete: false });
-  assert.equal(checkPath([...tour, neighboursOf.get(tour.at(-1)!)![0]]).ok, false);
+  assert.deepEqual(checkPath(tour, 1), { ok: true, complete: true, hops: tour.length - 1 });
+  assert.deepEqual(checkPath(tour.slice(0, 5), 1), { ok: true, complete: false, hops: 4 });
+  assert.equal(checkPath([...tour, neighboursOf.get(tour.at(-1)!)![0]], 1).ok, false);
   const unlinked = graph.nodes.map((n) => n.id).find((id) => id !== 1 && !neighboursOf.get(1)!.includes(id))!;
-  assert.equal(checkPath([1, unlinked]).ok, false);
-  assert.equal(checkPath([1, 99]).ok, false);
-  assert.equal(checkPath([]).ok, false);
-  assert.equal(checkPath("1,2").ok, false);
+  assert.equal(checkPath([1, unlinked], 1).ok, false);
+  assert.equal(checkPath([1, 99], 1).ok, false);
+  assert.equal(checkPath([], 1).ok, false);
+  assert.equal(checkPath("1,2", 1).ok, false);
 });
 
 test("names are cleaned, limited and unique whatever the case", async () => {
@@ -146,6 +147,26 @@ test("the leaderboard ranks by hops, then by time, and keeps each player's best"
   );
   assert.equal(board.me.rank, 2);
   assert.equal(board.finishers, 3);
+});
+
+test("a wormhole is entered from its own project and leads to one place per tour", async () => {
+  const { call, join } = await setup();
+  const token = await join("Wanderer");
+  const wormhole = SPECIALS.find((special) => special.kind === "wormhole")!;
+  const blackHole = SPECIALS.find((special) => special.kind === "blackhole")!;
+  const run = (await call("POST", "/api/runs", { start: wormhole.anchor }, token)).body;
+  const thrownTo = landing(run.id, 1);
+  const elsewhere = graph.nodes.find((n) => n.id !== thrownTo && n.id !== wormhole.anchor)!.id;
+  const put = (path: number[]) => call("PUT", `/api/runs/${run.id}`, { path }, token);
+
+  assert.equal((await put([wormhole.anchor, wormhole.id, elsewhere])).status, 422);
+  assert.equal((await put([wormhole.anchor, blackHole.id])).status, 422);
+  const stranger = graph.nodes.find((n) => n.id !== wormhole.anchor)!.id;
+  assert.equal(checkPath([stranger, wormhole.id], run.id).ok, false);
+  assert.equal(checkPath([wormhole.id], run.id).ok, false);
+  // Stepping in is a hop; being thrown out the other side is not.
+  assert.deepEqual((await put([wormhole.anchor, wormhole.id, thrownTo])).body, { finished: false, hops: 1 });
+  assert.equal((await call("POST", "/api/runs", { start: wormhole.id }, token)).status, 400);
 });
 
 test("the leaderboard is served ten places to a page", async () => {
