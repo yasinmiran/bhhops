@@ -7,13 +7,29 @@ and try to visit all 31 in as few hops as possible. Reaching a project pins up
 its poster; reading it is optional.
 
 Controls: arrow keys, or swipe, or the on-screen arrow pad. Enter, or the key
-in the middle of the pad, opens the poster of the project you are on. "Whole
-graph" pulls the camera back.
+in the middle of the pad, opens the poster of the project you are on; there the
+left arrow goes back and up and down scroll. "Whole graph" pulls the camera
+back. Space scares off whatever has wandered in front of the graph.
 
-Before the first tour a player picks a name. The server starts the clock,
-stores every hop, and scores the tour when the last project is reached. The
-leaderboard ranks by fewest hops; equal hops are decided by time. A player's
-best tour counts.
+Before the first tour a player gives a name and picks where to start, on a
+small map of the graph. The server starts the clock, stores every hop, and
+scores the tour when the last project is reached. The leaderboard ranks by
+fewest hops; equal hops are decided by time. A player's best tour counts.
+
+## What makes it harder
+
+The map is not honest, and it is dishonest in the same way for everyone:
+`src/tricks.ts` works it all out from the graph, with no dice.
+
+- Seven real threads are not drawn until the helix stands at one end of them.
+- A few drawn threads join nothing. They drop when the helix reaches an end.
+- Four grey notes numbered past 31 are not projects and cannot be reached.
+- A turtle, a lemur, a croissant and some spiders take turns getting in the
+  way (`src/Critters.tsx`). They cost time, never hops. They stay away for
+  anyone whose system asks for reduced motion.
+
+None of this reaches the server, which scores the walk against the real graph.
+Sounds are synthesised in the browser (`src/sound.ts`) and can be muted.
 
 Built with three.js through react-three-fiber and Motion on the client, and a
 small Express server with SQLite behind it. A device without WebGL 2, or one
@@ -106,6 +122,8 @@ has no backups and is deleted after 90 days.
 | `scripts/build-graph.mjs` | Chooses the links, lays the graph out, assigns arrow keys, computes par; writes `src/graph.json` |
 
 The generated files are committed, so the site builds without the photos.
+`AGENTS.md` says which file to edit when a team points out a mistake in its
+project's text, name or links.
 
 The readings and themes were made by a model, then checked by a second pass:
 every summary against its photo, every theme tag against the project's abstract
@@ -120,10 +138,11 @@ for every starting project the builder searches for the shortest tour that
 visits everything, which takes about half a minute. It comes out at 32 to 34
 hops depending on the start.
 
-To rebuild the images, convert the photos to upright JPEGs first (the originals
-are HEIC, which `sharp` cannot read):
+After a change to the text only, `npm run content` rebuilds `src/posters.json`
+and leaves the images alone. To rebuild the images too, convert the photos to
+upright JPEGs first (the originals are HEIC, which `sharp` cannot read):
 
 ```sh
 node scripts/build-data.mjs <folder of JPEGs named like the originals>
-node scripts/build-graph.mjs
+npm run graph
 ```

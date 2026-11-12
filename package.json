@@ -8,7 +8,9 @@
     "check": "tsc",
     "api": "node --watch server/index.ts",
     "start": "node server/index.ts",
-    "test": "node --test 'server/*.test.ts'"
+    "test": "node --test 'server/*.test.ts'",
+    "content": "node scripts/build-data.mjs",
+    "graph": "node scripts/build-graph.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",

@@ -1,10 +1,12 @@
 // Turns the poster readings into the site's data and images.
-// Usage: node scripts/build-data.mjs <dir of upright full-size photos> [readings.json]
+// Usage: node scripts/build-data.mjs [dir of upright full-size photos] [readings.json]
+// Without the photos only the text is rebuilt: the images and each poster's proportions stay as they are.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import sharp from "sharp";
 
 const [photosDir, readingsPath = new URL("./readings.json", import.meta.url).pathname] = process.argv.slice(2);
-if (!photosDir) throw new Error("usage: build-data.mjs <photos dir> [readings.json]");
+const postersPath = new URL("../src/posters.json", import.meta.url);
+const built = new Map(photosDir ? [] : JSON.parse(readFileSync(postersPath, "utf8")).map((p) => [p.id, p]));
 
 const projects = JSON.parse(readFileSync(new URL("./projects.json", import.meta.url), "utf8"));
 const readings = JSON.parse(readFileSync(readingsPath, "utf8"));
@@ -44,13 +46,18 @@ for (const { file, poster, check } of readings) {
   if (!project) throw new Error(`${file}: no project ${poster.project_number}`);
   if (posters.some((p) => p.id === project.id)) throw new Error(`${file}: project ${project.id} appears twice`);
 
-  const id = String(project.id).padStart(2, "0");
-  const photo = sharp(`${photosDir}/${file}`);
-  const { width, height } = await photo.metadata();
-  const sheet = region(poster.poster_box, width, height);
+  let aspect = built.get(project.id)?.aspect;
+  if (photosDir) {
+    const id = String(project.id).padStart(2, "0");
+    const photo = sharp(`${photosDir}/${file}`);
+    const { width, height } = await photo.metadata();
+    const sheet = region(poster.poster_box, width, height);
+    aspect = Number((sheet.width / sheet.height).toFixed(4));
 
-  await photo.clone().extract(sheet).resize({ height: 1800, withoutEnlargement: true }).webp({ quality: 76 }).toFile(`${outDir}${id}.webp`);
-  await photo.clone().extract(sheet).resize({ width: 640 }).webp({ quality: 72 }).toFile(`${outDir}${id}-thumb.webp`);
+    await photo.clone().extract(sheet).resize({ height: 1800, withoutEnlargement: true }).webp({ quality: 76 }).toFile(`${outDir}${id}.webp`);
+    await photo.clone().extract(sheet).resize({ width: 640 }).webp({ quality: 72 }).toFile(`${outDir}${id}-thumb.webp`);
+  }
+  if (aspect === undefined) throw new Error(`${file}: project ${project.id} has no image yet, so the photos directory is needed`);
 
   if (check.project_number !== poster.project_number) {
     report.push(`P${project.id} NUMBER MISMATCH in ${file}: reader ${poster.project_number} (${poster.number_evidence}), checker ${check.project_number}`);
@@ -65,7 +72,7 @@ for (const { file, poster, check } of readings) {
     highlights: poster.highlights,
     motif: poster.visual_motif,
     links: poster.links,
-    aspect: Number((sheet.width / sheet.height).toFixed(4)),
+    aspect,
     explainer: explainerFor(project.id),
   });
 }
@@ -74,6 +81,6 @@ posters.sort((a, b) => a.id - b.id);
 const missing = projects.filter((p) => !posters.some((x) => x.id === p.id)).map((p) => p.id);
 if (missing.length) report.push(`NO POSTER FOR PROJECTS: ${missing.join(", ")}`);
 
-writeFileSync(new URL("../src/posters.json", import.meta.url), JSON.stringify(posters, null, 1) + "\n");
+writeFileSync(postersPath, JSON.stringify(posters, null, 1) + "\n");
 console.log(`${posters.length} posters`);
 console.log(report.join("\n"));

@@ -17,7 +17,8 @@ const NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._-]*$/u;
 const FASTEST_HOP_MS = 100;
 const BOARD_PAGE_SIZE = 10;
 // The venue shares one address, so limits are per player; only sign-ups, which have no player yet, share a budget.
-const LIMITS = { playerPerMinute: 400, signupsPerMinute: 90, adminFailuresPerMinute: 30 };
+// That budget has to fit a whole room scanning the link at once, retries for taken names included.
+const LIMITS = { playerPerMinute: 400, signupsPerMinute: 600, adminFailuresPerMinute: 30 };
 
 class HttpError extends Error {
   readonly status: number;
