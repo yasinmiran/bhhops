@@ -499,11 +499,12 @@ function HelixAndCamera({ run, overview, extent }: RigProps) {
     const whole = (extent / 2 / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2))) * (portrait ? 1 / perspective.aspect : 1) * (portrait ? 1.12 : 1.22);
     const goalDistance = overview ? whole : closeUp;
     // In the whole-graph view the centre moves up a little, clear of the card and arrow pad.
-    // On a phone the helix sits above the middle, so what lies below it is not under the arrow pad.
+    // On a phone the helix sits a little above the middle: far enough that the note below it clears the arrow pad,
+    // not so far that the note above it slides under the buttons at the top.
     const goalFocus = overview
       ? new THREE.Vector3(0, -extent * (portrait ? 0.06 : 0.05), 0)
       : portrait
-        ? new THREE.Vector3(at.current.x, at.current.y - 2.4, at.current.z)
+        ? new THREE.Vector3(at.current.x, at.current.y - 1, at.current.z)
         : at.current;
     const ease = 1 - Math.exp(-4.5 * dt);
     focus.current.lerp(goalFocus, ease);

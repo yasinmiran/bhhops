@@ -636,6 +636,10 @@ a {
 .finale {
   align-self: center;
   max-width: 420px;
+  /* On a phone held sideways the note is taller than the screen, so it scrolls and no button is cut off. */
+  max-height: calc(100dvh - 28px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 20px 22px;
   display: grid;
   gap: 10px;
@@ -707,7 +711,7 @@ a {
 /* The graph in small, for choosing a start. */
 .start-map-frame {
   justify-self: center;
-  width: min(100%, 70dvh);
+  width: min(100%, 66dvh);
   display: grid;
   gap: 6px;
 }
@@ -1230,8 +1234,10 @@ a {
 }
 
 .board {
-  width: min(100%, 520px);
-  max-height: min(86dvh, 720px);
+  /* Wider and larger on a big screen: on a projector it is read from the back of a room. */
+  width: min(100%, clamp(520px, 44vw, 860px));
+  max-height: min(94dvh, 980px);
+  font-size: clamp(1rem, 1.15vw, 1.45rem);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1247,7 +1253,7 @@ a {
 }
 
 .board-head h2 {
-  font-size: 1.9rem;
+  font-size: 1.9em;
   font-weight: 800;
   color: var(--marker-blue);
 }
@@ -1255,7 +1261,7 @@ a {
 .board-rule,
 .board-empty {
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: 0.95em;
 }
 
 .board-scroll {
@@ -1274,15 +1280,16 @@ a {
   top: 0;
   background: var(--sheet);
   color: var(--ink-soft);
-  font-size: 0.85rem;
+  font-size: 0.85em;
   font-weight: 600;
   text-align: left;
 }
 
 .board th,
 .board td {
-  height: 42px;
-  padding: 4px 6px;
+  /* Ten rows and the header have to fit a laptop screen without scrolling inside the list. */
+  height: clamp(30px, 5.1dvh, 58px);
+  padding: 2px 6px;
   border-bottom: 1.5px solid rgb(29 36 51 / 0.12);
 }
 
@@ -1293,7 +1300,7 @@ a {
 
 .board-rank {
   width: 3.2em;
-  font: 800 1.05rem var(--hand);
+  font: 800 1.05em var(--hand);
 }
 
 .board-name {
@@ -1304,8 +1311,8 @@ a {
 .medal {
   display: inline-grid;
   place-items: center;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.8em;
+  height: 1.8em;
   border: 2px solid var(--ink);
   border-radius: 50%;
   line-height: 1;
@@ -1330,7 +1337,7 @@ a {
   justify-content: space-between;
   gap: 12px;
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: 0.95em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1368,6 +1375,13 @@ a {
   .board .medal {
     width: 1.6rem;
     height: 1.6rem;
+  }
+}
+
+/* A phone on its side has no room for the card under the whole graph. */
+@media (max-height: 500px) {
+  .hud-overview .hud-card {
+    display: none;
   }
 }
 

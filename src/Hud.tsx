@@ -32,17 +32,23 @@ function Timer({ run }: { run: Run }) {
   return <>{clock(run.result ? run.result.durationMs : now - run.startedAt)}</>;
 }
 
-async function share(run: Run): Promise<void> {
+/** Shares the result, and says whether it went to the clipboard, where nothing else would show that it did. */
+async function share(run: Run): Promise<"shared" | "copied" | "nothing"> {
   const result = run.result!;
   const payload = {
     text: `I toured all ${PROJECTS.length} BioHackathon projects in ${result.hops} hops and ${clock(result.durationMs)}. Place ${result.rank} of ${result.finishers}.`,
     url: location.href.split("#")[0],
   };
   try {
-    if (navigator.share) await navigator.share(payload);
-    else await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);
+    if (navigator.share) {
+      await navigator.share(payload);
+      return "shared";
+    }
+    await navigator.clipboard.writeText(`${payload.text} ${payload.url}`);
+    return "copied";
   } catch {
     // Dismissing the share sheet is not an error worth showing.
+    return "nothing";
   }
 }
 
@@ -65,13 +71,19 @@ export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onO
   // Par depends on where the tour began: some starts allow a shorter tour than others.
   const par = project(run.start).par;
   const [finaleSeen, setFinaleSeen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => setCopied(false), 2500);
+    return () => clearTimeout(timer);
+  }, [copied]);
   useEffect(() => {
     if (!run.complete) setFinaleSeen(false);
   }, [run.complete]);
 
   return (
     <div
-      className="hud"
+      className={overview ? "hud hud-overview" : "hud"}
       inert={hidden}
       // A mouse or touch press should not leave a button focused, or the next Enter would press it again instead of opening the poster.
       onClick={(event) => event.detail > 0 && (document.activeElement as HTMLElement | null)?.blur()}
@@ -124,8 +136,8 @@ export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onO
                 Leaderboard
               </button>
               {run.result && (
-                <button className="marker-button" onClick={() => share(run)}>
-                  Share
+                <button className="marker-button" onClick={() => void share(run).then((how) => setCopied(how === "copied"))}>
+                  {copied ? "Copied" : "Share"}
                 </button>
               )}
               <button className="marker-button" onClick={onRestart}>

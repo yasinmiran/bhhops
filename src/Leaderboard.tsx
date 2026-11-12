@@ -52,8 +52,11 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
   useEffect(() => {
     const table = scroller.current;
     if (!table) return;
-    table.scrollTop = 0;
-    table.querySelector(".board-me")?.scrollIntoView({ block: "nearest" });
+    // Only the list itself is moved. On a phone held sideways the whole sheet scrolls instead, and bringing
+    // the row into view there pushed the title and the close button off the top.
+    const mine = table.querySelector(".board-me");
+    const down = mine ? mine.getBoundingClientRect().bottom - table.getBoundingClientRect().bottom : 0;
+    table.scrollTop = Math.max(0, down);
   }, [board?.page]);
 
   // Steps from the page the server last answered with, which is the last page if the asked one no longer exists.

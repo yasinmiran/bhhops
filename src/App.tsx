@@ -186,6 +186,8 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget, onMapFa
               required
               autoFocus
             />
+            {/* Beside the field it is about: on a phone the buttons are a screen further down. */}
+            {error && <p className="error">{error}</p>}
           </div>
         )}
         </div>
@@ -199,7 +201,7 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget, onMapFa
           <StartPicker value={choice} onChange={setChoice} labelledBy="start-label" />
         </div>
         <div className="start-go">
-        {error && <p className="error">{error}</p>}
+        {error && player && <p className="error">{error}</p>}
         <div className="start-actions">
           <motion.button
             className="marker-button"
