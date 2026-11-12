@@ -1,24 +1,27 @@
 #!/usr/bin/env bash
 # Creates the NREC instance that runs 31 Hops and prints its address.
-# Safe to rerun: existing resources are kept and an interrupted run is finished.
+# Safe to rerun: an existing key pair or server is kept, and nothing is ever deleted or changed.
+#
+# Credentials come from the OpenStack CLI's usual places: a clouds.yaml profile
+# (OS_CLOUD=nrec, with OS_CLIENT_CONFIG_FILE if the file is not in the current
+# directory) or a sourced keystone rc file.
 set -euo pipefail
 
-: "${OS_AUTH_URL:?source your NREC keystone rc file first (see deploy/keystone_rc.example.sh)}"
-if [[ "${OS_REGION_NAME:-}" != "osl" ]]; then
-  echo "OS_REGION_NAME is '${OS_REGION_NAME:-}', expected 'osl'" >&2
+if [[ -z "${OS_CLOUD:-}" && -z "${OS_AUTH_URL:-}" ]]; then
+  echo "no credentials: set OS_CLOUD to a clouds.yaml profile, or source a keystone rc file" >&2
   exit 1
 fi
 
 # NREC recommends [a-zA-Z0-9] only in instance names.
 NAME="${HOPS_SERVER_NAME:-bhhops}"
 IMAGE="${HOPS_IMAGE:-GOLD Ubuntu 24.04 LTS}"
-FLAVOR="${HOPS_FLAVOR:-m1.small}"
+# 1 vCPU, 2 GB RAM, 20 GB disk: the largest flavor a DEMO project's quota allows,
+# and the extra disk over m1.small is what an image build needs.
+FLAVOR="${HOPS_FLAVOR:-c1.medium}"
 PUBLIC_KEY="${HOPS_PUBLIC_KEY:-$HOME/.ssh/id_ed25519.pub}"
-# Remembered before the default is applied: only an address range given on purpose is ever added on a rerun.
-SSH_CIDR_GIVEN="${SSH_CIDR+yes}"
-# GOLD images accept keys only, so SSH is open by default; narrow it with e.g. SSH_CIDR=203.0.113.7/32.
-SSH_CIDR="${SSH_CIDR:-0.0.0.0/0}"
-GROUP="$NAME"
+# The project's standing groups: "default" carries the web ports, "ssh" carries 22.
+# They are used as they are; this script never edits a security group.
+GROUPS_WANTED=(${HOPS_SECURITY_GROUPS:-default ssh})
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
 exists() { openstack "$@" >/dev/null 2>&1; }
@@ -26,54 +29,41 @@ exists() { openstack "$@" >/dev/null 2>&1; }
 # Without this, a wrong password would look like "nothing exists yet".
 openstack token issue >/dev/null
 
-# NREC known issue: a rule created through the API without an explicit remote
-# address has opened every port, so each rule names its source. A rule that is
-# already there is fine, which lets a rerun finish what an interrupted run began.
-allow() {
-  local ethertype="$1" protocol="$2" port="$3" source="$4" output
-  if ! output="$(openstack security group rule create --ingress --ethertype "$ethertype" \
-    --protocol "$protocol" --dst-port "$port" --remote-ip "$source" "$GROUP" 2>&1)"; then
-    if ! grep -qi "already exists" <<<"$output"; then
-      echo "$output" >&2
-      exit 1
-    fi
-  fi
-}
+region="$(openstack configuration show -f value -c region_name)"
+if [[ "$region" != "osl" ]]; then
+  echo "the active region is '$region', expected 'osl'" >&2
+  exit 1
+fi
 
+# The instance is only reachable if the groups it joins already open SSH and the web ports.
+open_ports=""
+for group in "${GROUPS_WANTED[@]}"; do
+  if ! exists security group show "$group"; then
+    echo "security group '$group' does not exist in osl; set HOPS_SECURITY_GROUPS to the groups to use" >&2
+    exit 1
+  fi
+  open_ports+="$(openstack security group rule list "$group" --ingress --protocol tcp -f value -c "Port Range")"$'\n'
+done
+for port in 22 80 443; do
+  if ! grep -qx "$port:$port" <<<"$open_ports"; then
+    echo "none of the groups (${GROUPS_WANTED[*]}) opens tcp $port; add that rule first, with an explicit remote address" >&2
+    exit 1
+  fi
+done
+
+# Key pairs made in the dashboard belong to the Feide user and are invisible here,
+# so the API user gets its own copy of the public key.
 if ! exists keypair show "$NAME"; then
   openstack keypair create --public-key "$PUBLIC_KEY" "$NAME" >/dev/null
   echo "keypair $NAME created from $PUBLIC_KEY"
 fi
 
-if ! exists security group show "$GROUP"; then
-  openstack security group create --description "31 Hops: web from anywhere, SSH" "$GROUP" >/dev/null
-  echo "security group $GROUP created"
-fi
-
-# SSH rules are added when the group has none yet, or when a range was asked for.
-# A plain rerun must not quietly reopen SSH to everyone after it was narrowed by hand.
-ssh_rules="$(openstack security group rule list "$GROUP" --ingress --protocol tcp -f value -c "Port Range")"
-if [[ -n "$SSH_CIDR_GIVEN" ]] || ! grep -qx "22:22" <<<"$ssh_rules"; then
-  if [[ "$SSH_CIDR" == *:* ]]; then
-    allow IPv6 tcp 22 "$SSH_CIDR"
-  else
-    allow IPv4 tcp 22 "$SSH_CIDR"
-  fi
-  if [[ "$SSH_CIDR" == "0.0.0.0/0" ]]; then
-    allow IPv6 tcp 22 ::/0
-  fi
-fi
-# The web ports are published on IPv4 only (see compose.yaml).
-allow IPv4 tcp 80 0.0.0.0/0
-allow IPv4 tcp 443 0.0.0.0/0
-# HTTP/3
-allow IPv4 udp 443 0.0.0.0/0
-
 if ! exists server show "$NAME"; then
-  # dualStack is the only NREC network with a public IPv4 address.
+  group_flags=()
+  for group in "${GROUPS_WANTED[@]}"; do group_flags+=(--security-group "$group"); done
+  # dualStack is the only NREC network with a public IPv4 address, and an instance takes exactly one network.
   openstack server create --image "$IMAGE" --flavor "$FLAVOR" \
-    --nic net-id=dualStack --key-name "$NAME" \
-    --security-group default --security-group "$GROUP" \
+    --network dualStack --key-name "$NAME" "${group_flags[@]}" \
     --user-data "$HERE/cloud-init.yaml" --wait "$NAME" >/dev/null
   echo "server $NAME created"
 fi

@@ -53,24 +53,26 @@ curl -X POST https://<host>/api/admin/remove-player \
 
 ## Deploy to NREC (Oslo)
 
-One `m1.small` instance runs two containers: Caddy, which serves the client
+One `c1.medium` instance runs two containers: Caddy, which serves the client
 and gets the certificate, and the game server with its SQLite file on a Docker
 volume.
 
-1. Get the OpenStack CLI and your credentials in place.
+1. Get the OpenStack CLI, and point it at your NREC credentials: either a
+   `clouds.yaml` profile or a sourced keystone rc file. The API password is the
+   one NREC showed at sign-up, not the Feide password.
 
    ```sh
    python3 -m venv .venv && source .venv/bin/activate
    pip install -r deploy/requirements.txt
-   cp deploy/keystone_rc.example.sh ~/keystone_rc.sh   # fill in, chmod 0600
-   source ~/keystone_rc.sh
+   export OS_CLOUD=nrec OS_CLIENT_CONFIG_FILE=/path/to/clouds.yaml
    ```
 
-2. Create the instance; the script prints its addresses. It makes a keypair
-   from `~/.ssh/id_ed25519.pub`, a security group (80 and 443 from anywhere
-   over IPv4, 22 from `SSH_CIDR`, which defaults to anywhere because the image
-   only accepts keys) and the server on the `dualStack` network. Rerunning it
-   is harmless and finishes an interrupted run.
+2. Create the instance; the script prints its addresses. It uploads
+   `~/.ssh/id_ed25519.pub` as a key pair for the API user (key pairs made in the
+   dashboard are invisible to the API) and starts a `c1.medium` on the
+   `dualStack` network in the project's existing `default` and `ssh` security
+   groups. It checks that those groups open 22, 80 and 443 and never edits
+   them. Rerunning it is harmless.
 
    ```sh
    deploy/provision.sh
@@ -88,8 +90,8 @@ volume.
    ```
 
 Caddy asks for the certificate once the name resolves and keeps retrying until
-it does. A demo project on NREC fits exactly one `m1.small`, has no backups,
-and is removed after 90 days.
+it does. A DEMO project's quota fits exactly one such instance per region. It
+has no backups and is deleted after 90 days.
 
 ## Where the content comes from
 

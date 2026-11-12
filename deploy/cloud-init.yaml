@@ -2,6 +2,11 @@
 package_update: true
 packages:
   - docker.io
+# 2 GB of RAM is not enough headroom for an image build next to the running stack.
+swap:
+  filename: /swapfile
+  size: 2G
+  maxsize: 2G
 runcmd:
   - usermod -aG docker ubuntu
   - systemctl enable --now docker
