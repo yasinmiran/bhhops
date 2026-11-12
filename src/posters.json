@@ -14,7 +14,39 @@
   ],
   "motif": "Suspension bridge linking cloud providers to a spiral Galaxy",
   "links": [],
-  "aspect": 0.6939
+  "aspect": 0.6939,
+  "explainer": {
+   "problem": "Galaxy users can run short of computing power. Plugging extra machines into Galaxy, or into secure spaces for sensitive data, is not yet automatic or simple.",
+   "thisWeek": "The team, from Belgium, Switzerland, Germany and the Netherlands, got a BYOC setup running on SimpleVM. Now they are building a SimpleVM Terraform module (setup written as code) and a CI/CD pipeline (steps that test and deploy changes automatically), and adding on-demand cloud from de.NBI and SURF.",
+   "whyItMatters": "A Galaxy user short on computing power could add their own machines, or analyse sensitive data in a secure space, without building the setup by hand.",
+   "glossary": [
+    {
+     "term": "BYOC",
+     "meaning": "Bring Your Own Compute: plugging your own servers or cloud machines into a shared service such as Galaxy."
+    },
+    {
+     "term": "Pulsar",
+     "meaning": "A companion service for Galaxy that runs analysis jobs on remote machines and sends the results back."
+    },
+    {
+     "term": "TRE / SPE",
+     "meaning": "Trusted Research Environment / Secure Processing Environment: a locked-down space to analyse sensitive data."
+    },
+    {
+     "term": "SimpleVM",
+     "meaning": "A de.NBI Cloud service (de.NBI is Germany's bioinformatics network) for starting your own virtual machines."
+    }
+   ],
+   "done": [
+    "SimpleVM BYOC setup"
+   ],
+   "next": [
+    "Connecting Galaxy and Pulsar",
+    "Hooking up the SLURM and HTCondor job schedulers",
+    "Data flow and APIs (interfaces between programs)",
+    "A reusable, scalable setup supported across ELIXIR nodes"
+   ]
+  }
  },
  {
   "id": 2,
@@ -33,7 +65,32 @@
   "links": [
    "#BioHackEU26"
   ],
-  "aspect": 1.4554
+  "aspect": 1.4554,
+  "explainer": {
+   "problem": "Researchers depositing a study that mixes several kinds of data must send each part to a different public archive in its own way, so the records end up poorly linked and inconsistently described.",
+   "thisWeek": "The team drew their pipeline: one ISA-JSON file for the whole study goes into a command-line broker, which submits each part to archives such as BioSamples and ENA and returns an ISA-JSON file with the new accessions linked in. Green dots on the poster sit next to test data, documentation and a first spec.",
+   "whyItMatters": "Researchers get one documented, scripted way to deposit a multi-omics study, with archive records that link to each other and are easier for AI tools to use.",
+   "glossary": [
+    {
+     "term": "MARS",
+     "meaning": "The project's approach for sending one multi-omics study to several public archives in one scripted run."
+    },
+    {
+     "term": "ISA-JSON",
+     "meaning": "A standard file format that describes a study's metadata in three layers: Investigation, Study and Assay."
+    },
+    {
+     "term": "Accession",
+     "meaning": "The permanent ID an archive gives a record when you deposit it, used to cite it and link to it."
+    },
+    {
+     "term": "ENA",
+     "meaning": "European Nucleotide Archive, the European public store for DNA and RNA sequence data."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 3,
@@ -52,7 +109,32 @@
   "links": [
    "https://github.com/pathway-lod/lod-pathways-community"
   ],
-  "aspect": 0.75
+  "aspect": 0.75,
+  "explainer": {
+   "problem": "Knowledge of how plants make specialized metabolites, a big source of drugs and foods, is scattered across separate resources. Researchers have no shared format to add new omics data or weigh pathway predictions.",
+   "thisWeek": "The team drew their plan in four steps: define shared ontology terms, check multi-omics data against SHACL rules, score candidate pathway parts with a minimum information standard and evidence from the Rhea, OrthoDB and Bgee databases, then let people submit. That last step is still mostly question marks.",
+   "whyItMatters": "Researchers could record pathway findings in one agreed format, link their omics data to them, and see which candidate pathway parts have the best evidence.",
+   "glossary": [
+    {
+     "term": "Specialized metabolites",
+     "meaning": "Compounds a plant makes beyond basic growth, often for defence or signalling; many become drugs or flavours."
+    },
+    {
+     "term": "PlantMetWiki",
+     "meaning": "The team's open, linked database of plant pathway reactions that experiments back up."
+    },
+    {
+     "term": "SHACL",
+     "meaning": "A standard way to write rules that linked data must follow, so a computer can flag records that break them."
+    },
+    {
+     "term": "Minimum information standard",
+     "meaning": "An agreed checklist of details every record must include so others can trust and reuse it."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 4,
@@ -71,7 +153,37 @@
   "links": [
    "https://haploblocks.org"
   ],
-  "aspect": 0.7088
+  "aspect": 0.7088,
+  "explainer": {
+   "problem": "Biobanks hold genome and health data that could help reveal what causes diseases like Alzheimer's or cancer, but privacy rules make it hard for researchers to pool them across institutions.",
+   "thisWeek": "The poster lists haploblocks, a haplograph and genomic hashes as done, and a validator is ticked off. In progress: embeddings with Evo2 and XGBoost, and adding proteomics data. It all builds toward a clinical recommendation engine that points to a drug type, with a type 4 for no known drugs.",
+   "whyItMatters": "Researchers could combine biobanks while keeping people private, and split individuals into subgroups that point to disease causes and targeted treatments.",
+   "glossary": [
+    {
+     "term": "Haploblocks",
+     "meaning": "Stretches of DNA that tend to be inherited together, so one block can stand in for many nearby variants."
+    },
+    {
+     "term": "Genomic hashes",
+     "meaning": "A compact fingerprint of a genome written as 0s and 1s, so genomes can be compared quickly and at scale."
+    },
+    {
+     "term": "Evo2",
+     "meaning": "A large AI model trained on DNA; it turns a sequence into a list of numbers (an embedding)."
+    }
+   ],
+   "done": [
+    "Haploblocks: the genome cut into blocks (see haploblocks.org)",
+    "Haplograph, drawn as a network of linked points",
+    "Genomic hashes: genomes written as strings of 0s and 1s",
+    "Validator, ticked off inside the in-progress box"
+   ],
+   "next": [
+    "Embeddings with Evo2 and XGBoost",
+    "Adding proteomics data",
+    "Clinical recommendation engine that suggests a drug type"
+   ]
+  }
  },
  {
   "id": 5,
@@ -90,7 +202,32 @@
   "links": [
    "BH.BILGEHAN.NL"
   ],
-  "aspect": 0.709
+  "aspect": 0.709,
+  "explainer": {
+   "problem": "Know-how on making data and tools work together is scattered across slides, wikis and email threads, so communities and data stewards struggle to find or reuse it.",
+   "thisWeek": "The team’s web tool works in three steps: capture, display, integrate. A community describes a practice as a task with inputs, a process and outputs; free text typed into one box goes to an LLM (large language model), which fills in the other fields. Each practice then sits on a lifecycle wheel from plan to share.",
+   "whyItMatters": "You can see how another community handled the same data task and which tools it used, then reuse that instead of starting from scratch.",
+   "glossary": [
+    {
+     "term": "Interoperability practice",
+     "meaning": "A way of making data, tools and metadata from different groups work together."
+    },
+    {
+     "term": "RDMkit",
+     "meaning": "ELIXIR’s online guide to research data management, organised by the stages of a data project."
+    },
+    {
+     "term": "FAIRsharing",
+     "meaning": "A curated registry of data standards, databases and data policies used in research."
+    },
+    {
+     "term": "bio.tools",
+     "meaning": "A registry of bioinformatics software and services, each described in a standard way."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 6,
@@ -107,7 +244,32 @@
   ],
   "motif": "Three cheering stick figures: one with a laptop, one with a stack, one at a bar-chart easel",
   "links": [],
-  "aspect": 0.6811
+  "aspect": 0.6811,
+  "explainer": {
+   "problem": "Life science depends on datasets, databases, software and workflows, not only papers. The curation, coding and training behind them have no clear path to formal credit, so there is less reason to maintain them.",
+   "thisWeek": "The team lines up three activities against two role vocabularies. CRediT has a role for software development but none for training delivery or community support, while CRO has all three. They sketch a chain from person to role to output, and ask people to post notes on work that never got credit.",
+   "whyItMatters": "Curators, developers and trainers could see their work recorded and counted, the way paper authors already do.",
+   "glossary": [
+    {
+     "term": "ELIXIR",
+     "meaning": "A European network that runs shared life science data services, databases and training across many countries."
+    },
+    {
+     "term": "CRediT",
+     "meaning": "Contributor Roles Taxonomy: a standard set of 14 roles, such as software or writing, for credit on papers."
+    },
+    {
+     "term": "CRO",
+     "meaning": "Contributor Role Ontology: a longer list of roles that builds on CRediT and adds ones like training."
+    },
+    {
+     "term": "APICURON",
+     "meaning": "A service that tracks curation work in biology databases and turns it into credit, like badges and rankings."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 7,
@@ -124,7 +286,32 @@
   ],
   "motif": "Colour-coded 5-species DNA alignment feeding quartet trees; animal stickers on a tree",
   "links": [],
-  "aspect": 0.7163
+  "aspect": 0.7163,
+  "explainer": {
+   "problem": "Building evolutionary trees from genome data is slow: standard methods like maximum likelihood struggle as datasets keep growing. This affects anyone building trees from large genome datasets.",
+   "thisWeek": "PhyloAI tallies the letter patterns in the columns of a DNA alignment, plus its length, and picks the tree shape for each group of four species. This week the team works on PhyloAI-RP, a reconstructability predictor that drops quartets it judges unreliable before the merge into one tree, and on a Bioconda package.",
+   "whyItMatters": "Researchers could get accurate trees for many species in a fraction of the usual time, from a tool they install with pip or conda.",
+   "glossary": [
+    {
+     "term": "Quartet topology",
+     "meaning": "How four species pair up on a tree. There are only three ways: AB with CD, AC with BD, or AD with BC."
+    },
+    {
+     "term": "Reconstructability predictor",
+     "meaning": "A model that judges whether a quartet shape can be read reliably from the data, so doubtful ones are dropped."
+    },
+    {
+     "term": "Amalgamation",
+     "meaning": "Stitching many small four-species trees into one tree covering all species, as tools like ASTRAL do."
+    },
+    {
+     "term": "Bioconda",
+     "meaning": "A community collection of bioinformatics software you install with the conda package manager."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 8,
@@ -141,7 +328,32 @@
   ],
   "motif": "Little Prince on asteroid EVERSE, dreaming of FAIR software in a box",
   "links": [],
-  "aspect": 0.7088
+  "aspect": 0.7088,
+  "explainer": {
+   "problem": "Life-science research runs on software, yet judging whether a tool is reliable and its results reproducible is still hard. ELIXIR, Europe's network for life-science data and tools, wants a shared way to do it.",
+   "thisWeek": "The team mapped how broad qualities such as reliability, sustainability and documentation break down into checkable indicators, like \"has documentation\". Tools such as Semgrep, GitLeaks and ScanCode measure them in quality pipelines they call RESQUI plugins. Clinical data adds open questions on safety and security.",
+   "whyItMatters": "Researchers and the ELIXIR Tools Platform would share one set of quality checks, making it easier to tell how far to trust a tool.",
+   "glossary": [
+    {
+     "term": "EVERSE",
+     "meaning": "European Virtual Institute for Research Software Excellence, an EU project on research software quality."
+    },
+    {
+     "term": "FAIR software",
+     "meaning": "Software that is Findable, Accessible, Interoperable and Reusable, so others can find, run and build on it."
+    },
+    {
+     "term": "RESQUI plugins",
+     "meaning": "The poster's name for its quality pipelines: plugins that run the measuring tools on a piece of software."
+    },
+    {
+     "term": "Semgrep, GitLeaks, ScanCode",
+     "meaning": "Code scanners: Semgrep spots risky code patterns, GitLeaks leaked passwords, ScanCode software licences."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 9,
@@ -158,7 +370,40 @@
   ],
   "motif": "Phylogenetic tree and coloured protein helices, with a red Claude starburst",
   "links": [],
-  "aspect": 0.5886
+  "aspect": 0.5886,
+  "explainer": {
+   "problem": "Biologists stare at a sequence alignment and wonder what its conserved columns mean in the 3D protein. Seeing that today takes structural expertise or switching between specialist tools.",
+   "thisWeek": "The team chose questions to work on, such as viral variants and immune escape, and protein families: GTPases, nanobodies, antibodies and the spike protein. They ran analyses and built prototypes in two existing viewers, iCn3D and Jalview.",
+   "whyItMatters": "A researcher could load an alignment and structures and see conserved binding pockets and divergent surfaces light up in 3D, no structural expertise needed.",
+   "glossary": [
+    {
+     "term": "MSA",
+     "meaning": "Multiple sequence alignment: related protein sequences lined up so matching positions share a column."
+    },
+    {
+     "term": "iCn3D",
+     "meaning": "A free web viewer for looking at 3D protein structures next to their sequences."
+    },
+    {
+     "term": "Jalview",
+     "meaning": "A free program for viewing, editing and colouring sequence alignments."
+    },
+    {
+     "term": "Mol*",
+     "meaning": "Mol-star, an open web viewer for 3D molecular structures, used by the Protein Data Bank websites."
+    }
+   ],
+   "done": [
+    "Ran analyses",
+    "Built prototypes in the iCn3D and Jalview viewers"
+   ],
+   "next": [
+    "Benchmark tools for alignment and interaction analysis",
+    "Finish the demos and prototypes in iCn3D and Jalview",
+    "Reusable pipelines: 3D to 2D alignment, and binding prediction",
+    "New Mol* programming and Prism user interfaces, sketched as Mol* v.6"
+   ]
+  }
  },
  {
   "id": 10,
@@ -179,7 +424,32 @@
    "schema.org",
    "bio.tools"
   ],
-  "aspect": 0.6581
+  "aspect": 0.6581,
+  "explainer": {
+   "problem": "Community websites built on the ELIXIR Toolkit Theme can point to tools and standards, but not to workflows or ontology terms, so shared workflows are hard to find.",
+   "thisWeek": "The team's poster shows where the theme runs, like RDMkit, RSQkit and 1+MG, and which registries it links to. They flagged two gaps: no support for ontologies or more ID types, and info kept in YAML files, not in JSON-LD. They sketched a route from tool lists via the bio.tools API to EDAM terms in each page's JSON-LD.",
+   "whyItMatters": "A community site could list its workflows with standard EDAM tags, so search engines find its pages more easily and theme sites work together better.",
+   "glossary": [
+    {
+     "term": "ELIXIR Toolkit Theme (ETT)",
+     "meaning": "A website template from ELIXIR that communities use to build sites and publish them straight from GitHub."
+    },
+    {
+     "term": "EDAM",
+     "meaning": "A shared vocabulary for bioinformatics: agreed names for topics, operations, data types and file formats."
+    },
+    {
+     "term": "JSON-LD (schema.org)",
+     "meaning": "Structured data inside a web page, written with schema.org terms, that search engines and programs can read."
+    },
+    {
+     "term": "bio.tools",
+     "meaning": "A public catalogue of bioinformatics software; each tool gets an ID and a description tagged with EDAM terms."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 11,
@@ -196,7 +466,32 @@
   ],
   "motif": "Big tree with a yellow VERDANT banner, ontology names as roots, pond below",
   "links": [],
-  "aspect": 0.6888
+  "aspect": 0.6888,
+  "explainer": {
+   "problem": "Biodiversity and microbiome researchers describe samples in many different vocabularies. Linking each term to standard ontologies by hand is slow and easy to get wrong.",
+   "thisWeek": "The team shows VERDANT in five steps: import your data, turn terms into embeddings, score them against other vocabularies like ENVO, label each pair exact, related or no match, then have an expert check it. Test cases start from air samples, free text in the PANGAEA data archive and a soil project's own ontology.",
+   "whyItMatters": "Sample terms get linked to shared standards with a score and an expert check, so data from different projects can be found and combined.",
+   "glossary": [
+    {
+     "term": "Ontology",
+     "meaning": "An agreed list of terms with definitions and named links between them, so tools mean the same thing by a word."
+    },
+    {
+     "term": "Embeddings",
+     "meaning": "Lists of numbers that capture what a piece of text means, so similar phrases end up close together."
+    },
+    {
+     "term": "ENVO",
+     "meaning": "Environment Ontology: a shared vocabulary for environments and habitats, such as soil, sea water or a biome."
+    },
+    {
+     "term": "Knowledge graph",
+     "meaning": "Data stored as things joined by named relationships, so facts from many sources can be linked and queried."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 12,
@@ -213,7 +508,32 @@
   ],
   "motif": "Sketched world map with a dashed '89' cluster and an elephant balancing a globe",
   "links": [],
-  "aspect": 0.708
+  "aspect": 0.708,
+  "explainer": {
+   "problem": "Archives like the European Nucleotide Archive and MGnify hold vast numbers of samples tagged with where they were found. Picking an area on a map and filtering by taxon, date or habitat at once is still hard.",
+   "thisWeek": "The poster shows the whole flow. SampleSift indexes your existing database into its own, then generates an API with an OpenAPI description, CQL2 filters for metadata and location, a clustering tile server and a map interface. It says the map interface is available as a web component and a Jupyter widget.",
+   "whyItMatters": "Draw a shape on a map, set a few filters, and get the matching samples straight away, on any data portal that adds the widget.",
+   "glossary": [
+    {
+     "term": "OpenAPI",
+     "meaning": "A standard way to describe a web API in one file, so people and tools know which requests it accepts."
+    },
+    {
+     "term": "CQL2",
+     "meaning": "Common Query Language 2: a standard way to ask which records match conditions on their fields and location."
+    },
+    {
+     "term": "Clustering tile server",
+     "meaning": "Serves the map in small pieces and merges nearby samples into one bubble with a count, so big maps stay fast."
+    },
+    {
+     "term": "MGnify",
+     "meaning": "A public resource that analyses and stores microbiome samples from places like soil, sea water and the gut."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 13,
@@ -232,7 +552,32 @@
   "links": [
    "#BioHackEU26"
   ],
-  "aspect": 1.5612
+  "aspect": 1.5612,
+  "explainer": {
+   "problem": "Life scientists can find published machine learning models in registries like DOME and BioAIrepo, but there is no easy path from finding a model to actually running it.",
+   "thisWeek": "The team sketched how four services should connect. DOME Registry annotates BioAIrepo, Galaxy fetches from BioAIrepo and sends updates back, and both link to a container registry. Open questions: who packages each model in a container, and could AI suggest a Docker template?",
+   "whyItMatters": "A researcher who finds a published model in a registry could run it directly in Galaxy, with links to related software.",
+   "glossary": [
+    {
+     "term": "DOME Registry",
+     "meaning": "A catalogue describing published machine learning methods by their Data, Optimization, Model and Evaluation."
+    },
+    {
+     "term": "BioAIrepo",
+     "meaning": "A repository where life scientists deposit AI models and datasets."
+    },
+    {
+     "term": "Galaxy",
+     "meaning": "A free web platform for running bioinformatics tools and workflows in the browser, without writing code."
+    },
+    {
+     "term": "Container registry",
+     "meaning": "An online store of containers: packages that bundle a tool with everything it needs to run anywhere."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 14,
@@ -249,7 +594,37 @@
   ],
   "motif": "Doodled mouse, pig and cow heads beside arrow-shaped sticky notes",
   "links": [],
-  "aspect": 0.6665
+  "aspect": 0.6665,
+  "explainer": {
+   "problem": "Animal scientists have a standard way to describe studies that measure animal traits, but few easy tools to use it, so their data is hard to share and compare.",
+   "thisWeek": "The team is finishing version 2 of MIMSA, a checklist of what to record about an animal study. They are adding it to ISA Wizard, the ARC framework and FAIRDOM SEEK, and testing the first two with real data. Twelve people take part, three of them online.",
+   "whyItMatters": "Animal researchers could describe and share their data with tools plant scientists already use, so studies get easier to repeat and compare.",
+   "glossary": [
+    {
+     "term": "MIMSA",
+     "meaning": "Minimal Information Metadata Standard for Animals: a checklist of what to write down about an animal study."
+    },
+    {
+     "term": "ISA",
+     "meaning": "Investigation, Study, Assay: a three-level way to describe a research project and its data."
+    },
+    {
+     "term": "ARC RO-Crate",
+     "meaning": "Annotated Research Context: a project's data and descriptions in one RO-Crate (Research Object Crate) bundle."
+    },
+    {
+     "term": "FAIRDOM SEEK",
+     "meaning": "A web platform where research teams store, describe and share their data and models."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Finish version 2 of the MIMSA checklist and the mapping",
+    "Build MIMSA into ISA Wizard and ARC, now testing with real data",
+    "Build MIMSA into FAIRDOM SEEK",
+    "Later, at a BioHackathon in Germany: a MIMSA ontology"
+   ]
+  }
  },
  {
   "id": 15,
@@ -269,7 +644,42 @@
    "elixir-europe-training/ELIXIR-TrP-KG-training-metadata",
    "https://biosoda.unil.ch/elixir-trainer/sparql"
   ],
-  "aspect": 0.6731
+  "aspect": 0.6731,
+  "explainer": {
+   "problem": "Training catalogues like TeSS and Glittr.org list training events, materials and contributors, but that data is poorly linked to other resources and hard to search or query, by people or by software.",
+   "thisWeek": "The team named it ELIXIR TRAINER. They fixed the script that pulls training data from TeSS, loaded it into a graph database called QLever and put it online with a public query endpoint. They described the graph with a schema and example queries, and set up an MCP server so AI assistants can ask it questions.",
+   "whyItMatters": "Trainers and learners can query training material with the same tools they use for UniProt and Bgee, or ask a chat assistant in plain words.",
+   "glossary": [
+    {
+     "term": "Knowledge graph",
+     "meaning": "Data stored as linked facts (this course, taught by that person, on this topic) that you can follow and query."
+    },
+    {
+     "term": "SPARQL",
+     "meaning": "A query language for linked data, a bit like SQL but for webs of facts instead of tables."
+    },
+    {
+     "term": "TeSS",
+     "meaning": "ELIXIR training portal that collects life science courses, events and training materials in one place."
+    },
+    {
+     "term": "MCP",
+     "meaning": "Model Context Protocol: a standard way to plug a database or tool into an AI assistant so it can use it."
+    }
+   ],
+   "done": [
+    "Fixed the script that harvests training data from TeSS",
+    "Graph is live on a public QLever SPARQL endpoint",
+    "Described the graph with a schema and example SPARQL queries",
+    "Deployed an MCP server and an interactive tools GUI next to the graph"
+   ],
+   "next": [
+    "Keep the graph updated automatically",
+    "Add a harvesting script for SciLifeLab (Sweden)",
+    "Write user stories as SPARQL queries",
+    "Write the BioHackrXiv report"
+   ]
+  }
  },
  {
   "id": 16,
@@ -286,7 +696,28 @@
   ],
   "motif": "Cloud of overlapping red translucent circles with a big question mark",
   "links": [],
-  "aspect": 0.7388
+  "aspect": 0.7388,
+  "explainer": {
+   "problem": "Microbiome researchers work with many kinds of data, from genes and metabolites to clinical and environmental records. The knowledge graphs that link these are scattered and do not connect.",
+   "thisWeek": "The team picked 5 use cases and turned them into 30 questions the graph should answer, then broke those into 559 entities and 39 relationships. They surveyed 67 ontologies and 17 existing knowledge graphs to steer toward one shared model. Discussions helped everyone agree on common words and ideas.",
+   "whyItMatters": "Researchers get one shared blueprint, so separate microbiome knowledge graphs can be joined and asked questions across health, food and biodiversity.",
+   "glossary": [
+    {
+     "term": "Knowledge graph",
+     "meaning": "A database that stores facts as things linked by named relationships, so you can follow the connections."
+    },
+    {
+     "term": "Ontology",
+     "meaning": "An agreed set of terms and how they relate, so different datasets use the same word for the same thing."
+    },
+    {
+     "term": "Competency question",
+     "meaning": "A question the finished graph must be able to answer; it tests whether the design covers what people need."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 17,
@@ -303,7 +734,37 @@
   ],
   "motif": "Network of red and green sticky-note tools linked by hand-drawn arrows",
   "links": [],
-  "aspect": 0.7273
+  "aspect": 0.7273,
+  "explainer": {
+   "problem": "A map of which bioinformatics tools get cited together in papers says nothing about how people chain them in real workflows. Anyone exploring these tools cannot see how they work together in practice.",
+   "thisWeek": "They mined 7.2 million publications for tools cited together and pulled registered workflows from WorkflowHub (Galaxy), Nextflow and nf-core, counting tool pairs in each. They also drew a 16-tool network of metabolomics and proteomics tools, and the poster asks: do papers and workflows agree?",
+   "whyItMatters": "You could see not only which tools are named together in papers, but which ones really run together, and in what order.",
+   "glossary": [
+    {
+     "term": "Co-citation",
+     "meaning": "Two tools cited in the same paper. Counting this hints which tools tend to belong together."
+    },
+    {
+     "term": "WorkflowHub",
+     "meaning": "A public registry where researchers share computational workflows, including the tools each one uses."
+    },
+    {
+     "term": "nf-core",
+     "meaning": "A community collection of ready-made, curated analysis pipelines written in Nextflow."
+    },
+    {
+     "term": "EDAM topic",
+     "meaning": "A label from EDAM, a shared vocabulary for bioinformatics, that tags a tool by subject such as proteomics."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Scale up to all literature and tools",
+    "Analyze the results",
+    "Clean up the repository",
+    "Write a BioHackrXiv report"
+   ]
+  }
  },
  {
   "id": 18,
@@ -320,7 +781,34 @@
   ],
   "motif": "Sticky-note pipeline in a blue box, red \"THE HARD PART\" arrow, Europe dot map",
   "links": [],
-  "aspect": 0.6857
+  "aspect": 0.6857,
+  "explainer": {
+   "problem": "Anaconda's 2024 licence change restricts its use at many computing centres. Bioconda's thousands of curated recipes can't be used directly in EESSI, an open alternative, and rewriting them by hand duplicates the work.",
+   "thisWeek": "Out of Bioconda's 10,572 packages they picked about 100 by downloads and dependencies. They are automating one pipeline: convert each recipe to EasyBuild, check it, build it for several processor types, then offer it to EESSI as a GitHub pull request. Converting is the hard part, and the pipeline is still in progress.",
+   "whyItMatters": "Bioconda tools you already use could install on EESSI clusters without repackaging by hand, and recipe errors found on the way go back to Bioconda.",
+   "glossary": [
+    {
+     "term": "Transpiler",
+     "meaning": "A program that translates one format into another, here Conda recipes into EasyBuild recipes."
+    },
+    {
+     "term": "Bioconda",
+     "meaning": "A community collection of thousands of ready-to-install bioinformatics tools for the Conda package manager."
+    },
+    {
+     "term": "EESSI",
+     "meaning": "European Environment for Scientific Software Installations: one shared software stack for computing clusters."
+    },
+    {
+     "term": "EasyBuild",
+     "meaning": "A tool that builds and installs scientific software on computing clusters from small recipe files."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Fully automated pipeline on GitLab, from conversion to pull request"
+   ]
+  }
  },
  {
   "id": 19,
@@ -339,7 +827,32 @@
   "links": [
    "https://edu.nl/ngaku"
   ],
-  "aspect": 0.7051
+  "aspect": 0.7051,
+  "explainer": {
+   "problem": "Exposure researchers describe pollution, chemicals, diet and lifestyle with many separate ontologies, so their data is hard to combine with each other or with omics data.",
+   "thisWeek": "The poster lays out the plan: gather exposome ontologies in one catalogue, ExpoPortal, then link related terms across them so exposure data becomes FAIR and ready for AI. It lists four use cases: noise and mental health, radiation, air pollution and asthma, and 6PPD-Q in coho salmon.",
+   "whyItMatters": "Researchers could keep using the vocabulary of their own field and still combine their exposure data with other datasets.",
+   "glossary": [
+    {
+     "term": "Exposome",
+     "meaning": "Everything a person is exposed to over a lifetime, outside the body (pollution, diet, noise) and inside it."
+    },
+    {
+     "term": "Ontology",
+     "meaning": "A shared vocabulary for a field where every term has an ID, a definition and links to related terms."
+    },
+    {
+     "term": "FAIR",
+     "meaning": "Data that is Findable, Accessible, Interoperable and Reusable, by people and by computers."
+    },
+    {
+     "term": "6PPD-Q",
+     "meaning": "A chemical formed from a common tyre additive; it washes off roads into streams and kills coho salmon."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 20,
@@ -360,7 +873,32 @@
    "edu.nl/3y4ek",
    "#BioHackEU26"
   ],
-  "aspect": 1.4655
+  "aspect": 1.4655,
+  "explainer": {
+   "problem": "bio.tools, a big catalogue of life science software, lists about 10,000 tools with public code and a paper. Many do similar jobs, and it is hard for researchers to tell which ones are well kept and actually reused.",
+   "thisWeek": "The team is building Maturity Meter (code at bio-tools/maturity-meter). You give it a research tool, and it gathers facts from the code repository, bio.tools, OpenEBench, Europe PMC, OpenAlex, the Lizard code analyser and more. It then scores six areas, like FAIRness and security, and offers suggestions.",
+   "whyItMatters": "Researchers choosing between look-alike tools could compare up-to-date scores for documentation, upkeep and reuse, not just names and descriptions.",
+   "glossary": [
+    {
+     "term": "bio.tools",
+     "meaning": "A big online catalogue of life science software, with a short record per tool: what it does, links, papers."
+    },
+    {
+     "term": "Software maturity",
+     "meaning": "How grown up a tool is: documented, maintained, secure, and actually used by others."
+    },
+    {
+     "term": "FAIR",
+     "meaning": "Findable, Accessible, Interoperable, Reusable: rules of thumb that make data and software easy to reuse."
+    },
+    {
+     "term": "RSEc",
+     "meaning": "Research Software Ecosystem: linked services, like bio.tools and OpenEBench, that share facts about tools."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 21,
@@ -379,7 +917,42 @@
   "links": [
    "elixir-europe.github.io/ds-handbook/"
   ],
-  "aspect": 0.7062
+  "aspect": 0.7062,
+  "explainer": {
+   "problem": "ELIXIR Nodes need practical help to run research data management services. The Data Stewardship Handbook is still in beta, and many pages give advice without showing how it works in practice.",
+   "thisWeek": "The team made 200 pull requests to the online handbook. They reshaped the page templates, added an \"At a glance\" summary, put final checked pages online and wrote new case study pages. They also drafted a questionnaire for a feedback survey.",
+   "whyItMatters": "Teams that support researchers get pages with real Node examples and links to existing resources, so general advice turns into practice.",
+   "glossary": [
+    {
+     "term": "ELIXIR Node",
+     "meaning": "A national member of ELIXIR, the European network that runs shared life science data services and training."
+    },
+    {
+     "term": "Data stewardship",
+     "meaning": "The everyday work of helping researchers plan, describe, store and share their data well."
+    },
+    {
+     "term": "Maturity Model",
+     "meaning": "A scale that lets a Node rate how developed its data services are and pick what to improve next."
+    },
+    {
+     "term": "Signposts, Waypoints, Campfires",
+     "meaning": "The handbook page types: finding guidance, setting goals with the maturity model, and sharing case studies."
+    }
+   ],
+   "done": [
+    "Reshaped page templates and built an \"At a glance\" summary",
+    "Put final, checked pages online",
+    "Wrote new case study pages (Campfires)",
+    "Drafted a questionnaire for a feedback survey"
+   ],
+   "next": [
+    "Move older pages to the new templates",
+    "Add links to other ELIXIR tools and resources",
+    "Write new guidance pages",
+    "Get feedback on the survey and plan how to share it"
+   ]
+  }
  },
  {
   "id": 22,
@@ -396,7 +969,32 @@
   ],
   "motif": "Star stickers feeding a sticky-note flowchart, plus a good vs bad graph sketch",
   "links": [],
-  "aspect": 0.7172
+  "aspect": 0.7172,
+  "explainer": {
+   "problem": "Drawing a clear metabolic pathway map by hand is slow, and several widely used pathway databases now limit how their maps can be reused. Researchers need open maps that software can lay out well.",
+   "thisWeek": "The team gathers maps as SBML files from sources such as Reactome, BRENDA and an E. coli core map. They define rules for a good map: hard ones like no crossing lines and cycles drawn as circles, soft ones like few bends. Then they try layout tools such as Cytoscape, igraph, Graphviz and NetworkX.",
+   "whyItMatters": "Researchers get open pathway maps they can reuse freely and combine with their own omics data, without drawing each map by hand.",
+   "glossary": [
+    {
+     "term": "Metabolic pathway map",
+     "meaning": "A diagram of the chain of chemical reactions a cell uses to build or break down molecules"
+    },
+    {
+     "term": "SBML",
+     "meaning": "Systems Biology Markup Language: a shared file format for reactions and molecules that many tools can read"
+    },
+    {
+     "term": "Layout algorithm",
+     "meaning": "A method a program uses to decide where each dot and line of a network goes on the page"
+    },
+    {
+     "term": "Cytoscape",
+     "meaning": "Free, open source software for drawing and exploring biological networks"
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 23,
@@ -413,7 +1011,34 @@
   ],
   "motif": "Doodled mouse and fish linked by arrows, plus a 3x3 sticky-note heatmap",
   "links": [],
-  "aspect": 0.7051
+  "aspect": 0.7051,
+  "explainer": {
+   "problem": "Single-cell datasets sit in many repositories, each described its own way, so they are hard to combine. Matching cell types across species is hard too, as results depend on how data are processed and genes paired.",
+   "thisWeek": "The team gathers about 3,000 annotated single-cell datasets from sources like CELLxGENE and Bgee and maps their labels to shared terms. They compare ways of matching genes between mouse and fish to pair up cell types, then sketch two ways to spot cells with no match in the other species.",
+   "whyItMatters": "Researchers could combine single-cell data from many sources and tell a cell type shared across species from one that is new or missing from an atlas.",
+   "glossary": [
+    {
+     "term": "scRNA-seq",
+     "meaning": "Single-cell RNA sequencing: reads which genes are active in each individual cell, not averaged over a tissue."
+    },
+    {
+     "term": "Cell type homology",
+     "meaning": "Cell types in different species that descend from the same ancestral cell type, the way genes do."
+    },
+    {
+     "term": "Ontology",
+     "meaning": "A shared, structured vocabulary of terms, so different databases label the same cell type the same way."
+    },
+    {
+     "term": "Local outlier factor",
+     "meaning": "A method that flags points sitting in a sparser neighbourhood than the points around them."
+    }
+   ],
+   "done": [
+    "Homology step: pairing up cell types across species"
+   ],
+   "next": []
+  }
  },
  {
   "id": 24,
@@ -430,7 +1055,34 @@
   ],
   "motif": "Scientist in black sunglasses holding a test tube, yellow robot head up top",
   "links": [],
-  "aspect": 0.7217
+  "aspect": 0.7217,
+  "explainer": {
+   "problem": "Researchers want AI coding helpers to build analyses on sensitive data. The people guarding that data need to be sure the AI cannot leak it or run harmful code.",
+   "thisWeek": "The team maps six ways an AI agent could leak or misuse data in a Secure Processing Environment, such as instructions hidden in workflows or data descriptions. A loop that writes and tests scenarios, then updates the threat list, is still in progress. A person proposes fixes and verifies the threat models.",
+   "whyItMatters": "Researchers could let an AI agent write their analysis of sensitive data, following tested safety rules that keep the data from leaking.",
+   "glossary": [
+    {
+     "term": "Secure Processing Environment",
+     "meaning": "A locked-down computer system where people can analyse sensitive data but cannot copy it out."
+    },
+    {
+     "term": "AI agent",
+     "meaning": "An AI model that can run tools and write code by itself to finish a task, not just chat."
+    },
+    {
+     "term": "GA4GH APIs",
+     "meaning": "Standard interfaces, set by the Global Alliance for Genomics and Health, for programs to reach genomic data."
+    },
+    {
+     "term": "Threat model",
+     "meaning": "A description of how an attacker could harm a system, used to plan defences."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Automatic loop that creates and evaluates scenarios"
+   ]
+  }
  },
  {
   "id": 25,
@@ -447,7 +1099,32 @@
   ],
   "motif": "Sticky-note DBTL cycle around a blue 'Architect' face, plus a cookie RO-Crate",
   "links": [],
-  "aspect": 0.6931
+  "aspect": 0.6931,
+  "explainer": {
+   "problem": "Engineering biology runs in a loop: design, build, test, learn. Each step has good tools, but researchers often pass results from one step to the next by hand, in inconsistent formats.",
+   "thisWeek": "The team lays out the loop in sticky notes, with an 'Architect' and a live knowledge graph at the hub. Their printed plan proposes one software agent per handover, each packing the work into an RO-Crate in a shared store; a second printout is a class diagram titled sentinel-oo.",
+   "whyItMatters": "Tools stay as they are, but each handover becomes a standard package software can read, so less reformatting by hand and results that are easier to repeat.",
+   "glossary": [
+    {
+     "term": "DBTL",
+     "meaning": "Design, Build, Test, Learn: plan a DNA or cell change, make it, measure it, use the lessons next round."
+    },
+    {
+     "term": "Interoperability contract",
+     "meaning": "Agreed rules for what one step hands the next: which files, what context, where they came from, how good."
+    },
+    {
+     "term": "RO-Crate",
+     "meaning": "Research Object Crate: data files bundled with a machine-readable note on what they are and where from."
+    },
+    {
+     "term": "Knowledge graph",
+     "meaning": "Data stored as linked facts (this thing relates to that thing) that software can search and follow."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 26,
@@ -464,7 +1141,38 @@
   ],
   "motif": "Rainbow Dante inferno layers under a train, beside a smiling Earth globe",
   "links": [],
-  "aspect": 1.5598
+  "aspect": 1.5598,
+  "explainer": {
+   "problem": "ELIXIR, Europe's network for life science data, involves hundreds of people. Who does what is scattered across documents, websites and people's heads, so newcomers and coordinators struggle to see the whole picture.",
+   "thisWeek": "The team started the ELIXIR Atlas. AI agents feed it from three sources so far: the LS Login people registry, the ELIXIR hub and node websites, and the ELIXIR Europe community on Zenodo. They sketched a personal view with a chatbot and charts over time, and drew today's info mess as Dante's circles of hell.",
+   "whyItMatters": "Anyone in ELIXIR could ask who works on what and get a current answer, without a curation team keeping a spreadsheet up to date.",
+   "glossary": [
+    {
+     "term": "ELIXIR",
+     "meaning": "A European network of national centres (nodes) that share life science data, tools and training."
+    },
+    {
+     "term": "Agent-driven",
+     "meaning": "AI programs built on large language models read the sources and pull out facts; people check the results."
+    },
+    {
+     "term": "LS Login",
+     "meaning": "Life Science Login, a shared sign-in for European research services; here it serves as a list of people."
+    },
+    {
+     "term": "Zenodo",
+     "meaning": "A free open repository run by CERN where researchers post papers, slides and data with a permanent link (DOI)."
+    }
+   ],
+   "done": [
+    "Pulled in people from the LS Login registry",
+    "Pulled in the ELIXIR hub and node websites",
+    "Pulled in the ELIXIR Europe community on Zenodo"
+   ],
+   "next": [
+    "Add more sources"
+   ]
+  }
  },
  {
   "id": 27,
@@ -481,7 +1189,40 @@
   ],
   "motif": "Stick-figure pipeline ending at a Europe map with flags, plus a TES surfer",
   "links": [],
-  "aspect": 0.6903
+  "aspect": 0.6903,
+  "explainer": {
+   "problem": "ELIXIR computing sites across Europe share one standard way to take compute jobs, but researchers can only send it tasks, not start interactive analysis services on it.",
+   "thisWeek": "The team works on the full path from a user to a compute site. Their Cloud Registry is at a 1.0 release candidate: sites register their job services there, and users sign in with LS Login. An omnipy plugin runs jobs as TES tasks, and NVFlare federated learning runs on WES and TES.",
+   "whyItMatters": "A researcher could send one standard request and get an analysis service running on a partner site in another country, then work with it live.",
+   "glossary": [
+    {
+     "term": "TES",
+     "meaning": "Task Execution Service: a shared standard for sending one compute job to any site that supports it."
+    },
+    {
+     "term": "WES",
+     "meaning": "Workflow Execution Service: the matching standard for sending a whole workflow run to a server."
+    },
+    {
+     "term": "LS Login",
+     "meaning": "Life Science Login: one shared account that signs you in to many European research services."
+    },
+    {
+     "term": "Federated learning",
+     "meaning": "Training one model across several sites, each on its own data, sharing only model updates, not the data."
+    }
+   ],
+   "done": [
+    "Service registry: Service-Info and Registry API ticked off",
+    "Test bed for passing login tokens between services is ready"
+   ],
+   "next": [
+    "New WES command line and Python tool, now in review",
+    "Live login tests this week: delegated chain, groups, lifetime",
+    "Main goal: become part of ELIXIR On-Cloud",
+    "Secondary goal: proposals for LS Login"
+   ]
+  }
  },
  {
   "id": 28,
@@ -497,7 +1238,41 @@
   ],
   "motif": "Smiling paper bumblebee beside a thermometer, over a sticky-note flowchart",
   "links": [],
-  "aspect": 0.6702
+  "aspect": 0.6702,
+  "explainer": {
+   "problem": "Researchers who study how climate change hits wildlife need to combine species records with climate data. Both are open, but each describes its data differently, so joining them in a repeatable way is hard.",
+   "thisWeek": "The team rebuilt the European part of a published study on climate and bumblebee decline as a chain of workflow steps. It fetches bumblebee sightings from GBIF, a global species database, and weather data from ERA5, a global record of past weather, prepares both and runs the analysis. It reproduces the paper's result.",
+   "whyItMatters": "Someone linking climate and species data could start from a ready package of data, metadata and runnable workflows instead of from scratch.",
+   "glossary": [
+    {
+     "term": "ARC",
+     "meaning": "Annotated Research Context: a project workspace that keeps data, workflows, their runs and metadata together."
+    },
+    {
+     "term": "CWL",
+     "meaning": "Common Workflow Language: a standard way to write down analysis steps so different systems can run them."
+    },
+    {
+     "term": "RO-Crate",
+     "meaning": "A way to bundle data, code and a machine-readable description of them into one shareable package."
+    },
+    {
+     "term": "FAIR Digital Object",
+     "meaning": "A data package that is findable, accessible, interoperable and reusable, with a lasting ID and clear metadata."
+    }
+   ],
+   "done": [
+    "Set up the ARC workspace",
+    "Chained the analysis scripts with CWL",
+    "Reproduced the paper's result"
+   ],
+   "next": [
+    "Record automatically where each result came from",
+    "Register the workflows on WorkflowHub, a public workflow registry",
+    "Publish the whole package as an RO-Crate",
+    "Write documentation"
+   ]
+  }
  },
  {
   "id": 29,
@@ -514,7 +1289,34 @@
   ],
   "motif": "AI robot saying ♂ ♀ above a column of green-vs-purple gender bar charts",
   "links": [],
-  "aspect": 0.7027
+  "aspect": 0.7027,
+  "explainer": {
+   "problem": "Women in the life sciences are underrepresented as lead authors, and search tools like Google Scholar rank papers in hidden ways that can bury their work further.",
+   "thisWeek": "The poster shows about 1,300 ELIXIR-supported papers. AI guesses each author's gender, and each paper gets its OpenAlex topics and BIP! impact scores. The team puts one question in big letters: does ELIXIR have a gender problem?",
+   "whyItMatters": "A ranking that weighs gender next to citations would help readers find work by women that the usual rankings can push down.",
+   "glossary": [
+    {
+     "term": "ELIXIR",
+     "meaning": "A European network that links life science data services and resources run by national nodes."
+    },
+    {
+     "term": "Bibliometric index",
+     "meaning": "A single score that ranks papers or authors from publication data such as citation counts."
+    },
+    {
+     "term": "OpenAlex",
+     "meaning": "A free, open catalogue of scholarly papers, authors and topics that anyone can search."
+    },
+    {
+     "term": "BIP! impact metrics",
+     "meaning": "Scores from BIP! Services: popularity is attention now, influence is overall reach, impulse is early momentum."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Focus group on women's experiences in academic publishing"
+   ]
+  }
  },
  {
   "id": 30,
@@ -531,7 +1333,32 @@
   ],
   "motif": "Rainbow BiCoReCa letters, registry boxes funnelling down, star stickies",
   "links": [],
-  "aspect": 0.6601
+  "aspect": 0.6601,
+  "explainer": {
+   "problem": "Biodiversity researchers struggle to find the tools, workflows, training and databases made for their field. The listings are scattered across many separate catalogues.",
+   "thisWeek": "The team pulls biodiversity resources from several registries into one catalogue that sits in the Research Software Ecosystem Atlas. Automatic filters pick thousands of tools from bio.tools and 500+ workflows from WorkflowHub. Everything from LifeWatch ERIC and the National Biodiversity Data Base (PNDB) goes in.",
+   "whyItMatters": "Biodiversity researchers get one place to find the right tools, workflows, databases and training, which saves time and makes their work easier to repeat.",
+   "glossary": [
+    {
+     "term": "bio.tools",
+     "meaning": "A public online registry that describes tens of thousands of bioinformatics software tools and services."
+    },
+    {
+     "term": "WorkflowHub",
+     "meaning": "A public site where researchers share and find computational workflows (multi-step analysis pipelines)."
+    },
+    {
+     "term": "EDAM",
+     "meaning": "A shared vocabulary of bioinformatics terms (topics, operations, data types, formats) used to tag tools."
+    },
+    {
+     "term": "LifeWatch ERIC",
+     "meaning": "A European research infrastructure offering data and online services for biodiversity and ecosystem research."
+    }
+   ],
+   "done": [],
+   "next": []
+  }
  },
  {
   "id": 31,
@@ -548,6 +1375,34 @@
   ],
   "motif": "Orange brick bridge of pipeline sticky notes spanning a river from Nextflow to Galaxy",
   "links": [],
-  "aspect": 0.639
+  "aspect": 0.639,
+  "explainer": {
+   "problem": "Good analysis pipelines often exist for only one system, Nextflow or Galaxy. Rewriting one for the other is still mostly done by hand and takes a lot of work, which slows down reuse.",
+   "thisWeek": "The team used AI agent skills to carry pipelines across from Nextflow to Galaxy, among them nf-core scrnaseq, sarek, oncoanalyser and nanoseq. Along the way they wrote 11 tool wrappers and 15 new tools. The ported workflows ran on Galaxy in Belgium, Australia, the US and Czechia.",
+   "whyItMatters": "A Galaxy user could run curated nf-core pipelines from the browser, without waiting for someone to rewrite them by hand.",
+   "glossary": [
+    {
+     "term": "Nextflow / nf-core",
+     "meaning": "A language for chaining analysis steps into pipelines; nf-core is its catalogue of reviewed pipelines."
+    },
+    {
+     "term": "Galaxy",
+     "meaning": "A web platform where researchers run analysis tools and workflows from the browser, no coding needed."
+    },
+    {
+     "term": "Agent skills",
+     "meaning": "Packaged instructions and scripts an AI assistant loads to do one job well, here porting a pipeline."
+    },
+    {
+     "term": "MCP",
+     "meaning": "Model Context Protocol: an open standard that lets AI assistants call outside tools, here a Galaxy server."
+    }
+   ],
+   "done": [],
+   "next": [
+    "Still crossing: rnaseq, mag, metaboigniter, msdeposit",
+    "Ideas for the next port: EGAPx, BWA METH, VIRify, funcscan"
+   ]
+  }
  }
 ]
