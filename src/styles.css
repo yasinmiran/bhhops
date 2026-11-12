@@ -13,6 +13,14 @@
   --hand: "Shantell Sans Variable", "Comic Sans MS", cursive;
   --text: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
   --gutter: 16px;
+  /* The side of one key of the arrow pad. */
+  --key: 50px;
+}
+
+@media (min-width: 700px) {
+  :root {
+    --key: 58px;
+  }
 }
 
 *,
@@ -98,6 +106,31 @@ a {
   box-shadow: 2px 2px 0 var(--ink);
 }
 
+.icon-button {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px 12px 8px 10px;
+  background: var(--sheet);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.icon-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.icon-button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--sheet);
+}
+
 .quiet-button {
   border: none;
   background: none;
@@ -181,9 +214,18 @@ a {
 }
 
 .hud-side {
-  display: grid;
-  justify-items: end;
-  gap: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Two by two on a phone, where the title needs the width. */
+@media (max-width: 520px) {
+  .hud-side {
+    width: 96px;
+    flex: none;
+  }
 }
 
 .hud-bottom {
@@ -240,8 +282,8 @@ a {
 .dpad {
   flex: none;
   display: grid;
-  grid-template: repeat(3, 44px) / repeat(3, 44px);
-  gap: 3px;
+  grid-template: repeat(3, var(--key)) / repeat(3, var(--key));
+  gap: 4px;
 }
 
 .dpad-key {
@@ -286,7 +328,175 @@ a {
   padding: 0;
   background: var(--marker-blue);
   color: var(--sheet);
-  font: 800 0.74rem/1 var(--hand);
+  font: 800 0.86rem/1 var(--hand);
+}
+
+/* The visitors that get in the way. Above the graph, under the controls. */
+
+.critter {
+  position: fixed;
+  z-index: 5;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.critter svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.critter-hint {
+  padding: 2px 9px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--sheet);
+  color: var(--ink);
+  font: 700 0.82rem var(--hand);
+  white-space: nowrap;
+}
+
+.walker {
+  left: 0;
+  width: clamp(130px, 21vw, 230px);
+}
+
+.croissant {
+  width: clamp(110px, 17vw, 190px);
+}
+
+.walker-body {
+  display: block;
+  width: 100%;
+}
+
+.croissant .walker-body svg {
+  animation: critter-wobble 0.5s ease-in-out infinite alternate;
+}
+
+.critter-leg {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: critter-step 0.42s ease-in-out infinite alternate;
+}
+
+.critter-leg-off {
+  animation-delay: -0.42s;
+}
+
+.scared .critter-leg {
+  animation-duration: 0.09s;
+}
+
+/* What a frightened turtle pulls into its shell. */
+.critter-shy {
+  transition: opacity 0.12s;
+}
+
+.scared .critter-shy {
+  opacity: 0;
+}
+
+@keyframes critter-step {
+  from {
+    rotate: -17deg;
+  }
+
+  to {
+    rotate: 17deg;
+  }
+}
+
+@keyframes critter-wobble {
+  from {
+    rotate: -5deg;
+  }
+
+  to {
+    rotate: 5deg;
+  }
+}
+
+.hanger {
+  top: 0;
+}
+
+.lemur {
+  width: clamp(96px, 15vw, 170px);
+}
+
+.lemur-swing {
+  display: grid;
+  justify-items: center;
+  transform-origin: 50% 0%;
+  animation: critter-swing 1.7s ease-in-out infinite alternate;
+}
+
+@keyframes critter-swing {
+  from {
+    rotate: -10deg;
+  }
+
+  to {
+    rotate: 10deg;
+  }
+}
+
+/* Only the spiders themselves take a tap; the gaps between their threads leave the graph reachable. */
+.spiders {
+  display: block;
+  width: clamp(230px, 36vw, 440px);
+  height: clamp(230px, 48dvh, 420px);
+  pointer-events: none;
+}
+
+.spider {
+  position: absolute;
+  top: 0;
+  width: 27%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+  pointer-events: auto;
+  animation: spider-bob 1.3s ease-in-out infinite alternate;
+}
+
+/* The thread it hangs by. */
+.spider::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 30px 50%;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--ink);
+}
+
+.spider svg {
+  position: relative;
+}
+
+.spider .critter-hint {
+  position: absolute;
+  top: 100%;
+}
+
+@keyframes spider-bob {
+  from {
+    translate: 0 -7%;
+  }
+
+  to {
+    translate: 0 0;
+  }
 }
 
 .finale {
@@ -317,7 +527,9 @@ a {
 .start {
   min-height: 100dvh;
   display: grid;
-  place-items: center;
+  align-content: center;
+  justify-items: center;
+  gap: 22px;
   padding: var(--gutter);
   /* The squared paper of a flipchart pad. */
   background-image:
@@ -347,26 +559,89 @@ a {
   font-size: 1.08rem;
 }
 
+.start-intro,
+.start-pick,
+.start-go {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  justify-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+/* The graph in small, for choosing a start. */
+.start-map {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 62dvh);
+  aspect-ratio: 1;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--sheet);
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.start-map-hot {
+  cursor: pointer;
+}
+
+.start-note .start-map-caption {
+  position: absolute;
+  inset: auto 10px 6px;
+  pointer-events: none;
+  font: 700 0.98rem var(--hand);
+  text-shadow: 0 0 6px var(--sheet), 0 0 3px var(--sheet), 0 0 2px var(--sheet);
+}
+
+.start-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  font-size: 0.92rem;
+}
+
+.start-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+
+/* Room for the map beside the words. */
+@media (min-width: 940px) {
+  .start-note {
+    width: min(100%, 1000px);
+    grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+    grid-template-areas:
+      "intro pick"
+      "go pick";
+    grid-template-rows: auto 1fr;
+    column-gap: 34px;
+  }
+
+  .start-intro {
+    grid-area: intro;
+  }
+
+  .start-pick {
+    grid-area: pick;
+  }
+
+  .start-go {
+    grid-area: go;
+  }
+}
+
 .field {
   display: grid;
   gap: 6px;
   width: 100%;
   font: 700 1rem var(--hand);
-}
-
-.name-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.name-row input {
-  flex: 1;
-  min-width: 0;
-}
-
-.name-row button {
-  flex: none;
 }
 
 /* Where to start: the button on the note, and the list it opens. */
@@ -416,18 +691,6 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.picker-par {
-  flex: none;
-  color: var(--ink-soft);
-  font-size: 0.88rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.picker-best {
-  color: var(--marker-red);
-  font-weight: 700;
 }
 
 .picker-chevron {
@@ -500,14 +763,41 @@ a {
   align-content: start;
 }
 
-.poster-nav {
-  font-family: var(--hand);
-  font-weight: 600;
+/* Stays at the foot of the sheet while it scrolls. */
+.sheet-keys {
+  position: sticky;
+  bottom: calc(env(safe-area-inset-bottom) + 10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
 }
 
-.poster-nav .quiet-button {
-  color: var(--marker-blue);
-  font: inherit;
+.sheet-keys .dpad-key {
+  width: var(--key);
+  height: var(--key);
+  pointer-events: auto;
+}
+
+.sheet-keys .sheet-back {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  font: 800 1.1rem/1 var(--hand);
+}
+
+.sheet-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 10px;
+  border-radius: 10px;
+  background: rgb(251 250 246 / 0.9);
+  color: var(--ink-soft);
+  font: 700 0.9rem var(--hand);
 }
 
 .poster-number {
@@ -914,6 +1204,47 @@ a {
   align-self: flex-start;
   padding: 0;
   color: var(--marker-blue);
+}
+
+/* On a phone the sheet takes nearly the whole screen, so all ten places of a page show without scrolling. */
+@media (max-width: 520px) {
+  .board-backdrop {
+    padding: 8px;
+  }
+
+  .board {
+    max-height: calc(100dvh - 16px);
+    gap: 8px;
+    padding: 14px 14px 12px;
+  }
+
+  .board th,
+  .board td {
+    height: 34px;
+    padding-block: 2px;
+  }
+
+  .board .medal {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}
+
+/* A phone on its side: the whole sheet scrolls, so the table is never squeezed down to its header. */
+@media (max-height: 500px) {
+  .board {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .board-scroll {
+    flex: none;
+    overflow: visible;
+  }
+
+  .board th {
+    position: static;
+  }
 }
 
 .board-me td {

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api, clock, type ApiError, type Board, type BoardRow } from "./api";
 import { PAR, type Player } from "./game";
 
@@ -25,6 +25,8 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
   const [board, setBoard] = useState<Board | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
+  const [retry, setRetry] = useState(0);
+  const scroller = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let alive = true;
@@ -43,14 +45,25 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
       alive = false;
       clearInterval(timer);
     };
-  }, [player?.token, page]);
+  }, [player?.token, page, retry]);
+
+  // A new page starts at its top, with the player's own row in view if it is on it.
+  useEffect(() => {
+    const table = scroller.current;
+    if (!table) return;
+    table.scrollTop = 0;
+    table.querySelector(".board-me")?.scrollIntoView({ block: "nearest" });
+  }, [board?.page]);
 
   // Steps from the page the server last answered with, which is the last page if the asked one no longer exists.
-  const turn = (by: number) => board && setPage(Math.min(board.pages, Math.max(1, board.page + by)));
+  // Asking again for a page whose request failed has to send it again; the state alone would not change.
+  const go = (to: number) => (to === page && error ? setRetry((n) => n + 1) : setPage(to));
+  const turn = (by: number) => board && go(Math.min(board.pages, Math.max(1, board.page + by)));
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
+      else if (event.repeat) return;
       else if (event.key === "ArrowLeft") turn(-1);
       else if (event.key === "ArrowRight") turn(1);
     };
@@ -80,14 +93,13 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
           </button>
         </header>
         <p className="board-rule">
-          Fewest hops wins. Equal hops: the faster tour wins. The shortest tour possible is {PAR} hops, and only from some
-          starts.
+          Fewest hops wins, then the faster tour. The shortest tour possible is {PAR} hops, and only from some starts.
           {board && ` ${board.finishers} of ${board.players} players have finished.`}
         </p>
         {error && <p className="error">{error}</p>}
         {board && board.rows.length === 0 && <p className="board-empty">Nobody has finished a tour yet. Be the first.</p>}
         {board && board.rows.length > 0 && (
-          <div className="board-scroll">
+          <div className="board-scroll" ref={scroller}>
             <table>
               <thead>
                 <tr>
@@ -126,7 +138,7 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
           </nav>
         )}
         {mineElsewhere && (
-          <button className="quiet-button board-mine" onClick={() => setPage(Math.ceil(mineElsewhere.rank / board!.pageSize))}>
+          <button className="quiet-button board-mine" onClick={() => go(Math.ceil(mineElsewhere.rank / board!.pageSize))}>
             You are in place {mineElsewhere.rank}. Show my page
           </button>
         )}

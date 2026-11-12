@@ -10,6 +10,8 @@ function PosterFrame({ p }: { p: Project }) {
     const box = event.currentTarget.getBoundingClientRect();
     const at = { x: (event.clientX - box.left) / box.width, y: (event.clientY - box.top) / box.height };
     setZoomed((was) => !was);
+    // Safari does not focus a button on click, and the arrow keys look around the poster from wherever focus is.
+    event.currentTarget.focus({ preventScroll: true });
     if (zoomed) return;
     // After the image has grown, bring the tapped spot back under the finger.
     requestAnimationFrame(() => {
@@ -43,10 +45,15 @@ interface PosterViewProps {
 }
 
 export function PosterView({ p, onClose, onHop }: PosterViewProps) {
+  const scroll = (pages: number) => (event: React.MouseEvent<HTMLButtonElement>) => {
+    const sheet = event.currentTarget.closest(".sheet-overlay");
+    sheet?.scrollBy({ top: pages * sheet.clientHeight * 0.6, behavior: "smooth" });
+  };
+
   return (
     <div className="poster-page">
       <nav className="poster-nav">
-        <button className="quiet-button" onClick={onClose}>
+        <button className="marker-button small" onClick={onClose}>
           ← Back to the projects
         </button>
       </nav>
@@ -148,6 +155,22 @@ export function PosterView({ p, onClose, onHop }: PosterViewProps) {
           ))}
         </ul>
       </section>
+
+      {/* The same keys the keyboard uses here, drawn where the arrow pad sits in the game. */}
+      <div className="sheet-keys">
+        <button className="dpad-key sheet-back" onClick={onClose}>
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <span className="sheet-scroll">
+          Scroll
+          <button className="dpad-key" onClick={scroll(-1)} aria-label="Scroll up">
+            ↑
+          </button>
+          <button className="dpad-key" onClick={scroll(1)} aria-label="Scroll down">
+            ↓
+          </button>
+        </span>
+      </div>
     </div>
   );
 }

@@ -2,17 +2,19 @@ import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber"
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { EDGES, PROJECTS, THEMES, edgeKey, posterThumb, project, theme, type Direction, type Project, type Run } from "./game";
+import { Helix } from "./Helix";
+import { HIDDEN_THREADS, LOOSE_ENDS, PHANTOMS, type Phantom, type Spot } from "./tricks";
 
 const PAPER = "#f4f3ee";
 const INK = "#1d2433";
-const PINK = "#ee3f6c";
 const UNWALKED = "#c3c6cb";
 const NOTE_SIZE = 1.55;
+const PHANTOM_PAPER = "#e4e1d6";
 const NOTE_COLORS = ["#b9d531", "#f6d94a", "#f39130", "#ee3f6c", "#2f8fce"];
 const HOP_SECONDS = 0.55;
-const HAND = '"Shantell Sans Variable", cursive';
+export const HAND = '"Shantell Sans Variable", cursive';
 
-const position = (p: Project) => new THREE.Vector3(p.x, p.y, p.z);
+const position = (p: Spot) => new THREE.Vector3(p.x, p.y, p.z);
 
 /** Deterministic noise, so tilts and confetti look the same on every device. */
 function seeded(seed: number): () => number {
@@ -23,9 +25,9 @@ function seeded(seed: number): () => number {
   };
 }
 
-const fontsReady = () => document.fonts.load(`800 64px ${HAND}`).catch(() => undefined);
+export const fontsReady = () => document.fonts.load(`800 64px ${HAND}`).catch(() => undefined);
 
-function canvasTexture(width: number, height: number, draw: (ctx: CanvasRenderingContext2D) => void): THREE.CanvasTexture {
+export function canvasTexture(width: number, height: number, draw: (ctx: CanvasRenderingContext2D) => void): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -47,9 +49,9 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): st
   return lines.slice(0, 3);
 }
 
-function noteTexture(p: Project): THREE.CanvasTexture {
+function noteTexture(p: { id: number; name: string }, paper: string): THREE.CanvasTexture {
   return canvasTexture(320, 320, (ctx) => {
-    ctx.fillStyle = theme(p.primary).color;
+    ctx.fillStyle = paper;
     ctx.fillRect(0, 0, 320, 320);
     // The darker strip where a sticky note's glue is.
     ctx.fillStyle = "rgba(29, 36, 51, 0.07)";
@@ -125,30 +127,6 @@ const starShape = (() => {
   shape.closePath();
   return new THREE.ShapeGeometry(shape);
 })();
-
-const HELIX = { turns: 1.25, height: 1.5, radius: 0.3, rungs: 6 };
-const BLUE = "#2f8fce";
-
-/** Where a strand is at t along the helix; the second strand runs half a turn behind the first. */
-function helixPoint(t: number, phase: number): THREE.Vector3 {
-  const angle = t * HELIX.turns * Math.PI * 2 + phase;
-  return new THREE.Vector3(Math.cos(angle) * HELIX.radius, (t - 0.5) * HELIX.height, Math.sin(angle) * HELIX.radius);
-}
-
-function strandGeometry(phase: number, thickness: number): THREE.TubeGeometry {
-  const curve = new THREE.CatmullRomCurve3(Array.from({ length: 33 }, (_, i) => helixPoint(i / 32, phase)));
-  return new THREE.TubeGeometry(curve, 48, thickness, 8);
-}
-
-const STRANDS = [
-  { color: PINK, fill: strandGeometry(0, 0.075), outline: strandGeometry(0, 0.11) },
-  { color: BLUE, fill: strandGeometry(Math.PI, 0.075), outline: strandGeometry(Math.PI, 0.11) },
-];
-const rungGeometry = new THREE.CylinderGeometry(0.035, 0.035, HELIX.radius * 2, 6);
-const RUNGS = Array.from({ length: HELIX.rungs }, (_, i) => {
-  const t = (i + 0.5) / HELIX.rungs;
-  return { y: (t - 0.5) * HELIX.height, angle: t * HELIX.turns * Math.PI * 2 };
-});
 
 const textureLoader = new THREE.TextureLoader();
 
@@ -292,8 +270,25 @@ function ProjectNote({ p, state, celebrate, textures, onTap }: NoteProps) {
   );
 }
 
+/** A note that is not a project: it has a number past the last real one, no colour, and nothing happens when it is tapped. */
+function PhantomNote({ p, map }: { p: Phantom; map: THREE.CanvasTexture | null }) {
+  const tilt = useMemo(() => (seeded(p.id * 97)() - 0.5) * 0.3, [p.id]);
+  return (
+    <group position={[p.x, p.y, p.z]} rotation-z={tilt}>
+      <mesh position={[0.05, -0.09, -0.02]}>
+        <planeGeometry args={[NOTE_SIZE, NOTE_SIZE]} />
+        <meshBasicMaterial color={INK} transparent opacity={0.16} depthWrite={false} />
+      </mesh>
+      <mesh>
+        <planeGeometry args={[NOTE_SIZE, NOTE_SIZE]} />
+        <meshBasicMaterial key={map ? "drawn" : "blank"} map={map} color="#d9d9d9" toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
 /** One thread between two notes, sagging slightly away from the viewer. */
-function Thread({ a, b, color, radius }: { a: Project; b: Project; color: string; radius: number }) {
+function Thread({ a, b, color, radius }: { a: Spot; b: Spot; color: string; radius: number }) {
   const geometry = useMemo(() => {
     const from = position(a);
     const to = position(b);
@@ -383,24 +378,7 @@ function HelixAndCamera({ run, overview, extent }: RigProps) {
 
   return (
     <group ref={helix} rotation-z={-0.3} scale={0.8}>
-      <group ref={twist}>
-        {STRANDS.map((strand) => (
-          <group key={strand.color}>
-            <mesh geometry={strand.fill}>
-              <meshBasicMaterial color={strand.color} toneMapped={false} />
-            </mesh>
-            {/* A fatter copy seen only from inside draws the marker outline around the strand. */}
-            <mesh geometry={strand.outline}>
-              <meshBasicMaterial color={INK} side={THREE.BackSide} />
-            </mesh>
-          </group>
-        ))}
-        {RUNGS.map((rung) => (
-          <mesh key={rung.y} geometry={rungGeometry} position-y={rung.y} rotation={[0, -rung.angle, Math.PI / 2]}>
-            <meshBasicMaterial color={INK} />
-          </mesh>
-        ))}
-      </group>
+      <Helix twist={twist} />
     </group>
   );
 }
@@ -421,7 +399,8 @@ function ArrowHints({ run }: { run: Run }) {
         const target = project(to);
         const towards = new THREE.Vector3(target.x - here.x, target.y - here.y, 0).normalize();
         return (
-          <mesh key={direction} position={[here.x + towards.x * 1.75, here.y + towards.y * 1.75, here.z + 0.3]}>
+          // In front of the helix, which stands on the note's corner and would otherwise hide a hint on that side.
+          <mesh key={direction} position={[here.x + towards.x * 1.75, here.y + towards.y * 1.75, here.z + 1.2]}>
             <planeGeometry args={[0.62, 0.62]} />
             <meshBasicMaterial map={textures[direction]} transparent toneMapped={false} />
           </mesh>
@@ -491,7 +470,10 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
     let made: THREE.CanvasTexture[] = [];
     void fontsReady().then(() => {
       if (!alive) return;
-      const next = new Map(PROJECTS.map((p) => [p.id, noteTexture(p)]));
+      const next = new Map([
+        ...PROJECTS.map((p) => [p.id, noteTexture(p, theme(p.primary).color)] as const),
+        ...PHANTOMS.map((p) => [p.id, noteTexture(p, PHANTOM_PAPER)] as const),
+      ]);
       made = [...next.values()];
       setNoteTextures(next);
     });
@@ -549,10 +531,18 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
         <ThemeLabels />
         {EDGES.map((edge) => {
           const key = edgeKey(edge.a, edge.b);
+          // A hidden thread shows once the helix has stood at either end, and stays.
+          if (HIDDEN_THREADS.has(key) && !visited.has(edge.a) && !visited.has(edge.b)) return null;
           const touchesHere = edge.a === run.current || edge.b === run.current;
           const color = walked.has(key) ? INK : touchesHere && edge.theme ? theme(edge.theme).color : UNWALKED;
           return <Thread key={key} a={project(edge.a)} b={project(edge.b)} color={color} radius={walked.has(key) || touchesHere ? 0.055 : 0.03} />;
         })}
+        {LOOSE_ENDS.filter((loose) => !loose.ends.some((id) => visited.has(id))).map((loose) => (
+          <Thread key={loose.key} a={loose.from} b={loose.to} color={UNWALKED} radius={0.03} />
+        ))}
+        {PHANTOMS.map((p) => (
+          <PhantomNote key={p.id} p={p} map={noteTextures.get(p.id) ?? null} />
+        ))}
         {PROJECTS.map((p) => (
           <ProjectNote
             key={p.id}

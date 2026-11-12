@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { PAR, PROJECTS, theme } from "./game";
+import { PROJECTS, theme } from "./game";
 
 const TYPEAHEAD_MS = 800;
-const PARS = PROJECTS.map((p) => p.par);
 const optionId = (row: number) => `start-option-${row}`;
 
 /** Row 0 is the random start; the projects follow in order. */
@@ -14,9 +13,6 @@ function Row({ row }: { row: number }) {
       <>
         <span className="picker-chip picker-any">?</span>
         <span className="picker-name">A random project</span>
-        <span className="picker-par">
-          par {Math.min(...PARS)} to {Math.max(...PARS)}
-        </span>
       </>
     );
   }
@@ -27,7 +23,6 @@ function Row({ row }: { row: number }) {
         {p.id}
       </span>
       <span className="picker-name">{p.name}</span>
-      <span className={p.par === PAR ? "picker-par picker-best" : "picker-par"}>par {p.par}</span>
     </>
   );
 }
@@ -40,7 +35,7 @@ interface StartPickerProps {
   labelledBy: string;
 }
 
-/** Where to start: a button showing the choice, which opens the list of all projects with the par from each. */
+/** Where to start, for the keyboard and for anyone who knows the project by name: a button showing the choice, which opens the list of all projects. */
 export function StartPicker({ value, onChange, labelledBy }: StartPickerProps) {
   const selected = value === null ? 0 : PROJECTS.findIndex((p) => p.id === value) + 1;
   const [open, setOpen] = useState(false);
@@ -75,10 +70,13 @@ export function StartPicker({ value, onChange, labelledBy }: StartPickerProps) {
   const onKey = (event: React.KeyboardEvent) => {
     const last = PROJECTS.length;
     const steps: Record<string, number> = { ArrowDown: Math.min(last, active + 1), ArrowUp: Math.max(0, active - 1), Home: 0, End: last };
+    const pending = event.timeStamp - typed.current.at <= TYPEAHEAD_MS ? typed.current.text : "";
+    // A space in the middle of a name being typed ("elixir a") is part of the name, not a choice.
+    const spaceContinues = pending !== "" && PROJECTS.some((p) => p.name.toLowerCase().startsWith(pending + " "));
     if (event.key in steps) {
       event.preventDefault();
       go(steps[event.key]);
-    } else if (event.key === "Enter" || event.key === " ") {
+    } else if (event.key === "Enter" || (event.key === " " && !spaceContinues)) {
       event.preventDefault();
       choose(active);
     } else if (event.key === "Escape" || event.key === "Tab") {
@@ -86,8 +84,8 @@ export function StartPicker({ value, onChange, labelledBy }: StartPickerProps) {
       close();
     } else if (event.key.length === 1 && !event.metaKey && !event.ctrlKey && !event.altKey) {
       // Typing a number or the start of a name jumps to that project.
-      const fresh = event.timeStamp - typed.current.at > TYPEAHEAD_MS;
-      const text = (fresh ? "" : typed.current.text) + event.key.toLowerCase();
+      event.preventDefault();
+      const text = pending + event.key.toLowerCase();
       typed.current = { text, at: event.timeStamp };
       const hit = PROJECTS.findIndex((p) => String(p.id).startsWith(text) || p.name.toLowerCase().startsWith(text));
       if (hit >= 0) go(hit + 1);

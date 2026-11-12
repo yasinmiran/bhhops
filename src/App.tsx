@@ -1,15 +1,18 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { PROJECTS, edgeBetween, lastPlayer, project, useGame, type Direction, type Player } from "./game";
 import { Leaderboard } from "./Leaderboard";
+import { Critters } from "./Critters";
 import { Hud } from "./Hud";
-import { randomName } from "./names";
+import { IconButton } from "./icons";
 import { PosterView } from "./PosterView";
+import { sound, useMuted } from "./sound";
 import { StartPicker } from "./StartPicker";
 import { Wall } from "./Wall";
 
 // three.js is most of the download; a device that falls back to the list never needs it.
 const Graph3D = lazy(() => import("./Graph3D").then((m) => ({ default: m.Graph3D })));
+const StartMap = lazy(() => import("./StartMap").then((m) => ({ default: m.StartMap })));
 
 const SHEET_SCROLL_STEP = 90;
 const KEY_DIRECTIONS: Record<string, Direction> = { ArrowUp: "up", ArrowRight: "right", ArrowDown: "down", ArrowLeft: "left" };
@@ -47,6 +50,26 @@ const idFromHash = () => {
   return PROJECTS.some((p) => p.id === id) ? id : null;
 };
 
+const LINKS = [
+  { href: "https://github.com/yasinmiran/bhhops", label: "Source of this game", github: true },
+  { href: "https://github.com/elixir-europe/biohackathon-projects-2026", label: "The 31 project descriptions", github: true },
+  { href: "https://biohackathon-europe.org/", label: "BioHackathon Europe", github: false },
+];
+
+function GithubMark() {
+  return (
+    <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+    </svg>
+  );
+}
+
+/** Turns the game's sounds off and on again. */
+export function SoundSwitch() {
+  const [muted, toggle] = useMuted();
+  return <IconButton picture={muted ? "soundOff" : "soundOn"} label={muted ? "Unmute" : "Mute"} pressed={muted} onClick={toggle} />;
+}
+
 interface StartProps {
   /** Covered by a poster or the leaderboard: keys and focus must not reach the form underneath. */
   hidden: boolean;
@@ -55,9 +78,12 @@ interface StartProps {
   onStart: (id: number, as: Player) => Promise<void>;
   onBoard: () => void;
   onForget: () => void;
+  /** The map could not be downloaded or drawn; the game could not be either. */
+  onMapFail: () => void;
 }
 
-function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: StartProps) {
+function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget, onMapFail }: StartProps) {
+  const still = useReducedMotion();
   const [name, setName] = useState(() => lastPlayer()?.name ?? "");
   const [choice, setChoice] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
@@ -79,56 +105,86 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: Start
 
   return (
     <div className="start" inert={hidden}>
-      <motion.form className="start-note" onSubmit={begin} initial={{ scale: 0.7, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: -1.5, opacity: 1 }}>
+      <motion.form className="start-note" onSubmit={begin} initial={{ scale: 0.7, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: -0.8, opacity: 1 }}>
+        <div className="start-intro">
         <h1>31 Hops</h1>
         <p>
           Every BioHackathon project is a sticky note, and a thread joins the ones working on the same thing. Travel the
-          threads with the arrow keys and visit all 31 in as few hops as you can. The clock breaks ties, and where you
-          start matters.
+          threads with the arrow keys and visit all 31 in as few hops as you can. The clock breaks ties.
+        </p>
+        <p>
+          Do not trust the map. Some threads are loose ends, some only show once you reach them, and a few notes are
+          not projects at all.
         </p>
         {player ? (
           <p className="start-player">
             Playing as <strong>{player.name}</strong>.{" "}
-            <button type="button" className="quiet-button" onClick={onForget}>
+            <button
+              type="button"
+              className="quiet-button"
+              onClick={() => {
+                // Whoever says this is not that player, so their name is not offered back to them.
+                setName("");
+                onForget();
+              }}
+            >
               Not you?
             </button>
           </p>
         ) : (
           <div className="field">
             <label htmlFor="player-name">Your name on the leaderboard</label>
-            <div className="name-row">
-              <input
-                id="player-name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                // A remembered or rolled name is replaced by typing, without clearing it first.
-                onFocus={(e) => e.target.select()}
-                minLength={2}
-                maxLength={20}
-                autoComplete="nickname"
-                required
-                autoFocus
-              />
-              <button type="button" className="marker-button small" onClick={() => setName(randomName())}>
-                Random name
-              </button>
-            </div>
+            <input
+              id="player-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              // A remembered name is replaced by typing, without clearing it first.
+              onFocus={(e) => e.target.select()}
+              minLength={2}
+              maxLength={20}
+              autoComplete="given-name"
+              required
+              autoFocus
+            />
           </div>
         )}
-        <div className="field">
-          <span id="start-label">Start at</span>
+        </div>
+        <div className="start-pick field">
+          <span id="start-label">Where you start matters. Pick a project, or leave it to chance</span>
+          <GraphBoundary onFail={onMapFail}>
+            <Suspense fallback={<div className="start-map" />}>
+              <StartMap value={choice} onChange={setChoice} />
+            </Suspense>
+          </GraphBoundary>
           <StartPicker value={choice} onChange={setChoice} labelledBy="start-label" />
         </div>
+        <div className="start-go">
         {error && <p className="error">{error}</p>}
         <div className="start-actions">
-          <button className="marker-button" disabled={busy}>
+          <motion.button
+            className="marker-button"
+            disabled={busy}
+            // A slow beat while it waits to be pressed.
+            animate={busy || still ? { scale: 1 } : { scale: [1, 1.05, 1] }}
+            transition={busy || still ? { duration: 0.1 } : { duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.07, rotate: -1.5 }}
+            whileTap={{ scale: 0.95 }}
+          >
             {busy ? "Starting…" : "Start the clock"}
-          </button>
-          <button type="button" className="quiet-button" onClick={onBoard}>
-            See the leaderboard
-          </button>
+          </motion.button>
+          <IconButton picture="board" label="Leaderboard" onClick={onBoard} />
+          <SoundSwitch />
+        </div>
         </div>
       </motion.form>
+      <footer className="start-links">
+        {LINKS.map((link) => (
+          <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+            {link.github && <GithubMark />}
+            {link.label}
+          </a>
+        ))}
+      </footer>
     </div>
   );
 }
@@ -163,10 +219,20 @@ export function App() {
     document.body.classList.toggle("playing", onGraph);
   }, [openId, onGraph]);
 
+  // The party popper goes off when the last project is reached, not when a finished tour is reloaded.
+  const wasComplete = useRef(run?.complete ?? false);
+  useEffect(() => {
+    const complete = run?.complete ?? false;
+    if (complete && !wasComplete.current) sound.finale();
+    wasComplete.current = complete;
+  }, [run?.complete]);
+
   const travel = useCallback(
     (to: number) => {
       if (!run) return;
       if (!edgeBetween(run.current, to)) return;
+      if (run.visited.includes(to)) sound.hop();
+      else sound.discover(run.visited.length + 1);
       setOverview(false);
       hop(to);
     },
@@ -177,15 +243,18 @@ export function App() {
     (direction: Direction) => {
       const to = run ? project(run.current).arrows[direction] : null;
       if (to !== null) travel(to);
+      else sound.bump();
     },
     [run, travel],
   );
 
   const openSheet = (id: number) => {
+    sound.page();
     location.hash = `#/p/${id}`;
   };
 
   const closeSheet = () => {
+    sound.page();
     if (openedHere.current) {
       openedHere.current = false;
       history.back();
@@ -203,7 +272,7 @@ export function App() {
         if (event.key === "Escape") return closeSheet();
         const overlay = sheetOverlay.current;
         // A zoomed poster keeps the arrows for looking around it.
-        if (!overlay || event.metaKey || event.ctrlKey || event.altKey || (event.target as Element).closest?.(".zoomed")) return;
+        if (!overlay || event.metaKey || event.ctrlKey || event.altKey || overlay.querySelector(".zoomed")) return;
         if (event.key === "ArrowLeft") {
           event.preventDefault();
           closeSheet();
@@ -220,7 +289,7 @@ export function App() {
         event.preventDefault();
         // One hop per press: a held key would otherwise run the helix across the graph.
         if (!event.repeat) move(direction);
-      } else if ((event.key === "Enter" || event.key === " ") && !(event.target instanceof HTMLButtonElement || event.target instanceof HTMLSelectElement)) {
+      } else if (event.key === "Enter" && !(event.target instanceof HTMLButtonElement)) {
         event.preventDefault();
         if (run) openSheet(run.current);
       }
@@ -237,8 +306,10 @@ export function App() {
 
   // The page behind is locked, so the sheet has to hold focus for arrow keys and Space to scroll it.
   const focusSheet = useCallback((node: HTMLDivElement | null) => {
+    // A sheet that is still sliding away unmounts after the next one has opened, and must not take the newer one's place.
+    if (!node) return;
     sheetOverlay.current = node;
-    node?.focus({ preventScroll: true });
+    node.focus({ preventScroll: true });
   }, []);
 
   const sheet = (
@@ -294,6 +365,7 @@ export function App() {
               <Graph3D run={run} overview={overview} onMove={move} onTap={tapNote} />
             </Suspense>
           </GraphBoundary>
+          <Critters active={!hidden && !run.complete} />
           <Hud
             run={run}
             player={player}
@@ -308,10 +380,19 @@ export function App() {
               setOverview(false);
               abandon();
             }}
+            soundSwitch={<SoundSwitch />}
           />
         </>
       ) : (
-        <StartNote hidden={hidden} player={player} onJoin={join} onStart={start} onBoard={() => setBoardOpen(true)} onForget={forget} />
+        <StartNote
+          hidden={hidden}
+          player={player}
+          onJoin={join}
+          onStart={start}
+          onBoard={() => setBoardOpen(true)}
+          onForget={forget}
+          onMapFail={() => setGraphFailed(true)}
+        />
       )}
       {sheet}
       {board}

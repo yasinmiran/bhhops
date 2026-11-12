@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { clock } from "./api";
+import { IconButton } from "./icons";
 import { PROJECTS, project, theme, type Direction, type Player, type Project, type Run, type Saving } from "./game";
 
 const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
@@ -16,6 +17,8 @@ interface HudProps {
   onOverview: () => void;
   onBoard: () => void;
   onRestart: () => void;
+  /** The mute button, which the start note shows too. */
+  soundSwitch: ReactNode;
 }
 
 /** Elapsed time, ticking once a second until the server has given the official time. */
@@ -57,7 +60,7 @@ function ArrowKey({ direction, here, onMove }: { direction: Direction; here: Pro
   );
 }
 
-export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart }: HudProps) {
+export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart, soundSwitch }: HudProps) {
   const here = project(run.current);
   // Par depends on where the tour began: some starts allow a shorter tour than others.
   const par = project(run.start).par;
@@ -91,15 +94,10 @@ export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onO
           {saving === "retrying" && <p className="hud-warning">Not saved yet. Trying again…</p>}
         </div>
         <div className="hud-side">
-          <button className="marker-button small" onClick={onBoard}>
-            Leaderboard
-          </button>
-          <button className="marker-button small" onClick={onOverview}>
-            {overview ? "Back to the helix" : "Whole graph"}
-          </button>
-          <button className="quiet-button" onClick={onRestart}>
-            Start over
-          </button>
+          <IconButton picture="board" label="Leaderboard" onClick={onBoard} />
+          <IconButton picture={overview ? "backToHelix" : "wholeGraph"} label={overview ? "Back to the helix" : "Whole graph"} onClick={onOverview} />
+          <IconButton picture="startOver" label="Start over" onClick={onRestart} />
+          {soundSwitch}
         </div>
       </header>
 
