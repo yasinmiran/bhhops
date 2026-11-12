@@ -15,7 +15,7 @@ const NAME_MAX = 20;
 const NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._-]*$/u;
 /** Faster than this per hop and it was not a person pressing keys. */
 const FASTEST_HOP_MS = 100;
-const LEADERBOARD_SIZE = 50;
+const BOARD_PAGE_SIZE = 10;
 // The venue shares one address, so limits are per player; only sign-ups, which have no player yet, share a budget.
 const LIMITS = { playerPerMinute: 400, signupsPerMinute: 90, adminFailuresPerMinute: 30 };
 
@@ -216,8 +216,19 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     const me = token ? (db.prepare("SELECT id FROM players WHERE token_hash = ?").get(sha256(token).toString("hex")) as { id: number } | undefined) : undefined;
     const mine = me ? rows.findIndex((row) => row.playerId === me.id) : -1;
     const playing = db.prepare("SELECT count(*) AS n FROM players").get() as { n: number };
+    const asked = Number(req.query.page ?? 1);
+    if (!Number.isInteger(asked) || asked < 1) throw new HttpError(400, "page is a whole number from 1");
+    const pages = Math.max(1, Math.ceil(rows.length / BOARD_PAGE_SIZE));
+    // A page past the end answers with the last one, so a board that shrank while open still shows something.
+    const page = Math.min(asked, pages);
+    const first = (page - 1) * BOARD_PAGE_SIZE;
     res.set("cache-control", "no-store").json({
-      top: rows.slice(0, LEADERBOARD_SIZE).map((row, i) => ({ rank: i + 1, name: row.name, hops: row.hops, durationMs: row.durationMs, me: i === mine })),
+      rows: rows
+        .slice(first, first + BOARD_PAGE_SIZE)
+        .map((row, i) => ({ rank: first + i + 1, name: row.name, hops: row.hops, durationMs: row.durationMs, me: first + i === mine })),
+      page,
+      pages,
+      pageSize: BOARD_PAGE_SIZE,
       me: mine < 0 ? null : { rank: mine + 1, name: rows[mine].name, hops: rows[mine].hops, durationMs: rows[mine].durationMs },
       finishers: rows.length,
       players: playing.n,

@@ -35,7 +35,10 @@ export interface BoardRow {
 }
 
 export interface Board {
-  top: BoardRow[];
+  rows: BoardRow[];
+  page: number;
+  pages: number;
+  pageSize: number;
   me: BoardRow | null;
   finishers: number;
   players: number;

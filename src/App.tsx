@@ -1,16 +1,18 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { PROJECTS, edgeBetween, project, useGame, type Direction, type Player } from "./game";
+import { PROJECTS, edgeBetween, lastPlayer, project, useGame, type Direction, type Player } from "./game";
 import { Leaderboard } from "./Leaderboard";
 import { Hud } from "./Hud";
+import { randomName } from "./names";
 import { PosterView } from "./PosterView";
+import { StartPicker } from "./StartPicker";
 import { Wall } from "./Wall";
 
 // three.js is most of the download; a device that falls back to the list never needs it.
 const Graph3D = lazy(() => import("./Graph3D").then((m) => ({ default: m.Graph3D })));
 
+const SHEET_SCROLL_STEP = 90;
 const KEY_DIRECTIONS: Record<string, Direction> = { ArrowUp: "up", ArrowRight: "right", ArrowDown: "down", ArrowLeft: "left" };
-const REASON_MS = 2600;
 
 function webglAvailable(): boolean {
   try {
@@ -56,8 +58,8 @@ interface StartProps {
 }
 
 function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: StartProps) {
-  const [name, setName] = useState("");
-  const [choice, setChoice] = useState("");
+  const [name, setName] = useState(() => lastPlayer()?.name ?? "");
+  const [choice, setChoice] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,7 +69,7 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: Start
     setError(null);
     try {
       const as = player ?? (await onJoin(name));
-      await onStart(choice ? Number(choice) : PROJECTS[Math.floor(Math.random() * PROJECTS.length)].id, as);
+      await onStart(choice ?? PROJECTS[Math.floor(Math.random() * PROJECTS.length)].id, as);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -92,22 +94,31 @@ function StartNote({ hidden, player, onJoin, onStart, onBoard, onForget }: Start
             </button>
           </p>
         ) : (
-          <label>
-            Your name on the leaderboard
-            <input value={name} onChange={(e) => setName(e.target.value)} minLength={2} maxLength={20} autoComplete="nickname" required autoFocus />
-          </label>
+          <div className="field">
+            <label htmlFor="player-name">Your name on the leaderboard</label>
+            <div className="name-row">
+              <input
+                id="player-name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                // A remembered or rolled name is replaced by typing, without clearing it first.
+                onFocus={(e) => e.target.select()}
+                minLength={2}
+                maxLength={20}
+                autoComplete="nickname"
+                required
+                autoFocus
+              />
+              <button type="button" className="marker-button small" onClick={() => setName(randomName())}>
+                Random name
+              </button>
+            </div>
+          </div>
         )}
-        <label>
-          Start at
-          <select value={choice} onChange={(e) => setChoice(e.target.value)}>
-            <option value="">A random project</option>
-            {PROJECTS.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.id}. {p.name}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="field">
+          <span id="start-label">Start at</span>
+          <StartPicker value={choice} onChange={setChoice} labelledBy="start-label" />
+        </div>
         {error && <p className="error">{error}</p>}
         <div className="start-actions">
           <button className="marker-button" disabled={busy}>
@@ -127,11 +138,11 @@ export function App() {
   const [boardOpen, setBoardOpen] = useState(false);
   const [openId, setOpenId] = useState(idFromHash);
   const [overview, setOverview] = useState(false);
-  const [reason, setReason] = useState<string | null>(null);
   const [canDraw] = useState(webglAvailable);
   const [graphFailed, setGraphFailed] = useState(false);
   // Whether the open sheet was reached from inside the app, in which case "back" closes it.
   const openedHere = useRef(false);
+  const sheetOverlay = useRef<HTMLDivElement | null>(null);
   const playing = canDraw && !graphFailed;
   const onGraph = playing && run !== null && player !== null;
 
@@ -152,19 +163,11 @@ export function App() {
     document.body.classList.toggle("playing", onGraph);
   }, [openId, onGraph]);
 
-  useEffect(() => {
-    if (!reason) return;
-    const timer = setTimeout(() => setReason(null), REASON_MS);
-    return () => clearTimeout(timer);
-  }, [reason, run?.hops]);
-
   const travel = useCallback(
     (to: number) => {
       if (!run) return;
-      const edge = edgeBetween(run.current, to);
-      if (!edge) return;
+      if (!edgeBetween(run.current, to)) return;
       setOverview(false);
-      setReason(edge.reason);
       hop(to);
     },
     [run, hop],
@@ -196,12 +199,26 @@ export function App() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (boardOpen) return;
-      if (event.key === "Escape" && openId !== null) return closeSheet();
-      if (!onGraph || openId !== null || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (openId !== null) {
+        if (event.key === "Escape") return closeSheet();
+        const overlay = sheetOverlay.current;
+        // A zoomed poster keeps the arrows for looking around it.
+        if (!overlay || event.metaKey || event.ctrlKey || event.altKey || (event.target as Element).closest?.(".zoomed")) return;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          closeSheet();
+        } else if ((event.key === "ArrowUp" || event.key === "ArrowDown") && !overlay.contains(document.activeElement)) {
+          // The browser scrolls the sheet itself while focus is inside it; this covers focus having gone elsewhere.
+          event.preventDefault();
+          overlay.scrollBy({ top: event.key === "ArrowUp" ? -SHEET_SCROLL_STEP : SHEET_SCROLL_STEP });
+        }
+        return;
+      }
+      if (!onGraph || event.metaKey || event.ctrlKey || event.altKey) return;
       const direction = KEY_DIRECTIONS[event.key];
       if (direction) {
         event.preventDefault();
-        // One hop per press: a held key would otherwise run the star across the graph.
+        // One hop per press: a held key would otherwise run the helix across the graph.
         if (!event.repeat) move(direction);
       } else if ((event.key === "Enter" || event.key === " ") && !(event.target instanceof HTMLButtonElement || event.target instanceof HTMLSelectElement)) {
         event.preventDefault();
@@ -219,7 +236,10 @@ export function App() {
   };
 
   // The page behind is locked, so the sheet has to hold focus for arrow keys and Space to scroll it.
-  const focusSheet = useCallback((node: HTMLDivElement | null) => node?.focus({ preventScroll: true }), []);
+  const focusSheet = useCallback((node: HTMLDivElement | null) => {
+    sheetOverlay.current = node;
+    node?.focus({ preventScroll: true });
+  }, []);
 
   const sheet = (
     <AnimatePresence>
@@ -278,7 +298,6 @@ export function App() {
             run={run}
             player={player}
             saving={saving}
-            reason={reason}
             overview={overview}
             hidden={hidden}
             onMove={move}

@@ -38,7 +38,7 @@ function PosterFrame({ p }: { p: Project }) {
 interface PosterViewProps {
   p: Project;
   onClose: () => void;
-  /** Set when a game is running and this project is where the star is; neighbours then become moves. */
+  /** Set when a game is running and this project is where the helix is; neighbours then become moves. */
   onHop?: (to: number) => void;
 }
 
@@ -47,7 +47,7 @@ export function PosterView({ p, onClose, onHop }: PosterViewProps) {
     <div className="poster-page">
       <nav className="poster-nav">
         <button className="quiet-button" onClick={onClose}>
-          Back to the projects
+          ← Back to the projects
         </button>
       </nav>
 

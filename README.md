@@ -2,12 +2,13 @@
 
 The 31 projects of BioHackathon Europe 2026 as a graph you can play. Each
 project is a sticky note, and a thread joins two projects that work on the same
-kind of thing. You move a star along the threads with the arrow keys and try to
-visit all 31 in as few hops as possible. Reaching a project pins up its poster;
-reading it is optional.
+kind of thing. You move a double helix along the threads with the arrow keys
+and try to visit all 31 in as few hops as possible. Reaching a project pins up
+its poster; reading it is optional.
 
-Controls: arrow keys, or swipe, or the on-screen arrow pad. Enter opens the
-poster of the project you are on. "Whole graph" pulls the camera back.
+Controls: arrow keys, or swipe, or the on-screen arrow pad. Enter, or the key
+in the middle of the pad, opens the poster of the project you are on. "Whole
+graph" pulls the camera back.
 
 Before the first tour a player picks a name. The server starts the clock,
 stores every hop, and scores the tour when the last project is reached. The

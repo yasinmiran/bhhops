@@ -1,16 +1,14 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { clock } from "./api";
-import { PROJECTS, project, theme, type Direction, type Player, type Run, type Saving } from "./game";
+import { PROJECTS, project, theme, type Direction, type Player, type Project, type Run, type Saving } from "./game";
 
 const GLYPH: Record<Direction, string> = { up: "↑", right: "→", down: "↓", left: "←" };
-const DPAD_ORDER: Direction[] = ["up", "left", "right", "down"];
 
 interface HudProps {
   run: Run;
   player: Player;
   saving: Saving;
-  reason: string | null;
   overview: boolean;
   hidden: boolean;
   onMove: (direction: Direction) => void;
@@ -45,7 +43,21 @@ async function share(run: Run): Promise<void> {
   }
 }
 
-export function Hud({ run, player, saving, reason, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart }: HudProps) {
+function ArrowKey({ direction, here, onMove }: { direction: Direction; here: Project; onMove: (direction: Direction) => void }) {
+  const to = here.arrows[direction];
+  return (
+    <button
+      className={`dpad-key dpad-${direction}`}
+      disabled={to === null}
+      onClick={() => onMove(direction)}
+      aria-label={to === null ? `Nothing ${direction}` : `Go ${direction} to project ${to}, ${project(to).name}`}
+    >
+      {GLYPH[direction]}
+    </button>
+  );
+}
+
+export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onOverview, onBoard, onRestart }: HudProps) {
   const here = project(run.current);
   // Par depends on where the tour began: some starts allow a shorter tour than others.
   const par = project(run.start).par;
@@ -83,7 +95,7 @@ export function Hud({ run, player, saving, reason, overview, hidden, onMove, onO
             Leaderboard
           </button>
           <button className="marker-button small" onClick={onOverview}>
-            {overview ? "Back to the star" : "Whole graph"}
+            {overview ? "Back to the helix" : "Whole graph"}
           </button>
           <button className="quiet-button" onClick={onRestart}>
             Start over
@@ -126,14 +138,6 @@ export function Hud({ run, player, saving, reason, overview, hidden, onMove, onO
       </AnimatePresence>
 
       <footer className="hud-bottom">
-        <AnimatePresence>
-          {reason && (
-            <motion.p key={reason + run.current} className="hud-reason" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              {reason}
-            </motion.p>
-          )}
-        </AnimatePresence>
-
         <div className="hud-row">
           <AnimatePresence mode="wait" initial={false}>
             <motion.button
@@ -152,21 +156,14 @@ export function Hud({ run, player, saving, reason, overview, hidden, onMove, onO
             </motion.button>
           </AnimatePresence>
 
-          <div className="dpad" role="group" aria-label="Move the star">
-            {DPAD_ORDER.map((direction) => {
-              const to = here.arrows[direction];
-              return (
-                <button
-                  key={direction}
-                  className={`dpad-key dpad-${direction}`}
-                  disabled={to === null}
-                  onClick={() => onMove(direction)}
-                  aria-label={to === null ? `Nothing ${direction}` : `Go ${direction} to project ${to}, ${project(to).name}`}
-                >
-                  {GLYPH[direction]}
-                </button>
-              );
-            })}
+          <div className="dpad" role="group" aria-label="Move the helix">
+            <ArrowKey direction="up" here={here} onMove={onMove} />
+            <ArrowKey direction="left" here={here} onMove={onMove} />
+            <button className="dpad-key dpad-enter" onClick={onOpen} aria-label={`Open project ${here.id}, ${here.name}`}>
+              Enter
+            </button>
+            <ArrowKey direction="right" here={here} onMove={onMove} />
+            <ArrowKey direction="down" here={here} onMove={onMove} />
           </div>
         </div>
       </footer>

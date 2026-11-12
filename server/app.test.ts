@@ -137,7 +137,7 @@ test("the leaderboard ranks by hops, then by time, and keeps each player's best"
 
   const board = (await call("GET", "/api/leaderboard", undefined, ben)).body;
   assert.deepEqual(
-    board.top.map((row: any) => [row.rank, row.name, row.hops, row.durationMs, row.me]),
+    board.rows.map((row: any) => [row.rank, row.name, row.hops, row.durationMs, row.me]),
     [
       [1, "Cleo", short.length - 1, 40_000, false],
       [2, "Ben", short.length - 1, 90_000, true],
@@ -146,6 +146,38 @@ test("the leaderboard ranks by hops, then by time, and keeps each player's best"
   );
   assert.equal(board.me.rank, 2);
   assert.equal(board.finishers, 3);
+});
+
+test("the leaderboard is served ten places to a page", async () => {
+  const { call, join, tick } = await setup();
+  const tour = fullTour(1);
+  let mine = "";
+  for (let i = 1; i <= 12; i++) {
+    const token = await join(`Player ${i}`);
+    if (i === 12) mine = token;
+    const run = (await call("POST", "/api/runs", { start: 1 }, token)).body;
+    tick(60_000 + i * 1000);
+    await call("PUT", `/api/runs/${run.id}`, { path: tour }, token);
+  }
+
+  const first = (await call("GET", "/api/leaderboard", undefined, mine)).body;
+  assert.deepEqual([first.page, first.pages, first.rows.length, first.rows[0].rank, first.rows[9].rank], [1, 2, 10, 1, 10]);
+  assert.equal(first.me.rank, 12);
+  assert.equal(first.rows.some((row: any) => row.me), false);
+
+  const second = (await call("GET", "/api/leaderboard?page=2", undefined, mine)).body;
+  assert.deepEqual(
+    second.rows.map((row: any) => [row.rank, row.name, row.me]),
+    [
+      [11, "Player 11", false],
+      [12, "Player 12", true],
+    ],
+  );
+
+  assert.equal((await call("GET", "/api/leaderboard?page=99")).body.page, 2);
+  for (const bad of ["0", "-1", "1.5", "two", ""]) {
+    assert.equal((await call("GET", `/api/leaderboard?page=${bad}`)).status, 400, bad);
+  }
 });
 
 test("starting again gives up the unfinished tour but keeps finished ones", async () => {

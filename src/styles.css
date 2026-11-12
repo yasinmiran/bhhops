@@ -191,20 +191,10 @@ a {
   gap: 10px;
 }
 
-.hud-reason {
-  pointer-events: auto;
-  justify-self: center;
-  padding: 7px 14px;
-  background: var(--note-yellow);
-  font: 600 1rem var(--hand);
-  rotate: -1deg;
-  box-shadow: 0 8px 8px -8px rgb(29 36 51 / 0.6);
-}
-
 .hud-row {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: space-between;
   gap: 12px;
 }
 
@@ -246,7 +236,7 @@ a {
   text-underline-offset: 3px;
 }
 
-/* Four keys in a cross, the same shape as the arrow keys on a keyboard. */
+/* Four keys in a cross, the same shape as the arrow keys on a keyboard, around the key that opens the project. */
 .dpad {
   flex: none;
   display: grid;
@@ -289,6 +279,14 @@ a {
 
 .dpad-down {
   grid-area: 3 / 2;
+}
+
+.dpad-enter {
+  grid-area: 2 / 2;
+  padding: 0;
+  background: var(--marker-blue);
+  color: var(--sheet);
+  font: 800 0.74rem/1 var(--hand);
 }
 
 .finale {
@@ -349,22 +347,133 @@ a {
   font-size: 1.08rem;
 }
 
-.start-note label {
+.field {
   display: grid;
   gap: 6px;
   width: 100%;
   font: 700 1rem var(--hand);
 }
 
-.start-note select {
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.name-row button {
+  flex: none;
+}
+
+/* Where to start: the button on the note, and the list it opens. */
+
+.picker {
   width: 100%;
   min-height: 46px;
-  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
   border: 2.5px solid var(--ink);
   border-radius: 6px;
   background: var(--sheet);
   color: var(--ink);
   font: 400 1rem var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.picker-row {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.picker-chip {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font: 800 0.95rem var(--hand);
+  rotate: -3deg;
+}
+
+.picker-any {
+  background: var(--ink);
+  color: var(--sheet);
+}
+
+.picker-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.picker-par {
+  flex: none;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.picker-best {
+  color: var(--marker-red);
+  font-weight: 700;
+}
+
+.picker-chevron {
+  flex: none;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgb(29 36 51 / 0.45);
+}
+
+.picker-list {
+  width: min(100%, 420px);
+  max-height: min(82dvh, 640px);
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--sheet);
+  box-shadow: 0 24px 30px -18px rgb(29 36 51 / 0.7);
+}
+
+.picker-list:focus {
+  outline: none;
+}
+
+.picker-option {
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.picker-active {
+  background: rgb(246 217 74 / 0.55);
+}
+
+.picker-option[aria-selected="true"] .picker-name {
+  font-weight: 700;
 }
 
 /* The poster sheet slides over the graph. */
@@ -741,7 +850,8 @@ a {
 
 .board th,
 .board td {
-  padding: 8px 6px;
+  height: 42px;
+  padding: 4px 6px;
   border-bottom: 1.5px solid rgb(29 36 51 / 0.12);
 }
 
@@ -757,6 +867,53 @@ a {
 
 .board-name {
   overflow-wrap: anywhere;
+}
+
+/* The first three places wear a sticker dot: gold, silver, bronze. */
+.medal {
+  display: inline-grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  line-height: 1;
+  box-shadow: 1.5px 1.5px 0 var(--ink);
+}
+
+.medal-gold {
+  background: #f5b921;
+}
+
+.medal-silver {
+  background: #cfd5dc;
+}
+
+.medal-bronze {
+  background: #d08c55;
+}
+
+.board-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.board-pager button:disabled {
+  opacity: 0.3;
+  box-shadow: none;
+  cursor: default;
+}
+
+.board-mine {
+  justify-self: start;
+  align-self: flex-start;
+  padding: 0;
+  color: var(--marker-blue);
 }
 
 .board-me td {

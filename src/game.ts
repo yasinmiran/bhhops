@@ -147,6 +147,8 @@ function view(tour: Tour): Run {
 }
 
 const PLAYER_KEY = "31hops.player.v1";
+/** Outlives "Not you?", so the name this device last played under can be taken up again. */
+const LAST_PLAYER_KEY = "31hops.last-player.v1";
 const TOUR_KEY = "31hops.tour.v1";
 const RETRY_MS = 4000;
 
@@ -169,6 +171,10 @@ function store(key: string, value: unknown): void {
 }
 
 const validPlayer = (p: any) => typeof p.token === "string" && typeof p.name === "string";
+/** Two names the server would treat as the same one. */
+const nameKey = (name: string) => name.normalize("NFKC").replace(/\s+/g, " ").trim().toLowerCase();
+
+export const lastPlayer = () => load<Player>(LAST_PLAYER_KEY, validPlayer);
 const validTour = (t: any) =>
   Number.isInteger(t.id) &&
   Array.isArray(t.path) &&
@@ -190,7 +196,10 @@ export function useGame() {
   const [saving, setSaving] = useState<Saving>("saved");
   const busy = useRef(false);
 
-  useEffect(() => store(PLAYER_KEY, player), [player]);
+  useEffect(() => {
+    store(PLAYER_KEY, player);
+    if (player) store(LAST_PLAYER_KEY, player);
+  }, [player]);
   useEffect(() => store(TOUR_KEY, tour), [tour]);
 
   const forget = useCallback(() => {
@@ -272,8 +281,19 @@ export function useGame() {
   }, [push, player?.token, tour?.id, scoredLength]);
   useEffect(() => () => clearTimeout(retryTimer.current), []);
 
-  /** Claims a name. Rejects with a message to show if it is taken or the server is unreachable. */
+  /** Claims a name, or takes up again the one this device last played under. Rejects with a message to show if it is taken or the server is unreachable. */
   const join = useCallback(async (name: string): Promise<Player> => {
+    const last = lastPlayer();
+    if (last && nameKey(last.name) === nameKey(name)) {
+      try {
+        await api("GET", "/me", undefined, last.token);
+        setPlayer(last);
+        return last;
+      } catch (error) {
+        // The server no longer knows that player, so the name is free to claim again.
+        if (!(error instanceof ApiError && error.status === 401)) throw error;
+      }
+    }
     const joined = await api<Player>("POST", "/players", { name });
     setPlayer(joined);
     return joined;

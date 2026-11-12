@@ -126,6 +126,30 @@ const starShape = (() => {
   return new THREE.ShapeGeometry(shape);
 })();
 
+const HELIX = { turns: 1.25, height: 1.5, radius: 0.3, rungs: 6 };
+const BLUE = "#2f8fce";
+
+/** Where a strand is at t along the helix; the second strand runs half a turn behind the first. */
+function helixPoint(t: number, phase: number): THREE.Vector3 {
+  const angle = t * HELIX.turns * Math.PI * 2 + phase;
+  return new THREE.Vector3(Math.cos(angle) * HELIX.radius, (t - 0.5) * HELIX.height, Math.sin(angle) * HELIX.radius);
+}
+
+function strandGeometry(phase: number, thickness: number): THREE.TubeGeometry {
+  const curve = new THREE.CatmullRomCurve3(Array.from({ length: 33 }, (_, i) => helixPoint(i / 32, phase)));
+  return new THREE.TubeGeometry(curve, 48, thickness, 8);
+}
+
+const STRANDS = [
+  { color: PINK, fill: strandGeometry(0, 0.075), outline: strandGeometry(0, 0.11) },
+  { color: BLUE, fill: strandGeometry(Math.PI, 0.075), outline: strandGeometry(Math.PI, 0.11) },
+];
+const rungGeometry = new THREE.CylinderGeometry(0.035, 0.035, HELIX.radius * 2, 6);
+const RUNGS = Array.from({ length: HELIX.rungs }, (_, i) => {
+  const t = (i + 0.5) / HELIX.rungs;
+  return { y: (t - 0.5) * HELIX.height, angle: t * HELIX.turns * Math.PI * 2 };
+});
+
 const textureLoader = new THREE.TextureLoader();
 
 /** The poster photo, fetched the first time a project is visited. */
@@ -297,9 +321,10 @@ interface RigProps {
   extent: number;
 }
 
-/** Flies the star along the thread on every hop and keeps the camera on it. */
-function StarAndCamera({ run, overview, extent }: RigProps) {
-  const star = useRef<THREE.Group>(null);
+/** Flies the helix along the thread on every hop and keeps the camera on it. */
+function HelixAndCamera({ run, overview, extent }: RigProps) {
+  const helix = useRef<THREE.Group>(null);
+  const twist = useRef<THREE.Group>(null);
   const travel = useRef<Travel>({ from: position(project(run.current)), to: position(project(run.current)), progress: 1 });
   const focus = useRef(position(project(run.current)));
   const distance = useRef(12);
@@ -318,15 +343,16 @@ function StarAndCamera({ run, overview, extent }: RigProps) {
     at.current.lerpVectors(t.from, t.to, eased);
     const arc = Math.sin(eased * Math.PI) * 1.1;
 
-    if (star.current) {
-      // The star sits on the note's corner, so it flies corner to corner and never snaps to the middle.
+    if (helix.current && twist.current) {
+      // The helix stands on the note's corner, so it flies corner to corner and never snaps to the middle.
       const resting = t.progress >= 1;
-      star.current.position.set(
+      helix.current.position.set(
         at.current.x - NOTE_SIZE * 0.52,
-        at.current.y + NOTE_SIZE * 0.52 + (resting ? Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
-        at.current.z + 0.35 + arc,
+        at.current.y + NOTE_SIZE * 0.68 + (resting ? Math.sin(clock.elapsedTime * 3) * 0.05 : 0),
+        at.current.z + 0.5 + arc,
       );
-      star.current.rotation.z = 0.25 + eased * Math.PI * 4;
+      // It always turns about its own axis, and winds up two extra turns over a hop.
+      twist.current.rotation.y = clock.elapsedTime * 1.4 + eased * Math.PI * 4;
     }
 
     const portrait = size.width / size.height < 0.9;
@@ -341,7 +367,7 @@ function StarAndCamera({ run, overview, extent }: RigProps) {
     focus.current.lerp(goalFocus, ease);
     distance.current += (goalDistance - distance.current) * ease;
 
-    // The camera trails the star a little, which is what makes the layers slide past each other.
+    // The camera trails the helix a little, which is what makes the layers slide past each other.
     const lean = overview ? 0 : distance.current * 0.12;
     perspective.position.lerp(new THREE.Vector3(focus.current.x, focus.current.y - lean, focus.current.z + distance.current), ease);
     perspective.lookAt(focus.current.x, focus.current.y, focus.current.z);
@@ -356,13 +382,25 @@ function StarAndCamera({ run, overview, extent }: RigProps) {
   });
 
   return (
-    <group ref={star} scale={0.34}>
-      <mesh geometry={starShape} scale={1.2}>
-        <meshBasicMaterial color={INK} />
-      </mesh>
-      <mesh geometry={starShape} position-z={0.02}>
-        <meshBasicMaterial color={PINK} toneMapped={false} />
-      </mesh>
+    <group ref={helix} rotation-z={-0.3} scale={0.8}>
+      <group ref={twist}>
+        {STRANDS.map((strand) => (
+          <group key={strand.color}>
+            <mesh geometry={strand.fill}>
+              <meshBasicMaterial color={strand.color} toneMapped={false} />
+            </mesh>
+            {/* A fatter copy seen only from inside draws the marker outline around the strand. */}
+            <mesh geometry={strand.outline}>
+              <meshBasicMaterial color={INK} side={THREE.BackSide} />
+            </mesh>
+          </group>
+        ))}
+        {RUNGS.map((rung) => (
+          <mesh key={rung.y} geometry={rungGeometry} position-y={rung.y} rotation={[0, -rung.angle, Math.PI / 2]}>
+            <meshBasicMaterial color={INK} />
+          </mesh>
+        ))}
+      </group>
     </group>
   );
 }
@@ -526,7 +564,7 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
           />
         ))}
         {!overview && <ArrowHints run={run} />}
-        <StarAndCamera run={run} overview={overview} extent={extent} />
+        <HelixAndCamera run={run} overview={overview} extent={extent} />
       </Canvas>
     </div>
   );
