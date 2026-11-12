@@ -1,0 +1,5583 @@
+[
+ {
+  "file": "IMG_6351.jpg",
+  "poster": {
+   "project_number": 31,
+   "number_evidence": "Written on the poster: \"PROJECT 31\" in orange marker at the top; the \"Nextflow\" and \"Galaxy\" banks joined by a bridge also match official title 31 (Nextflow to Galaxy Workflow Portability and FAIRness via Modular LLM Agent Skills).",
+   "title_on_poster": "BUILDING BRIDGES",
+   "one_liner": "Used AI agent \"skills\" to move nf-core data-analysis pipelines from Nextflow into Galaxy, and added new Galaxy tools along the way.",
+   "highlights": [
+    "22 contributions by first-timers (red star)",
+    "11 new tool wrappers and 15 new tools",
+    "Pipelines on the bridge include scrnaseq, sarek, oncoanalyser, bamtofastq, nanoseq",
+    "LLM agent skills port nf-core pipelines to Galaxy; Galaxy MCP",
+    "Galaxy enhancements: Schema.org derived-from, missing defaults, samplesheet support"
+   ],
+   "notes": [
+    {
+     "text": "22 contributions by first timers",
+     "status": "none"
+    },
+    {
+     "text": "scrnaseq (nf-core)",
+     "status": "none"
+    },
+    {
+     "text": "CSP2 (CFSAN)",
+     "status": "none"
+    },
+    {
+     "text": "sarek (nf-core)",
+     "status": "none"
+    },
+    {
+     "text": "oncoanalyser (nf-core)",
+     "status": "none"
+    },
+    {
+     "text": "OceanOmics (Australia)",
+     "status": "none"
+    },
+    {
+     "text": "bamtofastq (nf-core)",
+     "status": "none"
+    },
+    {
+     "text": "nanoseq (nf-core)",
+     "status": "none"
+    },
+    {
+     "text": "Tool & Workflow Maturation",
+     "status": "none"
+    },
+    {
+     "text": "To IWC (purple arrow)",
+     "status": "none"
+    },
+    {
+     "text": "Foundry, with speech bubbles: Skills / LLMs",
+     "status": "none"
+    },
+    {
+     "text": "Galaxy MCP",
+     "status": "none"
+    },
+    {
+     "text": "Next-flow (left bank label)",
+     "status": "none"
+    },
+    {
+     "text": "Galaxy (right bank label)",
+     "status": "none"
+    },
+    {
+     "text": "WIP (Work In Progress)",
+     "status": "none"
+    },
+    {
+     "text": "rnaseq (nf-core)",
+     "status": "doing"
+    },
+    {
+     "text": "mag (nf-core)",
+     "status": "doing"
+    },
+    {
+     "text": "metaboigniter (nf-core)",
+     "status": "doing"
+    },
+    {
+     "text": "msdeposit",
+     "status": "doing"
+    },
+    {
+     "text": "LLM agent skills port nf-core pipelines to Galaxy",
+     "status": "none"
+    },
+    {
+     "text": "FAIRness Evaluation",
+     "status": "none"
+    },
+    {
+     "text": "ran here (arrows to Belgian, Australian, US and Czech flags)",
+     "status": "none"
+    },
+    {
+     "text": "before / after (sketch of a workflow graph)",
+     "status": "none"
+    },
+    {
+     "text": "User-Defined Tools (UDTs)",
+     "status": "none"
+    },
+    {
+     "text": "Which Pipeline should we do next?",
+     "status": "none"
+    },
+    {
+     "text": "Egapx",
+     "status": "next"
+    },
+    {
+     "text": "BWA METH",
+     "status": "next"
+    },
+    {
+     "text": "VIRify & Mobilome Annotation pipeline",
+     "status": "next"
+    },
+    {
+     "text": "funcscan",
+     "status": "next"
+    },
+    {
+     "text": "Galaxy Enhancements: Schema.org derived-from; Better handling of missing defaults; Improved Samplesheet support; ...",
+     "status": "none"
+    },
+    {
+     "text": "11 New Tool Wrappers, 15 New Tools",
+     "status": "none"
+    },
+    {
+     "text": "Details (arrow down to hand-drawn QR code)",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": true,
+   "visual_motif": "Orange brick bridge of pipeline sticky notes spanning a river from Nextflow to Galaxy",
+   "poster_box": {
+    "x0": 0.048,
+    "y0": 0.028,
+    "x1": 0.841,
+    "y1": 0.964
+   },
+   "questions": [
+    {
+     "question": "The red star sticker reports how many contributions by first-timers?",
+     "options": [
+      "12",
+      "22",
+      "8",
+      "40"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Red star sticker, top right of the sheet",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many hand-drawn flags are on the Galaxy side, around the words \"ran here\"?",
+     "options": [
+      "2",
+      "3",
+      "4",
+      "6"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Right bank under the orange GALAXY label",
+     "difficulty": "medium"
+    },
+    {
+     "question": "The blue sticky note in the bottom-right corner reports how many new tools?",
+     "options": [
+      "15",
+      "9",
+      "20",
+      "6"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Blue sticky note, bottom right, second line (\"15 New Tools\")",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Four hand-drawn flags with \"ran here\" arrows",
+     "box": {
+      "x0": 0.588,
+      "y0": 0.552,
+      "x1": 0.785,
+      "y1": 0.664
+     }
+    },
+    {
+     "label": "Before/after sketch of a messy vs. connected workflow graph",
+     "box": {
+      "x0": 0.644,
+      "y0": 0.668,
+      "x1": 0.812,
+      "y1": 0.758
+     }
+    }
+   ],
+   "unreadable": "The hand-drawn QR code was not decoded. \"funcscan\" bubble has one overwritten letter (reads fun?scan, transcribed as funcscan). \"Egapx\" bubble handwriting is faint; \"Wrappers\" on the blue note is cut off at the edge. Galaxy Enhancements note ends in an illegible \"...\"."
+  },
+  "check": {
+   "project_number": 31,
+   "title_on_poster": "PROJECT 31 BUILDING BRIDGES",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6352.jpg",
+  "poster": {
+   "project_number": 30,
+   "number_evidence": "Written on the poster: \"#30\" boxed in the top-left corner; headline BiCoReCa also matches official title 30.",
+   "title_on_poster": "BiCoReCa Biodiversity Community Resource Catalogue",
+   "one_liner": "Pulled biodiversity tools, workflows and training from registries like bio.tools and TeSS into one community catalogue.",
+   "highlights": [
+    "bio.tools (35,000 tools) and WorkflowHub (1,600 workflows) auto-filtered into BiCoReCa",
+    "LifeWatch ERIC: 254 services, 39 workflows, 30 VREs, 44 training, all in",
+    "PNDB (National Biodiversity Data Base): 123 total, 59 resources, 64 training",
+    "EDAM: ~70 additional concepts needed for biodiversity",
+    "2025 microbiome catalogue: 4,000 auto-filtered records cut to 300 by human filtering"
+   ],
+   "notes": [
+    {
+     "text": "Update once keywords in place",
+     "status": "none"
+    },
+    {
+     "text": "MORE? Are we missing something?",
+     "status": "none"
+    },
+    {
+     "text": "Filter for users",
+     "status": "none"
+    },
+    {
+     "text": "join us!",
+     "status": "none"
+    },
+    {
+     "text": "Community interested",
+     "status": "none"
+    },
+    {
+     "text": "System for training",
+     "status": "none"
+    },
+    {
+     "text": "Tags or keywords to filter",
+     "status": "none"
+    },
+    {
+     "text": "Text mining to filter",
+     "status": "none"
+    },
+    {
+     "text": "Chem / Molecular dynamics",
+     "status": "none"
+    },
+    {
+     "text": "inputs?",
+     "status": "none"
+    },
+    {
+     "text": "CoReCa: community spaces inside RSEc",
+     "status": "none"
+    },
+    {
+     "text": "2026+ Community Resource Catalogues: A technology to build community spaces",
+     "status": "none"
+    },
+    {
+     "text": "BiCoReCa in the Research Software Ecosystem Atlas",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Rainbow BiCoReCa letters, registry boxes funnelling down, star stickies",
+   "poster_box": {
+    "x0": 0.04,
+    "y0": 0.02,
+    "x1": 0.82,
+    "y1": 0.91
+   },
+   "questions": [
+    {
+     "question": "What shape are most of the sticky notes on this poster?",
+     "options": [
+      "Hearts",
+      "Stars",
+      "Circles",
+      "Squares"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Sticky notes scattered across the poster, especially the cluster along the bottom",
+     "difficulty": "easy"
+    },
+    {
+     "question": "According to the EDAM box, about how many additional concepts are needed for biodiversity?",
+     "options": [
+      "~15",
+      "~40",
+      "~70",
+      "~150"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "EDAM box on the left side, middle of the poster",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the 2025 microbiome catalogue flow, how many records were displayed in the RSEc Atlas after human filtering by the community?",
+     "options": [
+      "50",
+      "750",
+      "1,200",
+      "300"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom-left section, under the 2025 Microbiome Community Resource Catalogue heading",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Hand-drawn PNDB logo of overlapping hexagons",
+     "box": {
+      "x0": 0.62,
+      "y0": 0.3,
+      "x1": 0.745,
+      "y1": 0.365
+     }
+    },
+    {
+     "label": "MORE? purple arrow sticky asking 'Are we missing something?'",
+     "box": {
+      "x0": 0.755,
+      "y0": 0.32,
+      "x1": 0.85,
+      "y1": 0.41
+     }
+    }
+   ],
+   "unreadable": "TeSS count partly hidden by a dark star sticky (looks like 3,600 training). Dark star near TeSS reads \"cross trainning with\", last word uncertain. Several stars at the bottom are blank (red, dark purple, green, a green speech bubble)."
+  },
+  "check": {
+   "project_number": 30,
+   "title_on_poster": "BiCoReCa: Biodiversity Community Resource Catalogue",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6353.jpg",
+  "poster": {
+   "project_number": 29,
+   "number_evidence": "Written as '#029' in the top-right corner; headline also matches official title 29 (gender in ELIXIR publications).",
+   "title_on_poster": "Gender representation in ELIXIR publications",
+   "one_liner": "Uses AI to infer author gender across ~1,300 ELIXIR-supported papers and asks whether ELIXIR has a gender problem.",
+   "highlights": [
+    "Dataset: ~1,300 ELIXIR-supported papers",
+    "AI robot infers author gender (male/female) from author data",
+    "Adds OpenAlex topics (e.g. Ecology, Cell Biology) and other metadata",
+    "Impact metrics: popularity, influence, impulse, citation count",
+    "Plans to compare ELIXIR with general literature, plus a focus group with women"
+   ],
+   "notes": [
+    {
+     "text": "Does ELIXIR have a problem with gender?",
+     "status": "none"
+    },
+    {
+     "text": "1: Statistical analysis by gender, OpenAlex topics, career lenght proxies, ELIXIR nodes, scholar impact metrics, ...",
+     "status": "none"
+    },
+    {
+     "text": "2: General literature <-> ELIXIR ?",
+     "status": "none"
+    },
+    {
+     "text": "3: Focus group on women's experiences in academic publishing (Tomorrow! Stay tuned!)",
+     "status": "none"
+    },
+    {
+     "text": "Impact metrics: Popularity, Influence, Impulse, Citation count",
+     "status": "none"
+    },
+    {
+     "text": "OpenAlex Topics: Ecology, Cell Biology, .... other metadata",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU 26",
+     "status": "none"
+    },
+    {
+     "text": "With the support of ELIXIR Hub, ELIXIR EDI, ELIXIR ELEAD, ELIXIR ES, ELIXIR GR",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "AI robot saying ♂ ♀ above a column of green-vs-purple gender bar charts",
+   "poster_box": {
+    "x0": 0.04,
+    "y0": 0.01,
+    "x1": 0.905,
+    "y1": 0.94
+   },
+   "questions": [
+    {
+     "question": "About how many ELIXIR-supported papers does the poster say were analysed?",
+     "options": [
+      "~500",
+      "~1,300",
+      "~5,000",
+      "~13,000"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Next to the drawn stack of discs near the top: '~1.300 ELIXIR supported papers'",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What drawing is shown saying the male and female symbols in a speech bubble?",
+     "options": [
+      "A cat",
+      "A microscope",
+      "A DNA helix",
+      "A robot labelled 'AI'"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Under 'AUTHORS' on the left, upper half",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the numbered bar charts (papers 1 to 5) under red dot 1, which number has male and female bars of about equal height?",
+     "options": [
+      "3",
+      "1",
+      "5",
+      "2"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Left column of document icons and bar charts, bottom-left quarter",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Robot labelled 'AI' with a speech bubble holding ♂ and ♀ symbols",
+     "box": {
+      "x0": 0.119,
+      "y0": 0.322,
+      "x1": 0.324,
+      "y1": 0.397
+     }
+    },
+    {
+     "label": "Focus-group drawing: six hatched people around a blue oval table",
+     "box": {
+      "x0": 0.665,
+      "y0": 0.764,
+      "x1": 0.808,
+      "y1": 0.842
+     }
+    }
+   ],
+   "unreadable": ""
+  },
+  "check": {
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ],
+   "project_number": 29,
+   "title_on_poster": "Gender representation in ELIXIR publications (#029)"
+  }
+ },
+ {
+  "file": "IMG_6354.jpg",
+  "poster": {
+   "project_number": 28,
+   "number_evidence": "\"#28\" written on the orange sticky note at the top of the poster; the headline \"Weather X Biodiversity\" also matches official title 28 (WeatherXBiodiversity).",
+   "title_on_poster": "Weather X Biodiversity",
+   "one_liner": "Rebuilt a bumblebee-and-weather study as reproducible, tracked workflows, with open publishing planned next.",
+   "highlights": [
+    "Workflow joins GBIF bumblebee occurrence data with ERA5 weather data",
+    "Retrieval, preprocessing and analysis steps each record provenance metadata",
+    "Done: ARC workspace setup, CWL script orchestration, reproduced the paper's result",
+    "Planned: automated provenance capture, WorkflowHub registration, RO-Crate publication"
+   ],
+   "notes": [
+    {
+     "text": "GBIF Bumblebee occurrence data",
+     "status": "none"
+    },
+    {
+     "text": "ERA5 weather data",
+     "status": "none"
+    },
+    {
+     "text": "GBIF Retrieval",
+     "status": "none"
+    },
+    {
+     "text": "ERA5 Retrieval",
+     "status": "none"
+    },
+    {
+     "text": "GBIF data",
+     "status": "none"
+    },
+    {
+     "text": "ERA5 data",
+     "status": "none"
+    },
+    {
+     "text": "GBIF Preprocessing",
+     "status": "none"
+    },
+    {
+     "text": "ERA5 Preprocessing",
+     "status": "none"
+    },
+    {
+     "text": "Preprocessed GBIF data",
+     "status": "none"
+    },
+    {
+     "text": "Preprocessed ERA5 data",
+     "status": "none"
+    },
+    {
+     "text": "Analysis",
+     "status": "none"
+    },
+    {
+     "text": "Analysis Results",
+     "status": "none"
+    },
+    {
+     "text": "Provenance Metadata (three pink star notes)",
+     "status": "none"
+    },
+    {
+     "text": "Paper",
+     "status": "none"
+    },
+    {
+     "text": "Authors",
+     "status": "none"
+    },
+    {
+     "text": "License",
+     "status": "none"
+    },
+    {
+     "text": "...",
+     "status": "none"
+    },
+    {
+     "text": "Publish workflows to WorkflowHub",
+     "status": "none"
+    },
+    {
+     "text": "Workflows in CWL",
+     "status": "none"
+    },
+    {
+     "text": "ARC Workspace contains: data, workflows, workflow executions, provenance metadata, contextual metadata",
+     "status": "none"
+    },
+    {
+     "text": "Publish -> ARCHive + ROHub (RO-Crate logo)",
+     "status": "none"
+    },
+    {
+     "text": "ARC Workspace Setup",
+     "status": "done"
+    },
+    {
+     "text": "CWL Script orchestration",
+     "status": "done"
+    },
+    {
+     "text": "Reproduce paper result",
+     "status": "done"
+    },
+    {
+     "text": "Automate provenance capture",
+     "status": "next"
+    },
+    {
+     "text": "WorkflowHub registration",
+     "status": "next"
+    },
+    {
+     "text": "RO-Crate publication",
+     "status": "next"
+    },
+    {
+     "text": "Documentation",
+     "status": "next"
+    }
+   ],
+   "contributors": [
+    "Anne Fouilloux",
+    "H. Lukas Weil",
+    "Paul Slavin",
+    "Jonathan Bauer",
+    "Kevin Schneider",
+    "Eli Chadwick",
+    "Jean Iaquinta",
+    "Dominik Brilhaus",
+    "Daniel Arend"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Smiling paper bumblebee beside a thermometer, over a sticky-note flowchart",
+   "poster_box": {
+    "x0": 0.056,
+    "y0": 0.028,
+    "x1": 0.868,
+    "y1": 0.94
+   },
+   "questions": [
+    {
+     "question": "What animal is drawn in the top-right corner of the poster?",
+     "options": [
+      "Butterfly",
+      "Bee",
+      "Ladybird",
+      "Hummingbird"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Top-right corner: large cut-paper striped insect with wings and a smile",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which weather dataset is labelled next to the drawn globe at the top of the poster?",
+     "options": [
+      "MODIS",
+      "WorldClim",
+      "CHELSA",
+      "ERA5"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Top centre: globe drawing labelled 'ERA5 weather data'",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many pink star-shaped 'Provenance Metadata' sticky notes are on the poster?",
+     "options": [
+      "2",
+      "4",
+      "3",
+      "5"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Centre column of the flowchart: pink star sticky notes between the GBIF and ERA5 branches and beside Analysis Results",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Cut-paper smiling bumblebee",
+     "box": {
+      "x0": 0.69,
+      "y0": 0.044,
+      "x1": 0.913,
+      "y1": 0.215
+     }
+    },
+    {
+     "label": "Paper flower with green and red hearts",
+     "box": {
+      "x0": 0.685,
+      "y0": 0.556,
+      "x1": 0.833,
+      "y1": 0.658
+     }
+    }
+   ],
+   "unreadable": "Some team-member surnames are ambiguous in the handwriting; Bauer, Iaquinta and Brilhaus are best readings."
+  },
+  "check": {
+   "project_number": 28,
+   "title_on_poster": "Weather x Biodiversity",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": "Minor: the 'ARC Workspace contains' legend also has a small hand-drawn pink star next to 'provenance metadata', which a careless counter might add to get 4. It is not a sticky note, so 3 is still the right answer."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6355.jpg",
+  "poster": {
+   "project_number": 27,
+   "number_evidence": "\"#27\" is written in marker in the bottom-right corner. It matches official title 27, \"Expanding the ELIXIR TES Network with Life-Science Services\".",
+   "title_on_poster": "FEDERATED COMPUTE @ ELIXIR",
+   "one_liner": "Built tools so researchers can send analysis jobs to computing sites across Europe, with a shared service registry and secure login.",
+   "highlights": [
+    "Cloud Registry 1.0 RC: LS-Login sign-in, nodes register TES/WES",
+    "New WES CLI/Python SDK in review: async TES, binaries, tolerance",
+    "Code grew 3x to ~21k+ lines",
+    "omnipy plugin runs jobs as TES tasks; NVFlare federated learning on WES/TES",
+    "Token exchange test bed ready for the auth flow"
+   ],
+   "notes": [
+    {
+     "text": "Subtitle: ELIXIR ON-CLOUD • BIOH EUROPE 2026",
+     "status": "none"
+    },
+    {
+     "text": "USER: Any complex anywhere | UI/UX: GA4GH SDK/Krini | ORCHESTRATOR: WESkit, Conguest | ROUTER: proTES gateway | WORKERS: TES: TESK, Funnel, TESP",
+     "status": "none"
+    },
+    {
+     "text": "GA4GH SDK sticky notes: terminal prompt \">_\" and \"py\"",
+     "status": "none"
+    },
+    {
+     "text": "NEW&REVIEW: WES CLI/Python · async TES · binaries · tolerance",
+     "status": "none"
+    },
+    {
+     "text": "CODE GREW 3x ~21k+ lines",
+     "status": "none"
+    },
+    {
+     "text": "Service Registry: Service-Info (ticked)",
+     "status": "done"
+    },
+    {
+     "text": "Service Registry: RegistryAPI (ticked)",
+     "status": "done"
+    },
+    {
+     "text": "Cloud Registry 1.0 RC / LS-Login sign-in / Import GA4GH service-info / Nodes register TES/WES",
+     "status": "none"
+    },
+    {
+     "text": "APPS: omnipy plugin runs jobs as TES task; NVFlare Federated learning on WES/TES",
+     "status": "none"
+    },
+    {
+     "text": "Surfer note: Zen-Batch, \"Why stress, When you can surf on TES\"",
+     "status": "none"
+    },
+    {
+     "text": "AUTH FLOW: user -> UI -> ORC -> Router -> Workers, TOKEN Exchange, LS login, Groups",
+     "status": "none"
+    },
+    {
+     "text": "Status & Goals: 1) Main goal: Integration into Elixir On-Cloud! 2) Secondary: Proposals for LS-Login. Token exchange test bed ready. Live tests this week: delegated chain, groups, lifetime",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Stick-figure pipeline ending at a Europe map with flags, plus a TES surfer",
+   "poster_box": {
+    "x0": 0.04,
+    "y0": 0,
+    "x1": 0.88,
+    "y1": 0.93
+   },
+   "questions": [
+    {
+     "question": "In the APPS section, what is drawn on the three green sticky notes joined by blue arrows?",
+     "options": [
+      "Laptops with a cloud",
+      "DNA double helices",
+      "Hospital buildings with a red cross",
+      "Test tubes in a rack"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Three green sticky notes at the bottom of the APPS column, right side, just above AUTH FLOW",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many small national flags are stuck onto the Europe map in the top-right corner?",
+     "options": [
+      "4",
+      "5",
+      "3",
+      "7"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Top-right corner, on the hand-drawn Europe map next to the {TES} labels",
+     "difficulty": "medium"
+    },
+    {
+     "question": "The orange 'CODE GREW 3x' sticky note with the thinking-face emoji says the code reached about how many lines?",
+     "options": [
+      "~5k+ lines",
+      "~12k+ lines",
+      "~50k+ lines",
+      "~21k+ lines"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Lower left, small orange note under the NEW&REVIEW list in the GA4GH SDK column",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Orange sticky note: bearded surfer in sunglasses, 'Why stress, When you can surf on TES'",
+     "box": {
+      "x0": 0.558,
+      "y0": 0.445,
+      "x1": 0.675,
+      "y1": 0.527
+     }
+    },
+    {
+     "label": "Hand-drawn Europe map covered in five small paper flags",
+     "box": {
+      "x0": 0.752,
+      "y0": 0.153,
+      "x1": 0.874,
+      "y1": 0.272
+     }
+    }
+   ],
+   "unreadable": "On the surfer note, the first letter of the word before 'Zen-Batch' is hidden (only '...aster' shows). The right edge of the Status & Goals note is cut off, so 'Elixir' and 'LS-Login' are partly missing. 'Krini' (under UI/UX) and 'Conguest' (under Orchestrator) are transcribed as written but may be misspelled tool names. The faint lines 'delegated chain / groups / lifetime' on the Status note are small and pale."
+  },
+  "check": {
+   "project_number": 27,
+   "title_on_poster": "FEDERATED COMPUTE @ ELIXIR",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6356.jpg",
+  "poster": {
+   "project_number": 26,
+   "number_evidence": "Written on the poster: \"#26\" in the top-right corner; matches official title 26 (\"ELIXIR Atlas\", drawn as the globe)",
+   "title_on_poster": "DANTE'S DATA INFERNO",
+   "one_liner": "An agent-fed \"ELIXIR Atlas\" that gathers people, websites and Zenodo records so anyone can find who does what in ELIXIR.",
+   "highlights": [
+    "Sources pulled in so far: LS Login people registry, hub and node websites, Zenodo",
+    "Zenodo source is the ELIXIR Europe community; more sources marked as coming",
+    "\"My custom view\" mock-up: chatbot plus trend charts spanning 2015 to 2026",
+    "Built for roles from newcomer and grant writer to head of node and node coordinator",
+    "Maps ELIXIR info pain as 8 named inferno circles, from Limbo down to Fraud"
+   ],
+   "notes": [
+    {
+     "text": "HAS ANYONE DONE THIS BEFORE? (orange speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "TWICE! HERE ARE THEIR NAMES AND PROJECTS (yellow speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "THIS WAY OUT! (robot with lantern by the ladder)",
+     "status": "none"
+    },
+    {
+     "text": "ATLAS EXPRESS (train carrying DOI documents)",
+     "status": "none"
+    },
+    {
+     "text": "LIMBO: Virtuous but never found: published, citable, unread (DOI!, 5 VIEWS)",
+     "status": "none"
+    },
+    {
+     "text": "LUST: Seduced by every new portal (OOH ANOTHER REGISTRY!)",
+     "status": "none"
+    },
+    {
+     "text": "GLUTTONY: Endless rolling minutes, never digested (MINUTES HELP! 2019-2026)",
+     "status": "none"
+    },
+    {
+     "text": "GREED: Knowledge locked in senior heads, gone when they step down (IT'S ALL UP HERE!, HOW WE DID IT)",
+     "status": "none"
+    },
+    {
+     "text": "WRATH: The reply all storm. Just CC everyone, engage no one (OH NO! ANOTHER BIG EMAIL THREAD)",
+     "status": "none"
+    },
+    {
+     "text": "HERESY: Those who dared to automate",
+     "status": "none"
+    },
+    {
+     "text": "ANGER: Against links: moved folders, revoked access (PLANS 23, MINUTES, 403, OOPS)",
+     "status": "none"
+    },
+    {
+     "text": "FRAUD: The spreadsheet claiming to be current (WHO DOES WHAT (FINAL), I'M TOTALLY UP TO DATE!)",
+     "status": "none"
+    },
+    {
+     "text": "MY CUSTOM VIEW (browser window with chatbot saying HELLO! and a chart from 2015 to 2026)",
+     "status": "none"
+    },
+    {
+     "text": "Roles: Newcomer, Grant writer, Head of node, Community lead, Community member, Platform exco, Hub content creator, Hub support staff, Node coordinator, ... you name it!",
+     "status": "none"
+    },
+    {
+     "text": "SO FAR...: LS LOGIN (People registry), Websites (Hub, Nodes), Zenodo (ELIXIR Europe community), MORE COMING",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "HELENA",
+    "XENIA",
+    "SEBASTIAN",
+    "ABDUL",
+    "VLAD"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Rainbow Dante inferno layers under a train, beside a smiling Earth globe",
+   "poster_box": {
+    "x0": 0.01,
+    "y0": 0.08,
+    "x1": 0.985,
+    "y1": 0.905
+   },
+   "questions": [
+    {
+     "question": "What vehicle is drawn running across the top of the poster?",
+     "options": [
+      "A rocket",
+      "A cargo ship",
+      "A train",
+      "A hot-air balloon"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top left, the \"ATLAS EXPRESS\" drawing above the coloured layers",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which animal is drawn in the yellow GREED layer, saying \"It's all up here!\"?",
+     "options": [
+      "A dinosaur",
+      "A dragon",
+      "An elephant",
+      "An owl"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Left side, yellow GREED band, left of the locked vault",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many views does the little sign in the blue LIMBO layer show?",
+     "options": [
+      "50",
+      "12",
+      "2",
+      "5"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Left side, top blue LIMBO band, the eye sign next to the \"DOI!\" document",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Woman at a laptop asking \"Has anyone done this before?\" on an orange bubble",
+     "box": {
+      "x0": 0.75,
+      "y0": 0.368,
+      "x1": 0.931,
+      "y1": 0.57
+     }
+    },
+    {
+     "label": "OBEY, THRASHER and shark-mouth stickers in the flames at the bottom of the inferno",
+     "box": {
+      "x0": 0.093,
+      "y0": 0.799,
+      "x1": 0.285,
+      "y1": 0.892
+     }
+    }
+   ],
+   "unreadable": "Year on the red \"LAST UPDATE\" tag in the FRAUD layer (looks like 2014, unsure); header of the small document drawn next to \"MORE COMING\" (possibly \"Annual node report\"); faint pencil text above \"SO FAR...\""
+  },
+  "check": {
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ],
+   "project_number": 26,
+   "title_on_poster": "Dante's Data Inferno / Elixir Atlas"
+  }
+ },
+ {
+  "file": "IMG_6357.jpg",
+  "poster": {
+   "project_number": 25,
+   "number_evidence": "Written on the poster: '#BioHackEU26 Project No. 25' in the boxed top-right corner; the DBTL theme also matches title 25 (DBTLHUB).",
+   "title_on_poster": "DBTL RELOADED",
+   "one_liner": "Designed AI agents that pass work between the design, build, test and learn steps of engineering biology, packaged as RO-Crates.",
+   "highlights": [
+    "DBTL cycle (Design, Build, Test, Learn) laid out as sticky notes around a central Architect",
+    "Central 'Live Knowledge Graph' linked to every phase of the cycle",
+    "Four transition notes between phases: L→D, D→B, B→T, T→L",
+    "Printed diagram: Interface agents and RO-Crates for a generic DBTL biomanufacturing workflow",
+    "Printed class diagram titled 'sentinel-oo: the classes'"
+   ],
+   "notes": [
+    {
+     "text": "DBTL RELOADED",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU26 Project No. 25",
+     "status": "none"
+    },
+    {
+     "text": "A / ArchitecT (with drawn face)",
+     "status": "none"
+    },
+    {
+     "text": "Live Knowledge Graph",
+     "status": "none"
+    },
+    {
+     "text": "D (o→o→o, with drawing of a person)",
+     "status": "none"
+    },
+    {
+     "text": "B (pipeline symbol)",
+     "status": "none"
+    },
+    {
+     "text": "T (pipeline symbol)",
+     "status": "none"
+    },
+    {
+     "text": "L (pipeline symbol)",
+     "status": "none"
+    },
+    {
+     "text": "S  L → D",
+     "status": "none"
+    },
+    {
+     "text": "D → B (with spider-like drawing)",
+     "status": "none"
+    },
+    {
+     "text": "S  B → T",
+     "status": "none"
+    },
+    {
+     "text": "S  T → L",
+     "status": "none"
+    },
+    {
+     "text": "RO-CRATE (cookie drawing) Do you want a cookie?",
+     "status": "none"
+    },
+    {
+     "text": "U (drawing of a person)",
+     "status": "none"
+    },
+    {
+     "text": "bio.tools ... WORKFLOWS",
+     "status": "none"
+    },
+    {
+     "text": "Printout: Interface agents and RO-Crates for a generic DBTL biomanufacturing workflow",
+     "status": "none"
+    },
+    {
+     "text": "Printout: sentinel-oo: the classes",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Sticky-note DBTL cycle around a blue 'Architect' face, plus a cookie RO-Crate",
+   "poster_box": {
+    "x0": 0.01,
+    "y0": 0.025,
+    "x1": 0.9,
+    "y1": 0.99
+   },
+   "questions": [
+    {
+     "question": "What word is written under the drawn face on the blue note at the centre of the cycle?",
+     "options": [
+      "Captain",
+      "Curator",
+      "Architect",
+      "Orchestrator"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Blue sticky notes in the centre of the poster",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What is drawn on the orange RO-CRATE sticky note?",
+     "options": [
+      "A cookie",
+      "A wooden crate",
+      "A rocket",
+      "A coffee cup"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Orange RO-CRATE note near the top centre",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which big letter is written on the red sticky notes that sit between the cycle phases?",
+     "options": [
+      "M",
+      "R",
+      "X",
+      "S"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Red sticky notes around the cycle (marked L→D, B→T, T→L)",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "RO-CRATE note with a cookie drawing asking 'Do you want a cookie?'",
+     "box": {
+      "x0": 0.5,
+      "y0": 0.19,
+      "x1": 0.685,
+      "y1": 0.285
+     }
+    },
+    {
+     "label": "Blue 'A / ArchitecT' note with a hand-drawn face",
+     "box": {
+      "x0": 0.385,
+      "y0": 0.338,
+      "x1": 0.562,
+      "y1": 0.445
+     }
+    }
+   ],
+   "unreadable": "Middle lines of the grey bio.tools note (dollar-like squiggles and one word, possibly 'Agent'); small print inside both printed diagrams; the letter at the top of the red D→B note is hidden under the RO-CRATE note."
+  },
+  "check": {
+   "project_number": 25,
+   "title_on_poster": "DBTL RELOADED",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": "Minor: only three of the four red notes (L->D, B->T, T->L) show a big S; the D->B red note shows a spider/octopus drawing and its top is covered by the RO-CRATE note. The answer is still clear."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6358.jpg",
+  "poster": {
+   "project_number": 24,
+   "number_evidence": "'#24' is handwritten in the top-right corner of the poster. The headline about secure AI agents also matches official title 24 (Evaluating and Securing AI-Assisted Workflows for Sensitive Data).",
+   "title_on_poster": "AI Agents as Interface for Secure Processing Environments",
+   "one_liner": "Mapped how AI agents could leak or misuse sensitive data in secure environments, plus a loop to test scenarios and propose fixes.",
+   "highlights": [
+    "Six threat models on sticky notes, e.g. leak instructions, forged history leak",
+    "Automatic evaluation loop: create/modify scenario, then evaluate scenario",
+    "Secure environment sketch: Agent, Tool Sandbox, GA4GH APIs, Sensitive Data",
+    "Human step proposes mitigations and verifies them against the threat models",
+    "Evaluation results feed a create/update threat model step"
+   ],
+   "notes": [
+    {
+     "text": "local endpoints readable (e.g. curl)",
+     "status": "none"
+    },
+    {
+     "text": "leak instructions",
+     "status": "none"
+    },
+    {
+     "text": "forged history leak",
+     "status": "none"
+    },
+    {
+     "text": "injections in workflows or data description",
+     "status": "none"
+    },
+    {
+     "text": "Reconnaissance via workflows & prompts",
+     "status": "none"
+    },
+    {
+     "text": "Persistent state allows chaining attacks",
+     "status": "none"
+    },
+    {
+     "text": "Work in Progress :)",
+     "status": "none"
+    },
+    {
+     "text": "create/modify scenario",
+     "status": "none"
+    },
+    {
+     "text": "evaluate scenario",
+     "status": "none"
+    },
+    {
+     "text": "create/update threat model",
+     "status": "none"
+    },
+    {
+     "text": "propose mitigation",
+     "status": "none"
+    },
+    {
+     "text": "verify",
+     "status": "none"
+    },
+    {
+     "text": "Agent",
+     "status": "none"
+    },
+    {
+     "text": "Tool Sandbox",
+     "status": "none"
+    },
+    {
+     "text": "GA4GH APIs",
+     "status": "none"
+    },
+    {
+     "text": "Sensitive Data",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Scientist in black sunglasses holding a test tube, yellow robot head up top",
+   "poster_box": {
+    "x0": 0.03,
+    "y0": 0,
+    "x1": 0.89,
+    "y1": 0.91
+   },
+   "questions": [
+    {
+     "question": "What does the yellow sticky note in the top-right 'Automatic Evaluation' box say?",
+     "options": [
+      "Done!",
+      "Work in Progress",
+      "Coming soon",
+      "Help wanted"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Top-right corner, yellow sticky note covering the end of the 'Automatic Evaluation' heading",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many orange-red sticky notes sit inside the 'Threat Models' box?",
+     "options": [
+      "5",
+      "8",
+      "4",
+      "6"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Left half of the poster, the 'Threat Models' box with the orange warning/bomb drawing",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the 'Security Processing Environment' diagram, which sticky note does the arrow from 'Sensitive Data' connect to?",
+     "options": [
+      "GA4GH APIs",
+      "Agent",
+      "Tool Sandbox",
+      "Encryption Key"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Bottom-right box: the L-shaped yellow arrow from 'Sensitive Data' goes up to the note above it",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Scientist in black sunglasses with a yellow test tube",
+     "box": {
+      "x0": 0.2,
+      "y0": 0.71,
+      "x1": 0.375,
+      "y1": 0.88
+     }
+    },
+    {
+     "label": "Orange warning triangle with a lit bomb and magnifier",
+     "box": {
+      "x0": 0.26,
+      "y0": 0.255,
+      "x1": 0.39,
+      "y1": 0.33
+     }
+    }
+   ],
+   "unreadable": "The top-right teal circle in the Automatic Evaluation loop is partly covered by the 'Work in Progress' note; only 'ex... scenario' is visible, so the first word is unconfirmed and left out of the notes."
+  },
+  "check": {
+   "project_number": 24,
+   "title_on_poster": "AI Agents as Interface for Secure Processing Environments",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6359.jpg",
+  "poster": {
+   "project_number": 23,
+   "number_evidence": "Written on the poster as \"#23\" in big red marker at top left; headline also matches official title #23.",
+   "title_on_poster": "Single-cell dataset integration across repositories & species",
+   "one_liner": "Pulled single-cell data together from many repositories and compared matching cell types between species, such as mouse and fish.",
+   "highlights": [
+    "Integrate annotated scRNAseq datasets from multiple resources (3K datasets)",
+    "Sources: CELLXGENE, Bgee, FENIX, Single cell portal, ASAP, scFAIR",
+    "Term remapping and harmonization across species, ontology rollup",
+    "Cell-first approach (Local outlier factor) vs expression-first (ElasticNet Regression)",
+    "Example table: cell type A R2 0.65 (gene1), cell type B R2 0.1 (gene2)"
+   ],
+   "notes": [
+    {
+     "text": "WP1",
+     "status": "none"
+    },
+    {
+     "text": "WP2",
+     "status": "none"
+    },
+    {
+     "text": "WP3.",
+     "status": "none"
+    },
+    {
+     "text": "Identification of conditions with comparable datasets across species for WP2 and WP3.",
+     "status": "none"
+    },
+    {
+     "text": "Integrate annotated scRNAseq datasets from multiple resources (3K datasets).",
+     "status": "none"
+    },
+    {
+     "text": "Term remapping and harmonization across species, ontology rollup.",
+     "status": "none"
+    },
+    {
+     "text": "CELLXGENE, Bgee, FENIX, Single cell portal, ASAP, scFAIR",
+     "status": "none"
+    },
+    {
+     "text": "Different mapping methods !!!",
+     "status": "none"
+    },
+    {
+     "text": "iter n=1, iter n=5, e-val th -10",
+     "status": "none"
+    },
+    {
+     "text": "myoProg-Pax3",
+     "status": "none"
+    },
+    {
+     "text": "homology",
+     "status": "done"
+    },
+    {
+     "text": "What about species-specificity?",
+     "status": "none"
+    },
+    {
+     "text": "Cell-first approach: Local outlier factor",
+     "status": "none"
+    },
+    {
+     "text": "Expression-first approach: ElasticNet Regression",
+     "status": "none"
+    },
+    {
+     "text": "A) Cross-species reference LOF",
+     "status": "none"
+    },
+    {
+     "text": "B) Species-aware neighborhood density",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Doodled mouse and fish linked by arrows, plus a 3x3 sticky-note heatmap",
+   "poster_box": {
+    "x0": 0.02,
+    "y0": 0.025,
+    "x1": 0.885,
+    "y1": 0.947
+   },
+   "questions": [
+    {
+     "question": "Which two animals are drawn on this poster?",
+     "options": [
+      "A cat and a dog",
+      "A fly and a worm",
+      "A mouse and a fish",
+      "A frog and a bird"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Left middle (above the gene-mapping dots) and again bottom right with arrows between them",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many coloured sticky notes make up the grid in the bottom-left corner?",
+     "options": [
+      "6",
+      "9",
+      "12",
+      "16"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Bottom left: red, orange and green sticky notes arranged in a square grid",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the small table at the bottom, what R² value is listed for cell type A?",
+     "options": [
+      "0.65",
+      "0.35",
+      "0.82",
+      "0.95"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Bottom centre box, table under 'ElasticNet Regression' with columns Cell type / R² / Top genes",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "3x3 heatmap made of red, orange and green sticky notes",
+     "box": {
+      "x0": 0.105,
+      "y0": 0.744,
+      "x1": 0.302,
+      "y1": 0.885
+     }
+    },
+    {
+     "label": "Mouse and fish doodles linked by circular arrows (cross-species LOF)",
+     "box": {
+      "x0": 0.515,
+      "y0": 0.74,
+      "x1": 0.78,
+      "y1": 0.82
+     }
+    }
+   ],
+   "unreadable": "Word after \"adaxial\" next to the green dot plot (looks like \"cells\"/\"alls\") left out; axis labels on the sticky-note heatmap (rows ...1-3, columns \"dr1/dr2/dr3\"?) not legible; small UMAP annotation \"m=iter.\" uncertain."
+  },
+  "check": {
+   "project_number": 23,
+   "title_on_poster": "#23 Single-cell dataset integration across repositories & species",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6360.jpg",
+  "poster": {
+   "project_number": 22,
+   "number_evidence": "Written on the poster: the headline reads \"22 - Open Pathway Maps\", which also matches official title 22.",
+   "title_on_poster": "22-OPen Pathway Maps",
+   "one_liner": "Set rules for what makes a metabolic pathway map easy to read, then tried graph layout tools against them",
+   "highlights": [
+    "Data sources: E. coli core map, Reactome, BRENDA, VMH/IMD and stress knowledge maps",
+    "Hard rules: cycles are a circle, no line crossing, reproducibility, aspect ratio",
+    "Soft rules: avoid long lines, avoid bends, no overlapping nodes",
+    "Tools: Cytoscape (12 algorithms), igraph (7), graphviz-dot (6), NetworkX (3)",
+    "Also listed MetaCarto, Sbml2Map and SbmlNetwork as tools"
+   ],
+   "notes": [
+    {
+     "text": "E. coli core map",
+     "status": "none"
+    },
+    {
+     "text": "Reactome",
+     "status": "none"
+    },
+    {
+     "text": "BRENDA Maps",
+     "status": "none"
+    },
+    {
+     "text": "Stress knowledge maps",
+     "status": "none"
+    },
+    {
+     "text": "VMH / IMD Maps",
+     "status": "none"
+    },
+    {
+     "text": "Data (SBML)",
+     "status": "none"
+    },
+    {
+     "text": "Define a good Map",
+     "status": "none"
+    },
+    {
+     "text": "Benchmarking",
+     "status": "none"
+    },
+    {
+     "text": "Rules",
+     "status": "none"
+    },
+    {
+     "text": "Trying it out",
+     "status": "none"
+    },
+    {
+     "text": "Good or bad?",
+     "status": "none"
+    },
+    {
+     "text": "What rules are important to you?",
+     "status": "none"
+    },
+    {
+     "text": "Hard Rules: Cycles are a circle; No line crossing; Reproducibility; Aspect ratio",
+     "status": "none"
+    },
+    {
+     "text": "Soft Rules: Avoid long lines; Avoid bends; No overlapping nodes",
+     "status": "none"
+    },
+    {
+     "text": "Tools: MetaCarto, Sbml2Map, SbmlNetwork, Cytoscape (12 algorithms), NetworkX (3 algorithms), graphviz-dot (6 algorithms), igraph (7 algorithms), Graphology + SigmaJS",
+     "status": "none"
+    },
+    {
+     "text": "3D maps?",
+     "status": "none"
+    },
+    {
+     "text": "Interaction types",
+     "status": "none"
+    },
+    {
+     "text": "Cofactor exclusion / duplication",
+     "status": "none"
+    },
+    {
+     "text": "Duplicate metabolites based on reaction steps between them",
+     "status": "none"
+    },
+    {
+     "text": "Stoichiometry",
+     "status": "none"
+    },
+    {
+     "text": "Evidence annotation",
+     "status": "none"
+    },
+    {
+     "text": "Same size boxes",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Jadzia Murphy",
+    "Julia Koblitz",
+    "Anja Tietz",
+    "Sergej Praček"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Star stickers feeding a sticky-note flowchart, plus a good vs bad graph sketch",
+   "poster_box": {
+    "x0": 0.03,
+    "y0": 0.018,
+    "x1": 0.92,
+    "y1": 0.95
+   },
+   "questions": [
+    {
+     "question": "What shape are the coloured stickers that name map sources like Reactome and BRENDA?",
+     "options": [
+      "Hearts",
+      "Stars",
+      "Clouds",
+      "Hexagons"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Top left, the cluster of purple and green stickers above the yellow 'Data' note",
+     "difficulty": "easy"
+    },
+    {
+     "question": "In the 'Tools' list, how many algorithms are noted next to Cytoscape?",
+     "options": [
+      "5",
+      "9",
+      "15",
+      "12"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom left, the 'Tools' list under the blue 'Trying it out' note",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the right-hand graph of the 'Good or bad?' sketch, which lettered node is drawn inside a triangle?",
+     "options": [
+      "A",
+      "C",
+      "B",
+      "E"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top right, the messier of the two graphs under 'Good or bad?'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Good vs bad graph sketch: tidy A-B-C/E-D tree next to a tangled version with triangle and square nodes",
+     "box": {
+      "x0": 0.63,
+      "y0": 0.136,
+      "x1": 0.885,
+      "y1": 0.264
+     }
+    },
+    {
+     "label": "Yellow 'Data' note with hand-drawn green SBML logo",
+     "box": {
+      "x0": 0.111,
+      "y0": 0.247,
+      "x1": 0.289,
+      "y1": 0.333
+     }
+    }
+   ],
+   "unreadable": "About four more team names in faint pencil on the third and fourth team lines are too small to read reliably. The blue speech bubble left of the Tools list (possibly mentions Sigma.js) is illegible. One orange speech bubble at bottom right is blank."
+  },
+  "check": {
+   "project_number": 22,
+   "title_on_poster": "22 - Open Pathway Maps",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6361.jpg",
+  "poster": {
+   "project_number": 21,
+   "number_evidence": "Written on the poster: \"#21\" at top left, and the headline \"Data Stewardship Handbook\" matches official title 21.",
+   "title_on_poster": "DATA STEWARDSHIP HANDBOOK",
+   "one_liner": "Improved an online handbook for research data managers: new page templates, checked pages online, a survey draft, 200 pull requests.",
+   "highlights": [
+    "200 pull requests!",
+    "Reshaped the handbook page templates",
+    "\"At a glance\" summary info + display done",
+    "Drafted a questionnaire for a feedback & engagement survey",
+    "Final, checked pages online; new Campfires (case study) pages written"
+   ],
+   "notes": [
+    {
+     "text": "11.11.2026 ELIXIR BioHackathon",
+     "status": "none"
+    },
+    {
+     "text": "200 pull requests!",
+     "status": "none"
+    },
+    {
+     "text": "Design, Templates & Tech",
+     "status": "none"
+    },
+    {
+     "text": "At a glance: Summary info + display",
+     "status": "done"
+    },
+    {
+     "text": "Reshaping templates",
+     "status": "done"
+    },
+    {
+     "text": "Working with GitHub: -> Issues -> Ingest -> Interaction (Document our way of working)",
+     "status": "doing"
+    },
+    {
+     "text": "Draft questionnaire",
+     "status": "done"
+    },
+    {
+     "text": "Feedback on it",
+     "status": "next"
+    },
+    {
+     "text": "Plan dissemination",
+     "status": "next"
+    },
+    {
+     "text": "+ SURVEY for feedback & engagement",
+     "status": "none"
+    },
+    {
+     "text": "Waypoints: Final, checked pages online",
+     "status": "done"
+    },
+    {
+     "text": "Identifying goals with the Maturity Model",
+     "status": "none"
+    },
+    {
+     "text": "Signposts: Finding GUIDANCE",
+     "status": "none"
+    },
+    {
+     "text": "Transfer old to new templates",
+     "status": "doing"
+    },
+    {
+     "text": "Write new pages",
+     "status": "next"
+    },
+    {
+     "text": "Sharing CASE STUDIES",
+     "status": "none"
+    },
+    {
+     "text": "Campfires: Update old to new templates",
+     "status": "doing"
+    },
+    {
+     "text": "Campfires: Write new",
+     "status": "done"
+    },
+    {
+     "text": "Campfires: Collect more ideas & contributors",
+     "status": "doing"
+    },
+    {
+     "text": "Add links to ELIXIR ecosystem",
+     "status": "doing"
+    },
+    {
+     "text": "Review content",
+     "status": "doing"
+    },
+    {
+     "text": "CONTRIBUTIONS (heart of names)",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Heleri",
+    "David",
+    "Pavlina",
+    "Marina",
+    "Siiri",
+    "Vilem",
+    "Martinique",
+    "Luiz",
+    "Kristyna",
+    "Xenia",
+    "Luka",
+    "Hana",
+    "Minna",
+    "Toni",
+    "Mijke",
+    "Jeanne"
+   ],
+   "links": [
+    "elixir-europe.github.io/ds-handbook/"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Hiking trail map: magpie by flagged peaks, signpost, hiker, campfires",
+   "poster_box": {
+    "x0": 0.035,
+    "y0": 0.055,
+    "x1": 0.888,
+    "y1": 0.963
+   },
+   "questions": [
+    {
+     "question": "How many pull requests does the yellow sun in the top right corner announce?",
+     "options": [
+      "50",
+      "120",
+      "200",
+      "500"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top right, inside the yellow sun next to the bird",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What is written on the wooden signpost on the left side of the trail?",
+     "options": [
+      "This way to FAIR",
+      "Finding GUIDANCE",
+      "Next stop: Galaxy",
+      "Mind the gap"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Left side, the signboard under the word SIGNPOSTs",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many wooden benches are drawn around the small campfire in the middle of the trail?",
+     "options": [
+      "2",
+      "4",
+      "5",
+      "3"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Centre right, the small fire ring beside \"Sharing CASE STUDIES\"",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Black and green magpie perched at the top of the trail",
+     "box": {
+      "x0": 0.625,
+      "y0": 0.079,
+      "x1": 0.76,
+      "y1": 0.305
+     }
+    },
+    {
+     "label": "Small campfire in a stone ring with three log benches",
+     "box": {
+      "x0": 0.451,
+      "y0": 0.514,
+      "x1": 0.704,
+      "y1": 0.611
+     }
+    }
+   ],
+   "unreadable": "No colour legend: note status inferred from checkboxes (green tick = done, green dot = doing, empty box = next)."
+  },
+  "check": {
+   "project_number": 21,
+   "title_on_poster": "Data Stewardship Handbook",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": "Minor: the small campfire sits beside the trail, not in the middle of it, but the question still points clearly to the right drawing."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6362.jpg",
+  "poster": {
+   "project_number": 20,
+   "number_evidence": "Written on the poster top right: \"project #20\". Matches official title 20 (Automated Software Maturity Assessment ... in bio.tools).",
+   "title_on_poster": "MATURITY METER",
+   "one_liner": "A tool that gathers info on a research software tool from registries and literature, then gives it maturity scores and suggestions.",
+   "highlights": [
+    "Pulls data from repo, RSEc, bio.tools, EDAM, OpenEBench, EuropePMC, OpenAlex, Lizard",
+    "Rates six areas: compatibility, FAIRness, maintainability, sci. impact, security, sustainability",
+    "Outputs scores plus suggestions for your tool",
+    "Code lives at bio-tools/maturity-meter",
+    "Asks for user input via edu.nl/3y4ek"
+   ],
+   "notes": [
+    {
+     "text": "Your Tool </>",
+     "status": "none"
+    },
+    {
+     "text": "Inputs: repo, RSEc, bio.tools, EDAM, OpenEBench, EuropePMC, OpenAlex, Lizard, others",
+     "status": "none"
+    },
+    {
+     "text": "magic / pew pew (around the gear)",
+     "status": "none"
+    },
+    {
+     "text": "Outputs: Compatibility, FAIRness, Maintainability, Sci. impact, Security, Sustainability",
+     "status": "none"
+    },
+    {
+     "text": "Scores + suggestions",
+     "status": "none"
+    },
+    {
+     "text": "We need your INPUT",
+     "status": "none"
+    },
+    {
+     "text": "Failed attempt at drawing a QR code for edu.nl/3y4ek",
+     "status": "none"
+    },
+    {
+     "text": "Our repo: bio-tools/maturity-meter",
+     "status": "none"
+    },
+    {
+     "text": "This is us",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU26",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Walter",
+    "Anita",
+    "Lev",
+    "Veit",
+    "Mariia"
+   ],
+   "links": [
+    "bio-tools/maturity-meter",
+    "edu.nl/3y4ek",
+    "#BioHackEU26"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Pink gear going \"magic pew pew\" turning data sources into scores",
+   "poster_box": {
+    "x0": 0.002,
+    "y0": 0.072,
+    "x1": 0.982,
+    "y1": 0.949
+   },
+   "questions": [
+    {
+     "question": "What is written inside the big green circle on the left side of the poster?",
+     "options": [
+      "Your Data",
+      "Your Tool",
+      "Your Lab",
+      "Your Code"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Large green circle at the left edge, middle height",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which sound effect is written just below the pink gear in the middle?",
+     "options": [
+      "zap zap",
+      "beep boop",
+      "whirr whirr",
+      "pew pew"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Centre of the poster, green text under the pink gear ('magic' is above it)",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many blue ovals connect the left green circle to the central gear?",
+     "options": [
+      "9",
+      "6",
+      "7",
+      "12"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Column of blue ovals between the left circle and the gear (repo down to others)",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Pink gear with 'magic' and 'pew pew' surrounded by green stars",
+     "box": {
+      "x0": 0.388,
+      "y0": 0.405,
+      "x1": 0.505,
+      "y1": 0.6
+     }
+    },
+    {
+     "label": "Hand-drawn 'failed attempt' QR code that turned into a smiling face with tongue",
+     "box": {
+      "x0": 0.765,
+      "y0": 0.56,
+      "x1": 0.935,
+      "y1": 0.74
+     }
+    }
+   ],
+   "unreadable": ""
+  },
+  "check": {
+   "project_number": 20,
+   "title_on_poster": "MATURITY METER",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6363.jpg",
+  "poster": {
+   "project_number": 19,
+   "number_evidence": "Written on the poster: \"19\" on the orange round sticker at top right. Content (exposome, ontology cross-mapping) also matches official title 19.",
+   "title_on_poster": "Ontologies",
+   "one_liner": "Built ExpoPortal and cross-mapped exposome ontologies so environmental exposure data becomes FAIR and AI-ready.",
+   "highlights": [
+    "ExpoPortal: a portal for exposome ontologies, linked from a star sticky note",
+    "Ontology cross-mapping feeding into FAIRification of exposome data",
+    "Use cases: noise & mental health, Norman_SLE radiation, air pollution & asthma",
+    "6PPD-Q & coho salmon use case, with the 6PPD-Q molecule drawn out",
+    "End goal drawn as \"AI Ready FAIR\""
+   ],
+   "notes": [
+    {
+     "text": "The Challenge: Exposome",
+     "status": "none"
+    },
+    {
+     "text": "1 Different standards",
+     "status": "none"
+    },
+    {
+     "text": "2 Heterogenous data with spatio temporal representation",
+     "status": "none"
+    },
+    {
+     "text": "3 Difficult data integration",
+     "status": "none"
+    },
+    {
+     "text": "4 lack of interoperability (FAIR crossed out)",
+     "status": "none"
+    },
+    {
+     "text": "Solution -> Ontologies",
+     "status": "none"
+    },
+    {
+     "text": "ExpoPortal",
+     "status": "none"
+    },
+    {
+     "text": "Ontology Cross_mapping",
+     "status": "none"
+    },
+    {
+     "text": "FAIRification",
+     "status": "none"
+    },
+    {
+     "text": "FAIR GOES UP! (blue house-shaped note)",
+     "status": "none"
+    },
+    {
+     "text": "elixir BHEU22! (pink speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "Use Cases",
+     "status": "none"
+    },
+    {
+     "text": "Noise exposure & mental health",
+     "status": "none"
+    },
+    {
+     "text": "Norman_SLE (Radiation)",
+     "status": "none"
+    },
+    {
+     "text": "Air polution & asthma",
+     "status": "none"
+    },
+    {
+     "text": "6 PPD-Q & Coho Salmon",
+     "status": "none"
+    },
+    {
+     "text": "AI Ready FAIR",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU2026",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "David Fitala",
+    "Marvin Martens",
+    "Boukerfa Amine",
+    "Faria Khan",
+    "Dominik Martinát",
+    "Bashir Mayahi",
+    "Fernando Vázquez López",
+    "Sara Morsy",
+    "Egon Willighagen"
+   ],
+   "links": [
+    "https://edu.nl/ngaku"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Flowchart from big blue \"Ontologies\" to \"AI Ready FAIR\", orange hazard triangles",
+   "poster_box": {
+    "x0": 0.03,
+    "y0": 0.05,
+    "x1": 0.865,
+    "y1": 0.94
+   },
+   "questions": [
+    {
+     "question": "What animal is cut out of blue paper near the bottom of the poster?",
+     "options": [
+      "A bird",
+      "A turtle",
+      "A fish",
+      "A whale"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Lower middle, next to the \"6 PPD-Q & Coho Salmon\" use case",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What is drawn in pen next to the three orange circles linked by green arrows?",
+     "options": [
+      "A robot",
+      "A rocket",
+      "A laptop",
+      "An owl"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Right side, just above the big \"AI Ready FAIR\" letters",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which body organ is drawn on the small green square sticky note?",
+     "options": [
+      "Heart",
+      "Brain",
+      "Kidneys",
+      "Lungs"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom left area, beside the hand-drawn pink molecule",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Pen-drawn robot beside three orange circles linked by green arrows",
+     "box": {
+      "x0": 0.585,
+      "y0": 0.52,
+      "x1": 0.83,
+      "y1": 0.685
+     }
+    },
+    {
+     "label": "Hand-drawn pink 6PPD-Q molecule and blue cut-out fish",
+     "box": {
+      "x0": 0.17,
+      "y0": 0.785,
+      "x1": 0.415,
+      "y1": 0.92
+     }
+    }
+   ],
+   "unreadable": "Star sticky URL: domain looks like \"edu.nl\" but could read \"edu.nel\"; transcribed as https://edu.nl/ngaku. Small pen note under the star (\"nine!\"/\"fine!\") unclear, left out. Surname \"Fitala\" spelling uncertain."
+  },
+  "check": {
+   "project_number": 19,
+   "title_on_poster": "Ontologies (#BioHackEU2026, ExpoPortal, Ontology cross-mapping, FAIRification)",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6364.jpg",
+  "poster": {
+   "project_number": 18,
+   "number_evidence": "Written on the poster: headline reads \"#18: CONDEESSI\", which also matches official title 18 (Condeessi, a Conda-EESSI transpiler).",
+   "title_on_poster": "#18: CONDEESSI",
+   "one_liner": "Automating conversion of popular Bioconda packages into EasyBuild recipes so they run on EESSI, a shared HPC software stack.",
+   "highlights": [
+    "Bioconda holds 10572 packages (yellow speech bubble)",
+    "Picked ~100 packages by number of downloads and dependencies",
+    "Pipeline: Convert to EB recipes -> Lint -> Build multi-arch -> Contribute (GitHub PR)",
+    "Converting to EasyBuild recipes flagged as \"THE HARD PART\"",
+    "Fully automated pipeline in .gitlab-ci, marked W.I.P"
+   ],
+   "notes": [
+    {
+     "text": "10572 packages",
+     "status": "none"
+    },
+    {
+     "text": "BIOCONDA",
+     "status": "none"
+    },
+    {
+     "text": "# Dowloads / # Deps",
+     "status": "none"
+    },
+    {
+     "text": "~100 packages",
+     "status": "none"
+    },
+    {
+     "text": "CONVERT to (EB recipes)",
+     "status": "none"
+    },
+    {
+     "text": "THE HARD PART",
+     "status": "none"
+    },
+    {
+     "text": "LINT",
+     "status": "none"
+    },
+    {
+     "text": "BUILD multi-arch",
+     "status": "none"
+    },
+    {
+     "text": "CONTRIBUTE (github PR)",
+     "status": "none"
+    },
+    {
+     "text": "Fully Automated Pipeline (.gitlab-ci) W.I.P",
+     "status": "none"
+    },
+    {
+     "text": "EESSI",
+     "status": "none"
+    },
+    {
+     "text": "EASYBUILD",
+     "status": "none"
+    },
+    {
+     "text": "EESSI HERE",
+     "status": "none"
+    },
+    {
+     "text": "YOUR HPC | SOFTWARE TOOLS PAINS",
+     "status": "none"
+    },
+    {
+     "text": "File system usage (# of files)",
+     "status": "none"
+    },
+    {
+     "text": "Tools duplicate (Each user = conda env)",
+     "status": "none"
+    },
+    {
+     "text": "NF/Snakemake Galaxy integration ?",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Sticky-note pipeline in a blue box, red \"THE HARD PART\" arrow, Europe dot map",
+   "poster_box": {
+    "x0": 0.046,
+    "y0": 0.022,
+    "x1": 0.915,
+    "y1": 0.975
+   },
+   "questions": [
+    {
+     "question": "What is drawn in the top-right corner, under the words \"EESSI HERE\"?",
+     "options": [
+      "A world map with blue pins",
+      "A bar chart of package downloads",
+      "A map of Europe with red dots",
+      "A drawing of a snake"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top-right box, pink sheet under the red \"EESSI HERE\" arrow",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many packages does the yellow speech bubble next to BIOCONDA say there are?",
+     "options": [
+      "2,890",
+      "25,000",
+      "1,057",
+      "10,572"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Yellow speech-bubble sticky note at the top left, beside the blue BIOCONDA note",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which CI configuration is named under \"Fully Automated Pipeline\"?",
+     "options": [
+      ".gitlab-ci",
+      "Jenkinsfile",
+      "CircleCI",
+      "Travis CI"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Blue handwriting to the right of the sticky-note pipeline, in brackets below \"Pipeline\"",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Europe map with red dots marking EESSI sites",
+     "box": {
+      "x0": 0.618,
+      "y0": 0.089,
+      "x1": 0.867,
+      "y1": 0.25
+     }
+    },
+    {
+     "label": "Dot-sticker chart of HPC software pains (grey, olive, teal and orange circles)",
+     "box": {
+      "x0": 0.606,
+      "y0": 0.684,
+      "x1": 0.878,
+      "y1": 0.829
+     }
+    }
+   ],
+   "unreadable": "Exact count of red dots on the Europe map is uncertain (about 22). Grey and olive circles in the pains chart have no visible writing. The small print on the map sheet (\"Escribir ya es trabajar (bueno, casi)\") looks like notepad branding, not project content, so it is left out."
+  },
+  "check": {
+   "project_number": 18,
+   "title_on_poster": "#18: CONDEESSI",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": "Mildly guessable: '.gitlab-ci' is the only option written as a dotfile name, so it stands out as the poster-specific spelling."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6366.jpg",
+  "poster": {
+   "project_number": 17,
+   "number_evidence": "\"#17\" written in marker right of the title; headline also matches official title 17.",
+   "title_on_poster": "BRIDGING LITERATURE AND PRACTICE: TOOL CO-CITATION NETWORKS FROM PUBLICATIONS AND REGISTERED WORKFLOWS",
+   "one_liner": "Mapped which bioinformatics tools get cited together in 7.2M papers and used together in workflows, to see if the two agree.",
+   "highlights": [
+    "Mined 7.2M publications for tool co-citations",
+    "Pulled registered workflows from 3 sources: WorkflowHub Galaxy, Nextflow, nf-core",
+    "WorkflowHub Galaxy: 788 workflows, 712 tool pairs found, 324 pairs used",
+    "Nextflow: 211 workflows, 3183 pairs found, 1259 used; nf-core: 158, 1890, 773",
+    "Drew a 16-tool network of metabolomics and proteomics tools coloured by EDAM topic"
+   ],
+   "notes": [
+    {
+     "text": "Goal 1: BUILD directed co-citation network of tools in biotools",
+     "status": "none"
+    },
+    {
+     "text": "Goal 2: BRIDGE co-citations and workflowhub",
+     "status": "none"
+    },
+    {
+     "text": "Goal 3: IMPLEMENT diractionality in InSoLito",
+     "status": "none"
+    },
+    {
+     "text": "Data: 7,2M publications; 3 sources of reg. workflows (WorkflowHub Galaxy, Nexflow, nf-core); rows: workflows / pairs found / pairs used",
+     "status": "none"
+    },
+    {
+     "text": "Key words: Galaxy, Europe PMC, Nextflow, WorkflowHub, bio.tools, nf-core, InSoLito, co-citations, Cytoscape",
+     "status": "none"
+    },
+    {
+     "text": "Blue speech bubble: AND SOURCES",
+     "status": "none"
+    },
+    {
+     "text": "EDAM topics legend: Metabolomics (green), Proteomics (red), Both (orange)",
+     "status": "none"
+    },
+    {
+     "text": "Green notes: meteboanalyst, hmdb, metlin, massbank; orange note: gnps",
+     "status": "none"
+    },
+    {
+     "text": "Red notes: percolator, ms-gf, msfragger, comet, MASCOT, skyline, libra, msconvert, peptideprophet, DIA-NN, proteinprophet",
+     "status": "none"
+    },
+    {
+     "text": "Overlay sheet: DO CO-CITATIONS AND WORKFLOWS AGREE?",
+     "status": "none"
+    },
+    {
+     "text": "Next step: SCALE UP to all literature and tools",
+     "status": "none"
+    },
+    {
+     "text": "Next step: ANALYZE results",
+     "status": "none"
+    },
+    {
+     "text": "Next step: CLEAN UP repository",
+     "status": "none"
+    },
+    {
+     "text": "Next step: WRITE BioHackrXiv report",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Xenie B.",
+    "Magnus P.",
+    "ALMA N.",
+    "Yolana G.",
+    "Julian U.",
+    "Vedran K.",
+    "Juancris P."
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Network of red and green sticky-note tools linked by hand-drawn arrows",
+   "poster_box": {
+    "x0": 0.02,
+    "y0": 0,
+    "x1": 0.955,
+    "y1": 0.98
+   },
+   "questions": [
+    {
+     "question": "According to the DATA box, how many publications did the team use?",
+     "options": [
+      "1.5M",
+      "7.2M",
+      "3.4M",
+      "720K"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Big number at the top of the DATA box, upper left",
+     "difficulty": "easy"
+    },
+    {
+     "question": "In the EDAM topics legend, what does the orange colour stand for?",
+     "options": [
+      "Genomics",
+      "Lipidomics",
+      "Transcriptomics",
+      "Both metabolomics and proteomics"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "EDAM TOPICS LEGEND under the green sticky-note cluster, left side",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many red square sticky notes make up the tool network drawing?",
+     "options": [
+      "11",
+      "8",
+      "14",
+      "6"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Large arrow network in the right half of the poster",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Green metabolomics sticky notes with the lone orange gnps note",
+     "box": {
+      "x0": 0.07,
+      "y0": 0.5,
+      "x1": 0.34,
+      "y1": 0.685
+     }
+    },
+    {
+     "label": "Fat arrow from peptideprophet to proteinprophet red notes",
+     "box": {
+      "x0": 0.67,
+      "y0": 0.686,
+      "x1": 0.831,
+      "y1": 0.777
+     }
+    }
+   ],
+   "unreadable": "Exact letters of some names uncertain: first letter of \"Xenie B.\" is a cursive X, and \"Julian U.\" may carry an accent (Julián). The translucent \"DO CO-CITATIONS AND WORKFLOWS AGREE?\" sheet covers the lower-left of the poster; nothing legible shows beneath it."
+  },
+  "check": {
+   "project_number": 17,
+   "title_on_poster": "Bridging Literature and Practice: Tool Co-citation Networks from Publications and Registered Workflows",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6367.jpg",
+  "poster": {
+   "project_number": 16,
+   "number_evidence": "Written on the poster: pink circle sticker \"#16\" at top left; headline also matches title 16 (MiCoKnowGraph, Microbiome Collaborative Knowledge Graph).",
+   "title_on_poster": "HOW TO BUILD A(?) COLLABORATIVE MICROBIOME KNOWLEDGE GRAPH?",
+   "one_liner": "Planned a shared knowledge graph for microbiome data: gathered use cases, questions, ontologies and data sources to shape its model.",
+   "highlights": [
+    "Scope: 5 use cases formalized into 30 scientific/competency questions",
+    "Questions cut into 559 entities and 39 relationships",
+    "State of the art: 67 ontologies and 17 knowledge graphs selected and described",
+    "Concepts and properties mapped toward a Knowledge Graph Model",
+    "Discussions led to harmonizing vocabularies and mental models into common knowledge"
+   ],
+   "notes": [
+    {
+     "text": "SIDEQUEST: ... trace of AI Model use?",
+     "status": "none"
+    },
+    {
+     "text": "Agent markdown file",
+     "status": "none"
+    },
+    {
+     "text": "Changeset file",
+     "status": "none"
+    },
+    {
+     "text": "Give up and become a farmer :)",
+     "status": "none"
+    },
+    {
+     "text": "SECRET WEAPONS",
+     "status": "none"
+    },
+    {
+     "text": "SPREADSHEETS",
+     "status": "none"
+    },
+    {
+     "text": "Use Cases: 5",
+     "status": "none"
+    },
+    {
+     "text": "Scientific/Competency questions: 30",
+     "status": "none"
+    },
+    {
+     "text": "Entities: 559",
+     "status": "none"
+    },
+    {
+     "text": "Relationships: 39",
+     "status": "none"
+    },
+    {
+     "text": "Ontologies: 67",
+     "status": "none"
+    },
+    {
+     "text": "Knowledge Graphs: 17",
+     "status": "none"
+    },
+    {
+     "text": "Relevant Concepts / Relevant Properties -> Knowledge Graph Model",
+     "status": "none"
+    },
+    {
+     "text": "Discussions: Data vs Metadata; Entity granularity level; Model approach; Boundaries of microbiome concepts; Taxa vs sample centric KG; WikiData; AI-Model; Automatization of KG generation; Knowledge completeness of a Knowledge Graph",
+     "status": "none"
+    },
+    {
+     "text": "Harmonization of: background, vocabularies, general concepts, mental models, ...",
+     "status": "none"
+    },
+    {
+     "text": "Common Knowledge",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Cloud of overlapping red translucent circles with a big question mark",
+   "poster_box": {
+    "x0": 0.015,
+    "y0": 0.01,
+    "x1": 0.97,
+    "y1": 1
+   },
+   "questions": [
+    {
+     "question": "What sits in the middle of the poster, made of overlapping red circles?",
+     "options": [
+      "A DNA double helix",
+      "A bacterium with flagella",
+      "A cloud with a question mark",
+      "A globe"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Centre of the poster, below the 'Relevant Concepts' and 'Relevant Properties' boxes",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which word is written on the green note in the 'SECRET WEAPONS' corner?",
+     "options": [
+      "SPREADSHEETS",
+      "COFFEE",
+      "PYTHON",
+      "GITHUB"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Right edge, middle: green note beside the red heart under the 'SECRET WEAPONS' label",
+     "difficulty": "medium"
+    },
+    {
+     "question": "What number is on the yellow dot attached to the 'Ontologies' box?",
+     "options": [
+      "24",
+      "48",
+      "92",
+      "67"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "'State of the Art' section, upper right: yellow dot on the left corner of the 'Ontologies' box",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Red circle cloud with question mark",
+     "box": {
+      "x0": 0.3,
+      "y0": 0.5,
+      "x1": 0.57,
+      "y1": 0.62
+     }
+    },
+    {
+     "label": "Secret weapons: spreadsheet note, heart, Australia cut-out, moon, video-call screen",
+     "box": {
+      "x0": 0.7,
+      "y0": 0.53,
+      "x1": 0.96,
+      "y1": 0.66
+     }
+    }
+   ],
+   "unreadable": "First word of the SIDEQUEST question is cut off at the sheet edge (only '... trace of AI Model use?' visible). Count on the Data sources dot is partly hidden by a sticky note (starts with 6). Second digit on the Knowledge Graph Model dot is unclear (1?). A dark green note under SIDEQUEST and one under the 'farmer' note show no readable text."
+  },
+  "check": {
+   "project_number": 16,
+   "title_on_poster": "HOW TO BUILD A(?) COLLABORATIVE MICROBIOME KNOWLEDGE GRAPH?",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6368.jpg",
+  "poster": {
+   "project_number": 15,
+   "number_evidence": "Written on the poster as \"#15\" in pink marker; matches official title 15 (knowledge graph of learning resources)",
+   "title_on_poster": "Training Resources AI-driveN Exploration Repository = ELIXIR TRAINER",
+   "one_liner": "Built ELIXIR TRAINER: a public knowledge graph of training materials harvested from TeSS, queryable via SPARQL and AI tools",
+   "highlights": [
+    "Deployed public QLever triplestore at biosoda.unil.ch/elixir-trainer/sparql",
+    "Fixed the TeSS harvesting script that feeds the knowledge graph",
+    "Deployed an MCP server alongside the KG, plus an interactive tools GUI",
+    "Described the KG with a VoID schema and SPARQL examples",
+    "Joined the ELIXIR TeSS Club"
+   ],
+   "notes": [
+    {
+     "text": "Harvesting",
+     "status": "none"
+    },
+    {
+     "text": "Fix Tess harvesting script",
+     "status": "done"
+    },
+    {
+     "text": "Add script for SciLifeLab (Sweden)",
+     "status": "none"
+    },
+    {
+     "text": "Replace Tess harvesting with new Tess dump",
+     "status": "none"
+    },
+    {
+     "text": "Deploying + Maintaining",
+     "status": "none"
+    },
+    {
+     "text": "Pick triplestore qlever",
+     "status": "done"
+    },
+    {
+     "text": "Deploy triplestore publicly https://biosoda.unil.ch/elixir-trainer/sparql",
+     "status": "done"
+    },
+    {
+     "text": "Properly describe the KG: generate & share void schema + sparql examples + required info",
+     "status": "done"
+    },
+    {
+     "text": "CI to update the KG",
+     "status": "none"
+    },
+    {
+     "text": "Prepare for how to fix when harvesting script breaks in 5 months",
+     "status": "none"
+    },
+    {
+     "text": "AI",
+     "status": "none"
+    },
+    {
+     "text": "Along the KG: Deploy the MCP server",
+     "status": "done"
+    },
+    {
+     "text": "Interactive tools GUI",
+     "status": "done"
+    },
+    {
+     "text": "Interactive tools from sparql-llm: visualisation",
+     "status": "none"
+    },
+    {
+     "text": "Interactive tools from sparql-llm: Tess dashboard",
+     "status": "none"
+    },
+    {
+     "text": "Answering Questions",
+     "status": "none"
+    },
+    {
+     "text": "Existing queries",
+     "status": "done"
+    },
+    {
+     "text": "User stories using SPARQL queries",
+     "status": "none"
+    },
+    {
+     "text": "Licensing + Comms",
+     "status": "none"
+    },
+    {
+     "text": "Suggest updated terms and conditions for Tess",
+     "status": "none"
+    },
+    {
+     "text": "BioHackrXiv report",
+     "status": "none"
+    },
+    {
+     "text": "Alternative Methodologies",
+     "status": "none"
+    },
+    {
+     "text": "Interactions with other projects",
+     "status": "none"
+    },
+    {
+     "text": "#6 -> user stories <- training credit",
+     "status": "none"
+    },
+    {
+     "text": "#26 experiment with Biotope",
+     "status": "none"
+    },
+    {
+     "text": "Join ELIXIR Tess Club",
+     "status": "done"
+    }
+   ],
+   "contributors": [],
+   "links": [
+    "elixir-europe-training/ELIXIR-TrP-KG-training-metadata",
+    "https://biosoda.unil.ch/elixir-trainer/sparql"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Green marker spires and trees, one spire topped by a cross, behind the notes",
+   "poster_box": {
+    "x0": 0.11,
+    "y0": 0.03,
+    "x1": 0.87,
+    "y1": 0.88
+   },
+   "questions": [
+    {
+     "question": "Which triplestore did the team pick, according to a ticked green sticky note?",
+     "options": [
+      "Blazegraph",
+      "QLever",
+      "Virtuoso",
+      "GraphDB"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Deploying + Maintaining row, first green note: 'Pick triplestore qlever'",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many pink sticky notes are on the poster?",
+     "options": [
+      "2",
+      "4",
+      "3",
+      "5"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Lower part of the sheet, near the 'Interactions with other projects' label",
+     "difficulty": "medium"
+    },
+    {
+     "question": "One note plans ahead for the harvesting script breaking. In how many months?",
+     "options": [
+      "3 months",
+      "6 months",
+      "12 months",
+      "5 months"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Far right note of the Deploying + Maintaining row: 'Prepare for how to fix when harvesting script breaks in 5 months'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Green marker sketch of spires with windows",
+     "box": {
+      "x0": 0.625,
+      "y0": 0.43,
+      "x1": 0.8,
+      "y1": 0.565
+     }
+    },
+    {
+     "label": "Ticked pink note: Join ELIXIR Tess Club",
+     "box": {
+      "x0": 0.565,
+      "y0": 0.685,
+      "x1": 0.67,
+      "y1": 0.768
+     }
+    }
+   ],
+   "unreadable": "Last word on the 'Properly describe the KG' note is smudged (read as 'required info'); a scribbled mark sits between 'generate' and 'share' (read as '&'); the second digit of '#26' on the Biotope note looks overwritten."
+  },
+  "check": {
+   "project_number": 15,
+   "title_on_poster": "Training Resources AI-driveN Exploration Repository = ELIXIR TRAINER",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6369.jpg",
+  "poster": {
+   "project_number": 14,
+   "number_evidence": "\"#14\" written in green marker next to the headline; headline matches official title 14",
+   "title_on_poster": "Unlocking animal data for reproducible research",
+   "one_liner": "Building MIMSA, a checklist for describing animal research data, and plugging it into ISA Wizard, ARC and FAIRDOM SEEK",
+   "highlights": [
+    "Finalising version 2 of the MIMSA checklist for animal metadata",
+    "Finalising the mapping",
+    "Integrating MIMSA into the ISA Wizard, ARC framework and FAIRDOM SEEK",
+    "Two integrations tagged 'Testing with real data'",
+    "Next up: a MIMSA ontology at a future Biohackathon in Germany"
+   ],
+   "notes": [
+    {
+     "text": "Open for input (black arrow next to ISA WIZARD)",
+     "status": "none"
+    },
+    {
+     "text": "Testing with real data (green arrow next to ISA WIZARD)",
+     "status": "none"
+    },
+    {
+     "text": "Open for input (black arrow next to ARC FRAMEWORK)",
+     "status": "none"
+    },
+    {
+     "text": "Testing with real data (green arrow next to ARC FRAMEWORK)",
+     "status": "none"
+    },
+    {
+     "text": "*online (marks remote contributors)",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Rica Rehfeld",
+    "Manuel Feser",
+    "Emily Clark",
+    "Sarah Fischer",
+    "Lucia Schulz",
+    "Max Schröder",
+    "Xiaoming Hu",
+    "Youchahou Matenchi",
+    "Daniel Arend",
+    "Anja Chlebusch",
+    "Dominik Brilhaus",
+    "Sebastian Beier"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Doodled mouse, pig and cow heads beside arrow-shaped sticky notes",
+   "poster_box": {
+    "x0": 0.067,
+    "y0": 0.072,
+    "x1": 0.875,
+    "y1": 0.985
+   },
+   "questions": [
+    {
+     "question": "Which of these animals is drawn on the poster?",
+     "options": [
+      "Cat",
+      "Horse",
+      "Pig",
+      "Chicken"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Right side, middle drawing in the column of animal heads",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What is written on the green arrow-shaped sticky notes?",
+     "options": [
+      "Testing with real data",
+      "Ready for release",
+      "Needs more volunteers",
+      "Bug fixing in progress"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Green arrows next to ISA WIZARD and ARC FRAMEWORK",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many names in the contributor list are marked with a green asterisk (online)?",
+     "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Contributor names under the headline; legend '*online' at bottom left",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Pig head doodle",
+     "box": {
+      "x0": 0.64,
+      "y0": 0.67,
+      "x1": 0.77,
+      "y1": 0.75
+     }
+    },
+    {
+     "label": "Arrow sticky notes: 'Open for input' and 'Testing with real data'",
+     "box": {
+      "x0": 0.51,
+      "y0": 0.585,
+      "x1": 0.65,
+      "y1": 0.83
+     }
+    }
+   ],
+   "unreadable": "First letter of the first contributor's name is ambiguous (Rica or Pica Rehfeld). Text on the third black arrow note (beside FAIRDOM SEEK) is too dark to read with confidence; it may repeat 'Open for input'. Spelling of 'Biohackerton Germany' in the future line is uncertain."
+  },
+  "check": {
+   "project_number": 14,
+   "title_on_poster": "#14 Unlocking animal data for reproducible research",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6370.jpg",
+  "poster": {
+   "project_number": 13,
+   "number_evidence": "Written on the poster: green note top right reads \"Project #13 #BioHackEU26\"; card names (DOME, BioAIRepo, Galaxy) also match official title 13.",
+   "title_on_poster": "DOME Registry / BioAIRepo / Galaxy / Container Registry",
+   "one_liner": "Mapped how the DOME Registry, BioAIRepo, Galaxy and a container registry connect: annotate, fetch, update, recommend, request access.",
+   "highlights": [
+    "Flowchart linking four cards: DOME Registry, BioAIRepo, Galaxy and Container Registry",
+    "DOME Registry to BioAIRepo arrow labelled 'Annotate' and 'Complement'",
+    "BioAIRepo to Galaxy labelled 'Fetch'; Galaxy back to BioAIRepo labelled 'Update'",
+    "'Recommend' arrow BioAIRepo to Container Registry; 'Request Access' arrow from Galaxy",
+    "DOME spelled out inside its letters: Data, Optimization, Model, Evaluation"
+   ],
+   "notes": [
+    {
+     "text": "Challenges",
+     "status": "none"
+    },
+    {
+     "text": "Dockerized by whom?",
+     "status": "none"
+    },
+    {
+     "text": "How to make Containers generic?",
+     "status": "none"
+    },
+    {
+     "text": "Questions ??",
+     "status": "none"
+    },
+    {
+     "text": "Using AI to recommend a Docker template?",
+     "status": "none"
+    },
+    {
+     "text": "Check whether there is already a Docker container",
+     "status": "none"
+    },
+    {
+     "text": "Research Software Ecosystem",
+     "status": "none"
+    },
+    {
+     "text": "Container -> BioContainers",
+     "status": "none"
+    },
+    {
+     "text": "Workflows / Compute / UI-based Sol\" / Reproducible analyses",
+     "status": "none"
+    },
+    {
+     "text": "</> Data: / Model: / Method Script:",
+     "status": "none"
+    },
+    {
+     "text": "Annotate",
+     "status": "none"
+    },
+    {
+     "text": "Complement",
+     "status": "none"
+    },
+    {
+     "text": "Fetch",
+     "status": "none"
+    },
+    {
+     "text": "Update",
+     "status": "none"
+    },
+    {
+     "text": "Recommend",
+     "status": "none"
+    },
+    {
+     "text": "Request Access",
+     "status": "none"
+    },
+    {
+     "text": "Project #13 #BioHackEU26",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [
+    "#BioHackEU26"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Flowchart of four cards (DOME, BioAIRepo, Galaxy, Container Registry) joined by tape arrows",
+   "poster_box": {
+    "x0": 0.029,
+    "y0": 0.166,
+    "x1": 0.967,
+    "y1": 0.963
+   },
+   "questions": [
+    {
+     "question": "What is drawn on the green square overlapping the corner of the Galaxy card?",
+     "options": [
+      "A rocket",
+      "A magnifying glass",
+      "A crossed hammer and screwdriver",
+      "A gear"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Bottom left, green square at the lower right corner of the Galaxy card",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which word labels the green arrow on the poster?",
+     "options": [
+      "Recommend",
+      "Deploy",
+      "Publish",
+      "Validate"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Right middle, orange label above the green arrow running from BioAIRepo to Container Registry",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which item is written on the tall orange list note at the far left edge (the one starting with 'Workflows')?",
+     "options": [
+      "Storage",
+      "Benchmarking",
+      "Training data",
+      "Reproducible analyses"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Left edge, tall orange note partly covered by a dark red square, last line",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Padlock drawing beside the 'Request Access' label",
+     "box": {
+      "x0": 0.414,
+      "y0": 0.841,
+      "x1": 0.554,
+      "y1": 0.931
+     }
+    },
+    {
+     "label": "Red code-page note with </> header and Data / Model / Method Script fields",
+     "box": {
+      "x0": 0.789,
+      "y0": 0.395,
+      "x1": 0.929,
+      "y1": 0.565
+     }
+    }
+   ],
+   "unreadable": "First word of the tall orange list note ('...tions') is hidden under a dark red square. A faint second layer of writing on the red code-page note (looks like Data / Model / Scripts) is not legible with confidence. Mirrored text showing through the Annotate and Complement labels and small print along the card edges are not readable."
+  },
+  "check": {
+   "project_number": 13,
+   "title_on_poster": "Project #13 #BioHackEU26 (diagram: DOME Registry -> BioAIRepo -> Galaxy / Container Registry)",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": "Minor wording: the note does not start with 'Workflows'; its first line is a partly covered word ending in '...tions' (hidden under a dark red note), with 'Workflows' on the second line. Still identifiable."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6371.jpg",
+  "poster": {
+   "project_number": 12,
+   "number_evidence": "Written bottom-left of the sheet: \"Project #12\"; the big \"SampleSift\" headline also matches official title #12.",
+   "title_on_poster": "Metadata-filtered maps at scale / SampleSift",
+   "one_liner": "A plug-in toolkit that indexes your sample database so geotagged biological samples can be filtered and mapped quickly.",
+   "highlights": [
+    "Map UI mockup: Pan/Rect/Poly/Clear tools, filters for taxonomy, date, biome, pH, temp, N50",
+    "Pipeline: your DB -> SampleSift indexing -> SampleSift DB -> generated spec & endpoints -> API",
+    "API serves OpenAPI endpoints/spec and CQL2 queryables for metadata and spatials",
+    "Clustering tile server plus generated dynamic UI",
+    "Available as a web component & jupyter widget"
+   ],
+   "notes": [
+    {
+     "text": "What stops us from filtering geoloc.-tagged data on maps? Slow to search + update map data; tedious to implement at scale; as requires DBs with specialized indexing",
+     "status": "none"
+    },
+    {
+     "text": "Our Solution: Agnostic full-stack that works with your existing data setup; Speedy searches via Django Elasticsearch DSL-inspired workflow",
+     "status": "none"
+    },
+    {
+     "text": "available as a web component & jupyter widget!",
+     "status": "none"
+    },
+    {
+     "text": "SampleSift indexing",
+     "status": "none"
+    },
+    {
+     "text": "Generate spec & endpoints",
+     "status": "none"
+    },
+    {
+     "text": "API (DO NOT TURN OFF)",
+     "status": "none"
+    },
+    {
+     "text": "OpenAPI endpoints/spec ({...} green circle)",
+     "status": "none"
+    },
+    {
+     "text": "CQL2 Queryables for metadata and spatials (orange star)",
+     "status": "none"
+    },
+    {
+     "text": "Clustering tile server (stacked diamonds with map pin and 89)",
+     "status": "none"
+    },
+    {
+     "text": "Generate dynamic UI (yellow circle sticker)",
+     "status": "none"
+    },
+    {
+     "text": "Problems (crossed out) -> Opportunities ;)",
+     "status": "none"
+    },
+    {
+     "text": "FastAPI ?",
+     "status": "none"
+    },
+    {
+     "text": "Sqlite + Spatialite ?",
+     "status": "none"
+    },
+    {
+     "text": "Pygeoapi (sad face)",
+     "status": "none"
+    },
+    {
+     "text": "Pglite (sad face)",
+     "status": "none"
+    },
+    {
+     "text": "DuckDB (sad face)",
+     "status": "none"
+    },
+    {
+     "text": "STANDARDS OGC, OData !",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Sketched world map with a dashed '89' cluster and an elephant balancing a globe",
+   "poster_box": {
+    "x0": 0.022,
+    "y0": 0.04,
+    "x1": 0.865,
+    "y1": 0.935
+   },
+   "questions": [
+    {
+     "question": "What animal is drawn balancing a globe inside the \"SampleSift DB\" box?",
+     "options": [
+      "Giraffe",
+      "Seal",
+      "Elephant",
+      "Octopus"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Lower-left, the \"SampleSift DB\" panel next to the database cylinder",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which number sits inside the dashed polygon selection on the hand-drawn map?",
+     "options": [
+      "89",
+      "64",
+      "31",
+      "150"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Top centre, the world-map mockup (same number on the stacked diamond sticker)",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which word is crossed out and replaced by \"Opportunities\" next to the green circles?",
+     "options": [
+      "Risks",
+      "Blockers",
+      "Issues",
+      "Problems"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom right, red crossed-out word above \"Opportunities\" and the winking smiley",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Elephant balancing a globe on its trunk (SampleSift DB)",
+     "box": {
+      "x0": 0.204,
+      "y0": 0.694,
+      "x1": 0.333,
+      "y1": 0.808
+     }
+    },
+    {
+     "label": "Stacked coloured diamond stickers with map pin and 89 (clustering tile server)",
+     "box": {
+      "x0": 0.681,
+      "y0": 0.436,
+      "x1": 0.824,
+      "y1": 0.556
+     }
+    }
+   ],
+   "unreadable": "Yellow circle sticker label reads like \"GolemUI\" (could be \"GolenUI\"), left out of notes. Faint printed text under the translucent overlays on the \"YOUR DB\" and \"SampleSift DB\" panels is not legible."
+  },
+  "check": {
+   "project_number": 12,
+   "title_on_poster": "Metadata-filtered maps at scale: SampleSift",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": "Minor: the elephant is the PostgreSQL mascot, so a DB-savvy visitor could guess it without the poster."
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": "Minor: 'Problems -> Opportunities' is a common cliche, so it can be guessed without the poster."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6372.jpg",
+  "poster": {
+   "project_number": 11,
+   "number_evidence": "Written on the poster as \"#11\" in the top-left corner; the VERDANT banner also matches official title 11.",
+   "title_on_poster": "KNOWLEDGE GRAPHS TO DEFINE YOUR SAMPLE DATA",
+   "one_liner": "Built VERDANT, a tool that uses AI embeddings to match free-text environmental sample descriptions to standard vocabularies like ENVO.",
+   "highlights": [
+    "VERDANT flow: import your data -> generate embeddings -> confidence score vs other vocabs",
+    "Each match is typed as exact match, related match or no match, then validated",
+    "Test cases: Aerobiome, PANGAEA and Soil, linked to ENVO, GOLD, EMPO, ChEBI, EUNIS",
+    "Aerobiome case: ~500 air metagenome samples from the upper troposphere biome",
+    "Roots list Natura 2000, EMPO, EUNIS, GOLD, NCBI Taxon, ChEBI, Wikidata and ENVO"
+   ],
+   "notes": [
+    {
+     "text": "Aerobiome. Start - Samples. Links - ENVO, GOLD, EMPO, ChEBI",
+     "status": "none"
+    },
+    {
+     "text": "upper troposphere biome",
+     "status": "none"
+    },
+    {
+     "text": "~500 air metagenome samples",
+     "status": "none"
+    },
+    {
+     "text": "PANGAEA. Start - free text descriptions. Links - ENVO",
+     "status": "none"
+    },
+    {
+     "text": "Research data with existing ENVO terms",
+     "status": "none"
+    },
+    {
+     "text": "Soil. Start - project curated ontology. Links - Natura, Eunis, ENVO",
+     "status": "none"
+    },
+    {
+     "text": "The Australian Microbiome Project",
+     "status": "none"
+    },
+    {
+     "text": "NMDC",
+     "status": "none"
+    },
+    {
+     "text": "Microflora Danica",
+     "status": "none"
+    },
+    {
+     "text": "Import your DATA",
+     "status": "none"
+    },
+    {
+     "text": "Generate Embeddings",
+     "status": "none"
+    },
+    {
+     "text": "Calculate confidense score with other Vocab",
+     "status": "none"
+    },
+    {
+     "text": "Relation type: Exact match (green), Related match (yellow), No match (red)",
+     "status": "none"
+    },
+    {
+     "text": "Validation",
+     "status": "none"
+    },
+    {
+     "text": "HELP US!",
+     "status": "none"
+    },
+    {
+     "text": "Can your expert validate some matches?",
+     "status": "none"
+    },
+    {
+     "text": "Which ontologies are missing?",
+     "status": "none"
+    },
+    {
+     "text": "What environment do you work with?",
+     "status": "none"
+    },
+    {
+     "text": "Come and try the tool & give us feedback",
+     "status": "none"
+    },
+    {
+     "text": "Roots: Natura 2000, EMPO, EUNIS, GOLD, NCBI Taxon, ChEBI, Wikidata, ENVO",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Big tree with a yellow VERDANT banner, ontology names as roots, pond below",
+   "poster_box": {
+    "x0": 0.012,
+    "y0": 0.015,
+    "x1": 0.882,
+    "y1": 0.962
+   },
+   "questions": [
+    {
+     "question": "What animal is drawn swimming next to the fish in the pond under the tree?",
+     "options": [
+      "Duck",
+      "Turtle",
+      "Frog",
+      "Crab"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Pond drawing in the lower middle, just right of the blue fish",
+     "difficulty": "easy"
+    },
+    {
+     "question": "What is written on the yellow star sticker among the pink speech bubbles?",
+     "options": [
+      "Try it!",
+      "Ask us!",
+      "Help us!",
+      "Join us!"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Yellow star in the lower right, surrounded by pink speech-bubble notes",
+     "difficulty": "medium"
+    },
+    {
+     "question": "One yellow round sticker says its starting point is 'free text descriptions'. Which name heads that sticker?",
+     "options": [
+      "Soil",
+      "Aerobiome",
+      "NMDC",
+      "PANGAEA"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Yellow round sticker on the left edge, at grass level",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Fish and turtle drawn swimming in the pond under the tree",
+     "box": {
+      "x0": 0.326,
+      "y0": 0.638,
+      "x1": 0.552,
+      "y1": 0.695
+     }
+    },
+    {
+     "label": "Yellow 'HELP US!' star beside a pink 'Can your expert validate some matches?' bubble",
+     "box": {
+      "x0": 0.622,
+      "y0": 0.755,
+      "x1": 0.808,
+      "y1": 0.822
+     }
+    }
+   ],
+   "unreadable": "The dark navy circle stickers needed contrast boosting to read; \"~500\" on the air metagenome sticker is likely right but not certain. The first word of the bubble \"What environment do you work with?\" is partly hidden by drawn root lines."
+  },
+  "check": {
+   "project_number": 11,
+   "title_on_poster": "Knowledge Graphs to Define Your Sample Data (VERDANT)",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6373.jpg",
+  "poster": {
+   "project_number": 10,
+   "number_evidence": "\"#10\" written in red marker inside a red circle, top right of the poster; content (ETT, bio.tools, EDAM annotations) matches official title 10",
+   "title_on_poster": "ELIXIR TOOLKIT THEME",
+   "one_liner": "Works on letting community websites built on the ELIXIR Toolkit Theme show software tools in a form machines can read",
+   "highlights": [
+    "ELIXIR Toolkit Theme (ETT): developed by ELIXIR-BE, deploys websites via GitHub",
+    "8 teal logo stickers show ETT implementations, incl. RDMkit, RSQkit and 1+MG",
+    "3 supported registries shown: ELIXIR TeSS, FAIRsharing and a wrench-logo registry",
+    "Flow: tool YAML files -> bio.tools API call -> EDAM annotations -> JSON LD (schema.org)",
+    "Gaps flagged: no support for ontologies & more IDs; info in YAML, not JSON LD"
+   ],
+   "notes": [
+    {
+     "text": "ELIXIR TOOLKIT THEME: developed by ELIXIR-BE; enables deployment of websites via GitHub; Search engine optimization including schema.org",
+     "status": "none"
+    },
+    {
+     "text": "Implementations (teal stickers): WEBSITE, elixir ElITMa, 1+MG, {RSQ}kit, RDMkit, plus logo-only stickers",
+     "status": "none"
+    },
+    {
+     "text": "Supported registries (teal stickers): elixir TeSS, FAIRsharing, wrench/tool logo",
+     "status": "none"
+    },
+    {
+     "text": "Lack of support for ontologies & more IDs",
+     "status": "none"
+    },
+    {
+     "text": "Info in yaml files Not in JSON LD",
+     "status": "none"
+    },
+    {
+     "text": "ETT -> tools & resources YAML files -> bio.tools annotations -> API call -> bio.tools/TOOL-ID -> EDAM annotations -> JSON LD (WebPage schema.org)",
+     "status": "none"
+    },
+    {
+     "text": "Adding WorkflowHub to the list of supported registries + Allowing data import into ETT instances with a use-case from the Australian BioCommons (grey Chateauform notepad sheet)",
+     "status": "none"
+    },
+    {
+     "text": "Audience & Contributors -> credit controlled vocabulary; terms4FAIRskills -> yaml -> JSON LD",
+     "status": "none"
+    },
+    {
+     "text": "Alignment needed with: APICURON; credit, recognition & usage focus group; other activities",
+     "status": "none"
+    },
+    {
+     "text": "which identifiers do you want? Add below (orange speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "ROR (green speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "Tasks/Roles e.g. software dev, data mgmt (green speech bubble)",
+     "status": "none"
+    },
+    {
+     "text": "DREAM BIG (grey sticker)",
+     "status": "none"
+    },
+    {
+     "text": "HUMAN MADE (polar bear sticker)",
+     "status": "none"
+    },
+    {
+     "text": "What we need? (three orange stars, middle one says Bert)",
+     "status": "none"
+    },
+    {
+     "text": "This is a handwritten poster about making things more machine-actionable!",
+     "status": "none"
+    },
+    {
+     "text": "Special thanks to Claire for the graphical realisation of this poster",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU26",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Federico Bianchini",
+    "Joshua Baskaran",
+    "Johan Gustafsson",
+    "Claire Rioualen",
+    "Danielle Welter"
+   ],
+   "links": [
+    "#BioHackEU26",
+    "schema.org",
+    "bio.tools"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Browser-window ETT box beside a cluster of hand-drawn teal logo stickers",
+   "poster_box": {
+    "x0": 0.063,
+    "y0": 0.027,
+    "x1": 0.9,
+    "y1": 0.985
+   },
+   "questions": [
+    {
+     "question": "What animal is on the HUMAN MADE sticker in the top left corner?",
+     "options": [
+      "Penguin",
+      "Fox",
+      "Polar bear",
+      "Owl"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top left corner, small sticker above the contributor names",
+     "difficulty": "easy"
+    },
+    {
+     "question": "According to the browser-window box, which ELIXIR node developed the ELIXIR Toolkit Theme?",
+     "options": [
+      "ELIXIR-NL",
+      "ELIXIR-UK",
+      "ELIXIR-ES",
+      "ELIXIR-BE"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "First bullet in the 'ELIXIR TOOLKIT THEME' browser-window box, upper left",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which of these is written on one of the teal round stickers under 'Implementations'?",
+     "options": [
+      "1+MG",
+      "Galaxy",
+      "Bioconductor",
+      "OpenAIRE"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Cluster of teal round stickers to the right of the arrow labelled 'Implementations', upper right",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "'What we need?' oval with three orange star stickers, middle star reads 'Bert'",
+     "box": {
+      "x0": 0.605,
+      "y0": 0.82,
+      "x1": 0.848,
+      "y1": 0.92
+     }
+    },
+    {
+     "label": "Orange 'which identifiers do you want?' speech bubble next to a grey DREAM BIG sticker",
+     "box": {
+      "x0": 0.157,
+      "y0": 0.76,
+      "x1": 0.317,
+      "y1": 0.817
+     }
+    }
+   ],
+   "unreadable": "First word before 'calls to keep updated' in the Audience & Contributors strip is ambiguous ('as' or 'API'), left out. Ghosted grey text from a sheet behind the transparent Audience strip (e.g. 'Which identifier you want? Add in the list') overlaps the marker text and was not transcribed separately. One letter in 'What we? need' is smudged. Small Spanish print at the bottom of the Chateauform notepad sheet not transcribed. Logo-only implementation stickers (crossed shape, coloured blobs, dark animal) have no readable name."
+  },
+  "check": {
+   "project_number": 10,
+   "title_on_poster": "No written title; red circled '#10', main box headed 'ELIXIR TOOLKIT THEME' (matches 10. Enabling workflows and EDAM annotations to display in community website deployments)",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6374.jpg",
+  "poster": {
+   "project_number": 9,
+   "number_evidence": "Written on the poster: \"PROJECT 9\" in large letters top right; headline \"MSA to insight\" also matches title 9.",
+   "title_on_poster": "MSA to insight",
+   "one_liner": "Linked protein sequence alignments to 3D structures, running analyses and building prototypes in the iCn3D and Jalview viewers.",
+   "highlights": [
+    "Done: analysis and prototypes, using iCn3D and Jalview",
+    "Analyses drawn: contacts, MD simulation, structure comparison, sequence alignment",
+    "Families covered include GTPase, nanobody, antibody and spike protein",
+    "Next: reusable 3D to 2D MSA pipeline and a reusable binding prediction pipeline",
+    "Next: new Mol* API + Prism UI, sketched as 'Mol* v.6'"
+   ],
+   "notes": [
+    {
+     "text": "Which questions: Functional specifity",
+     "status": "none"
+    },
+    {
+     "text": "Which questions: Viral variants -> immune escape",
+     "status": "none"
+    },
+    {
+     "text": "Which questions: Interaction modelling",
+     "status": "none"
+    },
+    {
+     "text": "Which questions: Molecular design",
+     "status": "none"
+    },
+    {
+     "text": "Which families: GTPase, Nanobody, Antibody, Spike protein",
+     "status": "none"
+    },
+    {
+     "text": "Which analysis: Contacts",
+     "status": "none"
+    },
+    {
+     "text": "Which analysis: MD simulation",
+     "status": "none"
+    },
+    {
+     "text": "Which analysis: Structure comparison/alignment",
+     "status": "none"
+    },
+    {
+     "text": "Which analysis: Sequence alignment (MAEIPD / M--ITD)",
+     "status": "none"
+    },
+    {
+     "text": "Which visualizations: Interoperability, Consensus, Automation",
+     "status": "none"
+    },
+    {
+     "text": "What we have done: Analysis",
+     "status": "none"
+    },
+    {
+     "text": "What we have done: Prototypes",
+     "status": "none"
+    },
+    {
+     "text": "What we have done: iCn3D/Jalview",
+     "status": "none"
+    },
+    {
+     "text": "What next: Benchmark & identify improved tools for alignment & interaction analysis",
+     "status": "none"
+    },
+    {
+     "text": "What next: Finalize demos/prototypes in prior art tools, iCn3D. Jalview.",
+     "status": "none"
+    },
+    {
+     "text": "What next: 3D -> 2D MSA reusable pipeline",
+     "status": "none"
+    },
+    {
+     "text": "What next: Binding prediction reusable pipeline",
+     "status": "none"
+    },
+    {
+     "text": "What next: New Mol* API + Prism UI",
+     "status": "none"
+    },
+    {
+     "text": "What next: Claude",
+     "status": "none"
+    },
+    {
+     "text": "What next: (Re) usability gap",
+     "status": "none"
+    },
+    {
+     "text": "What next: Mol* v.6",
+     "status": "none"
+    },
+    {
+     "text": "What next: \"The MVPs\", \"Case Studies\", \"A New World\" platform",
+     "status": "none"
+    },
+    {
+     "text": "Variants: AGTCAG / T",
+     "status": "none"
+    },
+    {
+     "text": "Ligand / Variant (labels on helix drawing)",
+     "status": "none"
+    },
+    {
+     "text": "Antibody design ?",
+     "status": "none"
+    },
+    {
+     "text": "Conf stability",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Phylogenetic tree and coloured protein helices, with a red Claude starburst",
+   "poster_box": {
+    "x0": 0.14,
+    "y0": 0.072,
+    "x1": 0.85,
+    "y1": 0.987
+   },
+   "questions": [
+    {
+     "question": "Which of these is listed under 'Which families' on the top sheet?",
+     "options": [
+      "Kinase",
+      "Nanobody",
+      "Hemoglobin",
+      "Ion channel"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Top sheet, second column under 'Which families', third entry in blue marker",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many bullet points are listed under 'Which visualizations'?",
+     "options": [
+      "2",
+      "4",
+      "3",
+      "5"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top sheet, rightmost column: Interoperability, Consensus, Automation",
+     "difficulty": "medium"
+    },
+    {
+     "question": "What version is written under the big red 'Mol*' at the bottom of the poster?",
+     "options": [
+      "v.2",
+      "v.3",
+      "v.4",
+      "v.6"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom sheet, lower right, red marker under 'Mol*'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Hand-drawn phylogenetic tree (dendrogram)",
+     "box": {
+      "x0": 0.348,
+      "y0": 0.336,
+      "x1": 0.474,
+      "y1": 0.411
+     }
+    },
+    {
+     "label": "Green and red helices joined by a black linker",
+     "box": {
+      "x0": 0.667,
+      "y0": 0.507,
+      "x1": 0.787,
+      "y1": 0.555
+     }
+    }
+   ],
+   "unreadable": "First entry under 'Which families' has an overwritten second letter (reads GRCR, likely GPCR), left out. Middle green bracket in 'What next' (Refine / analyzed / datasets annotation, with a connecting curl) has unclear word order, left out. Tiny text inside the small box under 'Conf stability' and the pencil sketches on the middle sheet (incl. a faint 'LIGAND' box) not transcribed."
+  },
+  "check": {
+   "project_number": 9,
+   "title_on_poster": "MSA to insight (PROJECT 9)",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6375.jpg",
+  "poster": {
+   "project_number": 8,
+   "number_evidence": "\"#8\" written in pink marker at top right next to the headline; content (research software quality, EVERSE, RESQUI) matches official title 8.",
+   "title_on_poster": "La Petite Métrique",
+   "one_liner": "Mapped how to measure research software quality (fairness, reliability, docs) and turn the checks into pipeline plugins.",
+   "highlights": [
+    "Quality dimensions: fairness, reliability, sustainability, documentation",
+    "Indicators such as has_documentation feed into measuring tools",
+    "Measuring tools named: OEBFAIR, Semgrep, GitLeaks, ScanCode",
+    "Quality pipelines, a.k.a. RESQUI plugins, lead to FAIR software",
+    "Clinical data angle: safety, security, responsibility as open dimensions"
+   ],
+   "notes": [
+    {
+     "text": "FAIR Software? (in a box with three air holes, inside a thought bubble)",
+     "status": "none"
+    },
+    {
+     "text": "FAIR ✓ SOFTWARE (open box with flames)",
+     "status": "none"
+    },
+    {
+     "text": "EVERSE (on the planet)",
+     "status": "none"
+    },
+    {
+     "text": "DIMENSIONS",
+     "status": "none"
+    },
+    {
+     "text": "... FAIRNESS F / RELIABILITY F / SUSTAINABILITY E / DOCUMENTATION",
+     "status": "none"
+    },
+    {
+     "text": "└ HAS_DOCUMENTATION",
+     "status": "none"
+    },
+    {
+     "text": "INDICATORS",
+     "status": "none"
+    },
+    {
+     "text": "CLINICAL DATA: SAFETY, SECURITY, RESPONSABILITY ?",
+     "status": "none"
+    },
+    {
+     "text": "MEASURING TOOLS: OEBFAIR, SEMGREP, GITLEAKS, SCANCODE",
+     "status": "none"
+    },
+    {
+     "text": "QUALITY PIPELINES A.K.A. RESQUI PLUGINS",
+     "status": "none"
+    },
+    {
+     "text": "#BioHackEU26",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Little Prince on asteroid EVERSE, dreaming of FAIR software in a box",
+   "poster_box": {
+    "x0": 0,
+    "y0": 0.005,
+    "x1": 0.93,
+    "y1": 0.995
+   },
+   "questions": [
+    {
+     "question": "What word is written on the big round planet in the middle of the poster?",
+     "options": [
+      "ELIXIR",
+      "EVERSE",
+      "GALAXY",
+      "ORCID"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Large brown circle in the centre, under the little prince figure",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which of these is named under MEASURING TOOLS?",
+     "options": [
+      "SonarQube",
+      "Pylint",
+      "Codecov",
+      "GitLeaks"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Lower right, red words around the drawn wrench",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many solid purple arrows are drawn on the poster?",
+     "options": [
+      "2",
+      "4",
+      "3",
+      "5"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "One below INDICATORS, one near QUALITY PIPELINES, one at lower left pointing up",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Little Prince with crown and scarf sitting on the planet",
+     "box": {
+      "x0": 0.318,
+      "y0": 0.396,
+      "x1": 0.482,
+      "y1": 0.496
+     }
+    },
+    {
+     "label": "Hospital drawing labelled CLINICAL DATA",
+     "box": {
+      "x0": 0.722,
+      "y0": 0.169,
+      "x1": 0.91,
+      "y1": 0.24
+     }
+    }
+   ],
+   "unreadable": ""
+  },
+  "check": {
+   "project_number": 8,
+   "title_on_poster": "La Petite Métrique",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "likely",
+     "problem": "Two arrows are flat cut-out purple paper (down arrow under INDICATORS, left arrow near QUALITY PIPELINES). The third, upper-left arrow pointing at FAIR SOFTWARE, is hand-coloured with a dark indigo/blue-violet marker with visible streaks, so a visitor could call it blue and answer 2, which is also an option. Suggest asking about 'large filled arrows' or naming the colour as dark purple/indigo."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6376.jpg",
+  "poster": {
+   "project_number": 7,
+   "number_evidence": "Written on the poster as \"#7\" in yellow before the PhyloAI headline; matches official title 7 (PhyloAI).",
+   "title_on_poster": "#7 PhyloAI: Machine learning-based quartet topology classifier for phylogenomic tree reconstruction",
+   "one_liner": "Uses machine learning to pick the right family tree for each group of 4 species, drops unreliable ones, and joins the rest into a big tree.",
+   "highlights": [
+    "PhyloAI classifies quartet topologies from site pattern distribution and alignment length",
+    "PhyloAI-RP: a reconstructability predictor that removes unreliable quartets",
+    "Filtered quartets are amalgamated (ASTRAQ) into an N-taxon tree",
+    "Pipeline: 1. all quartet topologies, 2. amalgamation, 3. N-taxon tree",
+    "BIOCONDA written large on the poster as the packaging target"
+   ],
+   "notes": [
+    {
+     "text": "Site pattern distribution",
+     "status": "none"
+    },
+    {
+     "text": "Length",
+     "status": "none"
+    },
+    {
+     "text": "Reconstructability predictor",
+     "status": "none"
+    },
+    {
+     "text": "PhyloAI-RP",
+     "status": "none"
+    },
+    {
+     "text": "Removal of unreliable quartets",
+     "status": "none"
+    },
+    {
+     "text": "Filtered quartets",
+     "status": "none"
+    },
+    {
+     "text": "1. All quartet topologies",
+     "status": "none"
+    },
+    {
+     "text": "2. Amalgamation ASTRAQ",
+     "status": "none"
+    },
+    {
+     "text": "3. N-taxon tree",
+     "status": "none"
+    },
+    {
+     "text": "BIOCONDA",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Colour-coded 5-species DNA alignment feeding quartet trees; animal stickers on a tree",
+   "poster_box": {
+    "x0": 0,
+    "y0": 0,
+    "x1": 0.94,
+    "y1": 1
+   },
+   "questions": [
+    {
+     "question": "Which word is written diagonally in big green letters on the poster?",
+     "options": [
+      "GALAXY",
+      "BIOCONDA",
+      "NEXTFLOW",
+      "DOCKER"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Right of the colour-coded DNA alignment, upper right of the sheet",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which of these animals appears as a sticker on the N-taxon tree drawing?",
+     "options": [
+      "Panda",
+      "Octopus",
+      "Fox",
+      "Penguin"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom left, stickers at the tips of the tree under '3. N-taxon tree'",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the PhyloAI-RP section, how many quartet drawings are crossed out in red?",
+     "options": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Right column under 'PhyloAI-RP', above 'Removal of unreliable quartets'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Animal stickers (flamingo, penguin, turtle, whale) on the N-taxon tree",
+     "box": {
+      "x0": 0.278,
+      "y0": 0.856,
+      "x1": 0.437,
+      "y1": 0.967
+     }
+    },
+    {
+     "label": "Quartet drawings with two crossed out in red (PhyloAI-RP)",
+     "box": {
+      "x0": 0.593,
+      "y0": 0.544,
+      "x1": 0.811,
+      "y1": 0.653
+     }
+    }
+   ],
+   "unreadable": "Small text on the whale sticker (looks like 'oceanholic', not certain). Amalgamation tool name is written 'ASTRAQ'; last letter clearly Q, though ASTRAL may be meant."
+  },
+  "check": {
+   "project_number": 7,
+   "title_on_poster": "#7 PhyloAI: Machine Learning-Based Quartet Topology Classifier for Phylogenomic Tree Reconstruction",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6377.jpg",
+  "poster": {
+   "project_number": 6,
+   "number_evidence": "Written on poster: 'Project 6' in pink highlight top-left; headline about credit also matches official title 6 (Credit and Recognition for Research Outputs Beyond Publications)",
+   "title_on_poster": "You did the work. Where is the credit?",
+   "one_liner": "Finding ways to give researchers credit for work beyond papers, like software, training and community support, in ELIXIR.",
+   "highlights": [
+    "Three steps: WHAT contributions are missing, HOW to record them, SHOW IT",
+    "Prototype with APICURON & BIP",
+    "Practical guidelines for ELIXIR Platforms",
+    "CRediT has gaps for training delivery and community support; CRO covers both",
+    "Person-to-output model: Contributor -> Role -> Output (e.g. Bioconductor workshop)"
+   ],
+   "notes": [
+    {
+     "text": "Putting my poster online in Zenodo or Figshare",
+     "status": "none"
+    },
+    {
+     "text": "Services aggregator: main publication latest version; smaller, previous versions other publication. What do you cite?",
+     "status": "none"
+    },
+    {
+     "text": "Arranging hackathons and other non traditional scientific meetings",
+     "status": "none"
+    },
+    {
+     "text": "EHDS datasets metadata updates 1/4 (warning triangle)",
+     "status": "none"
+    },
+    {
+     "text": "Institutional responsibilities: committees, etc",
+     "status": "none"
+    },
+    {
+     "text": "Idea #2: Incorporate service and training core people into paper authorship so they aren't left behind the eval process. Martenson",
+     "status": "none"
+    },
+    {
+     "text": "Idea 1: When providing service/training ask for acknowledgement AND if you get it reward the giver with extra resources. Martenson",
+     "status": "none"
+    },
+    {
+     "text": "WebProtégé, ontoportals / Coderefinery",
+     "status": "none"
+    },
+    {
+     "text": "Hugging Face model maintenance (talk to Ben Busby)",
+     "status": "none"
+    },
+    {
+     "text": "Maintainers of the \"Awesome\" systems (GitHub)",
+     "status": "none"
+    },
+    {
+     "text": "Amy, Carpentries",
+     "status": "none"
+    },
+    {
+     "text": "...ensuring people doing similar work are in contact; community network building & maintenance",
+     "status": "none"
+    },
+    {
+     "text": "Mind the gap! Existing vocabularies are a great start, but they don't capture everything you do.",
+     "status": "none"
+    },
+    {
+     "text": "What contribution are we missing? Tell us!",
+     "status": "none"
+    },
+    {
+     "text": "Bring one thing you do that never got credit for! (Artefacts/Activities vs Repositories/Resources)",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Martenson",
+    "BEN BUSBY",
+    "Amy"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Three cheering stick figures: one with a laptop, one with a stack, one at a bar-chart easel",
+   "poster_box": {
+    "x0": 0.061,
+    "y0": 0.053,
+    "x1": 0.841,
+    "y1": 0.915
+   },
+   "questions": [
+    {
+     "question": "Step 3 'SHOW IT!' says the team will prototype with which tools?",
+     "options": [
+      "ORCID & Wikidata",
+      "bio.tools & FAIRsharing",
+      "APICURON & BIP",
+      "Galaxy & WorkflowHub"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Green box numbered 3 with a laptop drawing, upper right",
+     "difficulty": "easy"
+    },
+    {
+     "question": "In the 'From person to output' flow, which name is given as the example contributor?",
+     "options": [
+      "Maria",
+      "Elena",
+      "Sofia",
+      "Laura"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Blue blob with a stick person, left side of the 'From person to output' row",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the 'Mind the gap!' table, how many activities are marked with a red X and '(gap)' under CRediT?",
+     "options": [
+      "Three",
+      "Two",
+      "One",
+      "None"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "CRediT column of the Activity/CRediT/CRO table, middle right",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Stick figure pointing at a bar-chart easel",
+     "box": {
+      "x0": 0.696,
+      "y0": 0.078,
+      "x1": 0.83,
+      "y1": 0.186
+     }
+    },
+    {
+     "label": "Smiling stick-person 'Contributor (e.g. Maria)' blue blob",
+     "box": {
+      "x0": 0.087,
+      "y0": 0.582,
+      "x1": 0.226,
+      "y1": 0.651
+     }
+    }
+   ],
+   "unreadable": "A hashtag starting '#7' on the left edge is half hidden by a sticky note. On the 'lead on a refresh ... data skills primer: was not allowed to be named' note, the joining word (looks like '&' or 'of') is unclear, so I left that note out. The first line of the tilted blue note ('keeping labs on different ...') is unclear. The words after 'resources' on the Idea 1 note are unclear. A scribble above 'Amy' and a mark below it are unclear. A crossed-out word on the 'Institutional responsibilities' note is unreadable. One dark blue sticky note shows no text."
+  },
+  "check": {
+   "project_number": 6,
+   "title_on_poster": "You did the work. Where is the credit?",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6378.jpg",
+  "poster": {
+   "project_number": 5,
+   "number_evidence": "Written on the poster: '#5' before the headline 'COMMUNITY PRACTICES'; consistent with official title 5 (submission and visualisation interface for community interoperability practices).",
+   "title_on_poster": "#5 COMMUNITY PRACTICES",
+   "one_liner": "A web tool where communities submit their data practices, an LLM helps tag them, and they are shown on a data lifecycle wheel.",
+   "highlights": [
+    "Three-step pipeline: capture, display, integrate community practices",
+    "Output site live at BH.BILGEHAN.NL",
+    "Free-text form input goes to an LLM that returns JSON to fill form fields",
+    "Practices placed on a lifecycle: plan, collect, process, analyse, share",
+    "Links tasks to FAIRsharing, RDM kit and bio.tools; asks for UX feedback and use cases"
+   ],
+   "notes": [
+    {
+     "text": "GO TO BH.BILGEHAN.NL or DSW",
+     "status": "none"
+    },
+    {
+     "text": "CAPTURE - DISPLAY - INTEGRATE",
+     "status": "none"
+    },
+    {
+     "text": "Lifecycle loop: PLAN -> COLLECT -> PROCESS -> ANALYSE -> SHARE",
+     "status": "none"
+    },
+    {
+     "text": "databases, tools, workflows, services, ....",
+     "status": "none"
+    },
+    {
+     "text": "Form fields: abc..., abcyz, abcf, free txt -> LLM -> JSON",
+     "status": "none"
+    },
+    {
+     "text": "TASK: inputs, process, outputs",
+     "status": "none"
+    },
+    {
+     "text": "registries, ontologies, roles, credit",
+     "status": "none"
+    },
+    {
+     "text": "FAIRsharing, RDM kit, bio.tools",
+     "status": "none"
+    },
+    {
+     "text": "TASKS -> REFERENCE PRACTICES -> GOOD THINGS",
+     "status": "none"
+    },
+    {
+     "text": "OUTPUTS: BH.BILGEHAN.NL",
+     "status": "none"
+    },
+    {
+     "text": "COMPETITION (orange sticky note)",
+     "status": "none"
+    },
+    {
+     "text": "name this tool!!",
+     "status": "none"
+    },
+    {
+     "text": "use the post its! (orange sticky note)",
+     "status": "none"
+    },
+    {
+     "text": "HELP NEEDED!!",
+     "status": "none"
+    },
+    {
+     "text": "UX feedback, use cases, ontology/registry sources",
+     "status": "none"
+    },
+    {
+     "text": "Legend: O = domain, filled dot = answers, red line = tasks",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [
+    "BH.BILGEHAN.NL"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Two hand-drawn lifecycle wheels with coloured domain circles and red task lines",
+   "poster_box": {
+    "x0": 0.03,
+    "y0": 0.048,
+    "x1": 0.9,
+    "y1": 0.97
+   },
+   "questions": [
+    {
+     "question": "What does the cloud-shaped bubble at the bottom right of the poster say?",
+     "options": [
+      "WE NEED DATA",
+      "COMING SOON",
+      "HELP NEEDED",
+      "ASK US HOW"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Bottom right, red text inside a green and blue cloud outline",
+     "difficulty": "easy"
+    },
+    {
+     "question": "In the left-hand drawing, a green line leaves a box labelled LLM and loops back to the form. Which word is written in red under that loop?",
+     "options": [
+      "JSON",
+      "XML",
+      "YAML",
+      "CSV"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Left middle, red word under the green loop below the LLM box",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the right-hand wheel drawing at the bottom, how many red lines meet at the single green circle in the middle?",
+     "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Bottom centre, second (right) grey wheel labelled PLAN and COLLECT",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Orange 'COMPETITION' sticky note with green and red stripes",
+     "box": {
+      "x0": 0.762,
+      "y0": 0.152,
+      "x1": 0.873,
+      "y1": 0.242
+     }
+    },
+    {
+     "label": "Lifecycle wheel dotted with blue, red and green domain circles linked by red task lines",
+     "box": {
+      "x0": 0.144,
+      "y0": 0.714,
+      "x1": 0.374,
+      "y1": 0.869
+     }
+    }
+   ],
+   "unreadable": "Red word between SHARE and PLAN in the lifecycle loop is smudged (possibly REUSE). Last item in the registry arrow list (after bio.tools) reads like 'DSW' but the first letter is ambiguous. 'OR' before DSW at top right is partly covered by a red hat-shaped drawing."
+  },
+  "check": {
+   "project_number": 5,
+   "title_on_poster": "#5 COMMUNITY PRACTICES",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": "JSON is the obvious guess for structured LLM output feeding a form, so the answer can be guessed without the poster."
+    },
+    {
+     "chosen_index": 1,
+     "confidence": "likely",
+     "problem": "Near its top end, the upper-right red line is drawn with a doubled stroke. At a glance that could pass for two lines and give a count of 4, but zoomed in it is three distinct lines ending at three blue dots."
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6379.jpg",
+  "poster": {
+   "project_number": 4,
+   "number_evidence": "Written on the poster in a boxed header: \"PROJECT 4\"",
+   "title_on_poster": "CLINICAL RECOMMEDATION ENGINE",
+   "one_liner": "Built tools that cut the human genome into haplotype blocks and hashes, working toward an engine that recommends drug types to patients.",
+   "highlights": [
+    "Done: Haplograph, a network of haplotype blocks",
+    "Done: Haploblocks, live at https://haploblocks.org",
+    "Done: genomic hashes, genome blocks turned into binary vectors [0 1 ... 1...]",
+    "In progress: validator (ticked), embeddings (Evo2, XGboost), proteomics data",
+    "Working towards: clinical recommendation engine sorting into drug types 1 to 4"
+   ],
+   "notes": [
+    {
+     "text": "Drug type 1 A",
+     "status": "none"
+    },
+    {
+     "text": "Drug type 2 B",
+     "status": "none"
+    },
+    {
+     "text": "Drug type 3",
+     "status": "none"
+    },
+    {
+     "text": "Type 4 No known drugs",
+     "status": "none"
+    },
+    {
+     "text": "Clinical trials",
+     "status": "none"
+    },
+    {
+     "text": "Drug discovery",
+     "status": "none"
+    },
+    {
+     "text": "OTHER HACKATHON PROJECTS",
+     "status": "none"
+    },
+    {
+     "text": "CLINICAL RECOMMEDATION ENGINE (WORKING TOWARDS!)",
+     "status": "next"
+    },
+    {
+     "text": "VALIDATOR",
+     "status": "done"
+    },
+    {
+     "text": "EMBEDDINGS (Evo2, XGboost...)",
+     "status": "doing"
+    },
+    {
+     "text": "OTHER DATA (PROTEOMICS)",
+     "status": "doing"
+    },
+    {
+     "text": "HAPLOGRAPH",
+     "status": "done"
+    },
+    {
+     "text": "HAPLOBLOCKS",
+     "status": "done"
+    },
+    {
+     "text": "GENOMIC HASHES",
+     "status": "done"
+    },
+    {
+     "text": "CHECK: https://haploblocks.org",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [
+    "https://haploblocks.org"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Four chromosomes (chr1 to chr4) linked by red arrows, beside a node network",
+   "poster_box": {
+    "x0": 0,
+    "y0": 0.01,
+    "x1": 0.93,
+    "y1": 0.995
+   },
+   "questions": [
+    {
+     "question": "What does the green square sticky note for 'Type 4' say?",
+     "options": [
+      "Rare disease only",
+      "No known drugs",
+      "Needs more data",
+      "Too toxic"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Green square sticky note below the three star stickers, top left inside the red box",
+     "difficulty": "easy"
+    },
+    {
+     "question": "How many chromosomes are drawn down the right edge of the poster, linked by red arrows?",
+     "options": [
+      "2",
+      "3",
+      "6",
+      "4"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Right edge, bottom half: chromosomes labelled chr1, chr2, chr3, chr4",
+     "difficulty": "medium"
+    },
+    {
+     "question": "Which model name is written in brackets next to 'EMBEDDINGS' in the In Progress box?",
+     "options": [
+      "ESM2",
+      "AlphaFold",
+      "Evo2",
+      "BERT"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Green 'IN PROGRESS!' box, middle right: 'EMBEDDINGS (Evo2, XGboost...)'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Chromosomes chr1 to chr4 with red arrows between marked regions",
+     "box": {
+      "x0": 0.715,
+      "y0": 0.615,
+      "x1": 0.865,
+      "y1": 0.945
+     }
+    },
+    {
+     "label": "House-shaped sticky notes: Clinical trials and Drug discovery",
+     "box": {
+      "x0": 0.055,
+      "y0": 0.425,
+      "x1": 0.305,
+      "y1": 0.51
+     }
+    }
+   ],
+   "unreadable": "Letter under 'Drug type 3' on the purple star (looks like Z, not certain). Third digit of the genomic hash example '[0 1 ? 1 1 0 0 0 1...]' is overwritten."
+  },
+  "check": {
+   "project_number": 4,
+   "title_on_poster": "PROJECT 4: CLINICAL RECOMMEDATION ENGINE (sic)",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6380.jpg",
+  "poster": {
+   "project_number": 3,
+   "number_evidence": "'#3' written in large pink marker at the top-left (with 'ROOM 26' above it); headline matches official title 3.",
+   "title_on_poster": "Developing Open Standards for a Semantic Framework in Plant Specialized Metabolism",
+   "one_liner": "Building shared ontology terms and data models so plant metabolism multi-omics data can be linked, checked and ranked.",
+   "highlights": [
+    "Pipeline drawn: multi-omics use cases to ontology terms, SHACL (RDF), .ttl, Modelling",
+    "Ontology built with ODK and LinkML; dashboard of ontology terms fed by the OLS API",
+    "7-step visualization plan, from selecting terms to SHACL QC and .ttl export",
+    "Prioritization via a minimal information standard and SPARQL evidence-tier queries",
+    "Federated queries over Rhea, OrthoDB and Bgee feed optional fields and a score"
+   ],
+   "notes": [
+    {
+     "text": "SUGGESTION proposed ontology terms (EDAM) METRIC",
+     "status": "none"
+    },
+    {
+     "text": "CORRECT SUBJ-PRED-OBJ TRIPLES FOR TRANSCRIPTOMICS?",
+     "status": "none"
+    },
+    {
+     "text": "NF-CORE INPUTS OR OUTPUTS?",
+     "status": "none"
+    },
+    {
+     "text": "ISA-json",
+     "status": "none"
+    },
+    {
+     "text": "Tools harmonization for multi-omics comparison",
+     "status": "none"
+    },
+    {
+     "text": "Open Question: How to stay in line with upstream ontology changes?",
+     "status": "none"
+    },
+    {
+     "text": "Open Question: How to avoid query time-outs for extensive federated queries?",
+     "status": "none"
+    },
+    {
+     "text": "NANOPUBS ?",
+     "status": "none"
+    },
+    {
+     "text": "Submitting queries ?",
+     "status": "none"
+    },
+    {
+     "text": "OPEN QUESTION: MINIMUM INFORMATION ABOUT METABOLIC PATHWAY CURATION?",
+     "status": "none"
+    },
+    {
+     "text": "VISUALIZATION: 1) select terms 2) check matching with PMW 3) SHACL violations (QC) 4) indicates proposed terms 5) biological findings 6) export in .ttl 7) UI enrichment analysis",
+     "status": "none"
+    },
+    {
+     "text": "MIS: minimal information standard",
+     "status": "none"
+    },
+    {
+     "text": "Prioritized List of Pathway compounds",
+     "status": "none"
+    },
+    {
+     "text": "API?",
+     "status": "none"
+    },
+    {
+     "text": "$ success metric",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Anne Fouilloux"
+   ],
+   "links": [
+    "https://github.com/pathway-lod/lod-pathways-community"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Big pink #3 with PlantMetWiki sticker over a flowchart of boxes and funnels",
+   "poster_box": {
+    "x0": 0.015,
+    "y0": 0,
+    "x1": 0.99,
+    "y1": 0.995
+   },
+   "questions": [
+    {
+     "question": "What symbol is drawn next to the words 'success metric' in the Submission System section?",
+     "options": [
+      "A star",
+      "A trophy",
+      "A dollar sign",
+      "A light bulb"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Bottom-left, under '4. SUBMISSION SYSTEM'",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which three databases are listed under the 'Federated Queries' circle?",
+     "options": [
+      "Rhea, OrthoDB, Bgee",
+      "KEGG, ChEBI, Reactome",
+      "MetaCyc, PubChem, Ensembl",
+      "Wikidata, PDB, LOTUS"
+     ],
+     "answer_index": 0,
+     "where_on_poster": "Lower right, in red below the 'Federated Queries' circle",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many numbered steps are listed under the 'VISUALIZATION' heading?",
+     "options": [
+      "5",
+      "6",
+      "9",
+      "7"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Left side, red list under 'VISUALIZATION' below '2. Multi-OMICS MODELLING'",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Green 'Modelling' funnel drawing",
+     "box": {
+      "x0": 0.23,
+      "y0": 0.515,
+      "x1": 0.46,
+      "y1": 0.575
+     }
+    },
+    {
+     "label": "Dollar sign doodle with 'success metric'",
+     "box": {
+      "x0": 0.105,
+      "y0": 0.895,
+      "x1": 0.255,
+      "y1": 0.945
+     }
+    }
+   ],
+   "unreadable": "Word after 'Community S' is hidden under the orange SUGGESTION sticky, so what '~110' counts is unclear. Name sticky: surname 'Fouilloux' is clear but the first name's middle letters are ambiguous (Anne or Amme); its body 'nanoskill MCP to fill in d... while analysing it' has an illegible word, so that note is left out. The 'MAPPING GENE ID to SolCyc locus MATCH' label is partly covered by a green sticky."
+  },
+  "check": {
+   "project_number": 3,
+   "title_on_poster": "Developing Open Standards for a Semantic Framework in Plant Specialized Metabolism",
+   "answers": [
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 0,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6381.jpg",
+  "poster": {
+   "project_number": 2,
+   "number_evidence": "Written on the poster as the headline \"#2 - MARS\"; consistent with official title 2 (multi-modal data submission reference workflow).",
+   "title_on_poster": "#2 - MARS",
+   "one_liner": "A command-line broker that submits multi-modal ISA-JSON metadata to BioSamples, ENA and MetaboLights and links back the accessions",
+   "highlights": [
+    "Pipeline: multi-modal ISA-JSON -> Brokering CLI -> BioSamples, ENA, MetaboLights",
+    "Output: ISA-JSON with linked accessions",
+    "V1 test data, documentation and V1 MARS ISA-JSON spec (green dots)",
+    "Concurrency and async support; external ref. in BioSamples (green dots)",
+    "Big PRE-PRINT sunburst; MARS logo sketches (rocket ship, rover)"
+   ],
+   "notes": [
+    {
+     "text": "V1 Test Data (green dot)",
+     "status": "none"
+    },
+    {
+     "text": "Documentation (green dot)",
+     "status": "none"
+    },
+    {
+     "text": "V1 MARS ISA-JSON spec (green dot), arrow to Pydantic model in sync",
+     "status": "none"
+    },
+    {
+     "text": "New datasets? (red dot)",
+     "status": "none"
+    },
+    {
+     "text": "Pydantic model in sync (yellow dot)",
+     "status": "none"
+    },
+    {
+     "text": "Metabolights support (yellow dot)",
+     "status": "none"
+    },
+    {
+     "text": "Repository API spec (yellow dot)",
+     "status": "none"
+    },
+    {
+     "text": "Concurrency and Async support (green dot)",
+     "status": "none"
+    },
+    {
+     "text": "External ref. in BioSamples (green dot)",
+     "status": "none"
+    },
+    {
+     "text": "AI-agent friendly? (red dot)",
+     "status": "none"
+    },
+    {
+     "text": "MARS LOGO! (red dot)",
+     "status": "none"
+    },
+    {
+     "text": "PRE-PRINT",
+     "status": "none"
+    },
+    {
+     "text": "Future suggestion (pencil, arrow to sticky notes)",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: ISA-RO-Crate ingest",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: Spatial-omics / single cells",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: also MGnify :)",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: also BIA",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: rocket ship drawing, labelled \"Rocket ship\"",
+     "status": "none"
+    },
+    {
+     "text": "Sticky: drawing of a rover on stacked layers",
+     "status": "none"
+    }
+   ],
+   "contributors": [],
+   "links": [
+    "#BioHackEU26"
+   ],
+   "has_qr_code": false,
+   "visual_motif": "Box-and-arrow pipeline diagram, traffic-light dots, PRE-PRINT sunburst",
+   "poster_box": {
+    "x0": 0.065,
+    "y0": 0.125,
+    "x1": 0.93,
+    "y1": 0.915
+   },
+   "questions": [
+    {
+     "question": "Which word sits in the middle of the yellow and red sunburst rays at the bottom left of the poster?",
+     "options": [
+      "RELEASE",
+      "PRE-PRINT",
+      "LAUNCH",
+      "PUBLISHED"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Bottom-left corner, large black lettering surrounded by yellow and red rays",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Next to the 'MARS LOGO!' item, one orange sticky note shows a rover. What is drawn on the other one?",
+     "options": [
+      "A telescope",
+      "A satellite dish",
+      "A planet with rings",
+      "A rocket ship"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom-right orange sticky notes below 'MARS LOGO!'",
+     "difficulty": "medium"
+    },
+    {
+     "question": "How many green dots are drawn on the poster?",
+     "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Coloured marker dots beside the list items below the pipeline diagram",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Rocket ship and Mars rover logo sketches on orange sticky notes",
+     "box": {
+      "x0": 0.732,
+      "y0": 0.828,
+      "x1": 0.902,
+      "y1": 0.932
+     }
+    },
+    {
+     "label": "PRE-PRINT sunburst with yellow and red rays",
+     "box": {
+      "x0": 0.1,
+      "y0": 0.685,
+      "x1": 0.378,
+      "y1": 0.88
+     }
+    }
+   ],
+   "unreadable": "The coloured dots (green, yellow, red) have no legend, so every status is left as none. There is a tiny doodle of a figure in the lower-left corner of the rocket-ship sticky that I could not make out."
+  },
+  "check": {
+   "project_number": 2,
+   "title_on_poster": "#2 - MARS",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ },
+ {
+  "file": "IMG_6382.jpg",
+  "poster": {
+   "project_number": 1,
+   "number_evidence": "Written on the poster: \"Project 1\" in red marker at top left. The headline also matches official title 1 (Bridging ELIXIR nodes for collaborative and scalable BYOC in Galaxy and TREs).",
+   "title_on_poster": "Scalable BYOC in Galaxy and TREs across ELIXIR",
+   "one_liner": "Automating \"bring your own cloud\" so researchers can run Galaxy and sensitive-data analysis on national clouds like de.NBI and SURF.",
+   "highlights": [
+    "SimpleVM BYOC setup done (green note)",
+    "Building a SimpleVM Terraform module and a CI/CD pipeline",
+    "Doing: Galaxy & Pulsar integration, plus SLURM and HTCondor job scheduler integrations",
+    "On-demand cloud from de.NBI + SURF for SimpleVM BYOC research environments",
+    "Collaboration across ELIXIR nodes BE, CH, DE and NL"
+   ],
+   "notes": [
+    {
+     "text": "Collaboration: BE CH DE NL (with ELIXIR logo)",
+     "status": "none"
+    },
+    {
+     "text": "On demand (cloud drawing) de.NBI + SURF",
+     "status": "doing"
+    },
+    {
+     "text": "SimpleVM BYOC Setup",
+     "status": "done"
+    },
+    {
+     "text": "SimpleVM BYOC Research Environment",
+     "status": "doing"
+    },
+    {
+     "text": "Tinker Sane Knowledge Exchange",
+     "status": "none"
+    },
+    {
+     "text": "Galaxy & Pulsor integration",
+     "status": "doing"
+    },
+    {
+     "text": "SimpleVM Terraform module",
+     "status": "doing"
+    },
+    {
+     "text": "CI/CD Pipeline",
+     "status": "doing"
+    },
+    {
+     "text": "Data flow & APIs",
+     "status": "next"
+    },
+    {
+     "text": "Job Scheduler integrations: SLURM, HTCONDOR",
+     "status": "doing"
+    },
+    {
+     "text": "Why? Use national cloud. Enable sensitive data analysis",
+     "status": "none"
+    },
+    {
+     "text": "Goal: Automate & Simplify BYOC with flexible deployment and support 4 TRE/SPE",
+     "status": "none"
+    },
+    {
+     "text": "Reusable & scalable setup. Support across ELIXIR Nodes",
+     "status": "next"
+    },
+    {
+     "text": "Impact: Automated & Reusable BYOC deployment. Support 4 TREs & Sensitive data",
+     "status": "none"
+    },
+    {
+     "text": "Cross-Node collaboration and interoperability. FAIR and Scalable research workflows",
+     "status": "none"
+    },
+    {
+     "text": "Legend: Done (green), Doing (yellow), Next Steps (blue)",
+     "status": "none"
+    },
+    {
+     "text": "Section labels: ELIXIR Nodes/Cloud providers, BYOC, Galaxy and TREs/SPEs",
+     "status": "none"
+    },
+    {
+     "text": "SANE NETWORK: TINKER = PROVIDER PORTAL = DATA SERVER",
+     "status": "none"
+    },
+    {
+     "text": "Hexagon badge: de.NBI, SURF, BIOHACKATHON, ETH, VIB (with hearts)",
+     "status": "none"
+    },
+    {
+     "text": "Stick figure: Help! I need more compute for using Galaxy!",
+     "status": "none"
+    },
+    {
+     "text": "Monitor drawing with cloud, SURF and SimpleVM logo",
+     "status": "none"
+    },
+    {
+     "text": "Sticker: ELIXIR for women in science",
+     "status": "none"
+    }
+   ],
+   "contributors": [
+    "Viktor",
+    "Mirela",
+    "Peter",
+    "Paul",
+    "David",
+    "Vipin",
+    "Nils",
+    "Govind",
+    "Sanjay"
+   ],
+   "links": [],
+   "has_qr_code": false,
+   "visual_motif": "Suspension bridge linking cloud providers to a spiral Galaxy",
+   "poster_box": {
+    "x0": 0.035,
+    "y0": 0.005,
+    "x1": 0.93,
+    "y1": 0.99
+   },
+   "questions": [
+    {
+     "question": "What does the stick figure on the poster say it needs?",
+     "options": [
+      "More storage for Galaxy",
+      "More compute for using Galaxy",
+      "A faster internet connection",
+      "More training data"
+     ],
+     "answer_index": 1,
+     "where_on_poster": "Left middle: red stick figure with the black handwritten text \"Help! I need more compute for using Galaxy!\"",
+     "difficulty": "easy"
+    },
+    {
+     "question": "Which country codes are written on the green \"Collaboration\" sticky note?",
+     "options": [
+      "ES, FR, IT, PT",
+      "NO, SE, FI, DK",
+      "BE, CH, DE, NL",
+      "UK, IE, AT, CZ"
+     ],
+     "answer_index": 2,
+     "where_on_poster": "Top centre: green note headed \"Collaboration\" with the letters BE / CH / DE / NL stacked down it",
+     "difficulty": "medium"
+    },
+    {
+     "question": "In the network diagram at the bottom under \"SANE NETWORK\", which three parts are linked together?",
+     "options": [
+      "Gateway, User Portal, Data Lake",
+      "Tinker, Compute Portal, Storage Node",
+      "Hub, Provider Portal, Archive Server",
+      "Tinker, Provider Portal, Data Server"
+     ],
+     "answer_index": 3,
+     "where_on_poster": "Bottom left: light blue words TINKER = PROVIDER PORTAL = DATA SERVER below \"SANE NETWORK\"",
+     "difficulty": "hard"
+    }
+   ],
+   "details": [
+    {
+     "label": "Red stick figure asking for more compute",
+     "box": {
+      "x0": 0.111,
+      "y0": 0.556,
+      "x1": 0.244,
+      "y1": 0.719
+     }
+    },
+    {
+     "label": "Blue spiral galaxy drawing",
+     "box": {
+      "x0": 0.652,
+      "y0": 0.397,
+      "x1": 0.863,
+      "y1": 0.561
+     }
+    }
+   ],
+   "unreadable": "Small printed text on the ELIXIR \"for women in science\" sticker beyond those words is too small to read. The teal circle badge near the top has bars only, no legible text. \"Pulsor\" is spelled that way on the note (likely meaning Pulsar)."
+  },
+  "check": {
+   "project_number": 1,
+   "title_on_poster": "Scalable BYOC in Galaxy and TREs across ELIXIR",
+   "answers": [
+    {
+     "chosen_index": 1,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 2,
+     "confidence": "certain",
+     "problem": ""
+    },
+    {
+     "chosen_index": 3,
+     "confidence": "certain",
+     "problem": ""
+    }
+   ]
+  }
+ }
+]

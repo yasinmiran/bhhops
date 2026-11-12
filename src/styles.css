@@ -1,0 +1,796 @@
+/* Everything here is borrowed from the posters themselves: flipchart paper taped to a
+   window, marker headlines, neon sticky notes, masking tape in two colours. */
+:root {
+  --glass: #cfdcd6;
+  --paper: #fbfaf6;
+  --ink: #1d2433;
+  --ink-soft: #556070;
+  --marker-blue: #24459c;
+  --marker-red: #d8412f;
+  --note-green: #b9d531;
+  --note-yellow: #f6d94a;
+  --note-orange: #f39130;
+  --note-pink: #ee3f6c;
+  --tape-green: #86c440;
+  --tape-yellow: #e7c94b;
+  --gold: #f5b921;
+
+  --hand: "Shantell Sans Variable", "Comic Sans MS", cursive;
+  --text: "Atkinson Hyperlegible Next Variable", system-ui, sans-serif;
+  --gutter: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--text);
+  /* The garden behind the glass, out of focus. */
+  background:
+    radial-gradient(55% 35% at 12% 8%, #b4cba6 0, transparent 70%),
+    radial-gradient(45% 30% at 88% 30%, #a7bdb4 0, transparent 70%),
+    radial-gradient(60% 40% at 30% 85%, #b9cdb0 0, transparent 70%),
+    linear-gradient(#dbe5e1, #c2d1ca);
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--hand);
+  font-variation-settings: "BNCE" 12, "INFM" 35, "SPAC" 0;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--marker-blue);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marker-red);
+  outline-offset: 3px;
+}
+
+/* Stars */
+
+.star {
+  width: 1.5em;
+  height: 1.5em;
+  flex: none;
+  overflow: visible;
+}
+
+.star polygon {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.star-gold polygon {
+  fill: var(--gold);
+}
+
+.star-paper polygon {
+  fill: #fff;
+  stroke-dasharray: 2.2 1.6;
+}
+
+.star-none polygon {
+  fill: none;
+  stroke-opacity: 0.3;
+}
+
+.star-slap {
+  animation: slap 0.38s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes slap {
+  from {
+    transform: scale(2.6) rotate(-25deg);
+    opacity: 0;
+  }
+}
+
+/* Buttons */
+
+.marker-button {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px 14px 8px 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 600 1.05rem var(--hand);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.marker-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.quiet-button {
+  border: none;
+  background: none;
+  padding: 8px 0;
+  color: var(--ink-soft);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* The wall */
+
+.wall-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 28px) var(--gutter) 48px;
+}
+
+.wall-head {
+  max-width: 640px;
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  margin-bottom: 36px;
+}
+
+.wall-head h1 {
+  font-size: clamp(3rem, 14vw, 5.2rem);
+  font-weight: 800;
+  font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
+  color: var(--marker-blue);
+  letter-spacing: -0.02em;
+  rotate: -1.5deg;
+}
+
+.lede {
+  font-size: 1.1rem;
+  max-width: 34em;
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* The pink star sticker one team used for its headline number. */
+.score-sticker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: 3.3rem;
+  rotate: 8deg;
+}
+
+.score-sticker .star polygon {
+  fill: var(--note-pink);
+  stroke: none;
+}
+
+.score-sticker strong {
+  position: absolute;
+  padding-top: 0.12em;
+  color: #fff;
+  font: 800 0.36em var(--hand);
+}
+
+.score-main {
+  font: 700 1.35rem var(--hand);
+}
+
+.score-rank {
+  color: var(--ink-soft);
+}
+
+.finale {
+  padding: 12px 16px;
+  background: var(--note-yellow);
+  font: 700 1.2rem var(--hand);
+  rotate: -1deg;
+  box-shadow: 0 6px 8px -6px rgb(29 36 51 / 0.5);
+}
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 18px;
+  align-items: start;
+}
+
+@media (min-width: 620px) {
+  .wall {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .wall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1250px) {
+  .wall {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.sheet {
+  position: relative;
+  background: var(--paper);
+  box-shadow: 0 10px 18px -10px rgb(29 36 51 / 0.45);
+}
+
+.tilt-0 {
+  rotate: -1.1deg;
+}
+.tilt-1 {
+  rotate: 0.7deg;
+}
+.tilt-2 {
+  rotate: -0.4deg;
+}
+.tilt-3 {
+  rotate: 1.2deg;
+}
+.tilt-4 {
+  rotate: -0.8deg;
+}
+
+/* Two strips of masking tape across the top corners. */
+.sheet::before,
+.sheet::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -7px;
+  width: 34px;
+  height: 15px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.sheet::before {
+  left: -9px;
+  rotate: -38deg;
+  background: var(--tape-green);
+}
+
+.sheet::after {
+  right: -9px;
+  rotate: 38deg;
+  background: var(--tape-green);
+}
+
+.sheet:nth-child(odd)::before,
+.sheet:nth-child(odd)::after {
+  background: var(--tape-yellow);
+}
+
+.sheet a {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.sheet-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frosted {
+  filter: blur(7px) saturate(0.55);
+  scale: 1.06;
+}
+
+.sheet a:has(.frosted)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(255 255 255 / 0.38);
+}
+
+.sheet-number {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  font: 800 clamp(2.6rem, 11vw, 4rem) var(--hand);
+  font-variation-settings: "BNCE" 30, "INFM" 70, "SPAC" 0;
+}
+
+.sheet-stars {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  padding: 4px 6px;
+  background: var(--paper);
+  font-size: 0.8rem;
+}
+
+.wall-foot {
+  max-width: 640px;
+  margin-top: 48px;
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+/* One poster */
+
+.poster-page {
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) 56px;
+  background: var(--paper);
+  display: grid;
+  gap: 26px;
+  align-content: start;
+}
+
+.poster-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--hand);
+  font-weight: 600;
+}
+
+.poster-nav a {
+  padding: 8px 0;
+}
+
+.poster-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.poster-number {
+  color: var(--marker-red);
+  font: 800 1.5rem var(--hand);
+  font-variation-settings: "BNCE" 25, "INFM" 60, "SPAC" 0;
+}
+
+.poster-head h1 {
+  font-size: clamp(1.45rem, 5.4vw, 2rem);
+  font-weight: 700;
+  color: var(--marker-blue);
+  margin: 2px 0 8px;
+}
+
+.poster-leads {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.poster-figure {
+  margin: 0 calc(var(--gutter) * -1);
+}
+
+.poster-frame {
+  width: 100%;
+  max-height: 86dvh;
+  overflow: hidden;
+  background: #e9ece8;
+}
+
+.poster-frame img {
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+
+.poster-frame.zoomed {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.poster-frame.zoomed img {
+  width: 280%;
+  max-width: none;
+  cursor: zoom-out;
+}
+
+.poster-figure figcaption {
+  padding: 8px var(--gutter) 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.poster-page h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.notes {
+  display: grid;
+  gap: 22px;
+}
+
+.note {
+  padding: 18px 16px 16px;
+  display: grid;
+  gap: 14px;
+  /* The lifted bottom edge of a sticky note. */
+  box-shadow: 0 14px 12px -12px rgb(29 36 51 / 0.55);
+}
+
+.note:nth-child(odd) {
+  rotate: -0.6deg;
+}
+
+.note:nth-child(even) {
+  rotate: 0.5deg;
+}
+
+.note-easy {
+  background: var(--note-green);
+}
+
+.note-medium {
+  background: var(--note-yellow);
+}
+
+.note-hard {
+  background: var(--note-orange);
+}
+
+.note-shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  25% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}
+
+.note-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.note-head h3 {
+  font-size: 1.22rem;
+  font-weight: 650;
+}
+
+.note-head .star {
+  font-size: 1.25rem;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 2px solid rgb(29 36 51 / 0.35);
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.6);
+  color: var(--ink);
+  font: 500 1.02rem var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option-open:disabled {
+  opacity: 0.6;
+}
+
+.option-wrong {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+
+.option-right {
+  border-color: var(--ink);
+  background: #fff;
+  font-weight: 700;
+}
+
+.note-status {
+  min-height: 1.5em;
+  font-size: 0.95rem;
+}
+
+.reveal {
+  padding-top: 4px;
+}
+
+.one-liner {
+  font-size: 1.12rem;
+  max-width: 36em;
+}
+
+.highlights {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  max-width: 38em;
+}
+
+.highlights li {
+  padding-left: 18px;
+  position: relative;
+}
+
+.highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 9px;
+  height: 9px;
+  background: var(--note-pink);
+  rotate: 8deg;
+}
+
+.links {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.next-poster {
+  justify-self: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-slap,
+  .note-shake {
+    animation: none;
+  }
+}
+
+/* The poster sheet slides over whichever wall is underneath. */
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+}
+
+body.sheet-open {
+  overflow: hidden;
+}
+
+.wall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.loading {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 700 1.3rem var(--hand);
+}
+
+/* The pavilion: a canvas filling the screen with the game's controls laid over it. */
+
+body.pavilion {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.scene {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
+  cursor: grab;
+}
+
+.scene:active {
+  cursor: grabbing;
+}
+
+.hud {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) calc(env(safe-area-inset-bottom) + 16px);
+  pointer-events: none;
+}
+
+.hud button,
+.hud .compass-dot {
+  pointer-events: auto;
+}
+
+.hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.hud-top h1 {
+  font-size: clamp(1.9rem, 8vw, 2.8rem);
+  font-weight: 800;
+  font-variation-settings: "BNCE" 30, "INFM" 60, "SPAC" 0;
+  color: var(--marker-blue);
+  rotate: -1.5deg;
+  /* Keeps the marker title readable over trees and posters alike. */
+  text-shadow: 0 0 12px #fff, 0 0 4px #fff;
+}
+
+.hud-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font: 700 1.05rem var(--hand);
+  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
+}
+
+.hud-rank {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
+}
+
+.mini-sticker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: 1.75rem;
+  rotate: 8deg;
+}
+
+.mini-sticker .star polygon {
+  fill: var(--note-pink);
+  stroke: none;
+}
+
+.mini-sticker strong {
+  position: absolute;
+  padding-top: 0.1em;
+  color: #fff;
+  font: 800 0.38em var(--hand);
+}
+
+.hud-side {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+}
+
+.hud-side .quiet-button {
+  color: var(--ink);
+  font-size: 0.88rem;
+  text-shadow: 0 0 8px #fff, 0 0 3px #fff;
+}
+
+.compass {
+  width: 76px;
+  height: 76px;
+}
+
+.compass-dot {
+  fill: rgb(255 255 255 / 0.85);
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  cursor: pointer;
+}
+
+.compass-clear {
+  fill: var(--gold);
+}
+
+.compass-here {
+  stroke: var(--marker-red);
+  stroke-width: 3;
+}
+
+.hud-hint {
+  align-self: center;
+  padding: 8px 14px;
+  background: var(--note-yellow);
+  font: 600 1rem var(--hand);
+  rotate: -1deg;
+  box-shadow: 0 8px 8px -8px rgb(29 36 51 / 0.6);
+}
+
+.hud-bottom {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.hud-caption {
+  width: min(100%, 520px);
+  padding: 10px 14px;
+  background: rgb(251 250 246 / 0.94);
+  box-shadow: 0 10px 14px -10px rgb(29 36 51 / 0.5);
+}
+
+.hud-caption .poster-number {
+  font-size: 1.15rem;
+}
+
+.hud-title {
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marker-button.round {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  line-height: 1;
+}
