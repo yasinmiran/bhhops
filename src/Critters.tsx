@@ -169,7 +169,8 @@ export function Critters({ active }: CrittersProps) {
     if (!visit) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== " ") return;
-      event.preventDefault();
+      // On a focused button Space still presses it, as a keyboard user expects.
+      if (!(event.target instanceof HTMLButtonElement)) event.preventDefault();
       if (!scared) sound.shoo();
       setScared(true);
     };

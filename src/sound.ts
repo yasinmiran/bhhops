@@ -27,8 +27,12 @@ function audio(): { ctx: AudioContext; out: GainNode } | null {
       master.gain.value = 0.5;
       master.connect(context.destination);
     }
-    // Browsers keep audio asleep until the page has been touched; by the first hop it has been.
-    if (context.state === "suspended") void context.resume();
+    // Browsers keep audio asleep until the page has been touched. Anything scheduled meanwhile would wait
+    // and then all sound at once, so a sound asked for while asleep is dropped and only wakes the audio up.
+    if (context.state !== "running") {
+      void context.resume();
+      return null;
+    }
     return { ctx: context, out: master! };
   } catch {
     return null;

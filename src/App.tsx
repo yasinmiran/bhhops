@@ -67,7 +67,47 @@ function GithubMark() {
 /** Turns the game's sounds off and on again. */
 export function SoundSwitch() {
   const [muted, toggle] = useMuted();
-  return <IconButton picture={muted ? "soundOff" : "soundOn"} label={muted ? "Unmute" : "Mute"} pressed={muted} onClick={toggle} />;
+  // The name stays "Mute" and the pressed state says whether it is on, which is how a screen reader expects a toggle.
+  return <IconButton picture={muted ? "soundOff" : "soundOn"} label="Mute" hint={muted ? "Unmute" : "Mute"} pressed={muted} onClick={toggle} />;
+}
+
+/** The black screen once the black hole has the helix, with the news told as a crawl into the distance. */
+function Oblivion({ hop, seen, onRetry }: { hop: number; seen: number; onRetry: () => void }) {
+  // The way out appears only once the screen has gone dark: a key already on its way down must not press it unseen.
+  const [dark, setDark] = useState(false);
+  return (
+    // The helix needs a moment to fall in before the lights go out.
+    <motion.div
+      className="oblivion"
+      role="alertdialog"
+      aria-labelledby="oblivion-title"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.9, duration: 0.9 }}
+      onAnimationComplete={() => setDark(true)}
+    >
+      <div className="oblivion-stage">
+        <div className="oblivion-plane">
+          <div className="oblivion-crawl">
+            <p className="oblivion-episode">Hop {hop}</p>
+            <h2 id="oblivion-title">Oblivion</h2>
+            <p>You just went into the oblivion.</p>
+            <p>
+              The black hole has your helix, and {seen} of {PROJECTS.length} projects went in with it. No thread leads out. No arrow key works
+              here.
+            </p>
+            <p>Far above, a turtle walks on, a croissant has places to be, and the leaderboard does not know your name.</p>
+            <p>There is one way back. It is the button.</p>
+          </div>
+        </div>
+      </div>
+      {dark && (
+        <button className="oblivion-retry" autoFocus onClick={onRetry}>
+          Try again
+        </button>
+      )}
+    </motion.div>
+  );
 }
 
 interface StartProps {
@@ -287,7 +327,8 @@ export function App() {
         }
         return;
       }
-      if (!onGraph || event.metaKey || event.ctrlKey || event.altKey) return;
+      // In the black hole no key does anything but the one button on screen.
+      if (!onGraph || run?.lost || event.metaKey || event.ctrlKey || event.altKey) return;
       const direction = KEY_DIRECTIONS[event.key];
       if (direction) {
         event.preventDefault();
@@ -387,34 +428,14 @@ export function App() {
             soundSwitch={<SoundSwitch />}
           />
           {run.lost && (
-            // The helix needs a moment to fall in before the lights go out.
-            <motion.div className="oblivion" role="alertdialog" aria-labelledby="oblivion-title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.9 }}>
-              <div className="oblivion-stage">
-                <div className="oblivion-plane">
-                  <div className="oblivion-crawl">
-                    <p className="oblivion-episode">Hop {run.hops + 1}</p>
-                    <h2 id="oblivion-title">Oblivion</h2>
-                    <p>You just went into the oblivion.</p>
-                    <p>
-                      The black hole has your helix, and {run.visited.length} of {PROJECTS.length} projects went in with it. No thread leads out. No
-                      arrow key works here.
-                    </p>
-                    <p>Far above, a turtle walks on, a croissant has places to be, and the leaderboard does not know your name.</p>
-                    <p>There is one way back. It is the button.</p>
-                  </div>
-                </div>
-              </div>
-              <button
-                className="oblivion-retry"
-                autoFocus
-                onClick={() => {
-                  setOverview(false);
-                  abandon();
-                }}
-              >
-                Try again
-              </button>
-            </motion.div>
+            <Oblivion
+              hop={run.hops + 1}
+              seen={run.visited.length}
+              onRetry={() => {
+                setOverview(false);
+                abandon();
+              }}
+            />
           )}
         </>
       ) : (

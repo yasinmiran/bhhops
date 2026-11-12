@@ -164,6 +164,7 @@ test("a wormhole is entered from its own project and leads to one place per tour
   const stranger = graph.nodes.find((n) => n.id !== wormhole.anchor)!.id;
   assert.equal(checkPath([stranger, wormhole.id], run.id).ok, false);
   assert.equal(checkPath([wormhole.id], run.id).ok, false);
+  assert.equal(checkPath([wormhole.anchor, wormhole.id], run.id).ok, false);
   // Stepping in is a hop; being thrown out the other side is not.
   assert.deepEqual((await put([wormhole.anchor, wormhole.id, thrownTo])).body, { finished: false, hops: 1 });
   assert.equal((await call("POST", "/api/runs", { start: wormhole.id }, token)).status, 400);

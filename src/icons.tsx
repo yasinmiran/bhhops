@@ -38,11 +38,13 @@ interface IconButtonProps {
   onClick: () => void;
   pressed?: boolean;
   autoFocus?: boolean;
+  /** The tooltip, where it should differ from the label. */
+  hint?: string;
 }
 
-export function IconButton({ picture, label, onClick, pressed, autoFocus }: IconButtonProps) {
+export function IconButton({ picture, label, onClick, pressed, autoFocus, hint = label }: IconButtonProps) {
   return (
-    <button type="button" className="icon-button" aria-label={label} title={label} aria-pressed={pressed} autoFocus={autoFocus} onClick={onClick}>
+    <button type="button" className="icon-button" aria-label={label} title={hint} aria-pressed={pressed} autoFocus={autoFocus} onClick={onClick}>
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         {PICTURES[picture]}
       </svg>

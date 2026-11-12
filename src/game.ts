@@ -304,7 +304,8 @@ export function useGame() {
       const status = error instanceof ApiError ? error.status : 0;
       if (status === 401) forget();
       // The server refused this tour for good (restarted elsewhere, or not a valid walk): drop it.
-      else if (status === 404 || status === 409 || status === 422) setTour(null);
+      // Only that tour: a late refusal of an old one must not take away the tour started since.
+      else if (status === 404 || status === 409 || status === 422) setTour((current) => (current?.id === now.id ? null : current));
       else {
         setSaving("retrying");
         retryTimer.current = setTimeout(() => void push(), RETRY_MS);

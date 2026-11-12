@@ -113,7 +113,7 @@ export function Hud({ run, player, saving, overview, hidden, onMove, onOpen, onO
                 {run.hops < par
                   ? `Par from project ${run.start} is ${par}: ${par - run.hops} under, thanks to a wormhole.`
                   : run.hops === par
-                    ? `That is par from project ${run.start}: no shorter walk exists.`
+                    ? `That is par from project ${run.start}.`
                     : `Par from project ${run.start} is ${par}, so ${run.hops - par} over.`}
               </p>
             ) : (

@@ -92,7 +92,7 @@ export function Leaderboard({ player, onClose }: { player: Player | null; onClos
           <IconButton picture="close" label="Close" onClick={onClose} autoFocus />
         </header>
         <p className="board-rule">
-          Fewest hops wins, then the faster tour. The shortest tour possible is {PAR} hops, and only from some starts.
+          Fewest hops wins, then the faster tour. Par is {PAR} hops, from the best starts; a kind wormhole can beat it.
           {board && ` ${board.finishers} of ${board.players} players have finished.`}
         </p>
         {error && <p className="error">{error}</p>}

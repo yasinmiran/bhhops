@@ -7,7 +7,8 @@ services:
     build:
       context: .
       target: web
-    restart: unless-stopped
+    # Always, not unless-stopped: older podman brings back only containers marked this way after a reboot.
+    restart: always
     # On the host's own network, so Caddy answers on IPv4 and IPv6 alike and sees who is calling.
     network_mode: host
     environment:
@@ -23,7 +24,7 @@ services:
     build:
       context: .
       target: api
-    restart: unless-stopped
+    restart: always
     # Reachable from this machine only; Caddy is the way in.
     ports:
       - "127.0.0.1:8787:8787"

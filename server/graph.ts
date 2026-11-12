@@ -47,5 +47,7 @@ export function checkPath(path: unknown, tourId: number): PathCheck {
     }
     seen.add(id);
   }
+  // The game always sends a wormhole together with where it led, so a path that stops inside one was made by hand.
+  if (WORMHOLES.has(path.at(-1) as number)) return { ok: false, why: "path ends inside a wormhole" };
   return { ok: true, complete: seen.size === PROJECT_IDS.size, hops: path.length - 1 - thrown };
 }

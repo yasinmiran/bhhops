@@ -14,8 +14,12 @@ const DATABASE_PATH = process.env.DATABASE_PATH ?? "hops.db";
 function adminToken(): string {
   if (process.env.ADMIN_TOKEN) return process.env.ADMIN_TOKEN;
   const kept = join(dirname(DATABASE_PATH), "admin-token");
-  if (!existsSync(kept)) writeFileSync(kept, randomBytes(32).toString("hex"), { mode: 0o600 });
-  return readFileSync(kept, "utf8").trim();
+  const stored = existsSync(kept) ? readFileSync(kept, "utf8").trim() : "";
+  // A file cut short by a full disk or a kill is replaced, or the server could never start again.
+  if (ADMIN_TOKEN_PATTERN.test(stored)) return stored;
+  const made = randomBytes(32).toString("hex");
+  writeFileSync(kept, made, { mode: 0o600 });
+  return made;
 }
 
 const token = adminToken();

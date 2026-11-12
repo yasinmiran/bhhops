@@ -449,7 +449,12 @@ function HelixAndCamera({ run, overview, extent }: RigProps) {
   const at = useRef(position(project(run.current)));
   const { camera, size, scene } = useThree();
 
+  const settled = useRef(false);
   useEffect(() => {
+    // A tour picked up after a reload stands where it stopped: the throw that got it there is not shown again.
+    const restored = !settled.current && !run.lost;
+    settled.current = true;
+    if (restored) return;
     const from = at.current.clone();
     if (run.lost && BLACK_HOLE) travel.current = { stops: [from, position(BLACK_HOLE)], legs: [HOP_SECONDS * 2], elapsed: 0 };
     else if (run.via !== null) travel.current = { stops: [from, position(place(run.via)), position(project(run.current))], legs: [HOP_SECONDS, THROW_SECONDS], elapsed: 0 };
