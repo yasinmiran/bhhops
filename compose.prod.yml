@@ -1,0 +1,44 @@
+# The stack on the server, under rootful podman:
+#   sudo podman compose -f compose.prod.yml up -d --build
+name: hops
+
+services:
+  web:
+    build:
+      context: .
+      target: web
+    restart: unless-stopped
+    # On the host's own network, so Caddy answers on IPv4 and IPv6 alike and sees who is calling.
+    network_mode: host
+    environment:
+      SITE: ${SITE:-bhhops.yasint.dev}
+      API_UPSTREAM: 127.0.0.1:8787
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: .
+      target: api
+    restart: unless-stopped
+    # Reachable from this machine only; Caddy is the way in.
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      # Left empty, the server makes its own and keeps it in /data/admin-token.
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    volumes:
+      - hops_data:/data
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  caddy_data:
+  caddy_config:
+  hops_data:

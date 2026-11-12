@@ -46,6 +46,12 @@ npm run dev        # client on http://localhost:5173, proxies /api
 npm test           # server tests
 ```
 
+The whole stack as it runs in production, on a laptop with Docker:
+
+```sh
+SITE=http://localhost docker compose up -d --build
+```
+
 ## What the server trusts
 
 Nothing the client says about its score. A tour is saved as the list of
@@ -68,47 +74,46 @@ curl -X POST https://<host>/api/admin/remove-player \
   -d '{"name":"the name"}'
 ```
 
-## Deploy to NREC (Oslo)
+## Deploy
 
-One `c1.medium` instance runs two containers: Caddy, which serves the client
-and gets the certificate, and the game server with its SQLite file on a Docker
-volume.
+One small server (1 vCPU, 2 GB RAM with 4 GB of swap for the build) runs two
+containers under rootful podman: Caddy, which serves the client and gets the
+certificate, and the game server with its SQLite file on a volume.
 
-1. Get the OpenStack CLI, and point it at your NREC credentials: either a
-   `clouds.yaml` profile or a sourced keystone rc file. The API password is the
-   one NREC showed at sign-up, not the Feide password.
+1. Point A and AAAA records for the hostname at the server. Ports 22, 80 and
+   443 have to be open to it.
 
-   ```sh
-   python3 -m venv .venv && source .venv/bin/activate
-   pip install -r deploy/requirements.txt
-   export OS_CLOUD=nrec OS_CLIENT_CONFIG_FILE=/path/to/clouds.yaml
-   ```
-
-2. Create the instance; the script prints its addresses. It uploads
-   `~/.ssh/id_ed25519.pub` as a key pair for the API user (key pairs made in the
-   dashboard are invisible to the API) and starts a `c1.medium` on the
-   `dualStack` network in the project's existing `default` and `ssh` security
-   groups. It checks that those groups open 22, 80 and 443 and never edits
-   them. Rerunning it is harmless.
+2. On the server, once:
 
    ```sh
-   deploy/provision.sh
+   sudo dnf install -y git podman podman-compose
+   sudo fallocate -l 4G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
+   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+   sudo systemctl enable --now podman-restart.service
+   git clone https://github.com/yasinmiran/bhhops.git && cd bhhops
+   sudo podman compose -f compose.prod.yml up -d --build
    ```
 
-3. Point an A record for the hostname at the IPv4 address. No AAAA record: the
-   web ports are published on IPv4 only.
+   The hostname is `bhhops.yasint.dev` unless `SITE` says otherwise. Caddy
+   asks for the certificate once the name resolves and keeps retrying until it
+   does.
 
-4. Copy `.env.example` to `.env`, set `SITE` and `ADMIN_TOKEN`, then build and
-   start the stack on the server. The same command redeploys; the database
-   volume is kept.
+3. To redeploy:
 
    ```sh
-   deploy/ship.sh <ipv4 address>
+   cd bhhops && git pull --ff-only && sudo podman compose -f compose.prod.yml up -d --build --force-recreate --remove-orphans
    ```
 
-Caddy asks for the certificate once the name resolves and keeps retrying until
-it does. A DEMO project's quota fits exactly one such instance per region. It
-has no backups and is deleted after 90 days.
+   The database volume is kept, so names and scores survive.
+
+The server makes its own admin token on first start. To read it, for the
+`remove-player` call above:
+
+```sh
+sudo podman exec hops_api_1 cat /data/admin-token
+```
+
+There are no backups.
 
 ## Where the content comes from
 

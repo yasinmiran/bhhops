@@ -1,5 +1,5 @@
 {
-	# The project's security group opens tcp 80 and 443 only, so there is no point advertising HTTP/3.
+	# Only tcp 80 and 443 are open in front of the server, so there is no point advertising HTTP/3.
 	servers {
 		protocols h1 h2
 	}
@@ -20,7 +20,7 @@
 		request_body {
 			max_size 64KB
 		}
-		reverse_proxy api:8787
+		reverse_proxy {$API_UPSTREAM}
 	}
 
 	# Hashed build output. Only files that exist are cacheable forever: a request for

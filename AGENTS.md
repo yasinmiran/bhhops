@@ -15,7 +15,7 @@ or the content next.
   22.18 or newer. It validates every tour against `src/graph.json`.
 - `scripts/`: the content, as JSON written by hand or by a model, and the two
   builders that turn it into what the client reads.
-- `deploy/`, `Dockerfile`, `compose.yaml`: the production stack.
+- `Dockerfile`, `deploy/Caddyfile`, `compose.prod.yml`: the production stack, run under podman. `compose.yaml` is the same stack for a laptop with Docker.
 
 ## Fixing a project's content
 

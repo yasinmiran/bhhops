@@ -1,15 +1,16 @@
-FROM node:24-alpine AS build
+# Image names are spelled out in full: podman stops to ask about short ones.
+FROM docker.io/library/node:24-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM caddy:2-alpine AS web
+FROM docker.io/library/caddy:2-alpine AS web
 COPY deploy/Caddyfile /etc/caddy/Caddyfile
 COPY --from=build /app/dist /srv
 
-FROM node:24-alpine AS api
+FROM docker.io/library/node:24-alpine AS api
 WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=8787 DATABASE_PATH=/data/hops.db
 COPY package.json package-lock.json ./
