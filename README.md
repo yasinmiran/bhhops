@@ -6,6 +6,8 @@ kind of thing. You move a double helix along the threads with the arrow keys
 and try to visit all 31 in as few hops as possible. Reaching a project pins up
 its poster; reading it is optional.
 
+![Mid-tour: the helix on project 31, a turtle in the way, and the black hole one hop to the right](docs/game.png)
+
 Controls: arrow keys, or swipe, or the on-screen arrow pad. Enter, or the key
 in the middle of the pad, opens the poster of the project you are on; there the
 left arrow goes back and up and down scroll. "Whole graph" pulls the camera
@@ -15,6 +17,8 @@ Before the first tour a player gives a name and picks where to start, on a
 small map of the graph. The server starts the clock, stores every hop, and
 scores the tour when the last project is reached. The leaderboard ranks by
 fewest hops; equal hops are decided by time. A player's best tour counts.
+
+![The start note: a name, and a map of the graph to pick the first project from](docs/start.png)
 
 ## What makes it harder
 
