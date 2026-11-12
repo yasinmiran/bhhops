@@ -12,7 +12,8 @@ export interface AppOptions {
 
 const NAME_MIN = 2;
 const NAME_MAX = 20;
-const NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._-]*$/u;
+// Real names: O'Neil and D’Angelo are people too. The page only ever shows a name as text.
+const NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._'’-]*$/u;
 /** Faster than this per hop and it was not a person pressing keys. */
 const FASTEST_HOP_MS = 100;
 const BOARD_PAGE_SIZE = 10;
@@ -118,7 +119,7 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     if (name.length < NAME_MIN || name.length > NAME_MAX) {
       throw new HttpError(400, `Names are ${NAME_MIN} to ${NAME_MAX} characters`);
     }
-    if (!NAME_PATTERN.test(name)) throw new HttpError(400, "Use letters, numbers, spaces, dots, dashes or underscores");
+    if (!NAME_PATTERN.test(name)) throw new HttpError(400, "Use letters, numbers, spaces, dots, dashes, apostrophes or underscores");
 
     const token = randomBytes(24).toString("hex");
     try {

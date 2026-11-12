@@ -68,7 +68,8 @@ test("names are cleaned, limited and unique whatever the case", async () => {
   assert.equal(first.status, 201);
   assert.equal(first.body.name, "Ana Banana");
   assert.equal((await call("POST", "/api/players", { name: "ana banana" })).status, 409);
-  for (const bad of ["a", "x".repeat(21), "<script>", "", 42, " . "]) {
+  assert.equal((await call("POST", "/api/players", { name: "Siobhán O'Neil-D’Arcy" })).status, 201);
+  for (const bad of ["a", "x".repeat(21), "<script>", "", 42, " . ", "'quoted", "a\"b"]) {
     assert.equal((await call("POST", "/api/players", { name: bad })).status, 400, String(bad));
   }
 });
