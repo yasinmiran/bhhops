@@ -10,7 +10,7 @@ export class ApiError extends Error {
 const OFFLINE = "Can't reach the server. Check the wifi and try again.";
 
 /** Calls the game server. Throws ApiError with a message fit to show; status 0 means the request never arrived. */
-export async function api<T>(method: "GET" | "POST" | "PUT", path: string, body?: unknown, token?: string): Promise<T> {
+export async function api<T>(method: "GET" | "POST" | "PUT" | "DELETE", path: string, body?: unknown, token?: string): Promise<T> {
   let res: Response;
   try {
     res = await fetch(`./api${path}`, {

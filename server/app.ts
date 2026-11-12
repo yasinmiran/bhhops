@@ -205,6 +205,13 @@ export function createApp({ db, adminToken, now = Date.now }: AppOptions) {
     res.json({ finished: true, hops, durationMs, ...rankOf(me.id) });
   });
 
+  // Giving up a tour. A finished one stays: it is a score, and nobody loses one by pressing "Start over".
+  app.delete("/api/runs/:id", (req, res) => {
+    const me = player(req);
+    const gone = db.prepare("DELETE FROM runs WHERE id = ? AND player_id = ? AND finished_at IS NULL").run(Number(req.params.id), me.id);
+    res.json({ removed: Number(gone.changes) });
+  });
+
   /** Where the player's best run stands, and how many players have finished at all. */
   function rankOf(playerId: number) {
     const rows = board();

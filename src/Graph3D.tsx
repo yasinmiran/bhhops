@@ -222,11 +222,13 @@ interface NoteProps {
   p: Project;
   state: "current" | "visited" | "reachable" | "far";
   celebrate: boolean;
+  /** Drawn larger, for the view of the whole graph, where a note at its own size is too small to read. */
+  large: boolean;
   textures: Map<number, THREE.CanvasTexture>;
   onTap: (id: number) => void;
 }
 
-function ProjectNote({ p, state, celebrate, textures, onTap }: NoteProps) {
+function ProjectNote({ p, state, celebrate, large, textures, onTap }: NoteProps) {
   const group = useRef<THREE.Group>(null);
   const seen = state === "current" || state === "visited";
   const photo = usePhoto(p.id, seen);
@@ -237,7 +239,7 @@ function ProjectNote({ p, state, celebrate, textures, onTap }: NoteProps) {
 
   useFrame((_, dt) => {
     if (!group.current) return;
-    const goal = state === "current" ? 1.18 : 1;
+    const goal = (state === "current" ? 1.18 : 1) * (large ? 1.55 : 1);
     group.current.scale.setScalar(group.current.scale.x + (goal - group.current.scale.x) * (1 - Math.exp(-8 * dt)));
   });
 
@@ -494,10 +496,15 @@ function HelixAndCamera({ run, overview, extent }: RigProps) {
     const perspective = camera as THREE.PerspectiveCamera;
     const closeUp = portrait ? 15 : 11;
     // Far enough back that the whole graph fits whichever way the screen is turned.
-    const whole = (extent / 2 / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2))) * (portrait ? 1 / perspective.aspect : 1) * (portrait ? 1.25 : 1.4);
+    const whole = (extent / 2 / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2))) * (portrait ? 1 / perspective.aspect : 1) * (portrait ? 1.12 : 1.22);
     const goalDistance = overview ? whole : closeUp;
     // In the whole-graph view the centre moves up a little, clear of the card and arrow pad.
-    const goalFocus = overview ? new THREE.Vector3(0, -extent * (portrait ? 0.06 : 0.13), 0) : at.current;
+    // On a phone the helix sits above the middle, so what lies below it is not under the arrow pad.
+    const goalFocus = overview
+      ? new THREE.Vector3(0, -extent * (portrait ? 0.06 : 0.05), 0)
+      : portrait
+        ? new THREE.Vector3(at.current.x, at.current.y - 2.4, at.current.z)
+        : at.current;
     const ease = 1 - Math.exp(-4.5 * dt);
     focus.current.lerp(goalFocus, ease);
     distance.current += (goalDistance - distance.current) * ease;
@@ -698,6 +705,7 @@ export function Graph3D({ run, overview, onMove, onTap }: GraphProps) {
             p={p}
             state={p.id === run.current ? "current" : visited.has(p.id) ? "visited" : reachable.has(p.id) ? "reachable" : "far"}
             celebrate={fresh.has(p.id)}
+            large={overview}
             textures={noteTextures}
             onTap={onTap}
           />

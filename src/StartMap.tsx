@@ -19,9 +19,11 @@ const LEFT = Math.min(...SHOWN.map((spot) => spot.x));
 const RIGHT = Math.max(...SHOWN.map((spot) => spot.x));
 const BOTTOM = Math.min(...SHOWN.map((spot) => spot.y));
 const TOP = Math.max(...SHOWN.map((spot) => spot.y));
-const MIDDLE = { x: (LEFT + RIGHT) / 2, y: (BOTTOM + TOP) / 2 };
+/** Room above the topmost dot for the helix that stands on a chosen project. */
+const HEADROOM = 5.2;
+const MIDDLE = { x: (LEFT + RIGHT) / 2, y: (BOTTOM + TOP + HEADROOM) / 2 };
 /** The side of the square of graph the map shows: the graph and most of a dot of margin all round. */
-const VIEW = Math.max(RIGHT - LEFT, TOP - BOTTOM) + DOT_SIZE * 1.8;
+const VIEW = Math.max(RIGHT - LEFT, TOP - BOTTOM + HEADROOM) + DOT_SIZE * 1.8;
 const STILL = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** What the game draws before the first hop: the links that are not hidden, and the loose ends among them. */
@@ -197,6 +199,7 @@ export function StartMap({ value, onChange }: StartMapProps) {
 
   const shown = hover ?? value;
   return (
+    <div className="start-map-frame">
     <div
       className={hover === null ? "start-map" : "start-map start-map-hot"}
       role="img"
@@ -212,6 +215,8 @@ export function StartMap({ value, onChange }: StartMapProps) {
       <Canvas orthographic dpr={[1, 2]} camera={{ position: [MIDDLE.x, MIDDLE.y, 50], near: 0.1, far: 200 }} gl={{ antialias: true }}>
         {textures && <Scene value={value} hover={hover} textures={textures} />}
       </Canvas>
+    </div>
+      {/* Under the map, not on it: on a phone a label inside the box hid the projects beneath it. */}
       <AnimatePresence mode="wait" initial={false}>
         <motion.p
           key={shown ?? "none"}

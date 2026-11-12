@@ -230,6 +230,22 @@ test("an admin can remove a player and their scores; nobody else can", async () 
   assert.equal((await call("GET", "/api/me", undefined, token)).status, 401);
 });
 
+test("a tour that was given up does not come back, and a finished one cannot be given up", async () => {
+  const { call, join, tick } = await setup();
+  const token = await join("Quitter");
+  const other = await join("Bystander");
+  const first = (await call("POST", "/api/runs", { start: 1 }, token)).body;
+  assert.deepEqual((await call("DELETE", `/api/runs/${first.id}`, undefined, other)).body, { removed: 0 });
+  assert.deepEqual((await call("DELETE", `/api/runs/${first.id}`, undefined, token)).body, { removed: 1 });
+  assert.equal((await call("GET", "/api/me", undefined, token)).body.run, null);
+
+  const second = (await call("POST", "/api/runs", { start: 1 }, token)).body;
+  tick(60_000);
+  await call("PUT", `/api/runs/${second.id}`, { path: fullTour(1) }, token);
+  assert.deepEqual((await call("DELETE", `/api/runs/${second.id}`, undefined, token)).body, { removed: 0 });
+  assert.equal((await call("GET", "/api/leaderboard")).body.finishers, 1);
+});
+
 test("the operator can empty the leaderboard, and only the operator", async () => {
   const { call, join, tick } = await setup();
   const tour = fullTour(1);

@@ -202,6 +202,15 @@ a {
   font: 700 1.08rem var(--hand);
 }
 
+/* A strip of paper behind the score and the clock, which stay readable when a note passes under them. */
+.hud-score,
+.hud-par {
+  width: fit-content;
+  padding: 0 7px;
+  border-radius: 6px;
+  background: rgb(244 243 238 / 0.86);
+}
+
 .hud-score strong {
   display: inline-block;
   color: var(--marker-red);
@@ -696,10 +705,16 @@ a {
 }
 
 /* The graph in small, for choosing a start. */
-.start-map {
-  position: relative;
+.start-map-frame {
   justify-self: center;
   width: min(100%, 70dvh);
+  display: grid;
+  gap: 6px;
+}
+
+.start-map {
+  position: relative;
+  width: 100%;
   aspect-ratio: 1;
   border: 2.5px solid var(--ink);
   border-radius: 6px;
@@ -712,17 +727,9 @@ a {
   cursor: pointer;
 }
 
-/* A label in the corner the graph leaves free. */
 .start-note .start-map-caption {
-  position: absolute;
-  inset: 8px auto auto 8px;
-  max-width: calc(100% - 16px);
-  padding: 2px 9px;
-  border: 2px solid var(--ink);
-  border-radius: 10px;
-  background: var(--sheet);
-  pointer-events: none;
-  font: 700 0.86rem var(--hand);
+  min-height: 1.5em;
+  font: 700 0.95rem var(--hand);
 }
 
 .start-links {
@@ -887,21 +894,25 @@ a {
 .poster-page {
   max-width: 760px;
   margin: 0 auto;
-  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) 56px;
+  padding: calc(env(safe-area-inset-top) + 14px) var(--gutter) 0;
   display: grid;
   gap: 26px;
   align-content: start;
 }
 
 /* Stays at the foot of the sheet while it scrolls. */
+/* A bar, not loose keys: the text scrolls away under its edge and is never half hidden behind a key. */
 .sheet-keys {
   position: sticky;
-  bottom: calc(env(safe-area-inset-bottom) + 10px);
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  pointer-events: none;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 10px var(--gutter) calc(env(safe-area-inset-bottom) + 12px);
+  border-top: 2px solid rgb(29 36 51 / 0.14);
+  background: var(--sheet);
 }
 
 .sheet-keys .dpad-key {

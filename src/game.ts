@@ -370,7 +370,13 @@ export function useGame() {
     });
   }, []);
 
-  const abandon = useCallback(() => setTour(null), []);
+  /** Gives the tour up, here and on the server, so a reload does not bring it back. */
+  const abandon = useCallback(() => {
+    const { player: as, tour: now } = latest.current;
+    // If this does not get through, starting the next tour removes the old one anyway.
+    if (as && now && !now.result) void api("DELETE", `/runs/${now.id}`, undefined, as.token).catch(() => undefined);
+    setTour(null);
+  }, []);
 
   return { player, run: tour ? view(tour) : null, saving, join, start, hop, abandon, forget };
 }
